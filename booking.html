@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Бронирование места | Таверна «Карточная Буря»</title>
+  <meta name="description" content="Возвестите Хозяину Таверны о своём визите на сходку «Карточная Буря».">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Таверна «Карточная Буря»">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Бронирование места — Таверна «Карточная Буря»">
+  <meta property="og:description" content="Отметьтесь в летописи Таверны, чтобы Хозяин знал, скольких гостей ждать на сходке.">
+  <meta property="og:url" content="https://example.com/tavern/booking.html">
+  <meta property="og:image" content="https://example.com/tavern/img/gerb.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Бронирование места — Таверна «Карточная Буря»">
+  <meta name="twitter:description" content="Отметьтесь в летописи Таверны, чтобы Хозяин знал, скольких гостей ждать.">
+  <meta name="twitter:image" content="https://example.com/tavern/img/gerb.jpg">
+  <meta name="theme-color" content="#17100a">
+  <link rel="canonical" href="https://example.com/tavern/booking.html">
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a class="nav-logo" href="index.html">
+        <img src="img/gerb-small.jpg" alt="Герб Таверны «Карточная Буря»" width="42" height="42">
+        <span>Карточная Буря</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav-links" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#about">О нас</a></li>
+        <li><a href="games.html">Коллекция</a></li>
+        <li><a href="index.html#events">Бури</a></li>
+        <li><a href="otgoloski.html">Отголоски Бури</a></li><li><a href="wiki/wiki.html">Орвей</a></li>
+        
+        <li><a href="index.html#team">Администрация</a></li>
+        <li><a href="index.html#contacts">Где нас найти</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="booking section">
+      <div class="container container-narrow">
+        <div class="section-head">
+          <span class="ornament">🕯</span>
+          <h1>Возвестить о визите</h1>
+          <p class="section-note">
+            Отметьтесь в летописи Таверны — дабы Хозяин знал, скольких гостей ждать.
+            Ваша запись сразу попадёт в таблицу организаторов.
+          </p>
+        </div>
+
+        <div class="booking-card">
+          <form id="bookingForm" novalidate>
+            <div class="form-group">
+              <label for="name">Ваше имя <span class="req">*</span></label>
+              <input type="text" id="name" name="name" required maxlength="80" placeholder="Как к вам обращаться в Таверне?">
+            </div>
+
+            <div class="form-group">
+              <label for="telegram">Ник в Telegram</label>
+              <input type="text" id="telegram" name="telegram" maxlength="64" placeholder="@никнейм">
+            </div>
+
+            <div class="form-group">
+              <label for="gathering">На какую Бурю планируешь прийти? <span class="req">*</span></label>
+              <select id="gathering" name="gathering" required>
+                <option value="">Выбери Бурю…</option>
+              </select>
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" id="firstTime">
+              <span>Я в Таверне впервые</span>
+            </label>
+
+            <div id="inviterFields" class="inviter-fields hidden">
+              <div class="form-group">
+                <label for="inviterName">Кто вас привёл (имя)</label>
+                <input type="text" id="inviterName" name="inviterName" maxlength="80" placeholder="Имя друга или знакомого">
+              </div>
+              <div class="form-group">
+                <label for="inviterTelegram">Ник пригласившего в Telegram</label>
+                <input type="text" id="inviterTelegram" name="inviterTelegram" maxlength="64" placeholder="@никнейм">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="gameWish">В какую игру хотелось бы поиграть</label>
+              <textarea id="gameWish" name="gameWish" rows="4" maxlength="300" placeholder="Например: Диксит, Бэнг!, D&D…"></textarea>
+            </div>
+
+            <div class="hp-field" aria-hidden="true">
+              <label for="website">Не заполняйте это поле</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn btn-gold">Возвестить о визите</button>
+          </form>
+
+          <p class="form-note">Поля со звёздочкой (<span class="req">*</span>) обязательны. После отправки организаторы увидят вашу запись в таблице сходки.</p>
+          <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <img class="footer-emblem" src="img/gerb-small.jpg" alt="Герб Таверны" width="74" height="74">
+    <p class="footer-title">Таверна «Карточная Буря»</p>
+    <p class="footer-quote">«Будь как дома, путник!»</p>
+    <p class="footer-copy">© <span class="js-year"></span> Таверна «Карточная Буря» · Двери открыты для всякого путника</p>
+    <p class="footer-copy"><a href="#top">Вернуться наверх ↑</a></p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/gatherings.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

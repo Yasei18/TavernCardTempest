@@ -1,0 +1,907 @@
+/* ============================================================
+   STYLE WIKI — страницы регионов и рас (стиль «Википедия» / dnd.su)
+   Светлое «бумажное» оформление контента при тёмной шапке сайта.
+   ============================================================ */
+
+/* Prata (self-hosted) */
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/prata/cyrillic-ext.woff2") format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/prata/cyrillic.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Prata';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/prata/latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+html, body {
+	font-family: 'Prata', serif;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 1.6;
+	margin: 0;
+	background: #eef0f4;
+	color: #1c1c1c;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	font-weight: 400;
+}
+
+a {
+	color: #1c2c7c;
+}
+
+a:hover {
+	color: #a6cbe6;
+}
+
+img {
+	max-width: 100%;
+}
+
+/* ============================================================
+   ШАПКА (та же, что на остальных страницах сайта)
+   ============================================================ */
+
+.header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 9999;
+	transition: box-shadow .3s;
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	background: rgb(3, 9, 41, 88%);
+}
+
+.header__container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin: 0 auto;
+	transition: padding-top .3s, padding-bottom .3s;
+}
+
+.create-line-header {
+	width: 1200px;
+	border-top: 1px solid #ffffff;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	font-size: clamp(19px, 1.8vw, 26px);
+	text-align: center;
+}
+
+.nav__link {
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 400;
+	margin: 15px 18px 10px;
+	color: #fff;
+	text-decoration: none;
+	transition: color .1s linear;
+}
+
+.nav__link:hover,
+.nav__link.active {
+	color: #a6cbe6;
+}
+
+.nav__btn {
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 400;
+	margin: 15px 18px 10px;
+	padding: 8px 22px;
+	color: #fff;
+	text-decoration: none;
+	transition: color .15s;
+}
+
+.nav__btn:hover {
+	color: #a6cbe6;
+}
+
+.dropdown {
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+	font-weight: 400;
+	margin: 15px 18px 10px;
+	transition: color .1s linear;
+}
+
+.dropdown .dropbtn {
+	font-size: inherit;
+	border: none;
+	outline: none;
+	color: white;
+	padding: 14px 16px;
+	background-color: inherit;
+	font-family: 'Prata', serif;
+	font-weight: 400;
+	font-style: normal;
+	margin: 0;
+}
+
+.dropdown:hover {
+	color: #a6cbe6;
+}
+
+.dropdown .dropbtn:hover {
+	color: #a6cbe6;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background: linear-gradient(180deg, #030929 0px, #030929 30px, rgba(41, 59, 81, 0.95) 100%);
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+	border-radius: 30px 30px;
+}
+
+.dropdown-content a {
+	float: none;
+	color: rgb(255, 255, 255);
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	border-radius: 30px 30px;
+}
+
+.dropdown-content a:hover {
+	color: #a6cbe6;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.box {
+	opacity: 0;
+	transition: all 0.4s ease;
+}
+
+.box-wrap:hover .box {
+	opacity: 1;
+}
+
+/* ============================================================
+   КАРКАС СТРАНИЦЫ
+   ============================================================ */
+
+.wiki-page {
+	padding: 170px 20px 60px;
+	min-height: 80vh;
+}
+
+.wiki-container {
+	max-width: 1060px;
+	margin: 0 auto;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 12px 40px rgba(3, 9, 41, 0.15);
+	padding: 48px 56px;
+	overflow: hidden;
+}
+
+/* Хлебные крошки */
+.crumbs {
+	font-size: 15px;
+	color: #888;
+	margin-bottom: 18px;
+	letter-spacing: 0.02em;
+}
+
+.crumbs a {
+	color: #1c2c7c;
+	text-decoration: none;
+}
+
+.crumbs a:hover {
+	text-decoration: underline;
+}
+
+.crumbs span {
+	color: #666;
+}
+
+/* ============================================================
+   ЗАГОЛОВКИ (вики-стиль)
+   ============================================================ */
+
+.wiki-title {
+	font-size: 44px;
+	line-height: 1.2;
+	color: #0c0c0c;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #a2a9b1;
+	margin-bottom: 22px;
+}
+
+.wiki-title__sub {
+	font-size: 18px;
+	color: #72777d;
+	font-style: italic;
+	margin-bottom: 8px;
+}
+
+.wiki-title__en {
+	font-size: 18px;
+	color: #72777d;
+	margin-bottom: 8px;
+}
+
+.wiki-lead {
+	font-size: 19px;
+	line-height: 1.7;
+	color: #2a2a2a;
+	margin-bottom: 26px;
+}
+
+.wiki-lead:first-letter {
+	color: #1c2c7c;
+}
+
+.wiki h2 {
+	font-size: 28px;
+	color: #0c0c0c;
+	margin: 40px 0 14px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #c8ccd1;
+}
+
+.wiki h3 {
+	font-size: 21px;
+	color: #222;
+	margin: 28px 0 10px;
+}
+
+.wiki h4 {
+	font-size: 17px;
+	color: #333;
+	margin: 20px 0 8px;
+}
+
+.wiki p {
+	font-size: 16.5px;
+	line-height: 1.75;
+	margin: 0 0 14px;
+	color: #2a2a2a;
+}
+
+.wiki ul,
+.wiki ol {
+	margin: 0 0 14px;
+	padding-left: 26px;
+}
+
+.wiki li {
+	font-size: 16px;
+	line-height: 1.7;
+	margin-bottom: 6px;
+	color: #2a2a2a;
+}
+
+.wiki blockquote {
+	margin: 18px 0;
+	padding: 12px 20px;
+	background: #f4f6fa;
+	border-left: 4px solid #1c2c7c;
+	font-style: italic;
+	color: #444;
+}
+
+.wiki hr {
+	border: 0;
+	border-top: 1px solid #e5e5e5;
+	margin: 30px 0;
+}
+
+/* Карта в статье региона */
+.wiki-map {
+	margin: 18px 0 26px;
+	padding: 10px;
+	background: #f8f9fa;
+	border: 1px solid #c8ccd1;
+	text-align: center;
+}
+
+.wiki-map img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 1px solid #d5dae6;
+}
+
+.wiki-map figcaption {
+	font-size: 14px;
+	color: #72777d;
+	margin-top: 8px;
+}
+
+/* Лайтбокс для карт */
+.map-lightbox {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	background: rgba(0, 0, 0, 0.85);
+	align-items: center;
+	justify-content: center;
+	padding: 30px;
+	box-sizing: border-box;
+	cursor: zoom-out;
+}
+
+.map-lightbox.open {
+	display: flex;
+}
+
+.map-lightbox img {
+	max-width: 95vw;
+	max-height: 90vh;
+	width: auto;
+	height: auto;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+	border-radius: 4px;
+	cursor: default;
+}
+
+/* Содержание (TOC) */
+.toc {
+	background: #f8f9fa;
+	border: 1px solid #c8ccd1;
+	padding: 16px 22px;
+	margin: 20px 0 30px;
+	display: inline-block;
+	font-size: 15px;
+}
+
+.toc-title {
+	font-weight: 400;
+	text-align: center;
+	margin-bottom: 8px;
+	color: #333;
+	font-size: 16px;
+}
+
+.toc ol {
+	margin: 0;
+	padding-left: 22px;
+}
+
+.toc li {
+	margin-bottom: 4px;
+}
+
+.toc a {
+	text-decoration: none;
+}
+
+.toc a:hover {
+	text-decoration: underline;
+}
+
+/* ============================================================
+   ИНФОБОКС (врезка «Краткие сведения», стиль Википедии)
+   ============================================================ */
+
+.infobox {
+	float: right;
+	clear: right;
+	width: 300px;
+	margin: 6px 0 18px 24px;
+	background: #f8f9fa;
+	border: 1px solid #c8ccd1;
+	border-collapse: collapse;
+	font-size: 14px;
+}
+
+.infobox__title {
+	background: #1c2c7c;
+	color: #fff;
+	text-align: center;
+	padding: 10px 12px;
+	font-size: 17px;
+	line-height: 1.3;
+}
+
+.infobox table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.infobox td {
+	padding: 7px 10px;
+	vertical-align: top;
+	border-bottom: 1px solid #e5e5e5;
+	line-height: 1.45;
+}
+
+.infobox td:first-child {
+	font-weight: 400;
+	color: #444;
+	width: 40%;
+}
+
+/* ============================================================
+   ТЕГИ РЕГИОНОВ И ТИПОВ РАС
+   ============================================================ */
+
+.race-tags {
+	margin: -8px 0 20px;
+}
+
+.tag {
+	display: inline-block;
+	padding: 4px 14px;
+	border-radius: 100px;
+	font-size: 13px;
+	letter-spacing: 0.03em;
+	color: #fff;
+	margin: 4px 6px 4px 0;
+	text-decoration: none;
+	transition: filter .15s;
+}
+
+.tag:hover {
+	filter: brightness(1.12);
+}
+
+.tag-region {
+	background: #5a6478;
+}
+
+.tag-region--alvaera {
+	background: #b8792a;
+}
+
+.tag-region--kaladan {
+	background: #1c2c7c;
+}
+
+.tag-region--zadubravye {
+	background: #3a6b35;
+}
+
+.tag-type {
+	background: #7a7a7a;
+}
+
+/* ============================================================
+   СТРАНИЦА РАСЫ (стиль dnd.su)
+   ============================================================ */
+
+.race-page__header {
+	margin-bottom: 26px;
+}
+
+.race-page__header h1 {
+	font-size: 42px;
+	line-height: 1.15;
+	color: #0c0c0c;
+	border-bottom: 1px solid #a2a9b1;
+	padding-bottom: 12px;
+}
+
+.race-page__header .race-title-en {
+	font-size: 18px;
+	color: #72777d;
+	margin-bottom: 6px;
+}
+
+.race-summary {
+	font-size: 17px;
+	line-height: 1.7;
+	color: #2a2a2a;
+	background: #f4f6fa;
+	border-radius: 6px;
+	padding: 18px 22px;
+	margin-bottom: 22px;
+	border: 1px solid #dde3ee;
+	overflow: hidden;
+}
+
+/* ============================================================
+   ИЛЛЮСТРАЦИИ РАС (арты, стиль dnd.su)
+   ============================================================ */
+
+.race-art {
+	float: right;
+	width: 300px;
+	margin: 4px 0 16px 28px;
+	text-align: center;
+	background: #f8f9fa;
+	border: 1px solid #c8ccd1;
+	padding: 8px;
+}
+
+.race-art img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border: 1px solid #d5dae6;
+	cursor: zoom-in;
+}
+
+.race-art figcaption {
+	font-size: 13px;
+	color: #72777d;
+	margin-top: 8px;
+	line-height: 1.5;
+}
+
+/* Таблица особенностей (как на dnd.su) */
+.feature-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 12px 0 22px;
+	font-size: 15px;
+	clear: both;
+}
+
+.feature-table th {
+	background: #1c2c7c;
+	color: #fff;
+	text-align: left;
+	padding: 10px 16px;
+	font-weight: 400;
+	letter-spacing: 0.02em;
+}
+
+.feature-table th:first-child {
+	width: 34%;
+}
+
+.feature-table td {
+	padding: 9px 16px;
+	border-bottom: 1px solid #e5e5e5;
+	vertical-align: top;
+	line-height: 1.55;
+}
+
+.feature-table tr:nth-child(even) td {
+	background: #f8f9fa;
+}
+
+.feature-table td:first-child {
+	color: #1c2c7c;
+	font-weight: 400;
+}
+
+.feature-group {
+	margin: 26px 0 8px;
+}
+
+.feature-group h3 {
+	font-size: 20px;
+	color: #1c2c7c;
+	margin-bottom: 6px;
+}
+
+/* ============================================================
+   КАТАЛОГ РАС (страница «Виды»)
+   ============================================================ */
+
+.races-catalog__header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.races-catalog__header h1 {
+	font-size: 40px;
+	color: #0c0c0c;
+	margin-bottom: 8px;
+}
+
+.races-catalog__header p {
+	color: #666;
+	font-size: 16px;
+}
+
+.race-card {
+	display: block;
+	background: #ffffff;
+	border: 1px solid #e0e3ea;
+	border-radius: 8px;
+	padding: 20px 24px;
+	margin-bottom: 16px;
+	text-decoration: none;
+	color: #1c1c1c;
+	transition: box-shadow .18s, transform .18s, border-color .18s;
+}
+
+.race-card:hover {
+	box-shadow: 0 8px 24px rgba(3, 9, 41, 0.12);
+	transform: translateY(-2px);
+	border-color: #1c2c7c;
+}
+
+.race-card__title {
+	font-size: 24px;
+	color: #1c2c7c;
+	margin-bottom: 4px;
+}
+
+.race-card__title .race-card__en {
+	font-size: 15px;
+	color: #888;
+	margin-left: 8px;
+	font-style: italic;
+}
+
+.race-card__desc {
+	font-size: 15px;
+	line-height: 1.6;
+	color: #444;
+	margin-top: 6px;
+}
+
+/* Карточка с артом (миниатюра слева, как на dnd.su) */
+.race-card--art {
+	display: flex;
+	gap: 20px;
+	align-items: flex-start;
+}
+
+.race-card--art .race-card__img {
+	width: 110px;
+	height: 140px;
+	object-fit: cover;
+	object-position: top center;
+	border-radius: 6px;
+	border: 1px solid #d5dae6;
+	flex-shrink: 0;
+	background: #f0f2f7;
+}
+
+.race-card--art .race-card__body {
+	flex: 1;
+	min-width: 0;
+}
+
+.races-group {
+	margin-bottom: 36px;
+}
+
+/* Поиск рас (каталог «Виды») */
+.container__searchBar {
+	max-width: 700px;
+	margin: 0 auto 30px;
+}
+
+.searchBar {
+	display: flex;
+	align-items: center;
+	height: 50px;
+	background: #fafafa;
+	padding: 10px 20px;
+	border-radius: 100px;
+	box-shadow: 0 10px 20px rgb(3, 9, 41, 0.15);
+	border: 1px solid #d5dae6;
+	transition: border-color .15s;
+}
+
+.searchBar:focus-within {
+	border-color: #1c2c7c;
+}
+
+.searchBar input {
+	width: 100%;
+	margin-left: 5px;
+	outline: none;
+	border: none;
+	color: #111111;
+	font-size: 16px;
+	font-weight: 400;
+	background: transparent;
+	transition: 0.8s;
+	font-family: 'Prata', serif;
+}
+
+.races-group__title {
+	font-size: 22px;
+	color: #0c0c0c;
+	border-bottom: 2px solid #1c2c7c;
+	padding-bottom: 6px;
+	margin-bottom: 16px;
+}
+
+/* ============================================================
+   СВЯЗАННЫЕ СТРАНИЦЫ (подвал статьи)
+   ============================================================ */
+
+.wiki-nav-more {
+	margin-top: 40px;
+	border-top: 1px solid #c8ccd1;
+	padding-top: 18px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.wiki-nav-more a {
+	display: inline-block;
+	padding: 8px 18px;
+	background: #f0f2f7;
+	border: 1px solid #d5dae6;
+	border-radius: 100px;
+	color: #1c2c7c;
+	text-decoration: none;
+	font-size: 14px;
+	transition: background .15s;
+}
+
+.wiki-nav-more a:hover {
+	background: #1c2c7c;
+	color: #fff;
+}
+
+/* ============================================================
+   КНОПКА «В таверну» и нижний колонтитул
+   ============================================================ */
+
+.wiki-footer {
+	text-align: center;
+	padding: 30px 0 0;
+	color: #999;
+	font-size: 13px;
+}
+
+.wiki-footer .copyright span {
+	color: #1c2c7c;
+}
+
+.wiki-footer .copyright a {
+	color: #1c2c7c;
+}
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+
+@media (max-width: 990px) {
+	.create-line-header {
+		width: 80%;
+	}
+
+	.wiki-page {
+		padding: 160px 14px 40px;
+	}
+
+	.wiki-container {
+		padding: 30px 22px;
+	}
+
+	.wiki-title {
+		font-size: 34px;
+	}
+
+	.infobox {
+		float: none;
+		width: 100%;
+		margin: 0 0 18px;
+	}
+
+	.race-art {
+		float: none;
+		width: 100%;
+		max-width: 300px;
+		margin: 0 auto 18px;
+	}
+
+	.race-page__header h1 {
+		font-size: 34px;
+	}
+}
+
+@media (max-width: 770px) {
+	.header {
+		padding: 10px 0;
+	}
+
+	.create-line-header {
+		width: 80%;
+	}
+
+	.nav {
+		position: static;
+		background: transparent;
+	}
+
+	.nav__link {
+		padding: 6px 10px;
+	}
+
+	.wiki-page {
+		padding: 150px 10px 30px;
+	}
+
+	.wiki-container {
+		padding: 24px 16px;
+		border-radius: 4px;
+	}
+
+	.wiki-title {
+		font-size: 28px;
+	}
+
+	.wiki h2 {
+		font-size: 23px;
+	}
+
+	.infobox {
+		float: none;
+		width: 100%;
+	}
+}
+
+@media (max-width: 575px) {
+	.wiki-title {
+		font-size: 25px;
+	}
+
+	.wiki-lead {
+		font-size: 17px;
+	}
+
+	.feature-table th:first-child {
+		width: 42%;
+	}
+
+	.wiki h2 {
+		font-size: 21px;
+	}
+
+	.race-card--art {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.race-card--art .race-card__img {
+		width: 100%;
+		height: auto;
+		max-height: 340px;
+	}
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Коллекция настольных игр Таверны | Карточная Буря</title>
+  <meta name="description" content="Полный список настольных игр, в которые играет Таверна «Карточная Буря»: D&D, Манчкин, Звёздные империи, Каркассон и ещё более двадцати игр.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Таверна «Карточная Буря»">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Коллекция настольных игр Таверны — Карточная Буря">
+  <meta property="og:description" content="Полный свиток настольных игр «Карточной Бури»: от ролевых саг и стратегий до душевных вечерних партий.">
+  <meta property="og:url" content="https://example.com/tavern/games.html">
+  <meta property="og:image" content="https://example.com/tavern/img/gerb.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Коллекция настольных игр Таверны — Карточная Буря">
+  <meta name="twitter:description" content="Полный свиток настольных игр «Карточной Бури».">
+  <meta name="twitter:image" content="https://example.com/tavern/img/gerb.jpg">
+  <meta name="theme-color" content="#17100a">
+  <link rel="canonical" href="https://example.com/tavern/games.html">
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a class="nav-logo" href="index.html">
+        <img src="img/gerb-small.jpg" alt="Герб Таверны «Карточная Буря»" width="42" height="42">
+        <span>Карточная Буря</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav-links" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html#about">О нас</a></li>
+        <li><a href="games.html">Коллекция</a></li>
+        <li><a href="index.html#events">Бури</a></li>
+        <li><a href="otgoloski.html">Отголоски Бури</a></li><li><a href="wiki/wiki.html">Орвей</a></li>
+        
+        <li><a href="index.html#team">Администрация</a></li>
+        <li><a href="index.html#contacts">Где нас найти</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ШАПКА КАТАЛОГА -->
+    <section class="catalog-hero">
+      <div class="container">
+        <div class="section-head">
+          <span class="ornament">🎲</span>
+          <h1>Коллекция</h1>
+          <p class="section-note">
+            Полный свиток настольных игр «Карточной Бури» — <span class="js-game-count">45 игр</span>:
+            от эпичных ролевых саг и тяжёлых стратегий до душевных вечерних партий.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- КАТАЛОГ -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="games-toolbar">
+          <input type="search" class="games-search" id="gamesSearch" placeholder="Найти игру по названию или жанру…" aria-label="Поиск по играм">
+          <div class="games-filters" id="gamesFilters" role="group" aria-label="Фильтр по жанру"></div>
+        </div>
+        <div class="games-grid" id="gamesGrid"></div>
+        <p class="games-empty" id="gamesEmpty" hidden>Ничего не найдено. Попробуй другой запрос…</p>
+        <p class="games-footnote">
+          ✦ Свиток игр постоянно растёт. Хочешь видеть за нашими столами свою любимую игру? Пиши — и она попадёт в каталог!
+        </p>
+        <p class="catalog-footnote">
+          <a class="btn btn-ghost" href="index.html#games">Вернуться на главную</a>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <img class="footer-emblem" src="img/gerb-small.jpg" alt="Герб Таверны" width="74" height="74">
+    <p class="footer-title">Таверна «Карточная Буря»</p>
+    <p class="footer-quote">«Будь как дома, путник!»</p>
+    <p class="footer-copy">© <span class="js-year"></span> Таверна «Карточная Буря» · Двери открыты для всякого путника</p>
+    <p class="footer-copy"><a href="#top">Вернуться наверх ↑</a></p>
+  </footer>
+
+  <script src="js/games.js"></script>
+  <script src="js/render-games.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Таверна «Карточная Буря»</title>
+  <meta name="description" content="Таверна «Карточная Буря» — сообщество любителей настольных и ролевых игр. Сходки в Москве, D&D, стримы и дружеская атмосфера.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Таверна «Карточная Буря»">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Таверна «Карточная Буря» — настольные и ролевые игры">
+  <meta property="og:description" content="Сообщество любителей настольных и ролевых игр. Сходки в Москве, D&D, стримы и дружеская атмосфера. Двери открыты для всякого путника!">
+  <meta property="og:url" content="https://example.com/tavern/index.html">
+  <meta property="og:image" content="https://example.com/tavern/img/gerb.jpg">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Таверна «Карточная Буря»">
+  <meta name="twitter:description" content="Сообщество любителей настольных и ролевых игр. Сходки в Москве, D&D, стримы и дружеская атмосфера.">
+  <meta name="twitter:image" content="https://example.com/tavern/img/gerb.jpg">
+  <meta name="theme-color" content="#17100a">
+  <link rel="canonical" href="https://example.com/tavern/index.html">
+  <link rel="apple-touch-icon" href="img/favicon.png">
+  <!-- Обновите startDate/endDate под ближайшую сходку перед публикацией. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Сходка «Карточная Буря»",
+    "description": "Настольные сходки Таверны «Карточная Буря»: игры, ведущие, чай и печенье. Первый визит — скидка 50%.",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "startDate": "2026-08-15T19:00:00+03:00",
+    "endDate": "2026-08-15T23:00:00+03:00",
+    "location": {
+      "@type": "Place",
+      "name": "Москва, Тишинская площадь, 1с1",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Москва",
+        "streetAddress": "Тишинская площадь, 1с1",
+        "addressCountry": "RU"
+      }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "Таверна «Карточная Буря»",
+      "url": "https://example.com/tavern/",
+      "sameAs": [
+        "https://t.me/tavern_card_tempest",
+        "https://vk.com/taverncardtempest",
+        "https://www.youtube.com/@TavernCardTempest"
+      ]
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "300",
+      "priceCurrency": "RUB",
+      "description": "300 ₽ — игры, ведущие, чай и печенье включены. Первый визит — 50% (150 ₽)."
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+      <a class="nav-logo" href="#top">
+        <img src="img/gerb-small.jpg" alt="Герб Таверны «Карточная Буря»" width="42" height="42">
+        <span>Карточная Буря</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav-links" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">О нас</a></li>
+        <li><a href="games.html">Коллекция</a></li>
+        <li><a href="#events">Бури</a></li>
+        <li><a href="otgoloski.html">Отголоски Бури</a></li><li><a href="wiki/wiki.html">Орвей</a></li>
+        
+        <li><a href="#team">Администрация</a></li>
+        <li><a href="#contacts">Где нас найти</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-emblem">
+          <img src="img/gerb.jpg" alt="Герб Таверны «Карточная Буря»" width="1280" height="1280" fetchpriority="high">
+        </div>
+        <p class="hero-eyebrow">Добро пожаловать в</p>
+        <h1 class="hero-title">Таверна<br>«Карточная Буря»</h1>
+        <p class="hero-subtitle">Двери открыты для всякого путника!</p>
+        <p class="hero-text">
+          О, приветствую тебя, путник. Вижу, ты не местный... но доходили ли до тебя
+          речи о Карточной Буре? Когда солнце близится к закату — Буря оживает.
+          Друзья собираются вместе, чтобы проверить себя на прочность за настольными
+          играми, вновь вдохнуть жизнь в своих персонажей под надзором ГМ в мирах D&D
+          и просто хорошо провести время.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#contacts">Присоединиться</a>
+          <a class="btn btn-ghost" href="#games">Наши игры</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://t.me/tavern_card_tempest" target="_blank" rel="noopener" title="Telegram">ТГ</a>
+          <a href="https://www.youtube.com/@TavernCardTempest" target="_blank" rel="noopener" title="YouTube">YT</a>
+          <a href="https://vk.com/taverncardtempest" target="_blank" rel="noopener" title="ВКонтакте">VK</a>
+          <a href="https://www.twitch.tv/tavern_card_tempest" target="_blank" rel="noopener" title="Twitch">TW</a>
+          <a href="https://discord.gg/AAMw8UJCj5" target="_blank" rel="noopener" title="Discord">DC</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЧЕМ МЫ ЗАНИМАЕМСЯ -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="ornament">❧</span>
+          <h2>Чем мы занимаемся</h2>
+          <p class="section-note">Таверна — это сообщество, нацеленное на развлекательное времяпрепровождение в кругу любителей настольных ролевых игр.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <a class="about-card-link" href="booking.html" aria-label="Записаться на Бурю"></a>
+            <span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 3C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3H5ZM9 9.5C8.17157 9.5 7.5 8.82843 7.5 8C7.5 7.17157 8.17157 6.5 9 6.5C9.82843 6.5 10.5 7.17157 10.5 8C10.5 8.82843 9.82843 9.5 9 9.5ZM10.5 12C10.5 12.8284 9.82843 13.5 9 13.5C8.17157 13.5 7.5 12.8284 7.5 12C7.5 11.1716 8.17157 10.5 9 10.5C9.82843 10.5 10.5 11.1716 10.5 12ZM10.5 16C10.5 16.8284 9.82843 17.5 9 17.5C8.17157 17.5 7.5 16.8284 7.5 16C7.5 15.1716 8.17157 14.5 9 14.5C9.82843 14.5 10.5 15.1716 10.5 16ZM15 9.5C14.1716 9.5 13.5 8.82843 13.5 8C13.5 7.17157 14.1716 6.5 15 6.5C15.8284 6.5 16.5 7.17157 16.5 8C16.5 8.82843 15.8284 9.5 15 9.5ZM16.5 12C16.5 12.8284 15.8284 13.5 15 13.5C14.1716 13.5 13.5 12.8284 13.5 12C13.5 11.1716 14.1716 10.5 15 10.5C15.8284 10.5 16.5 11.1716 16.5 12ZM16.5 16C16.5 16.8284 15.8284 17.5 15 17.5C14.1716 17.5 13.5 16.8284 13.5 16C13.5 15.1716 14.1716 14.5 15 14.5C15.8284 14.5 16.5 15.1716 16.5 16Z"/></svg></span>
+            <h3>Бури</h3>
+            <p>Регулярные очные встречи «Карточной Бури» — игры, ведущие, чай и печенье. Опытные буревестники объясняют правила и ведут по своим мирам, а после каждой Бури выходят отчёты в «Отголосках».</p>
+            <div class="about-links">
+              <a class="btn btn-gold" href="booking.html">Записаться</a>
+              <a class="btn btn-ghost" href="otgoloski.html">Отголоски Бури</a>
+            </div>
+          </article>
+          <article class="about-card">
+            <a class="about-card-link" href="wiki/wiki.html" aria-label="Открыть мир Орвей"></a>
+            <span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7.04813 13.4061L10.5831 16.9421L9.1703 18.3558L10.5849 19.7711L9.17064 21.1853L6.69614 18.71L3.86734 21.5388L2.45312 20.1246L5.28192 17.2958L2.80668 14.8213L4.22089 13.4071L5.63477 14.8202L7.04813 13.4061ZM2.99907 3L6.54506 3.00335L18.3624 14.8207L19.7772 13.4071L21.1915 14.8213L18.7166 17.2962L21.545 20.1246L20.1308 21.5388L17.3024 18.7104L14.8275 21.1853L13.4133 19.7711L14.8269 18.3562L3.00181 6.53118L2.99907 3ZM17.4563 3.0001L20.9991 3.00335L21.001 6.52648L16.9481 10.5781L13.4121 7.0431L17.4563 3.0001Z"/></svg></span>
+            <h3>D&D, стримы и записи</h3>
+            <p>Вдохновляем жизнь в персонажей под строгим надзором ГМ и ведём собственные кампании в нашем мире — Орвей. Прямые эфиры на Twitch и записи игр на YouTube: смотрим наши приключения вместе.</p>
+            <div class="about-links">
+              <a class="btn btn-gold" href="wiki/wiki.html">Орвей</a>
+              <a class="btn btn-ghost" href="https://www.twitch.tv/tavern_card_tempest" target="_blank" rel="noopener">Twitch</a>
+              <a class="btn btn-ghost" href="https://www.youtube.com/@TavernCardTempest" target="_blank" rel="noopener">YouTube</a>
+            </div>
+          </article>
+          <article class="about-card">
+            <a class="about-card-link" href="https://t.me/tavern_card_tempest" target="_blank" rel="noopener" aria-label="Открыть Telegram Таверны"></a>
+            <span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM17.3628 15.2332C20.4482 16.0217 22.7679 18.7235 22.9836 22H20C20 19.3902 19.0002 17.0139 17.3628 15.2332ZM15.3401 12.9569C16.9728 11.4922 18 9.36607 18 7C18 5.58266 17.6314 4.25141 16.9849 3.09687C19.2753 3.55397 21 5.57465 21 8C21 10.7625 18.7625 13 16 13C15.7763 13 15.556 12.9853 15.3401 12.9569Z"/></svg></span>
+            <h3>Дружная гильдия</h3>
+            <p>Общий «Шумный Зал», где кипят страсти, рождаются союзы и ведутся самые ожесточённые мемные баталии. Следи за вестями Таверны в каналах и соцсетях.</p>
+            <div class="about-links">
+              <a class="btn btn-gold" href="https://t.me/tavern_card_tempest" target="_blank" rel="noopener">Telegram</a>
+              <a class="btn btn-ghost" href="https://vk.com/taverncardtempest" target="_blank" rel="noopener">ВКонтакте</a>
+              <a class="btn btn-ghost" href="https://t.me/TavernCardTempest_Chat" target="_blank" rel="noopener">Шумный Зал</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- В КАКИЕ ИГРЫ ИГРАЕМ -->
+    <section id="games" class="section section-dark">
+      <div class="container">
+        <div class="section-head">
+          <span class="ornament">❦</span>
+          <h2>В какие игры мы играем</h2>
+          <p class="section-note">От эпичных ролевых саг до душевных партий в кругу друзей — список постоянно растёт.</p>
+        </div>
+
+        <div class="games-grid" id="gamesGrid" data-featured="true"></div><p class="games-footnote">
+          ✦ Хочешь видеть за нашими столами свою любимую игру? Пиши — и она попадёт в свиток грядущих баталий!
+        </p>
+        <p class="catalog-footnote">
+          <a class="btn btn-ghost" href="games.html">Смотреть все <span class="js-game-count">45 игр</span> →</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- СХОДКИ -->
+    <section id="events" class="section">
+      <div class="container container-narrow">
+        <div class="section-head">
+          <span class="ornament">❖</span>
+          <h2>Встреча «Карточная Буря»</h2>
+          <p class="section-note">Нумерованные встречи, на которые собирается вся гильдия.</p>
+        </div>
+
+        <div class="events-card">
+          <ul class="events-list">
+            <li>
+              <span class="event-mark">📍</span>
+              <div><b>Место:</b> <a href="https://yandex.ru/maps/?text=Москва,%20Тишинская%20площадь,%201с1" target="_blank" rel="noopener">Москва, Тишинская площадь, 1с1</a></div>
+            </li>
+            <li>
+              <span class="event-mark">🕐</span>
+              <div><b>Время:</b> с 12:00 и до самого вечера</div>
+            </li>
+            <li>
+              <span class="event-mark">💰</span>
+              <div><b>Стоимость:</b> 300 ₽ — игры, ведущие, чай и печенье включены</div>
+            </li>
+            <li>
+              <span class="event-mark">🎁</span>
+              <div><b>Скидки:</b> первый визит — 50% (150 ₽). Приведёшь друга — и вам обоим 150 ₽</div>
+            </li>
+          </ul>
+          <p class="events-note">
+            Оповестите организаторов о скидке! Отмечайтесь в «летописи» под постом о сходке,
+            чтобы Хозяин Таверны знал, скольких гостей ждать.
+          </p>
+          <a class="btn btn-gold" href="booking.html">Забронировать место</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- АДМИНИСТРАЦИЯ -->
+    <section id="team" class="section section-dark">
+      <div class="container">
+        <div class="section-head">
+          <span class="ornament">⚜</span>
+          <h2>Администрация Таверны</h2>
+          <p class="section-note">Те, кто держит огонь в очаге и точит кубики к новой Буре.</p>
+        </div>
+
+        <div class="team-grid">
+          <div class="team-card">
+            <div class="team-avatar team-nikita">Н</div>
+            <h3>Никита</h3>
+            <p class="team-role">Хозяин Таверны</p>
+            <p class="team-desc">Держит двери открытыми для всякого путника и главный по сходкам.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar team-katya">Е</div>
+            <h3>Екатерина</h3>
+            <p class="team-role">Хозяйка Таверны</p>
+            <p class="team-desc">Соправительница гильдии и хранительница уюта под сводами Таверны.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar team-danya">Д</div>
+            <h3>Даниил</h3>
+            <p class="team-role">Художник</p>
+            <p class="team-desc">Автор герба Таверны — бросил вызов хаосу и сотворил наше знамя.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar team-sasha">С</div>
+            <h3>Саша</h3>
+            <p class="team-role">Технический Тиун</p>
+            <p class="team-desc">Отвечает за технику перед съёмками игр: звук, свет, картинку и трансляции.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar team-artem">Ар</div>
+            <h3>Артём</h3>
+            <p class="team-role">Миростроитель</p>
+            <p class="team-desc">Прорабатывает собственный фэнтези-мир, по которому мы играем кампании.</p>
+          </div>
+          <div class="team-card">
+            <div class="team-avatar team-asya">Ас</div>
+            <h3>Ася</h3>
+            <p class="team-role">Художница</p>
+            <p class="team-desc">Рисует для Таверны и помогает советом по самым разным вопросам.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ГДЕ НАС НАЙТИ -->
+    <section id="contacts" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="ornament">❧</span>
+          <h2>Где нас найти</h2>
+          <p class="section-note">Все тропы ведут в «Шумный Зал». Выбирай любую дорогу — будем рады видеть тебя!</p>
+        </div>
+
+        <div class="social-grid">
+          <a class="social-card" href="https://t.me/tavern_card_tempest" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span>
+            <div><b>Telegram</b><small>Канал с главными вестями</small></div>
+          </a>
+          <a class="social-card" href="https://t.me/TavernCardTempest_Chat" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="1.6" y="2.5" width="20.8" height="15" rx="7"/><path d="M7 17.5 L10.6 21 L11.8 17.5 Z"/></svg></span>
+            <div><b>Шумный Зал</b><small>Сердце сообщества — чат</small></div>
+          </a>
+          <a class="social-card" href="https://www.youtube.com/@TavernCardTempest" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+            <div><b>YouTube</b><small>Записи D&D игр и другие интересности</small></div>
+          </a>
+          <a class="social-card" href="https://vk.com/taverncardtempest" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9.489.004.729-.003h3.564l.73.003.914.01.433.007.418.011.403.014.388.016.374.021.36.025.345.03.333.033c1.74.196 2.933.616 3.833 1.516.9.9 1.32 2.092 1.516 3.833l.034.333.029.346.025.36.02.373.025.588.012.41.013.644.009.915.004.98-.001 3.313-.003.73-.01.914-.007.433-.011.418-.014.403-.016.388-.021.374-.025.36-.03.345-.033.333c-.196 1.74-.616 2.933-1.516 3.833-.9.9-2.092 1.32-3.833 1.516l-.333.034-.346.029-.36.025-.373.02-.588.025-.41.012-.644.013-.915.009-.98.004-3.313-.001-.73-.003-.914-.01-.433-.007-.418-.011-.403-.014-.388-.016-.374-.021-.36-.025-.345-.03-.333-.033c-1.74-.196-2.933-.616-3.833-1.516-.9-.9-1.32-2.092-1.516-3.833l-.034-.333-.029-.346-.025-.36-.02-.373-.025-.588-.012-.41-.013-.644-.009-.915-.004-.98.001-3.313.003-.73.01-.914.007-.433.011-.418.014-.403.016-.388.021-.374.025-.36.03-.345.033-.333c.196-1.74.616-2.933 1.516-3.833.9-.9 2.092-1.32 3.833-1.516l.333-.034.346-.029.36-.025.373-.02.588-.025.41-.012.644-.013.915-.009ZM6.79 7.3H4.05c.13 6.24 3.25 9.99 8.72 9.99h.31v-3.57c2.01.2 3.53 1.67 4.14 3.57h2.84c-.78-2.84-2.83-4.41-4.11-5.01 1.28-.74 3.08-2.54 3.51-4.98h-2.58c-.56 1.98-2.22 3.78-3.8 3.95V7.3H10.5v6.92c-1.6-.4-3.62-2.34-3.71-6.92Z"/></svg></span>
+            <div><b>ВКонтакте</b><small>Новости и объявления о событиях</small></div>
+          </a>
+          <a class="social-card" href="https://www.twitch.tv/tavern_card_tempest" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></span>
+            <div><b>Twitch</b><small>Игры в прямом эфире</small></div>
+          </a>
+          <a class="social-card" href="https://discord.gg/AAMw8UJCj5" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></span>
+            <div><b>Discord</b><small>Сердце сообщества</small></div>
+          </a>
+          <a class="social-card" href="https://www.tiktok.com/@tavern_card_tempe" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
+            <div><b>TikTok</b><small>Короткие зарисовки из Таверны</small></div>
+          </a>
+          <a class="social-card" href="https://www.instagram.com/tavern_card_tempest" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></span>
+            <div><b>Instagram</b><small>Атмосфера Таверны в кадре</small></div>
+          </a>
+          <a class="social-card" href="https://www.youtube.com/@LGMISHERE" target="_blank" rel="noopener">
+            <span class="social-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="14.6" r="3.3"/><circle cx="8.4" cy="15.6" r="2.3"/><circle cx="15.6" cy="15.6" r="2.3"/><circle cx="5.6" cy="8.4" r="1.9"/><circle cx="9.4" cy="6.4" r="2.15"/><circle cx="14.6" cy="6.4" r="2.15"/><circle cx="18.4" cy="8.4" r="1.9"/></svg></span>
+            <div><b>LGMISHERE</b><small>Наш второй проект — записи игр ЛГМ</small></div>
+          </a>
+        </div>
+
+        <div class="support-card">
+          <h3>✦ Поддержать Таверну ✦</h3>
+          <p>Хочешь, чтобы в наших бочках не переводился эль, а под сводами лилась музыка? Каждая монета — вклад в общее дело!</p>
+          <p class="support-account">Поддержать Таверну: <a href="https://taplink.cc/taverncardtempest" target="_blank" rel="noopener">taplink.cc/taverncardtempest</a></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <img class="footer-emblem" src="img/gerb-small.jpg" alt="Герб Таверны" width="74" height="74">
+    <p class="footer-title">Таверна «Карточная Буря»</p>
+    <p class="footer-quote">«Будь как дома, путник!»</p>
+    <p class="footer-copy">© <span class="js-year"></span> Таверна «Карточная Буря» · Двери открыты для всякого путника</p>
+    <p class="footer-copy"><a href="#top">Вернуться наверх ↑</a></p>
+  </footer>
+
+  <script src="js/games.js"></script>
+  <script src="js/render-games.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мир Орвей | Peace &amp; Order — Таверна «Карточная Буря»</title>
+  <meta name="description" content="Мир Орвей — фэнтези-мир Таверны «Карточная Буря» для D&D. Аль'Ваэра, Каладан и Тораваки, расы, боги, кампании и карта мира.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Таверна «Карточная Буря»">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Мир Орвей | Peace &amp; Order">
+  <meta property="og:description" content="Фэнтези-мир Таверны «Карточная Буря»: Аль'Ваэра, Каладан и Тораваки, расы, боги, хронология и кампании.">
+  <meta property="og:image" content="img/gerb.jpg">
+  <meta name="theme-color" content="#030929">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/world.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="header__container">
+      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a class="nav__link" href="index.html">главная</a>
+        <div class="dropdown">
+          <div class="box-wrap">
+            <button class="dropbtn"> мир </button>
+            <div class="box">
+              <div class="dropdown-content">
+                <a href="#world-alvaera">Аль'Ваэра</a>
+                <a href="#world-kaladan">Каладан</a>
+                <a href="#world-toravaki">Тораваки</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="nav__link" href="#races">расы</a>
+        <div class="dropdown">
+          <div class="box-wrap">
+            <button class="dropbtn"> кампании </button>
+            <div class="box">
+              <div class="dropdown-content">
+                <a href="#campaign-bpo">Братья по оружию</a>
+                <a href="#campaign-peski">Забытые пески</a>
+                <a href="#campaign-niti">Путешествие по нитям</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="nav__link" href="#map">карта</a>
+        <a class="nav__link" href="#support">мерч</a>
+      </nav>
+    </div>
+    <div class="create-line-header"></div>
+  </header>
+
+  <!-- ЗАСТАВКА -->
+  <div class="intro" id="intro">
+    <div class="container">
+      <div class="intro__inner">
+        <p class="intro__subtitle">Peace &amp; Order</p>
+        <h1 class="intro__title">Мир Орвей</h1>
+        <p class="intro__text">
+          Осколки шести миров, соединённые Пеленой. Здесь сошлись земли, что когда-то были разделены,
+          а теперь истекают кровью в единой реальности.
+        </p>
+        <a class="button ribbon-outset border" href="#worlds">исследовать мир</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ОПИСАНИЕ -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">ОПИСАНИЕ</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">мира и порядка</h2>
+        <div class="section__text">
+          <p>
+            Здесь начинается ваше увлекательное путешествие по неофициальному сеттингу для пятой редакции
+            легендарной настольной ролевой игры Dungeons &amp; Dragons. Этот уникальный мир был создан
+            талантливыми энтузиастами из Таверны «Карточная Буря».
+          </p>
+        </div>
+        <a href="https://taplink.cc/taverncardtempest" class="button ribbon-outset border" target="_blank" rel="noopener">создатели</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- МИРЫ -->
+  <section class="section" id="worlds">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">ИССЛЕДУЙ</h3>
+        <div class="create-line-section"></div>
+
+        <div class="card">
+
+          <div class="card__item" id="world-alvaera">
+            <div class="card__inner__vaero">
+              <div class="card__img__vaero">
+                <img src="img/worlds/alvaera.png" alt="Аль'Ваэра">
+              </div>
+            </div>
+            <div class="card__caption">
+              <h3>Аль'Ваэра</h3>
+              <p>Восточная пустыня, хранящая память о павшем Уруде. Боги ходят среди смертных, джинны торгуют желаниями.</p>
+            </div>
+          </div>
+
+          <div class="card__item" id="world-kaladan">
+            <div class="card__inner">
+              <div class="card__img">
+                <img src="img/worlds/kaladan.png" alt="Каладан">
+              </div>
+            </div>
+            <div class="card__caption">
+              <h3>Каладан</h3>
+              <p>Павшая Империя, на костях которой выросли десятки государств. Интриги, магия и гномьи паровые технологии.</p>
+            </div>
+          </div>
+
+          <div class="card__item" id="world-toravaki">
+            <div class="card__inner__toravaki">
+              <div class="card__img__toravaki">
+                <img src="img/worlds/toravaki.png" alt="Тораваки">
+              </div>
+            </div>
+            <div class="card__caption">
+              <h3>Тораваки</h3>
+              <p>Восточные степи под копытами Крылатого Улуса. Свободные ярганы берегут традиции, а из песков приходит драконья Орда.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РАСЫ -->
+  <section class="section" id="races">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">РАСЫ</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">народы трёх миров</h2>
+      </div>
+
+      <div class="wiki-race-group">
+        <h3>🏜️ Аль'Ваэра</h3>
+        <div class="wiki-race-list">
+          <div class="wiki-race"><b>Махребы</b><span>Коренные люди городов-государств.</span></div>
+          <div class="wiki-race"><b>Дженази</b><span>Отмеченные печатью стихий.</span></div>
+          <div class="wiki-race"><b>Тосабеи</b><span>Воины-антилопы.</span></div>
+          <div class="wiki-race"><b>Хушиты</b><span>Змееподобные прорицатели.</span></div>
+          <div class="wiki-race"><b>Шуалы</b><span>Лисьи дети пустыни.</span></div>
+          <div class="wiki-race"><b>Акрабимы</b><span>Скорпионолюды.</span></div>
+          <div class="wiki-race"><b>Кутрубы</b><span>Проклятые вечным голодом.</span></div>
+          <div class="wiki-race"><b>Фаскиры</b><span>Тени, что помнят тьму Уруда.</span></div>
+        </div>
+      </div>
+
+      <div class="wiki-race-group">
+        <h3>🏰 Каладан</h3>
+        <div class="wiki-race-list">
+          <div class="wiki-race"><b>Имперцы</b><span>Наследники Каладанской Империи.</span></div>
+          <div class="wiki-race"><b>Померанцы</b><span>Северные народы Померании.</span></div>
+          <div class="wiki-race"><b>Тарраконцы</b><span>Жители жаркого полуострова.</span></div>
+          <div class="wiki-race"><b>Венты</b><span>Виноградари Беневенто.</span></div>
+          <div class="wiki-race"><b>Альбани</b><span>Холодные северяне.</span></div>
+          <div class="wiki-race"><b>Дварфы Каладана</b><span>Мастера пара и руды.</span></div>
+          <div class="wiki-race"><b>Эльфы Каладана</b><span>Древние хранители знаний.</span></div>
+          <div class="wiki-race"><b>Гномы Каладана</b><span>Механики и шутники.</span></div>
+          <div class="wiki-race"><b>Тифлинги</b><span>Носители инфернального наследия.</span></div>
+        </div>
+      </div>
+
+      <div class="wiki-race-group">
+        <h3>🐉 Тораваки</h3>
+        <div class="wiki-race-list">
+          <div class="wiki-race"><b>Джагатаи</b><span>Драконорождённые — высшая каста Крылатого Улуса.</span></div>
+          <div class="wiki-race"><b>Яламы</b><span>Ящеролюды — низшая каста, рабочие руки империи.</span></div>
+          <div class="wiki-race"><b>Ярганы</b><span>Свободные орки-кочевники, хранители степной чести.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- БОГИ И ВЕРОВАНИЯ -->
+  <section class="section" id="gods">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">БОГИ</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">и верования</h2>
+      </div>
+
+      <div class="wiki-grid">
+        <article class="wiki-card">
+          <h3><span class="wiki-emoji">✨</span> Сияние</h3>
+          <p>
+            Вера в Единого Творца, являющего себя в двух Ликах — Милостивом (прощение и исцеление) и Правом
+            (закон и справедливость). Пришла с юга; на север её принёс пророк Агапит.
+            Священный текст — «Скрижали Сияния».
+          </p>
+        </article>
+
+        <article class="wiki-card">
+          <h3><span class="wiki-emoji">🛡️</span> Вера в Семерых</h3>
+          <p>
+            Пантеон новых богов Каладана, вознёсшихся при основании Империи: Отец, Дева, Воин, Матерь,
+            Старик, Кузнец и Неведомый. Ныне они ведут войну на истощение против захватчика — Солнцеликого.
+          </p>
+        </article>
+
+        <article class="wiki-card">
+          <h3><span class="wiki-emoji">🕌</span> Джа'Илам</h3>
+          <p>
+            Вера пустыни Аль'Ваэра в единого безымянного Творца, чей лик незрим, а воля абсолютна.
+            Священный текст — Рухбат, столица веры — город Кехабат, символ — золотой круг без начала и конца.
+          </p>
+        </article>
+
+        <article class="wiki-card">
+          <h3><span class="wiki-emoji">☯️</span> Двуликий</h3>
+          <p>
+            Само Бытие, стоящее над всеми пантеонами. Ему не молятся и не ждут ответа — но во всех мифах народов
+            есть отголосок истины: мир сотворён силой, что выше богов.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ХРОНОЛОГИЯ -->
+  <section class="section" id="history">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">ХРОНОЛОГИЯ</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">летопись мира</h2>
+      </div>
+
+      <div class="wiki-table-wrap">
+        <table class="wiki-table">
+          <thead>
+            <tr>
+              <th>Период</th>
+              <th>Годы</th>
+              <th>События</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Эпоха Шести Миров</td>
+              <td>до 0 ГС</td>
+              <td>Архитекторы создают шесть миров. Каждый из них застывает в своём перекосе.</td>
+            </tr>
+            <tr>
+              <td>Слияние</td>
+              <td>0 ГС</td>
+              <td>Двуликий соединяет миры в один. Рождается Пелена, Архитекторы становятся смертными.</td>
+            </tr>
+            <tr>
+              <td>Эпоха Первая</td>
+              <td>0–250 ГС</td>
+              <td>Выжившие осколки народов ищут новые земли.</td>
+            </tr>
+            <tr>
+              <td>Эпоха Первых Царств</td>
+              <td>251–500 ГС</td>
+              <td>Рождаются первые королевства и союзы.</td>
+            </tr>
+            <tr>
+              <td>Туманная Эпоха</td>
+              <td>501–750 ГС</td>
+              <td>Пелена расширяется, границы земель зыбки.</td>
+            </tr>
+            <tr>
+              <td>Эпоха Стали и Веры</td>
+              <td>751–1000 ГС</td>
+              <td>Расцвет Каладанской Империи; Сияние приходит на север.</td>
+            </tr>
+            <tr>
+              <td>Эпоха Раскола</td>
+              <td>1001–1250 ГС</td>
+              <td>Явление драконов (1100), битва на Ворожбе (1130), падение Империи.</td>
+            </tr>
+            <tr>
+              <td>Эпоха Предвестий</td>
+              <td>1251–1500 ГС</td>
+              <td>Свержение Тугор-кагана (1445), вторжение Орды и нападение на Калинов мост (1500).</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ФРАКЦИИ -->
+  <section class="section" id="factions">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">ФРАКЦИИ</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">и силы мира</h2>
+      </div>
+
+      <div class="wiki-faction-grid">
+        <article class="wiki-faction">
+          <h3>🐉 Крылатый Улус</h3>
+          <div class="wiki-faction-region">Тораваки</div>
+          <p>Кочевая теократическая империя драконорождённых под властью живого бога Улуг-Хана. Военная машина, что сметает всё на своём пути.</p>
+        </article>
+
+        <article class="wiki-faction">
+          <h3>🌑 Орден Сумрака</h3>
+          <div class="wiki-faction-region">Каладан</div>
+          <p>Учёные и воины, изучающие Пелену и первозданную энергию. Они делают «проколы», стабилизируя реальность в точках высокого давления.</p>
+        </article>
+
+        <article class="wiki-faction">
+          <h3>🕷️ Синдикат</h3>
+          <div class="wiki-faction-region">Аль'Ваэра</div>
+          <p>Тайная преступная сеть, которую называют «Паутиной». Контролирует теневую экономику, шпионаж и контрабанду всех четырёх городов.</p>
+        </article>
+
+        <article class="wiki-faction">
+          <h3>⚔️ Осколки Багатура</h3>
+          <div class="wiki-faction-region">Все земли</div>
+          <p>Боевые школы, рождённые из духа Архитектора Войны, разлетевшегося на осколки в битве на Ворожбе. Каждая школа — философский путь воина.</p>
+        </article>
+
+        <article class="wiki-faction">
+          <h3>🐫 Пятеро над Песками</h3>
+          <div class="wiki-faction-region">Аль'Ваэра</div>
+          <p>Древние Великие Визири, пережившие падение Уруда. По слухам, их тень до сих пор падает на пустыню — и на её города.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАМПАНИИ -->
+  <section class="section" id="campaigns">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">КАМПАНИИ</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">истории Таверны</h2>
+      </div>
+
+      <div class="campaign-grid">
+        <article class="campaign-card" id="campaign-bpo">
+          <h3>Братья по оружию</h3>
+          <div class="campaign-tag">Северные земли</div>
+          <p>Кампания Таверны, в которой путники идут плечом к плечу по северным землям Орвея, скрепляя клятвы мечом и щитом.</p>
+        </article>
+
+        <article class="campaign-card" id="campaign-peski">
+          <h3>Забытые пески</h3>
+          <div class="campaign-tag">Аль'Ваэра</div>
+          <p>Экспедиция в сердце пустыни Аль'Ваэры, где под барханами спят руины павшего Уруда, а джинны помнят каждого искателя сокровищ.</p>
+        </article>
+
+        <article class="campaign-card" id="campaign-niti">
+          <h3>Путешествие по нитям</h3>
+          <div class="campaign-tag">Пелена</div>
+          <p>Истории, сплетённые в Пелене между осколками реальности. Нити судьбы ведут героев через границы миров — если те не оборвутся.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАРТА -->
+  <section class="section" id="map">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">КАРТА</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">земли Орвея</h2>
+      </div>
+
+      <div class="map-frame">
+        <img src="img/worlds/map-full.jpg" alt="Карта мира Орвей с Пеленой" loading="lazy">
+      </div>
+      <p class="map-note">✦ Тёмные нити на карте — Пелена, соединяющая осколки миров.</p>
+    </div>
+  </section>
+
+  <!-- МЕРЧ / ПОДДЕРЖКА -->
+  <section class="section" id="support">
+    <div class="container">
+      <div class="section__header">
+        <h3 class="section__subtitle">МЕРЧ</h3>
+        <div class="create-line-section"></div>
+        <h2 class="section__title">и поддержка Таверны</h2>
+      </div>
+
+      <div class="support-card">
+        <h3>✦ Поддержать Таверну ✦</h3>
+        <p>Хочешь, чтобы в наших бочках не переводился эль, а под сводами лилась музыка? Каждая монета — вклад в общее дело!</p>
+        <p class="support-account">Поддержать Таверну: <a href="https://taplink.cc/taverncardtempest" target="_blank" rel="noopener">taplink.cc/taverncardtempest</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="intro__subtitle">Peace &amp; Order</p>
+        <h2 class="intro__title">Мир Орвей</h2>
+        <a class="button ribbon-outset border" href="index.html">вернуться в Таверну</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>PEACE &amp; ORDER</span>. &nbsp;© <span class="js-year"></span> Таверна «Карточная Буря» · <a href="index.html">Карточная Буря</a>
+    </div>
+  </footer>
+
+  <script>
+    var headerEl = document.getElementById('header');
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > 100) {
+        headerEl.classList.add('header_mini');
+      } else {
+        headerEl.classList.remove('header_mini');
+      }
+    });
+
+    var toggle = document.getElementById('navToggle');
+    var nav = document.getElementById('nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', function () {
+        var isOpen = nav.classList.toggle('active');
+        toggle.classList.toggle('open', isOpen);
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('active');
+          toggle.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    }
+
+    document.querySelectorAll('.js-year').forEach(function (el) {
+      el.textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
