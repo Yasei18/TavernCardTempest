@@ -15,27 +15,30 @@
 <body>
 
     <header class="header" id="header">
-       <div class="header__container">
-            <nav class="nav" id="nav">
-                <a class="nav__btn" href="./wiki.html">Главная</a>
-                <div class="dropdown">
-                  <div class="box-wrap">
-                  <button class="dropbtn"> Регионы </button>
-                  <div class="box">
-                    <div class="dropdown-content">
-                      <a href="./alvaera.html" class="active">Аль'Ваэра</a>
-                      <a href="./kaladan.html">Каладан</a>
-                      <a href="./zadubravye.html">Задубравье</a>
-                    </div>
-                  </div>
-                  </div>
+      <div class="header__container">
+        <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav" id="nav">
+          <a class="nav__btn" href="./wiki.html">Главная</a>
+          <div class="dropdown">
+            <div class="box-wrap">
+              <button class="dropbtn" type="button">Регионы</button>
+              <div class="box">
+                <div class="dropdown-content">
+                  <a href="./alvaera.html" class="active">Аль'Ваэра</a>
+                  <a href="./kaladan.html">Каладан</a>
+                  <a href="./zadubravye.html">Задубравье</a>
                 </div>
-                <a class="nav__link" href="./races.html">Виды</a>
-                <a class="nav__link" href="./map.html">Карта</a>
-                <a class="nav__link" href="../index.html">В таверну</a>
-            </nav>
+              </div>
+            </div>
           </div>
-          <div class="create-line-header"></div>
+          <a class="nav__link" href="./races.html">Виды</a>
+          <a class="nav__link" href="./map.html">Карта</a>
+          <a class="nav__link" href="../index.html">В таверну</a>
+        </nav>
+      </div>
+      <div class="create-line-header"></div>
     </header>
 
     <div class="wiki-page">

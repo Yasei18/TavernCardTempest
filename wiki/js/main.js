@@ -10,6 +10,33 @@ window.addEventListener("scroll", function () {
   }
 })
 
+const navToggle = document.getElementById("navToggle")
+const navLinks = document.getElementById("nav")
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener("click", function () {
+    const isOpen = navLinks.classList.toggle("open")
+    navToggle.classList.toggle("open", isOpen)
+    navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false")
+  })
+
+  navLinks.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.classList.remove("open")
+      navToggle.classList.remove("open")
+      navToggle.setAttribute("aria-expanded", "false")
+    })
+  })
+
+  const dropbtn = navLinks.querySelector(".dropdown .dropbtn")
+  if (dropbtn) {
+    dropbtn.addEventListener("click", function () {
+      const dropdown = dropbtn.closest(".dropdown")
+      dropdown.classList.toggle("open")
+    })
+  }
+}
+
 const lightboxLinks = document.querySelectorAll(".js-map-open, .js-art-open")
 
 if (lightboxLinks.length > 0) {

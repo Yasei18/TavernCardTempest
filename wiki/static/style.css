@@ -104,7 +104,9 @@ hr {
   text-shadow: 0 6px 40px rgba(0, 0, 0, 0.85);
 }
 
-/* Header */
+/* ============================================================
+   ШАПКА (прежняя, в духе Орвея)
+   ============================================================ */
 .header{
   position: fixed;
   top: 0;
@@ -257,6 +259,10 @@ hr {
   border-radius: 30px 30px;
 }
 
+.dropdown-content a.active {
+  color: #a6cbe6;
+}
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -268,6 +274,115 @@ hr {
 
 .box-wrap:hover .box {
   opacity: 1;
+}
+
+/* Кнопка-бургер (для мобильного меню) */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #ffffff;
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Мобильное меню: выпадает из шапки списком */
+@media (max-width: 770px) {
+  .header {
+    height: 56px;
+    background: rgba(3, 9, 41, 0.92);
+  }
+
+  .header__container {
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 0;
+  }
+
+  .header .create-line-header {
+    display: none;
+  }
+
+  .nav-toggle {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  .nav {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    background: rgba(3, 9, 41, 0.98);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    padding: 8px 0 12px;
+    font-size: 18px;
+    transform: translateY(-130%);
+    transition: transform 0.3s ease;
+    text-align: left;
+  }
+
+  .nav.open {
+    transform: translateY(0);
+  }
+
+  .nav .nav__btn,
+  .nav .nav__link {
+    display: block;
+    margin: 0;
+    padding: 12px 24px;
+    text-align: left;
+  }
+
+  .nav .dropdown {
+    margin: 0;
+  }
+
+  .nav .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .nav .dropdown .box {
+    opacity: 1;
+  }
+
+  .nav .dropdown-content {
+    position: static;
+    display: none;
+    background: rgba(41, 59, 81, 0.6);
+    border-radius: 0;
+    box-shadow: none;
+    min-width: 0;
+    padding-left: 24px;
+  }
+
+  .nav .dropdown.open .dropdown-content {
+    display: block;
+  }
+
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 }
 
 /* Section */
@@ -571,13 +686,6 @@ hr {
     font-size: 120px;
   }
 
-  .create-line-header {
-    width: 60%;
-    border-bottom: 1px solid #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   .create-line-section {
     width: 80%;
     border-bottom: 1px solid #000000;
@@ -625,13 +733,6 @@ hr {
     margin-top: -40px;
   }
 
-  .create-line-header {
-    width: 60%;
-    border-bottom: 1px solid #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
 }
 
 @media (max-width: 770px) {
@@ -640,28 +741,6 @@ hr {
     .intro {
       min-height: 650px;
     }
-
-  /* Header */
-  .header {
-    padding: 10px 0;
-  }
-
-  .create-line-header {
-    width: 60%;
-    border-bottom: 1px solid #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Nav */
-  .nav {
-    position: static;
-    background: transparent;
-  }
-
-  .nav__link {
-    padding: 6px 10px;
-  }
 
   /* Section */
   .section {
@@ -699,13 +778,6 @@ hr {
   /* INTRO */
   .intro__subtitle {
     font-size: 22px;
-  }
-
-  .create-line-header {
-    width: 60%;
-    border-bottom: 1px solid #ffffff;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .intro__title {
