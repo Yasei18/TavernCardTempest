@@ -67,8 +67,14 @@
             </div>
 
             <div class="form-group">
-              <label for="telegram">Ник в Telegram</label>
-              <input type="text" id="telegram" name="telegram" maxlength="64" placeholder="@никнейм">
+              <div class="field-label">
+                <label for="telegram">Ник в Telegram <span class="req">*</span></label>
+                <span class="field-hint">
+                  <button type="button" class="hint-btn" id="telegramHint" aria-label="Зачем указывать ник" aria-expanded="false">?</button>
+                  <span class="hint-pop" id="telegramHintText" role="tooltip">Бот Таверны напишет вам сюда напоминание о начале сходки: за неделю и ещё раз за несколько дней до встречи.</span>
+                </span>
+              </div>
+              <input type="text" id="telegram" name="telegram" required maxlength="33" pattern="@(?=.{5,32}$)[a-zA-Z][a-zA-Z0-9]*(?:_[a-zA-Z0-9]+)*$" placeholder="@никнейм" title="Ник: 5–32 символа, латинские буквы, цифры и одиночное подчёркивание (_), не в начале и не в конце" aria-describedby="telegramHintText">
             </div>
 
             <div class="form-group">
@@ -90,7 +96,7 @@
               </div>
               <div class="form-group">
                 <label for="inviterTelegram">Ник пригласившего в Telegram</label>
-                <input type="text" id="inviterTelegram" name="inviterTelegram" maxlength="64" placeholder="@никнейм">
+                <input type="text" id="inviterTelegram" name="inviterTelegram" maxlength="33" pattern="@(?=.{5,32}$)[a-zA-Z][a-zA-Z0-9]*(?:_[a-zA-Z0-9]+)*$" placeholder="@никнейм" title="Ник: 5–32 символа, латинские буквы, цифры и одиночное подчёркивание (_), не в начале и не в конце">
               </div>
             </div>
 

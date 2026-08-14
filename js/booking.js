@@ -58,6 +58,15 @@ document.addEventListener('DOMContentLoaded', function () {
     inviterFields.classList.toggle('hidden', !firstTime.checked);
   });
 
+  var telegramHint = document.getElementById('telegramHint');
+  if (telegramHint) {
+    telegramHint.addEventListener('click', function () {
+      var hint = telegramHint.closest('.field-hint');
+      var open = hint.classList.toggle('open');
+      telegramHint.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -96,34 +105,63 @@ document.addEventListener('DOMContentLoaded', function () {
       secret: SITE_SECRET
     };
 
-    button.disabled = true;
-    status.className = 'form-status';
-    status.textContent = 'Отправляем весть в Таверну…';
+    var send = function () {
+      button.disabled = true;
+      status.className = 'form-status';
+      status.textContent = 'Отправляем весть в Таверну…';
 
-    fetch(WEB_APP_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(payload)
-    })
-      .then(function (res) {
-        return res.json();
+      fetch(WEB_APP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
       })
-      .then(function (data) {
-        if (data && data.result === 'ok') {
-          status.classList.add('success');
-          status.textContent = data.message || 'Хозяин Таверны получил вашу весть! Место за вами. До встречи за игровым столом!';
-          form.reset();
-          inviterFields.classList.add('hidden');
-        } else {
-          throw new Error('bad response');
-        }
-      })
-      .catch(function () {
-        status.classList.add('error');
-        status.textContent = 'Не удалось отправить весть. Попробуйте ещё раз или напишите в Шумный Зал: @TavernCardTempest_Chat';
-      })
-      .finally(function () {
-        button.disabled = false;
-      });
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          if (data && data.result === 'ok') {
+            status.classList.add('success');
+            status.textContent = data.message || 'Хозяин Таверны получил вашу весть! Место за вами. До встречи за игровым столом!';
+            form.reset();
+            inviterFields.classList.add('hidden');
+          } else {
+            throw new Error('bad response');
+          }
+        })
+        .catch(function () {
+          status.classList.add('error');
+          status.textContent = 'Не удалось отправить весть. Попробуйте ещё раз или напишите в Шумный Зал: @TavernCardTempest_Chat';
+        })
+        .finally(function () {
+          button.disabled = false;
+        });
+    };
+
+    /* Если этот ник уже регистрировался на выбранную Бурю — не шлём повторно. */
+    var checkDuplicate = function () {
+      if (!payload.telegram || !payload.gathering || payload.gathering === 'Пока не определился') {
+        send();
+        return;
+      }
+      fetch(WEB_APP_URL + '?action=check&gathering=' + encodeURIComponent(payload.gathering) + '&telegram=' + encodeURIComponent(payload.telegram))
+        .then(function (res) {
+          return res.json();
+        })
+        .then(function (data) {
+          if (data && data.result === 'ok' && data.exists) {
+            status.className = 'form-status success';
+            status.textContent = 'Вы уже возвестили о визите на эту Бурю — спасибо, что перепроверили!';
+            form.reset();
+            inviterFields.classList.add('hidden');
+          } else {
+            send();
+          }
+        })
+        .catch(function () {
+          send();
+        });
+    };
+
+    checkDuplicate();
   });
 });

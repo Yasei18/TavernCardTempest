@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
 
     <script defer src="./js/main.js"></script>
 
-        <meta name="description" content="Каталог всех рас мира Орвей: эльфы, дварфы, гномы, тифлинги, драконорождённые и другие. Сеттинг Таверны «Карточная Буря» для D&D 5e.">
+        <meta name="description" content="Каталог всех рас мира Орвей: люди, эльфы, дварфы, гномы, тифлинги, джагатаи, яламы и другие. Сеттинг Таверны «Карточная Буря» для D&D 5e.">
     <title>Расы — Мир Орвей</title>
 </head>
 <body>
@@ -34,6 +34,7 @@
             </div>
           </div>
           <a class="nav__link active" href="./races.html">Виды</a>
+          <a class="nav__link" href="./faiths.html">Верования</a>
           <a class="nav__link" href="./map.html">Карта</a>
           <a class="nav__link" href="../index.html">В таверну</a>
         </nav>
@@ -42,6 +43,28 @@
     </header>
 
     <div class="wiki-page">
+        <aside class="races-sidebar">
+            <div class="race-filters">
+                <div class="race-filters__title">Регионы</div>
+                <div class="race-filters__tags">
+                    <button type="button" class="tag tag-region--alvaera filter-tag" data-group="region" data-filter="alvaera">Аль'Ваэра</button>
+                    <button type="button" class="tag tag-region--kaladan filter-tag" data-group="region" data-filter="kaladan">Каладан</button>
+                    <button type="button" class="tag tag-region--zadubravye filter-tag" data-group="region" data-filter="zadubravye">Задубравье</button>
+                    <button type="button" class="tag tag-region--stepnoy-poyas filter-tag" data-group="region" data-filter="stepnoy-poyas">Степной Пояс</button>
+                    <button type="button" class="tag tag-region--fossoria filter-tag" data-group="region" data-filter="fossoria">Фоссория</button>
+                </div>
+                <div class="race-filters__title">Типы</div>
+                <div class="race-filters__tags">
+                    <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="dvarfy">Дварфы</button>
+                    <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="gnomy">Гномы</button>
+                    <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="stihiynye">Стихийные</button>
+                    <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="elfy">Эльфы</button>
+                    <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="demony">Демоны</button>
+                    <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="zverolyudi">Зверолюди</button>
+                </div>
+            </div>
+        </aside>
+
         <div class="wiki-container">
 
             <nav class="crumbs">
@@ -50,7 +73,7 @@
 
             <div class="races-catalog__header">
                 <h1>Виды</h1>
-                <p>Каталог всех рас мира Орвей. Нажмите на расу, чтобы перейти к её описанию.</p>
+                <p>Каталог всех рас мира Орвей. Используйте поиск или теги, чтобы отфильтровать расы.</p>
             </div>
 
             <div class="container__searchBar">
@@ -59,180 +82,120 @@
                 </div>
             </div>
 
-            <div class="race-tags" style="text-align:center; margin-bottom: 30px;">
-                <a href="./alvaera.html" class="tag tag-region--alvaera">Аль'Ваэра</a>
-                <a href="./kaladan.html" class="tag tag-region--kaladan">Каладан</a>
-                <a href="./zadubravye.html" class="tag tag-region--zadubravye">Задубравье</a>
-            </div>
+            <div class="races-list">
 
-            <div class="races-group">
-                <h2 class="races-group__title">Аль'Ваэра</h2>
-
-                <a class="race-card" href="./races/race-mahreby.html">
-                    <div class="race-card__title">Махребы<span class="race-card__en">Mahreby</span></div>
-                    <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Люди</span></div>
-                    <div class="race-card__desc">Люди — дети солнца и песка. Народ пустыни, строящий города из камня и золота.</div>
+                <a class="race-card" href="./races/race-lyudi.html">
+                    <div class="race-card__title">Люди<span class="race-card__en">Humans</span></div>
+                    <div class="race-tags"><span class="tag tag-type">Люди</span></div>
+                    <div class="race-card__desc">Самый многочисленный вид Орвея: махребы, померанцы, северяне, имперцы, венты, тарраконцы и дубравцы.</div>
                 </a>
 
-                <a class="race-card race-card--art" href="./races/race-dzhenazi.html">
-                    <img class="race-card__img" src="./static/images/khemed.jpg" alt="Дженази">
+                <a class="race-card race-card--art" href="./races/race-dzhenazi.html" data-region="alvaera" data-type="stihiynye">
+                    <img class="race-card__img" src="./static/images/khemed.jpg" alt="Фускары">
                     <div class="race-card__body">
-                        <div class="race-card__title">Дженази<span class="race-card__en">Genasi</span></div>
-                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Дженази</span></div>
+                        <div class="race-card__title">Фускары<span class="race-card__en">Fuskary</span></div>
+                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Стихийные</span></div>
                         <div class="race-card__desc">Отмеченные печатью стихий: дети воздуха, земли, огня и воды.</div>
                     </div>
                 </a>
 
-                <a class="race-card race-card--art" href="./races/race-akrabimy.html">
+                <a class="race-card race-card--art" href="./races/race-akrabimy.html" data-region="alvaera">
                     <img class="race-card__img" src="./static/images/akrabim.jpg" alt="Акрабим">
                     <div class="race-card__body">
                         <div class="race-card__title">Акрабимы<span class="race-card__en">Akrabim</span></div>
-                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Акрабимы</span></div>
+                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Акрабимы</span><span class="tag tag-type">Зверолюди</span></div>
                         <div class="race-card__desc">Песчаные ювелиры, чьи когти создают красоту, а жала хранят тайны ядов и лекарств.</div>
                     </div>
                 </a>
 
-                <a class="race-card" href="./races/race-tosabei.html">
+                <a class="race-card" href="./races/race-tosabei.html" data-region="alvaera" data-type="zverolyudi">
                     <div class="race-card__title">Тосабеи<span class="race-card__en">Tosabei</span></div>
-                    <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Тосабеи</span></div>
+                    <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Тосабеи</span><span class="tag tag-type">Зверолюди</span></div>
                     <div class="race-card__desc">Саблерогие исполины, помнящие каждую клятву, данную под звёздами.</div>
                 </a>
 
-                <a class="race-card race-card--art" href="./races/race-hushity.html">
+                <a class="race-card race-card--art" href="./races/race-hushity.html" data-region="alvaera" data-type="zverolyudi">
                     <img class="race-card__img" src="./static/images/nahra.jpg" alt="Хушит">
                     <div class="race-card__body">
                         <div class="race-card__title">Хушиты<span class="race-card__en">Hushit</span></div>
-                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Хушиты</span></div>
+                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Хушиты</span><span class="tag tag-type">Зверолюди</span></div>
                         <div class="race-card__desc">Шепчущиеся с песком. Их глаза видят не только настоящее, но и то, что было и лишь грядёт.</div>
                     </div>
                 </a>
 
-                <a class="race-card race-card--art" href="./races/race-shualy.html">
+                <a class="race-card race-card--art" href="./races/race-shualy.html" data-region="alvaera" data-type="zverolyudi">
                     <img class="race-card__img" src="./static/images/ikki.jpg" alt="Шуал">
                     <div class="race-card__body">
                         <div class="race-card__title">Шуалы<span class="race-card__en">Shualy</span></div>
-                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Шуалы</span></div>
+                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Шуалы</span><span class="tag tag-type">Зверолюди</span></div>
                         <div class="race-card__desc">Лисьи дети пустыни. Их смех звенит монетами на базарах, а хитрость не знает границ.</div>
                     </div>
                 </a>
 
-                <a class="race-card" href="./races/race-kutruby.html">
+                <a class="race-card" href="./races/race-kutruby.html" data-region="alvaera" data-type="demony">
                     <div class="race-card__title">Кутрубы<span class="race-card__en">Kutrub</span></div>
-                    <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Кутрубы</span></div>
+                    <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Демоны</span></div>
                     <div class="race-card__desc">Проклятые голодом. Они живут на лезвии между разумом и безумием.</div>
                 </a>
-            </div>
 
-            <div class="races-group">
-                <h2 class="races-group__title">Каладан</h2>
-
-                <a class="race-card race-card--art" href="./races/race-pomerancy.html">
-                    <img class="race-card__img" src="./static/images/pomerancy.jpg" alt="Померанец">
-                    <div class="race-card__body">
-                        <div class="race-card__title">Померанцы<span class="race-card__en">Pomeranci</span></div>
-                        <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Люди</span></div>
-                        <div class="race-card__desc">Жители южного побережья Ледяного моря. Охотники и рыбаки, живущие рядом с лесом.</div>
-                    </div>
+                <a class="race-card" href="./races/race-faskiry.html" data-region="alvaera" data-type="demony">
+                    <div class="race-card__title">Фаскиры<span class="race-card__en">Faskiry</span></div>
+                    <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Демоны</span><span class="tag tag-type">Другое</span></div>
+                    <div class="race-card__desc">Тени, что помнят тьму Уруда. Чёрные силуэты, плывущие сквозь туман, будто пепел из неведомых могил.</div>
                 </a>
 
-                <a class="race-card race-card--art" href="./races/race-severyane.html">
-                    <img class="race-card__img" src="./static/images/severyane.jpg" alt="Северянин">
-                    <div class="race-card__body">
-                        <div class="race-card__title">Северяне<span class="race-card__en">Severiane</span></div>
-                        <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Люди</span></div>
-                        <div class="race-card__desc">Суровый народ берегов Ледяного моря, привыкший к невзгодам и не знающий милости.</div>
-                    </div>
-                </a>
-
-                <a class="race-card race-card--art" href="./races/race-impercy.html">
-                    <img class="race-card__img" src="./static/images/impercy.jpg" alt="Имперец">
-                    <div class="race-card__body">
-                        <div class="race-card__title">Имперцы<span class="race-card__en">Impercy</span></div>
-                        <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Люди</span></div>
-                        <div class="race-card__desc">Потомки великой Империи, живущие в центральных регионах Каладана.</div>
-                    </div>
-                </a>
-
-                <a class="race-card race-card--art" href="./races/race-venty.html">
-                    <img class="race-card__img" src="./static/images/venty.jpg" alt="Вент">
-                    <div class="race-card__body">
-                        <div class="race-card__title">Венты<span class="race-card__en">Venty</span></div>
-                        <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Люди</span></div>
-                        <div class="race-card__desc">Открытый и дружелюбный народ полуострова Беневенто, ценящий искусство и философию.</div>
-                    </div>
-                </a>
-
-                <a class="race-card race-card--art" href="./races/race-tarrakoncy.html">
-                    <img class="race-card__img" src="./static/images/tarrakoncy.jpg" alt="Тарраконец">
-                    <div class="race-card__body">
-                        <div class="race-card__title">Тарраконцы<span class="race-card__en">Tarrakoncy</span></div>
-                        <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Люди</span></div>
-                        <div class="race-card__desc">Гордые и воинственные люди засушливого полуострова Тарраконика.</div>
-                    </div>
-                </a>
-
-                <a class="race-card" href="./races/race-lesnye-elfy.html">
+                <a class="race-card" href="./races/race-lesnye-elfy.html" data-region="kaladan" data-type="elfy">
                     <div class="race-card__title">Лесные эльфы<span class="race-card__en">Wood Elves</span></div>
                     <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Эльфы</span></div>
                     <div class="race-card__desc">Скрытые лесные королевства, обострённые чувства и быстрые ноги.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-vysshie-elfy.html">
+                <a class="race-card" href="./races/race-vysshie-elfy.html" data-region="kaladan" data-type="elfy">
                     <div class="race-card__title">Высшие эльфы<span class="race-card__en">High Elves</span></div>
                     <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Эльфы</span></div>
                     <div class="race-card__desc">Солнечные и лунные эльфы с острым умом и знанием основ магии.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-gornye-dvarfy.html">
+                <a class="race-card" href="./races/race-gornye-dvarfy.html" data-region="kaladan" data-type="dvarfy">
                     <div class="race-card__title">Горные дварфы<span class="race-card__en">Mountain Dwarves</span></div>
                     <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Дварфы</span></div>
                     <div class="race-card__desc">Воины горных чертогов, знатоки боя и владения доспехами.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-holmovye-dvarfy.html">
+                <a class="race-card" href="./races/race-holmovye-dvarfy.html" data-region="kaladan" data-type="dvarfy">
                     <div class="race-card__title">Холмовые дварфы<span class="race-card__en">Hill Dwarves</span></div>
                     <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Дварфы</span></div>
                     <div class="race-card__desc">Мудрые хранители предгорий с крепким здоровьем и выдержкой.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-lesnoy-gnom.html">
+                <a class="race-card" href="./races/race-lesnoy-gnom.html" data-region="kaladan" data-type="gnomy">
                     <div class="race-card__title">Лесной гном<span class="race-card__en">Forest Gnome</span></div>
                     <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Гномы</span></div>
                     <div class="race-card__desc">Мастера иллюзий и друзья маленьких зверей.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-skalny-gnom.html">
+                <a class="race-card" href="./races/race-skalny-gnom.html" data-region="kaladan" data-type="gnomy">
                     <div class="race-card__title">Скальный гном<span class="race-card__en">Rock Gnome</span></div>
                     <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Гномы</span></div>
                     <div class="race-card__desc">Изобретатели и жестянщики, создающие удивительные механизмы.</div>
                 </a>
 
-                <a class="race-card race-card--art" href="./races/race-albany.html">
+                <a class="race-card race-card--art" href="./races/race-albany.html" data-region="kaladan" data-type="stihiynye">
                     <img class="race-card__img" src="./static/images/albany.jpg" alt="Альбани">
                     <div class="race-card__body">
                         <div class="race-card__title">Альбани<span class="race-card__en">Albani</span></div>
-                        <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Альбани</span></div>
+                        <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Стихийные</span></div>
                         <div class="race-card__desc">Древний народ Померании с голубоватой кожей, чтящий своих предков.</div>
                     </div>
                 </a>
 
-                <a class="race-card" href="./races/race-tiflingi.html">
+                <a class="race-card" href="./races/race-tiflingi.html" data-region="kaladan" data-type="demony">
                     <div class="race-card__title">Тифлинги<span class="race-card__en">Tieflings</span></div>
-                    <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Тифлинги</span></div>
+                    <div class="race-tags"><span class="tag tag-region--kaladan">Каладан</span><span class="tag tag-type">Демоны</span></div>
                     <div class="race-card__desc">Носители чёрной исцеляющей крови и дьявольского наследия.</div>
                 </a>
-            </div>
 
-            <div class="races-group">
-                <h2 class="races-group__title">Задубравье</h2>
-
-                <a class="race-card" href="./races/race-dubravcy.html">
-                    <div class="race-card__title">Дубравцы<span class="race-card__en">Dubravcy</span></div>
-                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Люди</span></div>
-                    <div class="race-card__desc">Коренные люди Задубравья, дети леса, живущие в ладу с природой.</div>
-                </a>
-
-                <a class="race-card race-card--art" href="./races/race-gayuny.html">
+                <a class="race-card race-card--art" href="./races/race-gayuny.html" data-region="zadubravye">
                     <img class="race-card__img" src="./static/images/gayuny.jpg" alt="Гаюн">
                     <div class="race-card__body">
                         <div class="race-card__title">Гаюны<span class="race-card__en">Gajuny</span></div>
@@ -241,41 +204,48 @@
                     </div>
                 </a>
 
-                <a class="race-card" href="./races/race-perevertni.html">
+                <a class="race-card" href="./races/race-perevertni.html" data-region="zadubravye" data-type="zverolyudi">
                     <div class="race-card__title">Перевертни<span class="race-card__en">Perevertni</span></div>
-                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Перевертни</span></div>
+                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Перевертни</span><span class="tag tag-type">Зверолюди</span></div>
                     <div class="race-card__desc">Оборотни и шифтеры, несущие в себе звериную душу.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-polunoshniki.html">
+                <a class="race-card" href="./races/race-polunoshniki.html" data-region="zadubravye" data-type="demony">
                     <div class="race-card__title">Полуночники<span class="race-card__en">Polunoshniki</span></div>
-                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Полуночники</span></div>
+                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Демоны</span><span class="tag tag-type">Полуночники</span></div>
                     <div class="race-card__desc">Бледные изгои с заострёнными клыками, живущие между мирами.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-kremnichi.html">
+                <a class="race-card" href="./races/race-kremnichi.html" data-region="zadubravye" data-type="dvarfy">
                     <div class="race-card__title">Кремничи<span class="race-card__en">Kremnichi</span></div>
                     <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Дварфы</span></div>
                     <div class="race-card__desc">Народ гор и каменных недр, потомки древних духов земли, лучшие кузнецы.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-yargany.html">
+                <a class="race-card" href="./races/race-yargany.html" data-region="stepnoy-poyas">
                     <div class="race-card__title">Ярганы<span class="race-card__en">Yargany</span></div>
-                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Орки</span></div>
+                    <div class="race-tags"><span class="tag tag-region--stepnoy-poyas">Степной Пояс</span><span class="tag tag-type">Орки</span></div>
                     <div class="race-card__desc">Степные орки, равные кремничам в кузнечном деле и воинской доблести.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-drakonorozhdennye.html">
-                    <div class="race-card__title">Драконорождённые<span class="race-card__en">Dragonborn</span></div>
-                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Драконорождённые</span></div>
+                <a class="race-card" href="./races/race-drakonorozhdennye.html" data-region="stepnoy-poyas" data-type="zverolyudi">
+                    <div class="race-card__title">Джагатаи<span class="race-card__en">Dzhagatai</span></div>
+                    <div class="race-tags"><span class="tag tag-region--stepnoy-poyas">Степной Пояс</span><span class="tag tag-type">Драконорождённые</span><span class="tag tag-type">Зверолюди</span></div>
                     <div class="race-card__desc">Джагатаи Крылатого Улуса — дети степи и пламени, несущие волю крылатых ханов.</div>
                 </a>
 
-                <a class="race-card" href="./races/race-yashcherolyudy.html">
-                    <div class="race-card__title">Ящеролюды<span class="race-card__en">Yashcherolyudy</span></div>
-                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Ящеролюды</span></div>
+                <a class="race-card" href="./races/race-yashcherolyudy.html" data-region="stepnoy-poyas" data-type="zverolyudi">
+                    <div class="race-card__title">Яламы<span class="race-card__en">Yalamy</span></div>
+                    <div class="race-tags"><span class="tag tag-region--stepnoy-poyas">Степной Пояс</span><span class="tag tag-type">Ящеролюды</span><span class="tag tag-type">Зверолюди</span></div>
                     <div class="race-card__desc">Яламы Крылатого Улуса — низшая каста, рабочие спины Великой Орды.</div>
                 </a>
+
+                <a class="race-card" href="./races/race-fotiane.html" data-region="fossoria zadubravye" data-type="elfy">
+                    <div class="race-card__title">Фотиане<span class="race-card__en">Fotiane</span></div>
+                    <div class="race-tags"><span class="tag tag-region--fossoria">Фоссория</span><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Эльфы</span></div>
+                    <div class="race-card__desc">Потомки древних жрецов Солнца, народ великой южной империи Фоссории. Мастера металлов и ревностные служители Сияния.</div>
+                </a>
+
             </div>
 
             <nav class="wiki-nav-more">
@@ -294,20 +264,45 @@
 
     <script>
         const searchInput = document.getElementById('raceSearch');
-        searchInput.addEventListener('input', function () {
-            const query = this.value.trim().toLowerCase();
-            const cards = document.querySelectorAll('.race-card');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const cards = document.querySelectorAll('.race-card');
+
+        const activeFilters = { region: null, type: null };
+
+        function applyFilters() {
+            const query = searchInput.value.trim().toLowerCase();
             cards.forEach(function (card) {
                 const text = card.textContent.toLowerCase();
-                card.style.display = text.includes(query) ? '' : 'none';
+                const matchesQuery = text.includes(query);
+                let ok = matchesQuery;
+                Object.keys(activeFilters).forEach(function (group) {
+                    const value = activeFilters[group];
+                    if (!value) return;
+                    const values = (card.dataset[group] || '').split(' ').filter(Boolean);
+                    if (values.indexOf(value) === -1) ok = false;
+                });
+                card.style.display = ok ? '' : 'none';
             });
-            const groups = document.querySelectorAll('.races-group');
-            groups.forEach(function (group) {
-                const visible = group.querySelectorAll('.race-card[style*="display: none"]');
-                const hasVisible = group.querySelectorAll('.race-card').length > visible.length;
-                group.style.display = hasVisible ? '' : 'none';
+        }
+
+        filterTags.forEach(function (tag) {
+            tag.addEventListener('click', function () {
+                const group = tag.dataset.group;
+                const filter = tag.dataset.filter;
+                const active = tag.classList.contains('active');
+
+                filterTags.forEach(function (t) {
+                    if (t.dataset.group === group) t.classList.remove('active');
+                });
+
+                activeFilters[group] = (!active) ? filter : null;
+                if (!active) tag.classList.add('active');
+
+                applyFilters();
             });
         });
+
+        searchInput.addEventListener('input', applyFilters);
     </script>
 
 </body>
