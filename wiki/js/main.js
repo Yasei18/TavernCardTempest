@@ -28,13 +28,13 @@ if (navToggle && navLinks) {
     })
   })
 
-  const dropbtn = navLinks.querySelector(".dropdown .dropbtn")
-  if (dropbtn) {
+  const dropbtns = navLinks.querySelectorAll(".dropdown .dropbtn")
+  dropbtns.forEach(function (dropbtn) {
     dropbtn.addEventListener("click", function () {
       const dropdown = dropbtn.closest(".dropdown")
       dropdown.classList.toggle("open")
     })
-  }
+  })
 }
 
 const lightboxLinks = document.querySelectorAll(".js-map-open, .js-art-open")

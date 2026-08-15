@@ -31,11 +31,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://example.com/tavern/wiki/map.html</loc>
-    <lastmod>2026-08-11</lastmod>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>https://example.com/tavern/wiki/alvaera.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.5</priority>
@@ -404,5 +399,60 @@
     <loc>https://example.com/tavern/games/zombiehouse.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/snezhnaya-pustosh.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-pyatero.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-siyanie.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-dzhailam.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-panteon-severnyh-pustosh.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-staraya-vera-alvaera.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-staraya-vera-zadubravye.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-tengrianstvo.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-duhi-predkov.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/faiths/faith-draconiy-bog.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.4</priority>
   </url>
 </urlset>

@@ -78,6 +78,12 @@ document.addEventListener('DOMContentLoaded', function () {
       '</div>';
   }
 
+  // Название дополнения без префикса базовой игры («Игра — дополнение» → «дополнение»).
+  function expShortTitle(exp) {
+    var sep = exp.title.indexOf(' — ');
+    return sep === -1 ? exp.title : exp.title.slice(sep + 3);
+  }
+
   // Группирует дополнения по базовой игре: блок с названием игры и списком ссылок.
   function expansionsHtml(list) {
     var groups = {};
@@ -93,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!base) return;
       var items = groups[key].map(function (exp) {
         var page = exp.slug ? 'games/' + exp.slug + '.html' : '';
-        return '<li class="games-exp-item"><a href="' + page + '">' + exp.title + '</a></li>';
+        return '<li class="games-exp-item"><a href="' + page + '">' + expShortTitle(exp) + '</a></li>';
       }).join('');
       html += '<div class="games-exp-group">' +
         '<h4 class="games-exp-base"><a href="games/' + base.slug + '.html">' + base.title + '</a></h4>' +

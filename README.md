@@ -19,9 +19,8 @@
 
 ## Орвей — вики мира
 
-- `wiki.html` — обзор мира.
-- `map.html` — карта.
-- `alvaera.html`, `kaladan.html`, `zadubravye.html` — регионы.
+- `wiki.html` — обзор мира и карта.
+- `alvaera.html`, `kaladan.html`, `zadubravye.html`, `snezhnaya-pustosh.html` — регионы.
 - `races.html` и `races/*.html` — 28 страниц рас, населяющих Орвей.
 
 Шапка вики выполнена в фирменном синем стиле Таверны, а на мобильных (до 770px)
@@ -39,10 +38,10 @@
 │   ├── wiki.html       # Обзор мира
 │   ├── races.html      # Список рас
 │   ├── races/          # Страницы рас
-│   ├── map.html        # Карта
 │   ├── alvaera.html    # Регион
 │   ├── kaladan.html    # Регион
 │   ├── zadubravye.html # Регион
+│   ├── snezhnaya-pustosh.html # Регион
 │   ├── js/main.js      # Мобильное меню
 │   └── static/         # Стили вики
 ├── css/                # Стили главного сайта

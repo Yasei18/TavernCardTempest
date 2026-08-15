@@ -596,11 +596,15 @@ h1, h2, h3 {
 }
 
 .games-exp-list {
-  list-style: none;
-  margin: 0;
+  list-style: disc;
+  margin: 0 0 0 20px;
   padding: 0;
   display: grid;
   gap: 6px;
+}
+
+.games-exp-item::marker {
+  color: var(--gold-dim);
 }
 
 .games-exp-item a {
@@ -938,6 +942,15 @@ h1, h2, h3 {
   color: var(--bg-darker);
   border: 2px solid var(--gold);
   box-shadow: 0 0 20px rgba(212, 165, 67, 0.25);
+  overflow: hidden;
+}
+
+.team-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: translateY(2px) scale(1.15);
 }
 
 .team-nikita   { background: linear-gradient(140deg, #eec36a, #c98f2d); }
@@ -945,7 +958,9 @@ h1, h2, h3 {
 .team-danya    { background: linear-gradient(140deg, #a9c4a0, #5f8b6a); }
 .team-sasha    { background: linear-gradient(140deg, #a9b7d8, #5f6f9b); }
 .team-artem    { background: linear-gradient(140deg, #c9a0a0, #8b4a5a); }
+.team-artem .team-photo { object-position: center 10%; }
 .team-asya     { background: linear-gradient(140deg, #e0b0c0, #9c5f76); }
+.team-vika     { background: linear-gradient(140deg, #c8b0e0, #7f5f9c); }
 
 .team-card h3 {
   font-size: 22px;
