@@ -654,26 +654,16 @@ img {
 	filter: brightness(1.25);
 }
 
-.races-sidebar {
-	position: absolute;
-	top: 170px;
-	bottom: 60px;
-	left: calc(50% + 530px + 24px);
-	width: 240px;
-}
-
-.races-sidebar .race-filters {
-	position: sticky;
-	top: 150px;
+.race-filters {
+	margin: 20px 0 4px;
+	padding: 18px 22px;
 	text-align: left;
-	background: #ffffff;
+	background: #f4f6fb;
+	border: 1px solid #e2e6f0;
 	border-radius: 8px;
-	box-shadow: 0 12px 40px rgba(3, 9, 41, 0.15);
-	padding: 20px 22px;
-	margin-bottom: 0;
 }
 
-.races-sidebar .race-filters__title {
+.race-filters__title {
 	font-size: 13px;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
@@ -681,35 +671,50 @@ img {
 	margin: 14px 0 8px;
 }
 
-.races-sidebar .race-filters__title:first-child {
+.race-filters__title:first-child {
 	margin-top: 0;
 }
 
-.races-sidebar .race-filters__tags {
+.race-filters__tags {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	gap: 6px;
 }
 
-.races-sidebar .race-filters__tags .tag {
+.race-filters__tags .tag {
 	margin: 0;
 }
 
-@media (max-width: 1400px) {
-	.races-sidebar {
-		position: static;
-		width: auto;
-		margin-bottom: 20px;
-	}
+.race-filters__clear {
+	display: block;
+	width: 100%;
+	margin-top: 16px;
+	padding: 7px 10px;
+	font-family: inherit;
+	font-size: 13px;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: #889;
+	background: transparent;
+	border: 1px dashed #ccd;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
 
-	.races-sidebar .race-filters {
-		position: static;
+.race-filters__clear:hover {
+	color: #3c4a8c;
+	border-color: #3c4a8c;
+}
+
+@media (max-width: 900px) {
+	.race-filters {
 		text-align: center;
 		padding: 16px 18px;
 	}
 
-	.races-sidebar .race-filters__tags {
+	.race-filters__tags {
 		justify-content: center;
 	}
 }
@@ -1088,4 +1093,48 @@ img {
 		height: auto;
 		max-height: 340px;
 	}
+}
+
+/* ============================================================
+   КНОПКА «НАВЕРХ» (в стиле Орвея)
+   ============================================================ */
+.back-top {
+	position: fixed;
+	right: 24px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 9998;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 52px;
+	height: 52px;
+	border-radius: 50%;
+	background: rgba(3, 9, 41, 0.85);
+	border: 1px solid rgba(255, 255, 255, 0.35);
+	color: #a6cbe6;
+	cursor: pointer;
+	box-shadow: 0 12px 40px rgba(3, 9, 41, 0.4);
+	transition: opacity 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
+}
+
+.back-top svg {
+	width: 24px;
+	height: 24px;
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.back-top.is-visible {
+	display: flex;
+}
+
+.back-top:hover {
+	border-color: #ffffff;
+	color: #ffffff;
+	background: rgba(3, 9, 41, 0.95);
+	transform: translateY(-50%) scale(1.08);
 }

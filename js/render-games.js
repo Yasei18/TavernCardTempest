@@ -59,15 +59,20 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Счётчики игр и дополнений в шапке каталога.
-  function updateStats() {
+  // Если числа не переданы — показывает всё из GAMES.
+  function updateStats(gamesCount, expsCount) {
     var gamesValue = document.querySelector('.js-stat-games');
     var gamesLabel = document.querySelector('.js-stat-games-label');
     var expsValue = document.querySelector('.js-stat-expansions');
     var expsLabel = document.querySelector('.js-stat-expansions-label');
     if (!gamesValue && !expsValue) return;
 
-    var bases = GAMES.filter(function (g) { return !isExpansion(g); }).length;
-    var exps = GAMES.filter(isExpansion).length;
+    var bases = gamesCount === undefined
+      ? GAMES.filter(function (g) { return !isExpansion(g); }).length
+      : gamesCount;
+    var exps = expsCount === undefined
+      ? GAMES.filter(isExpansion).length
+      : expsCount;
 
     if (gamesValue) gamesValue.textContent = bases;
     if (gamesLabel) gamesLabel.textContent = plural(bases, 'игра', 'игры', 'игр');
@@ -163,6 +168,8 @@ document.addEventListener('DOMContentLoaded', function () {
       expWrap.hidden = expList.length === 0;
     }
 
+    updateStats(mainList.length, expList.length);
+
     if (empty) {
       empty.hidden = mainList.length + expList.length > 0;
     }
@@ -197,11 +204,21 @@ document.addEventListener('DOMContentLoaded', function () {
     tags.forEach(function (t) {
       html += '<button type="button" class="games-filter" data-tag="' + t + '">' + t + '</button>';
     });
+    html += '<button type="button" class="games-filter games-filter-clear" data-clear="1">Очистить</button>';
     filters.innerHTML = html;
 
     filters.addEventListener('click', function (e) {
       var btn = e.target.closest ? e.target.closest('.games-filter') : null;
       if (!btn) return;
+
+      if (btn.hasAttribute('data-clear')) {
+        activeTags = [];
+        if (search) search.value = '';
+        refreshFilters();
+        apply();
+        return;
+      }
+
       var t = btn.getAttribute('data-tag') || '';
       if (t === '') {
         activeTags = [];

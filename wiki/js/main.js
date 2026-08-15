@@ -91,3 +91,15 @@ document.querySelectorAll('a[href="#header"]').forEach(function (link) {
   })
 })
 
+const backTop = document.getElementById("backTop")
+if (backTop) {
+  function onBackTopScroll() {
+    backTop.classList.toggle("is-visible", window.scrollY > 400)
+  }
+  window.addEventListener("scroll", onBackTopScroll, { passive: true })
+  onBackTopScroll()
+  backTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  })
+}
+

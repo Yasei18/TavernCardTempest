@@ -62,17 +62,17 @@
           </p>
         </div>
         <div class="games-stats" id="gamesStats">
-          <div class="games-stat">
+          <a class="games-stat" href="#gamesToolbar">
             <span class="games-stat-icon" aria-hidden="true">🎲</span>
             <span class="games-stat-value js-stat-games">0</span>
             <span class="games-stat-label js-stat-games-label">игр</span>
-          </div>
+          </a>
           <span class="games-stat-sep" aria-hidden="true">✦</span>
-          <div class="games-stat">
+          <a class="games-stat" href="#gamesExpansions">
             <span class="games-stat-icon" aria-hidden="true">⚜</span>
             <span class="games-stat-value js-stat-expansions">0</span>
             <span class="games-stat-label js-stat-expansions-label">дополнений</span>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -80,7 +80,7 @@
     <!-- КАТАЛОГ -->
     <section class="section section-dark">
       <div class="container">
-        <div class="games-toolbar">
+        <div class="games-toolbar" id="gamesToolbar">
           <input type="search" class="games-search" id="gamesSearch" placeholder="Найти игру по названию или жанру…" aria-label="Поиск по играм">
           <div class="games-filters" id="gamesFilters" role="group" aria-label="Фильтр по жанру"></div>
         </div>
@@ -96,6 +96,9 @@
             Дополнения к играм каталога: вместе с базовой игрой — новый опыт за нашими столами.
           </p>
           <div class="games-exp-groups" id="gamesExpansionsGrid"></div>
+          <div class="games-exp-link-row">
+            <a class="games-filter games-filter-exp" href="#gamesGrid">✦ Список игр</a>
+          </div>
         </div>
 
         <p class="games-footnote">

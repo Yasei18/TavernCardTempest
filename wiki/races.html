@@ -36,6 +36,8 @@
             </div>
           </div>
 
+          <a class="nav__link" href="./races.html">Виды</a>
+
           <div class="dropdown">
             <div class="box-wrap">
               <button class="dropbtn" type="button">Верования</button>
@@ -56,7 +58,23 @@
     </header>
 
     <div class="wiki-page">
-        <aside class="races-sidebar">
+        <div class="wiki-container">
+
+            <nav class="crumbs">
+                <a href="../index.html">Главная</a> / <span>Виды</span>
+            </nav>
+
+            <div class="races-catalog__header">
+                <h1>Виды</h1>
+                <p>Каталог всех рас мира Орвей. Используйте поиск или теги, чтобы отфильтровать расы.</p>
+            </div>
+
+            <div class="container__searchBar">
+                <div class="searchBar">
+                    <input type="text" id="raceSearch" placeholder="Поиск расы..." autocomplete="off">
+                </div>
+            </div>
+
             <div class="race-filters">
                 <div class="race-filters__title">Регионы</div>
                 <div class="race-filters__tags">
@@ -75,24 +93,7 @@
                     <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="demony">Демоны</button>
                     <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="zverolyudi">Зверолюди</button>
                 </div>
-            </div>
-        </aside>
-
-        <div class="wiki-container">
-
-            <nav class="crumbs">
-                <a href="../index.html">Главная</a> / <span>Виды</span>
-            </nav>
-
-            <div class="races-catalog__header">
-                <h1>Виды</h1>
-                <p>Каталог всех рас мира Орвей. Используйте поиск или теги, чтобы отфильтровать расы.</p>
-            </div>
-
-            <div class="container__searchBar">
-                <div class="searchBar">
-                    <input type="text" id="raceSearch" placeholder="Поиск расы..." autocomplete="off">
-                </div>
+                <button type="button" class="race-filters__clear" id="raceClear">Очистить фильтры</button>
             </div>
 
             <div class="races-list">
@@ -316,7 +317,19 @@
         });
 
         searchInput.addEventListener('input', applyFilters);
-    </script>
 
+        document.getElementById('raceClear').addEventListener('click', function () {
+            searchInput.value = '';
+            activeFilters.region = null;
+            activeFilters.type = null;
+            filterTags.forEach(function (t) {
+                t.classList.remove('active');
+            });
+            applyFilters();
+        });
+    </script>
+<button class="back-top" id="backTop" type="button" aria-label="Вернуться наверх" title="Наверх">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
 </body>
 </html>
