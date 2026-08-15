@@ -137,12 +137,14 @@ document.addEventListener('DOMContentLoaded', function () {
             form.reset();
             inviterFields.classList.add('hidden');
           } else {
-            throw new Error('bad response');
+            throw new Error(data && data.message ? data.message : 'bad response');
           }
         })
-        .catch(function () {
+        .catch(function (err) {
           status.classList.add('error');
-          status.textContent = 'Не удалось отправить весть. Попробуйте ещё раз или напишите в Шумный Зал: @TavernCardTempest_Chat';
+          status.textContent = (err && err.message && err.message !== 'bad response')
+            ? err.message
+            : 'Не удалось отправить весть. Попробуйте ещё раз или напишите в Шумный Зал: @TavernCardTempest_Chat';
         })
         .finally(function () {
           button.disabled = false;
@@ -160,9 +162,11 @@ document.addEventListener('DOMContentLoaded', function () {
       script.async = true;
       script.onload = function () {
         try {
-          grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'booking' })
-            .then(function (token) { send(token); })
-            .catch(function () { send(''); });
+          grecaptcha.ready(function () {
+            grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'booking' })
+              .then(function (token) { send(token); })
+              .catch(function () { send(''); });
+          });
         } catch (e) {
           send('');
         }
