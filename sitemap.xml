@@ -391,6 +391,16 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://example.com/tavern/games/rik-i-morti-vsmortit-vsjo.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/games/kolonizatory-amerika.html</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://example.com/tavern/games/zabortom.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.6</priority>
