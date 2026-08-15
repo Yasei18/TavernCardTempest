@@ -809,6 +809,47 @@ h1, h2, h3 {
   text-align: center;
 }
 
+.back-top {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--bg-card-soft), var(--bg-card));
+  border: 1px solid var(--gold-dim);
+  color: var(--gold-bright);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: opacity 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
+}
+
+.back-top svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.back-top.is-visible {
+  display: flex;
+}
+
+.back-top:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-50%) scale(1.08);
+  background: linear-gradient(160deg, var(--bg-card), var(--bg-dark));
+}
+
 /* ---------- СТРАНИЦА ИГРЫ ---------- */
 .back-link {
   margin: 0 0 18px;
@@ -2074,6 +2115,19 @@ h1, h2, h3 {
 }
 
 @media (max-width: 560px) {
+  .back-top {
+    right: 14px;
+    bottom: 18px;
+    top: auto;
+    transform: none;
+    width: 46px;
+    height: 46px;
+  }
+
+  .back-top:hover {
+    transform: scale(1.08);
+  }
+
   .games-stats {
     gap: 10px;
     margin-top: 26px;

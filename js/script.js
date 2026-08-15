@@ -34,4 +34,16 @@ document.addEventListener('DOMContentLoaded', function () {
   for (var i = 0; i < yearEls.length; i++) {
     yearEls[i].textContent = new Date().getFullYear();
   }
+
+  var backTop = document.getElementById('backTop');
+  if (backTop) {
+    var onScroll = function () {
+      backTop.classList.toggle('is-visible', window.scrollY > 400);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    backTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
 });
