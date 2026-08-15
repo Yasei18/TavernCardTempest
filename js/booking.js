@@ -1,5 +1,14 @@
 var WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwX3xN3NZHwtR_0zZJ_qUrencxADQYdzhiEDfjtLDqrLQ-liacmtYEy40XH4rU3trIvrg/exec';
-var SITE_SECRET = 'ef31e4c66d49fa162f40e7515e93b1e7';
+var SITE_SECRET = '6LdKDIctAAAAAMk4kwuGrcFY4UXDuhZVUUhNBXdC';
+/* ВАЖНО: SITE_SECRET лежит в публичном коде сайта, поэтому он лишь отпугивает
+   случайных ботов. Настоящая защита от спама — reCAPTCHA ниже.
+   Если ключ меняется — обновите и здесь, и в таблице (меню «Таверна» → «Ключ сайта»). */
+
+/* reCAPTCHA v3 (рекомендуется): вставьте сюда SITE-ключ с
+   https://www.google.com/recaptcha/admin (тип v3, «невидимый»).
+   SECRET-ключ сохраните в таблице: меню «Таверна» → «Ключ reCAPTCHA».
+   Пока SITE-ключ пустой — капча отключена, форма работает как раньше. */
+var RECAPTCHA_SITE_KEY = '6LdKDIctAAAAAMk4kwuGrcFY4UXDuhZVUUhNBXdC';
 
 document.addEventListener('DOMContentLoaded', function () {
   var form = document.getElementById('bookingForm');
@@ -105,7 +114,10 @@ document.addEventListener('DOMContentLoaded', function () {
       secret: SITE_SECRET
     };
 
-    var send = function () {
+    var send = function (captchaToken) {
+      if (captchaToken) {
+        payload.captchaToken = captchaToken;
+      }
       button.disabled = true;
       status.className = 'form-status';
       status.textContent = 'Отправляем весть в Таверну…';
@@ -137,10 +149,32 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     };
 
+    /* Получение токена reCAPTCHA v3 (если капча включена) и отправка формы. */
+    var sendWithCaptcha = function () {
+      if (!RECAPTCHA_SITE_KEY) {
+        send('');
+        return;
+      }
+      var script = document.createElement('script');
+      script.src = 'https://www.google.com/recaptcha/api.js?render=' + encodeURIComponent(RECAPTCHA_SITE_KEY);
+      script.async = true;
+      script.onload = function () {
+        try {
+          grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: 'booking' })
+            .then(function (token) { send(token); })
+            .catch(function () { send(''); });
+        } catch (e) {
+          send('');
+        }
+      };
+      script.onerror = function () { send(''); };
+      document.head.appendChild(script);
+    };
+
     /* Если этот ник уже регистрировался на выбранную Бурю — не шлём повторно. */
     var checkDuplicate = function () {
       if (!payload.telegram || !payload.gathering || payload.gathering === 'Пока не определился') {
-        send();
+        sendWithCaptcha();
         return;
       }
       fetch(WEB_APP_URL + '?action=check&gathering=' + encodeURIComponent(payload.gathering) + '&telegram=' + encodeURIComponent(payload.telegram))
@@ -154,11 +188,11 @@ document.addEventListener('DOMContentLoaded', function () {
             form.reset();
             inviterFields.classList.add('hidden');
           } else {
-            send();
+            sendWithCaptcha();
           }
         })
         .catch(function () {
-          send();
+          sendWithCaptcha();
         });
     };
 
