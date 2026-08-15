@@ -49,12 +49,30 @@ document.addEventListener('DOMContentLoaded', function () {
     return true;
   }
 
-  function pluralGames(n) {
+  // Склонение для счётчиков на странице каталога.
+  function plural(n, one, few, many) {
     var mod10 = n % 10;
     var mod100 = n % 100;
-    if (mod10 === 1 && mod100 !== 11) return n + ' игра';
-    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return n + ' игры';
-    return n + ' игр';
+    if (mod10 === 1 && mod100 !== 11) return one;
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return few;
+    return many;
+  }
+
+  // Счётчики игр и дополнений в шапке каталога.
+  function updateStats() {
+    var gamesValue = document.querySelector('.js-stat-games');
+    var gamesLabel = document.querySelector('.js-stat-games-label');
+    var expsValue = document.querySelector('.js-stat-expansions');
+    var expsLabel = document.querySelector('.js-stat-expansions-label');
+    if (!gamesValue && !expsValue) return;
+
+    var bases = GAMES.filter(function (g) { return !isExpansion(g); }).length;
+    var exps = GAMES.filter(isExpansion).length;
+
+    if (gamesValue) gamesValue.textContent = bases;
+    if (gamesLabel) gamesLabel.textContent = plural(bases, 'игра', 'игры', 'игр');
+    if (expsValue) expsValue.textContent = exps;
+    if (expsLabel) expsLabel.textContent = plural(exps, 'дополнение', 'дополнения', 'дополнений');
   }
 
   function cardHtml(game) {
@@ -148,12 +166,9 @@ document.addEventListener('DOMContentLoaded', function () {
     if (empty) {
       empty.hidden = mainList.length + expList.length > 0;
     }
-
-    var counts = document.querySelectorAll('.js-game-count');
-    for (var i = 0; i < counts.length; i++) {
-      counts[i].textContent = pluralGames(GAMES.length);
-    }
   }
+
+  updateStats();
 
   if (search) {
     search.addEventListener('input', apply);
