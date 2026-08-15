@@ -991,7 +991,24 @@ h1, h2, h3 {
 }
 
 .event-mark {
-  font-size: 22px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  margin-top: 2px;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.event-mark svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
 }
 
 .events-list b {
