@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./static/style_wiki.css">
+    <link rel="stylesheet" href="./static/map/distr/leaflet.css">
+    <link rel="stylesheet" href="./static/map/distr/leaflet-search.min.css">
+    <link rel="stylesheet" href="./static/map/distr/leaflet.fullscreen.css">
+    <link rel="stylesheet" href="./static/map/css/map.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+
+    <script defer src="../js/layout.js"></script>
+<script defer src="./js/main.js"></script>
+
+    <script src="./static/map/distr/leaflet.js"></script>
+    <script src="./static/map/distr/leaflet-hash.js"></script>
+    <script src="./static/map/distr/fuse.min.js"></script>
+    <script src="./static/map/distr/leaflet-search.min.js"></script>
+    <script src="./static/map/distr/leaflet.fullscreen.min.js"></script>
+
+    <script src="./static/map/data/main.js"></script>
+    <script src="./static/map/data/bounds.js"></script>
+    <script src="./static/map/data/alvaera.js"></script>
+    <script src="./static/map/data/alvaera-bounds.js"></script>
+    <script src="./static/map/data/pomerania.js"></script>
+    <script src="./static/map/data/pomerania-bounds.js"></script>
+    <script src="./static/map/data/maps.js"></script>
+
+    <meta name="description" content="Интерактивная карта мира Орвей для D&D 5e: Аль'Ваэра, Каладан, Задубравье, Снежная Пустошь, Степной Пояс. Города, регионы, поиск.">
+    <title>Карта мира Орвей — Мир Орвей</title>
+</head>
+<body data-layout="wiki" data-root="" data-footer="none" id="MapBody">
+
+    
+
+    <div class="wrapper">
+        <aside id="mapnav" class="map-overlay dark">
+
+            <div class="map-overlay-inner">
+                <div class="map-overlay-inner-header">
+                    <h1 id="mapTitle">Карта мира Орвей</h1>
+                    <a class="header-logo" title="На главную" href="./wiki.html">☰</a>
+                </div>
+
+                <div class="map-overlay-inner-content">
+
+                    <div class="tab-content control-group">
+                        <p>Карта</p>
+                        <div class="custom-select">
+                            <select id="mapSelect"></select>
+                        </div>
+                    </div>
+
+                    <div id="draftBar" class="control-group" style="display:none">
+                        <div class="draft-info">
+                            <span id="draftText">Правки из coord-helper загружены</span>
+                            <button id="draftReset" type="button">Сбросить</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-content control-group">
+                        <p>Слои</p>
+                        <label class="control control--checkbox">Границы регионов
+                            <input type="checkbox" value="boundLayer">
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Города
+                            <img src="./static/map/distr/images/marker_city.png" alt="">
+                            <input type="checkbox" value="cityLayer" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Поселения
+                            <img src="./static/map/distr/images/marker_town.png" alt="">
+                            <input type="checkbox" value="townLayer" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Крепости и заставы
+                            <img src="./static/map/distr/images/marker_castle.png" alt="">
+                            <input type="checkbox" value="castleLayer" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Руины
+                            <img src="./static/map/distr/images/marker_ruin.png" alt="">
+                            <input type="checkbox" value="ruinLayer" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Реки и моря
+                            <img src="./static/map/distr/images/marker_water.png" alt="">
+                            <input type="checkbox" value="waterLayer" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Места
+                            <img src="./static/map/distr/images/marker_place.png" alt="">
+                            <input type="checkbox" value="placeLayer" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Области
+                            <img src="./static/map/distr/images/marker_region.png" alt="">
+                            <input type="checkbox" value="regionLayer" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                        <label class="control control--checkbox">Все пометки
+                            <input type="checkbox" id="main-group-checkbox" value="geodata" checked>
+                            <div class="control__indicator"></div>
+                        </label>
+                    </div>
+
+                    <div class="map-overlay-inner-attr">
+                        мир © Таверна «Карточная Буря»,<br>
+                        сеттинг для D&amp;D 5e
+                    </div>
+
+                </div>
+            </div>
+
+        </aside>
+
+        <button id="sidebar-toggle" title="Слои"><span>▶</span></button>
+
+        <main id="map" class="map"></main>
+    </div>
+
+    <script>
+    ////////////////////////
+    // главные настройки, границы
+    ////////////////////////
+
+    if (window.innerWidth <= 640) {
+        document.getElementById('mapnav').classList.add('sidebar-hidden');
+        document.getElementById('sidebar-toggle').classList.add('sidebar-hidden');
+    }
+
+    function fitMap() {
+        var h = document.getElementById('header').offsetHeight || 0;
+        var w = document.querySelector('.wrapper');
+        w.style.paddingTop = h + 'px';
+        document.getElementById('map').style.height = 'calc(100vh - ' + h + 'px)';
+        map.invalidateSize();
+    }
+
+    var MAXZOOM = 4;
+
+    var map = L.map('map', {
+        crs: L.CRS.Simple,
+        maxZoom: MAXZOOM,
+        minZoom: 1,
+        maxBoundsViscosity: 1,
+        zoomControl: false,
+        attributionControl: true
+    });
+
+    ////////////////////////
+    // контролы
+    ////////////////////////
+
+    var hash = new L.Hash(map);
+    new L.control.scale({ imperial: false, metric: true, position: 'bottomright' }).addTo(map);
+    new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
+    L.control.fullscreen({ position: 'bottomright' }).addTo(map);
+
+    L.control.attribution({ position: 'bottomright' }).addTo(map);
+    map.attributionControl.setPrefix('');
+    map.attributionControl.addAttribution('мир © Таверна «Карточная Буря» · D&D 5e');
+
+    ////////////////////////
+    // данные о картах
+    ////////////////////////
+
+    var currentMapId = 'orvey';
+    var currentTileLayer = null;
+    var currentBoundLayer = null;
+    var currentGeodata = null;
+    var searchControl = null;
+    var baseLayers = {};
+    var fuse = null;
+
+    function mapBounds(mapId) {
+        var cfg = ORVEYMAPS[mapId];
+        var sw = map.unproject([0, cfg.imgH], map.getMaxZoom());
+        var ne = map.unproject([cfg.imgW, 0], map.getMaxZoom());
+        return L.latLngBounds(sw, ne);
+    }
+
+    ////////////////////////
+    // данные основных иконок
+    ////////////////////////
+
+    function pointToLayer(feature, latlng) {
+        var newLatLng = map.unproject([latlng.lng, latlng.lat], map.getMaxZoom());
+        return new L.marker(newLatLng, {
+            icon: L.icon({
+                iconUrl: './static/map/distr/images/marker_' + feature.properties.cat + '.png',
+                iconSize: [28, 28],
+                iconAnchor: [14, 26],
+                popupAnchor: [0, -24]
+            }),
+            riseOnHover: true,
+            className: feature.properties.cat
+        });
+    }
+
+    function onEachFeature(feature, layer, latlng) {
+        feature.layer = layer;
+
+        var header = feature.properties.name;
+        var nonmapxy = "";
+        var DescSynonym = "";
+        var DescLoyal = "";
+
+        if (feature.properties.url) {
+            header = "<a target='_top' href='" + feature.properties.url + "'>" + feature.properties.name + "</a>";
+        }
+        if (feature.properties.nonmap) {
+            nonmapxy = " 🧭";
+        }
+        if (feature.properties.synonym) {
+            DescSynonym = " · " + feature.properties.synonym;
+        }
+        if (feature.properties.loyal) {
+            DescLoyal = "<div class='content-subtext'>" + feature.properties.loyal + "</div>";
+        }
+
+        var desc = "<div class='content-header dark'>" +
+            "<h3>" + header + nonmapxy +
+            "</h3><span class='subhead'>" + feature.properties.english + DescSynonym + "</span>" +
+            "</div><div class='content-main'>" + feature.properties.description +
+            "</div>" + DescLoyal;
+
+        layer.on("click", function () {
+            layer.bindPopup(desc, {
+                maxWidth: 270,
+                autoPanPadding: [60, 60]
+            }).openPopup();
+        });
+
+        layer.bindTooltip(feature.properties.name, {
+            sticky: true,
+            permanent: false
+        });
+    }
+
+    ////////////////////////
+    // черновик правок из coord-helper
+    ////////////////////////
+
+    function draftKey(mapId, kind) { return 'coordhelper_draft_' + mapId + '_' + kind; }
+
+    var draftOriginals = {};
+
+    function getDraft(mapId, kind) {
+        try {
+            var raw = localStorage.getItem(draftKey(mapId, kind));
+            if (!raw) return null;
+            return JSON.parse(raw);
+        } catch (e) { return null; }
+    }
+
+    function applyDraft(mapId, cfg) {
+        var draftPoints = getDraft(mapId, 'points');
+        var draftRegions = getDraft(mapId, 'regions');
+        if (!draftPoints && !draftRegions) {
+            if (draftOriginals[mapId]) {
+                cfg.points = draftOriginals[mapId].points;
+                cfg.regions = draftOriginals[mapId].regions;
+            }
+            document.getElementById('draftBar').style.display = 'none';
+            return;
+        }
+        if (!draftOriginals[mapId]) {
+            draftOriginals[mapId] = { points: cfg.points, regions: cfg.regions };
+        }
+        if (draftPoints && draftPoints.type === 'FeatureCollection' && Array.isArray(draftPoints.features)) {
+            cfg.points = draftPoints;
+        }
+        if (draftRegions && draftRegions.type === 'FeatureCollection' && Array.isArray(draftRegions.features)) {
+            cfg.regions = draftRegions;
+        }
+        var bar = document.getElementById('draftBar');
+        bar.style.display = '';
+        document.getElementById('draftText').textContent =
+            'Загружены правки из coord-helper (' + cfg.title + ')';
+    }
+
+    document.getElementById('draftReset').addEventListener('click', function () {
+        var mapId = currentMapId;
+        try {
+            localStorage.removeItem(draftKey(mapId, 'points'));
+            localStorage.removeItem(draftKey(mapId, 'regions'));
+        } catch (e) {}
+        document.getElementById('draftBar').style.display = 'none';
+        loadMap(mapId);
+    });
+
+    function loadMap(mapId) {
+        var cfg = ORVEYMAPS[mapId];
+        if (!cfg) return;
+
+        // подхватываем черновик правок из coord-helper (localStorage)
+        applyDraft(mapId, cfg);
+
+        // убираем старые слои
+        if (currentTileLayer) { map.removeLayer(currentTileLayer); currentTileLayer = null; }
+        if (currentBoundLayer) { map.removeLayer(currentBoundLayer); currentBoundLayer = null; }
+        if (currentGeodata) { map.removeLayer(currentGeodata); currentGeodata = null; }
+        if (searchControl) { map.removeControl(searchControl); searchControl = null; }
+        var oldLayers = baseLayers;
+        baseLayers = {};
+        Object.keys(oldLayers).forEach(function (k) {
+            if (oldLayers[k] && map.hasLayer(oldLayers[k])) map.removeLayer(oldLayers[k]);
+        });
+
+        // границы и подложка
+        var bounds = mapBounds(mapId);
+        currentTileLayer = L.tileLayer(cfg.tiles, {
+            tileSize: 512,
+            preferCanvas: true,
+            updateWhenIdle: false,
+            reuseTiles: true,
+            noWrap: true
+        }).addTo(map);
+        map.setMaxBounds(bounds);
+        map.fitBounds(bounds);
+
+        var points = cfg.points;
+        var regions = cfg.regions;
+
+        function makeLayer(cat) {
+            return L.geoJSON(points, {
+                pointToLayer: pointToLayer,
+                onEachFeature: onEachFeature,
+                filter: function (feature) { return feature.properties.cat == cat; }
+            });
+        }
+
+        var cityLayer = makeLayer("city");
+        var townLayer = makeLayer("town");
+        var castleLayer = makeLayer("castle");
+        var ruinLayer = makeLayer("ruin");
+        var waterLayer = makeLayer("water");
+        var placeLayer = makeLayer("place");
+        var regionLayer = makeLayer("region");
+
+        currentGeodata = L.layerGroup([
+            cityLayer,
+            townLayer,
+            castleLayer,
+            ruinLayer,
+            waterLayer,
+            placeLayer,
+            regionLayer
+        ]).addTo(map);
+
+        baseLayers = {
+            "cityLayer": cityLayer,
+            "townLayer": townLayer,
+            "castleLayer": castleLayer,
+            "ruinLayer": ruinLayer,
+            "waterLayer": waterLayer,
+            "placeLayer": placeLayer,
+            "regionLayer": regionLayer,
+            "geodata": currentGeodata,
+            "boundLayer": null
+        };
+
+        currentBoundLayer = L.geoJSON(regions, {
+            coordsToLatLng: function (newcoords) {
+                return (map.unproject([newcoords[0], newcoords[1]], map.getMaxZoom()));
+            },
+            style: function (feature) {
+                return {
+                    fillColor: feature.properties.bg,
+                    weight: 2,
+                    color: "#ffffff",
+                    className: "map-kingdoms-bound",
+                    fillOpacity: 0.18
+                };
+            },
+            onEachFeature: function (feature, layer) {
+                layer.on({
+                    mouseover: function (e) {
+                        e.target.setStyle({ weight: 4, color: "#f7d51e", fillOpacity: 0.4 });
+                    },
+                    mouseout: function (e) {
+                        currentBoundLayer.resetStyle(e.target);
+                    }
+                });
+                layer.bindTooltip(feature.properties.name, {
+                    sticky: true,
+                    permanent: false
+                }).openTooltip();
+            }
+        });
+        baseLayers["boundLayer"] = currentBoundLayer;
+
+        currentMapId = mapId;
+        document.getElementById('mapTitle').textContent = cfg.title;
+
+        applyLayerVisibility();
+        buildSearch(points);
+    }
+
+    function applyLayerVisibility() {
+        document.querySelectorAll('.control--checkbox input[type="checkbox"]').forEach(function (checkbox) {
+            var selectedLayer = baseLayers[checkbox.value];
+            if (selectedLayer && map.hasLayer(selectedLayer) && !checkbox.checked) {
+                map.removeLayer(selectedLayer);
+                if (checkbox.value === 'geodata') {
+                    Object.keys(baseLayers).forEach(function (k) {
+                        var l = baseLayers[k];
+                        if (k !== 'geodata' && k !== 'boundLayer' && map.hasLayer(l)) map.removeLayer(l);
+                    });
+                }
+            }
+        });
+    }
+
+    ////////////////////////
+    // поиск
+    ////////////////////////
+
+    function buildSearch(points) {
+        if (searchControl) { map.removeControl(searchControl); searchControl = null; }
+
+        fuse = new Fuse(points.features, {
+            threshold: 0.3,
+            minMatchCharLength: 3,
+            keys: [
+                { name: 'properties.name', weight: 0.5 },
+                { name: 'properties.synonym', weight: 0.1 },
+                { name: 'properties.english', weight: 0.1 },
+                { name: 'properties.loyal', weight: 0.2 }
+            ]
+        });
+
+        searchControl = L.control.search({
+            layer: currentGeodata,
+            propertyName: 'name',
+            position: 'topright',
+            zoom: 3,
+            autoType: false,
+            collapsed: false,
+            minLength: 2,
+            tooltipLimit: 10,
+            autoResize: false,
+            textErr: 'Не найдено',
+            textCancel: 'Сбросить',
+            textPlaceholder: 'Поиск…       ',
+            filterData: function (text, records) {
+                var jsons = fuse.search(text),
+                    ret = {}, key;
+                for (var i in jsons) {
+                    key = jsons[i].item.properties.name;
+                    ret[key] = records[key];
+                }
+                return ret;
+            }
+        }).on('search:locationfound', function (e) {
+            e.layer.openPopup();
+        }).addTo(map);
+    }
+
+    ////////////////////////
+    // переключение видимости
+    ////////////////////////
+
+    document.querySelectorAll('.control--checkbox input[type="checkbox"]').forEach(function (checkbox) {
+        if (checkbox.id === 'main-group-checkbox') return;
+        checkbox.addEventListener('change', function () {
+            var selectedLayer = baseLayers[this.value];
+            if (map.hasLayer(selectedLayer)) {
+                map.removeLayer(selectedLayer);
+                this.checked = false;
+            } else {
+                map.addLayer(selectedLayer);
+                this.checked = true;
+            }
+        });
+    });
+
+    document.getElementById("main-group-checkbox").addEventListener('change', function () {
+        if (map.hasLayer(currentGeodata)) {
+            map.removeLayer(currentGeodata);
+            this.checked = false;
+        } else {
+            map.addLayer(currentGeodata);
+            this.checked = true;
+        }
+    });
+
+    ////////////////////////
+    // переключение карт
+    ////////////////////////
+
+    var mapSelect = document.getElementById('mapSelect');
+    Object.keys(ORVEYMAPS).forEach(function (id) {
+        var o = document.createElement('option');
+        o.value = id;
+        o.textContent = ORVEYMAPS[id].title;
+        mapSelect.appendChild(o);
+    });
+
+    mapSelect.addEventListener('change', function () {
+        loadMap(this.value);
+    });
+
+    loadMap('orvey');
+
+    ////////////////////////
+    // переключение видимости сайдбара
+    ////////////////////////
+
+    document.getElementById('sidebar-toggle').onclick = function () {
+        document.getElementById('mapnav').classList.toggle('sidebar-hidden');
+        document.getElementById('sidebar-toggle').classList.toggle('sidebar-hidden');
+        map.invalidateSize();
+    };
+
+    window.addEventListener('load', fitMap);
+    window.addEventListener('resize', fitMap);
+    </script>
+
+</body>
+</html>

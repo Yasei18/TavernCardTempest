@@ -103,3 +103,45 @@ if (backTop) {
   })
 }
 
+const wikiSidebar = document.querySelector(".wiki-sidebar")
+if (wikiSidebar) {
+  let sidebarTop = -1
+  function updateSidebarTop() {
+    const top = headerEl.offsetHeight + 16
+    if (top !== sidebarTop) {
+      sidebarTop = top
+      wikiSidebar.style.top = top + "px"
+    }
+  }
+  window.addEventListener("scroll", updateSidebarTop, { passive: true })
+  window.addEventListener("resize", updateSidebarTop)
+  updateSidebarTop()
+}
+
+document.querySelectorAll('a[href^="#"]:not([href="#header"])').forEach(function (link) {
+  link.addEventListener("click", function (e) {
+    const hash = link.getAttribute("href")
+    if (!hash || hash.length < 2) return
+    const target = document.getElementById(hash.slice(1))
+    if (!target) return
+    const details = target.closest("details.wiki-tab")
+    if (details && !details.open) {
+      details.open = true
+    }
+    e.preventDefault()
+    const offset = headerEl.offsetHeight + 16
+    const top = target.getBoundingClientRect().top + window.scrollY - offset
+    window.scrollTo({ top: Math.max(top, 0), behavior: "smooth" })
+    highlightTarget(target)
+  })
+})
+
+function highlightTarget(target) {
+  target.classList.remove("wiki-tab-highlight")
+  void target.offsetWidth
+  target.classList.add("wiki-tab-highlight")
+  setTimeout(function () {
+    target.classList.remove("wiki-tab-highlight")
+  }, 2000)
+}
+

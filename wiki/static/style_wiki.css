@@ -37,6 +37,7 @@ html, body {
 	margin: 0;
 	background: #eef0f4;
 	color: #1c1c1c;
+	scroll-padding-top: 100px;
 }
 
 *,
@@ -399,6 +400,15 @@ img {
 	color: #1c2c7c;
 }
 
+.wiki-container > h2,
+.wiki-content > h2 {
+	font-size: 28px;
+	color: #0c0c0c;
+	margin: 40px 0 14px;
+	padding-bottom: 6px;
+	border-bottom: 1px solid #c8ccd1;
+}
+
 .wiki h2 {
 	font-size: 28px;
 	color: #0c0c0c;
@@ -452,6 +462,80 @@ img {
 	border: 0;
 	border-top: 1px solid #e5e5e5;
 	margin: 30px 0;
+}
+
+/* Сворачиваемые вкладки (разделы-вкладки из гугл-документов) */
+.wiki-tab {
+	margin: 0 0 18px;
+	border: 1px solid #dfe3ea;
+	border-radius: 8px;
+	background: #fff;
+	overflow: hidden;
+}
+
+.wiki-tab > summary {
+	list-style: none;
+	cursor: pointer;
+	padding: 16px 24px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	user-select: none;
+}
+
+.wiki-tab > summary::-webkit-details-marker {
+	display: none;
+}
+
+.wiki-tab > summary::after {
+	content: "+";
+	flex: 0 0 auto;
+	font-size: 26px;
+	line-height: 1;
+	font-weight: 400;
+	color: #1c2c7c;
+	transition: transform .2s ease;
+}
+
+.wiki-tab[open] > summary::after {
+	transform: rotate(45deg);
+}
+
+.wiki-tab > summary:hover {
+	background: #f7f9fc;
+}
+
+.wiki-tab > summary h2 {
+	display: inline;
+	font-size: 24px;
+	line-height: 1.3;
+	color: #0c0c0c;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.wiki-tab__body {
+	padding: 10px 24px 20px;
+	border-top: 1px solid #eef0f4;
+}
+
+/* Подсветка цели после перехода по якорю */
+.wiki-tab-highlight {
+	animation: wiki-tab-flash 1.8s ease-out;
+	border-radius: 3px;
+}
+
+@keyframes wiki-tab-flash {
+	0% {
+		background: #ffec9e;
+		box-shadow: 0 0 0 6px rgba(255, 236, 158, .9);
+	}
+	100% {
+		background: transparent;
+		box-shadow: 0 0 0 0 rgba(255, 236, 158, 0);
+	}
 }
 
 /* Карта в статье региона */
@@ -582,6 +666,39 @@ img {
 	font-weight: 400;
 	color: #444;
 	width: 40%;
+}
+
+/* ============================================================
+   СТРАНИЦЫ РЕГИОНОВ С САЙДБАРОМ (Аль'Ваэра, Задубравье)
+   «Краткие сведения» — отдельный блок слева, следует за прокруткой
+   ============================================================ */
+
+.wiki-layout--sidebar {
+	display: flex;
+	align-items: flex-start;
+	gap: 42px;
+	max-width: 1402px;
+	margin: 0 auto;
+}
+
+.wiki-layout--sidebar .wiki-sidebar {
+	flex: 0 0 300px;
+	width: 300px;
+	position: sticky;
+	top: 150px;
+}
+
+.wiki-layout--sidebar .wiki-sidebar .infobox {
+	float: none;
+	width: 100%;
+	margin: 0;
+}
+
+.wiki-layout--sidebar .wiki-container {
+	flex: 1;
+	min-width: 0;
+	max-width: 1060px;
+	margin: 0 auto;
 }
 
 /* ============================================================
@@ -1028,6 +1145,25 @@ img {
 		float: none;
 		width: 100%;
 		margin: 0 0 18px;
+	}
+
+	.wiki-layout--sidebar {
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.wiki-layout--sidebar .wiki-sidebar {
+		position: static;
+		width: 100%;
+		flex-basis: auto;
+		margin-bottom: 18px;
+	}
+
+	.wiki-layout--sidebar .wiki-container {
+		flex: 0 0 auto;
+		width: 100%;
+		max-width: 1060px;
+		margin: 0 auto;
 	}
 
 	.race-art {

@@ -796,6 +796,64 @@ hr {
 
 }
 
+/* Общий подвал вики */
+.wiki-footer {
+  text-align: center;
+  padding: 30px 0 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.wiki-footer .copyright span {
+  color: #1c2c7c;
+}
+
+.wiki-footer .copyright a {
+  color: #1c2c7c;
+}
+
+/* Кнопка «наверх» */
+.back-top {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9998;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(3, 9, 41, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #a6cbe6;
+  cursor: pointer;
+  box-shadow: 0 12px 40px rgba(3, 9, 41, 0.4);
+  transition: opacity 0.3s, border-color 0.3s, background 0.3s, transform 0.3s;
+}
+
+.back-top svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.back-top.is-visible {
+  display: flex;
+}
+
+.back-top:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+  background: rgba(3, 9, 41, 0.95);
+  transform: translateY(-50%) scale(1.08);
+}
+
 @media (max-width: 770px) {
 
     /* INTRO */

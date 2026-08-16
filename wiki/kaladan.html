@@ -7,54 +7,15 @@
 
     <link rel="stylesheet" href="./static/style_wiki.css">
 
-    <script defer src="./js/main.js"></script>
+    <script defer src="../js/layout.js"></script>
+<script defer src="./js/main.js"></script>
 
         <meta name="description" content="Каладан — континент с разнообразными климатическими зонами и народами. Регион мира Орвей для D&D 5e.">
     <title>Каладан — Мир Орвей</title>
 </head>
-<body>
+<body data-layout="wiki" data-root="">
 
-    <header class="header" id="header">
-      <div class="header__container">
-        <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-        <nav class="nav" id="nav">
-          <a class="nav__btn" href="./wiki.html">Главная</a>
-          <div class="dropdown">
-            <div class="box-wrap">
-              <button class="dropbtn" type="button">Регионы</button>
-              <div class="box">
-                <div class="dropdown-content">
-                  <a href="./alvaera.html">Аль'Ваэра</a>
-                  <a href="./kaladan.html" class="active">Каладан</a>
-                  <a href="./zadubravye.html">Задубравье</a>
-                  <a href="./snezhnaya-pustosh.html">Снежная Пустошь</a>
-                  <span>Степной Пояс</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="nav__link" href="./races.html">Виды</a>
-
-          <div class="dropdown">
-            <div class="box-wrap">
-              <button class="dropbtn" type="button">Верования</button>
-              <div class="box">
-                <div class="dropdown-content">
-                  <a href="./faiths/faith-pyatero.html">Пятеро</a>
-                  <a href="./faiths/faith-siyanie.html">Сияние</a>
-                  <a href="./faiths/faith-dzhailam.html">Джа'Илам</a>
-                  <a href="./faiths.html">Пантеоны</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="nav__link" href="../index.html">В таверну</a>
-        </nav>
-      </div>
-      <div class="create-line-header"></div>
-    </header>
+    
 
     <div class="wiki-page">
         <div class="wiki-container">
@@ -126,11 +87,5 @@
         </div>
     </div>
 
-    <div class="wiki-footer">
-        <div class="copyright"><span>© <span class="js-year"></span> Таверна «Карточная Буря» · Двери открыты для всякого путника</span><br><span><a href="#header">Вернуться наверх ↑</a></span></div>
-    </div>
-<button class="back-top" id="backTop" type="button" aria-label="Вернуться наверх" title="Наверх">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-  </button>
 </body>
 </html>

@@ -71,7 +71,7 @@ h1, h2, h3 {
 .nav {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 26px 16px 0;
+  padding: 16px 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -82,7 +82,6 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: -34px;
   color: var(--text-main);
   font-family: 'Forum', 'Cinzel', serif;
   font-weight: 700;
@@ -102,12 +101,12 @@ h1, h2, h3 {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 22px;
 }
 
 .nav-links a {
   color: var(--parchment-dim);
-  font-size: 23px;
+  font-size: 20px;
   letter-spacing: 0.4px;
   white-space: nowrap;
   transition: color 0.2s;
@@ -2080,10 +2079,34 @@ h1, h2, h3 {
 }
 
 /* ---------- АДАПТИВ ---------- */
-@media (max-width: 860px) {
+/* Шапка: до 1200px полноценное меню не помещается — включаем компактную
+   шапку с бургером (планшеты и телефоны). */
+@media (max-width: 1200px) {
+  .nav {
+    padding: 12px 18px;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    margin-left: 0;
+    font-size: 21px;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .nav-logo img {
+    width: 46px;
+    height: 46px;
+    flex: none;
+  }
+
+  .nav-logo span {
+    white-space: nowrap;
+  }
+
   .nav-links {
     position: fixed;
-    top: 66px;
+    top: 70px;
     left: 0;
     right: 0;
     flex-direction: column;
@@ -2112,7 +2135,9 @@ h1, h2, h3 {
   .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .nav-toggle.open span:nth-child(2) { opacity: 0; }
   .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+}
 
+@media (max-width: 860px) {
   .section {
     padding: 64px 18px;
   }

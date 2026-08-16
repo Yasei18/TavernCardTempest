@@ -1,0 +1,412 @@
+/* Карта мира Орвей — основная стилизация */
+:root {
+  --map-bg: #14161a;
+  --map-panel: #1d2026;
+  --map-panel-2: #262b33;
+  --map-text: #d8d6cf;
+  --map-muted: #99978f;
+  --map-accent: #b8792a;
+  --map-border: #3a3f48;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body#MapBody {
+  background: var(--map-bg);
+  color: var(--map-text);
+  font: 15px/1.55 "Segoe UI", Arial, sans-serif;
+  overflow: hidden;
+}
+
+.wrapper {
+  display: flex;
+  height: 100vh;
+}
+
+/* ---------- Сайдбар ---------- */
+#mapnav {
+  width: 310px;
+  min-width: 310px;
+  background: var(--map-panel);
+  border-right: 1px solid var(--map-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  transition: margin-left .25s ease;
+}
+
+#mapnav.sidebar-hidden {
+  margin-left: -310px;
+}
+
+.map-overlay-inner-header {
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid var(--map-border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.map-overlay-inner-header h1 {
+  margin: 0;
+  font: 800 24px/1.1 "Prata", Georgia, serif;
+  color: #f0ece1;
+  letter-spacing: .5px;
+}
+
+.map-overlay-inner-header .header-logo {
+  color: var(--map-accent);
+  font-size: 22px;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.map-overlay-inner-content {
+  padding: 12px 18px 18px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.control-group {
+  margin-bottom: 16px;
+}
+
+.control-group p {
+  margin: 6px 0;
+  color: var(--map-muted);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  cursor: pointer;
+  color: var(--map-text);
+  font-size: 14px;
+}
+
+.control img {
+  float: right;
+  max-height: 20px;
+  margin-left: auto;
+}
+
+.control__indicator {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--map-border);
+  background: var(--map-panel-2);
+  margin-right: 9px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ---------- Индикатор черновика правок ---------- */
+.draft-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(184, 121, 42, .12);
+  border: 1px solid var(--map-accent);
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--map-text);
+}
+
+.draft-info button {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  background: var(--map-panel-2);
+  color: var(--map-text);
+  border: 1px solid var(--map-border);
+  border-radius: 3px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.draft-info button:hover {
+  border-color: var(--map-accent);
+  color: #fff;
+}
+
+.control input {
+  display: none;
+}
+
+.control input:checked + .control__indicator {
+  background: var(--map-accent);
+  border-color: var(--map-accent);
+}
+
+.control input:checked + .control__indicator::after {
+  content: "✓";
+  display: block;
+  text-align: center;
+  color: #fff;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--map-panel-2);
+  color: var(--map-text);
+  border: 1px solid var(--map-border);
+  border-radius: 4px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  margin: 2px 4px 2px 0;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--map-accent);
+}
+
+.btn:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.btn-none {
+  background: none;
+  border-color: transparent;
+  color: var(--map-muted);
+}
+
+.btn-none:disabled {
+  display: none;
+}
+
+.custom-select select {
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--map-panel-2);
+  color: var(--map-text);
+  border: 1px solid var(--map-border);
+  border-radius: 4px;
+  padding: 8px;
+  font: inherit;
+  font-size: 14px;
+}
+
+.map-overlay-inner-attr {
+  color: var(--map-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  border-top: 1px solid var(--map-border);
+  padding-top: 12px;
+  margin-top: 12px;
+}
+
+.map-overlay-inner-attr a {
+  color: var(--map-accent);
+  text-decoration: none;
+}
+
+.map-overlay-inner-attr a:hover {
+  text-decoration: underline;
+}
+
+#sidebar-toggle {
+  position: absolute;
+  top: 14px;
+  left: 320px;
+  z-index: 1100;
+  background: var(--map-panel);
+  color: var(--map-text);
+  border: 1px solid var(--map-border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: left .25s ease;
+}
+
+#sidebar-toggle.sidebar-hidden {
+  left: 14px;
+}
+
+/* ---------- Карта ---------- */
+#map {
+  flex: 1;
+  height: 100vh;
+  background: var(--map-bg);
+}
+
+.leaflet-container {
+  background: var(--map-bg);
+  font: 14px/1.5 "Segoe UI", Arial, sans-serif;
+}
+
+.leaflet-control-zoom a,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-fullscreen a {
+  background: var(--map-panel-2) !important;
+  color: var(--map-text) !important;
+  border-color: var(--map-border) !important;
+}
+
+.leaflet-control-attribution {
+  background: rgba(20, 22, 26, .8) !important;
+  color: var(--map-muted) !important;
+}
+
+.leaflet-control-attribution a {
+  color: var(--map-accent) !important;
+}
+
+/* ---------- Попапы ---------- */
+.leaflet-popup-content-wrapper {
+  background: var(--map-panel);
+  color: var(--map-text);
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .5);
+}
+
+.leaflet-popup-tip {
+  background: var(--map-panel);
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+.content-header h3 {
+  margin: 0 0 2px;
+  font: 800 17px/1.2 "Prata", Georgia, serif;
+  color: #f0ece1;
+}
+
+.content-header .subhead {
+  display: block;
+  color: var(--map-muted);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.content-main {
+  color: var(--map-text);
+  font-size: 13px;
+}
+
+.content-subtext {
+  color: var(--map-accent);
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.content-header a,
+.content-main a {
+  color: var(--map-accent);
+  text-decoration: none;
+}
+
+.content-header a:hover,
+.content-main a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Поиск ---------- */
+.leaflet-control-search {
+  background: var(--map-panel) !important;
+  border-color: var(--map-border) !important;
+}
+
+.leaflet-control-search .search-input {
+  background: var(--map-panel-2) !important;
+  color: var(--map-text) !important;
+  border-color: var(--map-border) !important;
+  width: 200px;
+}
+
+.leaflet-control-search .search-button {
+  background-color: var(--map-panel) !important;
+}
+
+.leaflet-control-search .search-tip {
+  background: var(--map-panel-2) !important;
+  color: var(--map-text) !important;
+}
+
+.leaflet-control-search .search-tip-select {
+  background: var(--map-accent) !important;
+  color: #fff !important;
+}
+
+/* ---------- Полигоны регионов ---------- */
+.map-kingdoms-bound {
+  pointer-events: visibleFill;
+  cursor: pointer;
+}
+
+/* ---------- Шапка карты: компактная, в цвет фона страницы ---------- */
+body#MapBody .header {
+  background: var(--map-bg);
+  box-shadow: 0 1px 0 var(--map-border);
+}
+
+body#MapBody .header__container {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+body#MapBody .nav {
+  font-size: 15px;
+  gap: 6px;
+}
+
+body#MapBody .nav__link,
+body#MapBody .nav__btn,
+body#MapBody .nav .dropdown .dropbtn {
+  margin: 4px 8px;
+  padding: 8px 16px;
+  text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+body#MapBody .nav .dropdown {
+  margin: 0;
+  padding: 0;
+}
+
+body#MapBody .header .create-line-header {
+  border-top-color: var(--map-border);
+  width: 100%;
+}
+
+/* ---------- Мобильная адаптация ---------- */
+@media (max-width: 640px) {
+  #mapnav {
+    width: 280px;
+    min-width: 280px;
+  }
+  #mapnav.sidebar-hidden {
+    margin-left: -280px;
+  }
+  #sidebar-toggle {
+    left: 290px;
+  }
+  #sidebar-toggle.sidebar-hidden {
+    left: 14px;
+  }
+  .leaflet-control-search .search-input {
+    width: 130px;
+  }
+}

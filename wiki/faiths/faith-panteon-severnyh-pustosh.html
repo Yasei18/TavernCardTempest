@@ -1,100 +1,21 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Пантеон Северных Пустошей — Верования Орвея</title>
+    <meta name="description" content="Пантеон Северных Пустошей — жестокие боги Снежной Пустоши, суровая вера жителей берегов Ледяного моря, не знающих милости ни к себе, ни к окружающим. Религия мира Орвей.">
     <link rel="stylesheet" href="../static/style_wiki.css">
-
+    <script defer src="../../js/layout.js"></script>
     <script defer src="../js/main.js"></script>
-
-        <meta name="description" content="Пантеон Северных Пустошей — жестокие боги Снежной Пустоши, суровая вера жителей берегов Ледяного моря, не знающих милости ни к себе, ни к окружающим. Религия мира Орвей.">
-    <title>Пантеон Северных Пустошей — Верования Снежной Пустоши</title>
 </head>
-<body>
-
-    <header class="header" id="header">
-      <div class="header__container">
-        <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-        <nav class="nav" id="nav">
-          <a class="nav__btn" href="../wiki.html">Главная</a>
-          <div class="dropdown">
-            <div class="box-wrap">
-              <button class="dropbtn" type="button">Регионы</button>
-              <div class="box">
-                <div class="dropdown-content">
-                  <a href="../alvaera.html">Аль'Ваэра</a>
-                  <a href="../kaladan.html">Каладан</a>
-                  <a href="../zadubravye.html">Задубравье</a>
-                  <a href="../snezhnaya-pustosh.html">Снежная Пустошь</a>
-                  <span>Степной Пояс</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="nav__link" href="../races.html">Виды</a>
-
-          <div class="dropdown">
-            <div class="box-wrap">
-              <button class="dropbtn" type="button">Верования</button>
-              <div class="box">
-                <div class="dropdown-content">
-                  <a href="../faiths/faith-pyatero.html">Пятеро</a>
-                  <a href="../faiths/faith-siyanie.html">Сияние</a>
-                  <a href="../faiths/faith-dzhailam.html">Джа'Илам</a>
-                  <a href="../faiths.html">Пантеоны</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <a class="nav__link" href="../../index.html">В таверну</a>
-        </nav>
-      </div>
-      <div class="create-line-header"></div>
-    </header>
-
+<body data-layout="wiki" data-root="../">
     <div class="wiki-page">
         <div class="wiki-container">
-
-            <nav class="crumbs">
-                <a href="../../index.html">Главная</a> / <a href="../faiths.html">Верования</a> / <a href="../snezhnaya-pustosh.html">Снежная Пустошь</a> / <span>Пантеон Северных Пустошей</span>
-            </nav>
-
-            <div class="race-page__header">
-                <h1>Пантеон Северных Пустошей</h1>
-                <div class="race-title-en">Pantheon of the Northern Wastes</div>
-            </div>
-
-            <div class="race-tags">
-                <span class="tag tag-region--snezhnaya-pustosh">Снежная Пустошь</span>
-            </div>
-
-            <div class="race-summary">
-                Вера жителей Снежной Пустоши. Суровые, как сам север, жестокие боги, не знающие милости ни к себе, ни к окружающим. Их почитают северяне — люди, привыкшие к невзгодам и тяжёлому климату, чьи традиции суровы, а обычаи жестоки.
-            </div>
-
-            <h2>Боги льда и моря</h2>
-            <p>На самом севере, на берегу Ледяного моря, живут северяне, привыкшие к невзгодам и тяжёлому климату. Веря в своих жестоких богов, эти люди сами не знают милости ни к себе, ни к окружающим. Их боги требуют силы, мужества и верности роду — и не прощают слабости. О том, каковы эти боги, судят по тем, кто им поклоняется: обряды просты, но беспощадны, жертвы — нередки, а отступников не прощают.</p>
-
-            <h2>Северные обычаи</h2>
-            <p>Легендами о грозных варягах, которые на своих драккарах могут приплыть из-за моря, пугают детей, живущих на побережьях морей. Северяне больше надеются на врождённую мудрость лидеров, завоёвывающих власть силой. Борода — достоинство любого северянина: её размер, внешний вид и пышность традиционно отмечаются. Жизнь в суровом краю закаляет тело и дух, и вера в жестоких богов — лишь часть этого закала.</p>
-
-            <nav class="wiki-nav-more">
-                <a href="../faiths.html">Каталог верований</a>
-                <a href="../snezhnaya-pustosh.html">Снежная Пустошь</a>
-            </nav>
-
+            <div id="raceContent"></div>
         </div>
     </div>
-
-    <div class="wiki-footer">
-        <div class="copyright"><span>© <span class="js-year"></span> Таверна «Карточная Буря» · Двери открыты для всякого путника</span><br><span><a href="#header">Вернуться наверх ↑</a></span></div>
-    </div>
-<button class="back-top" id="backTop" type="button" aria-label="Вернуться наверх" title="Наверх">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-  </button>
+    <script src="../js/data.js"></script>
+    <script src="../js/race-page.js"></script>
 </body>
 </html>

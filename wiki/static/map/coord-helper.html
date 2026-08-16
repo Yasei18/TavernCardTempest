@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coord Helper — Орвей</title>
+    <link rel="stylesheet" href="./distr/leaflet.css">
+    <style>
+        html, body { height: 100%; margin: 0; font: 14px/1.5 "Segoe UI", Arial, sans-serif; background: #14161a; color: #d8d6cf; }
+        #wrap { display: flex; height: 100vh; }
+        #panel {
+            width: 360px; min-width: 360px; padding: 14px;
+            background: #1d2026; border-right: 1px solid #3a3f48;
+            overflow-y: auto; box-sizing: border-box;
+        }
+        #panel h1 { font-size: 18px; margin: 0 0 10px; }
+        #panel h2 { font-size: 14px; margin: 16px 0 6px; text-transform: uppercase; color: #99978f; letter-spacing: 1px; }
+        #panel select, #panel button, #panel textarea, #panel input[type="text"] {
+            width: 100%; box-sizing: border-box; margin: 3px 0;
+            background: #262b33; color: #d8d6cf; border: 1px solid #3a3f48; border-radius: 4px;
+            padding: 7px; font: inherit;
+        }
+        #panel button { cursor: pointer; }
+        #panel button:hover { border-color: #b8792a; }
+        #panel button.active { border-color: #b8792a; background: #b8792a; color: #fff; }
+        #panel textarea { height: 90px; font-family: Consolas, monospace; font-size: 12px; resize: vertical; }
+        #panel .btn-row { display: flex; gap: 6px; margin: 6px 0; }
+        #panel .btn-row button { flex: 1; margin: 0; }
+        #status { margin: 8px 0; font-size: 13px; }
+        #coords { font-family: Consolas, monospace; color: #f7d51e; }
+        .hint { color: #99978f; font-size: 12px; }
+        .mini { display: flex; align-items: center; gap: 7px; margin: 5px 0; font-size: 13px; color: #d8d6cf; cursor: pointer; }
+        .mini input { width: auto; margin: 0; }
+        #map { flex: 1; height: 100vh; }
+        .leaflet-container { background: #14161a; }
+        .vert-marker { background: #f7d51e; border: 1px solid #000; border-radius: 50%; }
+        #exportBox { margin-top: 10px; }
+        #exportBox textarea { height: 260px; }
+        .preview { background: #262b33; border: 1px solid #3a3f48; border-radius: 4px; padding: 8px; margin: 6px 0; font-size: 12px; max-height: 120px; overflow-y: auto; }
+        .preview b { color: #f0ece1; }
+        .preview .pv-sub { color: #99978f; }
+        .leaflet-tooltip.point-label {
+            background: rgba(20, 22, 26, .85); border: 1px solid rgba(255, 255, 255, .25);
+            color: #f0ece1; font: 700 12px/1.3 "Segoe UI", Arial, sans-serif;
+            padding: 2px 6px; border-radius: 3px; box-shadow: none;
+        }
+        .leaflet-tooltip.point-label::before { display: none; }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <div id="panel">
+        <h1>Расстановка меток</h1>
+        <p class="hint">Пиксельная система <b>maxZoom=4</b>. Клик по карте ставит метку/вершину.</p>
+
+        <h2>Карта</h2>
+        <select id="mapSelect"></select>
+
+        <h2>Режим</h2>
+        <select id="mode">
+            <option value="point">Метки (объекты)</option>
+            <option value="region">Полигоны (регионы)</option>
+        </select>
+
+        <div id="pointMode">
+            <h2>Метки на карте</h2>
+            <select id="pointSel"></select>
+            <label class="mini"><input type="checkbox" id="showLabels" checked> Показывать подписи на карте</label>
+            <div id="status">Выберите метку и кликните по карте.</div>
+            <div class="preview" id="preview" style="display:none"></div>
+            <h2>Свойства метки</h2>
+            <select id="ptCat">
+                <option value="city">Город</option>
+                <option value="town">Поселение</option>
+                <option value="castle">Крепость / застава</option>
+                <option value="ruin">Руины</option>
+                <option value="water">Реки и моря</option>
+                <option value="place">Место</option>
+                <option value="region">Область</option>
+            </select>
+            <input type="text" id="ptName" placeholder="Название (рус.)">
+            <input type="text" id="ptEnglish" placeholder="Название (англ.)">
+            <input type="text" id="ptSynonym" placeholder="Синоним">
+            <textarea id="ptDesc" placeholder="Описание для всплывающей подписи"></textarea>
+            <input type="text" id="ptUrl" placeholder="Ссылка на статью, напр. alvaera.html#kehabat">
+            <input type="text" id="ptLoyal" placeholder="Принадлежность (для городов)">
+            <label class="mini"><input type="checkbox" id="ptNonmap"> «Вне карты» — не нанесена на карту (🧭)</label>
+            <div class="btn-row">
+                <button id="ptNew">Новая</button>
+                <button id="ptSave">Сохранить</button>
+                <button id="ptDelete">Удалить</button>
+            </div>
+            <p class="hint">Клик по карте ставит выбранную метку в это место. Координаты: <span id="coords">—</span></p>
+        </div>
+
+        <div id="regionMode" style="display:none">
+            <h2>Регион</h2>
+            <select id="regionSel"></select>
+            <div id="regionStatus">Выберите регион. Клики добавляют вершины.</div>
+            <button id="closePolygon">Завершить полигон</button>
+            <button id="clearPolygon">Очистить</button>
+        </div>
+
+        <h2>Экспорт</h2>
+        <button id="exportBtn">Собрать данные</button>
+        <div id="exportBox" style="display:none">
+            <button id="copyBtn">Копировать данные точек</button>
+            <button id="copyBoundsBtn">Копировать данные границ</button>
+            <textarea id="out" readonly placeholder="Скопируйте сюда результат…"></textarea>
+        </div>
+        <p class="hint">Вставьте данные точек и границ в соответствующие файлы static/map/data/ — карта подхватит метки. Имена файлов для каждой карты указаны в начале вывода.</p>
+
+        <h2>Загрузка из файла</h2>
+        <p class="hint">Выберите ранее сохранённый data-файл (.js или .json) — точки объединятся с уже загруженными по названию.</p>
+        <input type="file" id="loadFile" accept=".js,.json,text/plain">
+        <div id="loadStatus" class="hint">Файл не выбран.</div>
+
+        <h2>Перенос на карту</h2>
+        <button id="saveToMapBtn">Сохранить изменения на карте</button>
+        <div id="saveStatus" class="hint">Черновик правок не сохранён.</div>
+    </div>
+    <div id="map"></div>
+</div>
+
+<script src="./distr/leaflet.js"></script>
+<script src="./data/main.js"></script>
+<script src="./data/bounds.js"></script>
+<script src="./data/alvaera.js"></script>
+<script src="./data/alvaera-bounds.js"></script>
+<script src="./data/pomerania.js"></script>
+<script src="./data/pomerania-bounds.js"></script>
+<script src="./data/maps.js"></script>
+<script>
+var MAXZOOM = 4;
+
+var currentMapId = 'orvey';
+var currentConfig = ORVEYMAPS[currentMapId];
+
+var map = L.map('map', {
+    crs: L.CRS.Simple, maxZoom: MAXZOOM, minZoom: 1,
+    maxBoundsViscosity: 1, zoomControl: true
+});
+
+var currentTileLayer = null;
+
+function pxToLatLng(x, y) { return map.unproject([x, y], MAXZOOM); }
+function latLngToPx(ll) { var p = map.project(ll, MAXZOOM); return [Math.round(p.x), Math.round(p.y)]; }
+
+function mapBounds(cfg) {
+    var sw = map.unproject([0, cfg.imgH], MAXZOOM);
+    var ne = map.unproject([cfg.imgW, 0], MAXZOOM);
+    return L.latLngBounds(sw, ne);
+}
+
+function applyMap() {
+    var cfg = ORVEYMAPS[currentMapId];
+    currentConfig = cfg;
+
+    if (currentTileLayer) { map.removeLayer(currentTileLayer); }
+    var tileUrl = '../maps/tiles/' + (cfg.tilesRoot ? cfg.tilesRoot + '/' : '') + '{z}/{x}/{y}.png';
+    currentTileLayer = L.tileLayer(tileUrl, {
+        tileSize: 512, noWrap: true
+    }).addTo(map);
+    var b = mapBounds(cfg);
+    map.setMaxBounds(b);
+    map.fitBounds(b);
+
+    pointMarkers.clearLayers();
+    vertMarkers.clearLayers();
+    if (currentPoly) { map.removeLayer(currentPoly); currentPoly = null; }
+    currentVerts = [];
+    rebuildPointSel();
+    rebuildRegionSel();
+    applyDraftToHelper();
+    document.getElementById('ptName').value = '';
+    document.getElementById('ptEnglish').value = '';
+    document.getElementById('ptSynonym').value = '';
+    document.getElementById('ptDesc').value = '';
+    document.getElementById('ptUrl').value = '';
+    document.getElementById('ptLoyal').value = '';
+    document.getElementById('ptNonmap').checked = false;
+    currentPoint = null;
+    document.getElementById('coords').textContent = '—';
+    document.getElementById('preview').style.display = 'none';
+    document.getElementById('status').textContent =
+        'Карта: ' + cfg.title + ' (' + cfg.imgW + '×' + cfg.imgH + ', maxZoom=' + MAXZOOM + '). Клик по карте ставит метку/вершину.';
+    redrawVerts();
+    showPoints();
+}
+
+function markerIcon(cat) {
+    return L.icon({
+        iconUrl: './distr/images/marker_' + cat + '.png',
+        iconSize: [28, 28],
+        iconAnchor: [14, 26]
+    });
+}
+
+// ---------- метки ----------
+var pointSel = document.getElementById('pointSel');
+var showLabelsChk = document.getElementById('showLabels');
+var pointMarkers = L.layerGroup().addTo(map);
+var currentPoint = null;
+
+function listPoints() {
+    return currentConfig.points.features.filter(function (f) { return f.geometry.type === 'Point'; });
+}
+
+function rebuildPointSel(keepName) {
+    pointSel.innerHTML = '';
+    var all = listPoints();
+    if (!all.length) {
+        var o0 = document.createElement('option');
+        o0.value = '';
+        o0.textContent = '— пока нет меток —';
+        pointSel.appendChild(o0);
+        return null;
+    }
+    all.forEach(function (f) {
+        var o = document.createElement('option');
+        o.value = f.properties.name;
+        o.textContent = f.properties.name + ' (' + f.properties.cat + ')';
+        pointSel.appendChild(o);
+    });
+    if (keepName && pointSel.querySelector('option[value="' + keepName + '"]')) {
+        pointSel.value = keepName;
+    }
+    return all;
+}
+
+function loadPointForm(f) {
+    if (!f) return;
+    var pr = f.properties;
+    document.getElementById('ptCat').value = pr.cat || 'place';
+    document.getElementById('ptName').value = pr.name || '';
+    document.getElementById('ptEnglish').value = pr.english || '';
+    document.getElementById('ptSynonym').value = pr.synonym || '';
+    document.getElementById('ptDesc').value = pr.description || '';
+    document.getElementById('ptUrl').value = pr.url || '';
+    document.getElementById('ptLoyal').value = pr.loyal || '';
+    document.getElementById('ptNonmap').checked = !!pr.nonmap;
+    currentPoint = pr.name;
+    var c = f.geometry.coordinates;
+    if (c && (c[0] !== 0 || c[1] !== 0)) {
+        document.getElementById('coords').textContent = '[' + c.join(', ') + ']';
+    } else {
+        document.getElementById('coords').textContent = 'ещё не заданы';
+    }
+    updatePreview(f);
+    showPoints();
+}
+
+function updatePreview(f) {
+    var pr = f.properties;
+    var el = document.getElementById('preview');
+    if (!pr || !pr.name) { el.style.display = 'none'; return; }
+    el.style.display = '';
+    el.innerHTML = '<b>' + pr.name + '</b>' + (pr.nonmap ? ' 🧭' : '') +
+        (pr.english ? ' <span class="pv-sub">' + pr.english + '</span>' : '') +
+        (pr.synonym ? ' <span class="pv-sub">· ' + pr.synonym + '</span>' : '') +
+        (pr.description ? '<br>' + pr.description : '') +
+        (pr.loyal ? ' <span class="pv-sub">[' + pr.loyal + ']</span>' : '');
+}
+
+function showPoints() {
+    pointMarkers.clearLayers();
+    var showLabels = showLabelsChk.checked;
+    listPoints().forEach(function (f) {
+        var c = f.geometry.coordinates;
+        if (!c || (c[0] === 0 && c[1] === 0)) return;
+        var m = L.marker(pxToLatLng(c[0], c[1]), {
+            icon: markerIcon(f.properties.cat || 'place'),
+            riseOnHover: true
+        }).addTo(pointMarkers);
+        if (showLabels) {
+            m.bindTooltip(f.properties.name, { className: 'point-label', permanent: true, direction: 'top', offset: [0, -26] });
+        } else {
+            m.bindTooltip(f.properties.name);
+        }
+        m.on('click', function () {
+            pointSel.value = f.properties.name;
+            loadPointForm(f);
+        });
+    });
+}
+
+showLabelsChk.addEventListener('change', showPoints);
+
+function findPoint(name) {
+    return currentConfig.points.features.find(function (x) { return x.properties.name === name; });
+}
+
+function formValues() {
+    return {
+        cat: document.getElementById('ptCat').value,
+        name: document.getElementById('ptName').value.trim(),
+        english: document.getElementById('ptEnglish').value.trim(),
+        synonym: document.getElementById('ptSynonym').value.trim(),
+        description: document.getElementById('ptDesc').value.trim(),
+        url: document.getElementById('ptUrl').value.trim(),
+        loyal: document.getElementById('ptLoyal').value.trim(),
+        nonmap: document.getElementById('ptNonmap').checked
+    };
+}
+
+document.getElementById('ptSave').addEventListener('click', function () {
+    var v = formValues();
+    if (!v.name) { alert('Введите название.'); return; }
+    var f = currentPoint ? findPoint(currentPoint) : null;
+    if (f && f.properties.name !== v.name && findPoint(v.name)) {
+        alert('Метка с таким названием уже есть.'); return;
+    }
+    if (!f) {
+        f = {
+            "type": "Feature",
+            "properties": {
+                "cat": v.cat, "name": v.name, "english": v.english, "synonym": v.synonym,
+                "description": v.description, "url": v.url, "loyal": v.loyal,
+                "nonmap": v.nonmap
+            },
+            "geometry": { "type": "Point", "coordinates": [0, 0] }
+        };
+        currentConfig.points.features.push(f);
+    }
+    f.properties.cat = v.cat;
+    f.properties.name = v.name;
+    f.properties.english = v.english;
+    f.properties.synonym = v.synonym;
+    f.properties.description = v.description;
+    f.properties.url = v.url;
+    f.properties.loyal = v.loyal;
+    f.properties.nonmap = v.nonmap;
+    currentPoint = v.name;
+    rebuildPointSel(v.name);
+    loadPointForm(f);
+    document.getElementById('status').innerHTML =
+        '✓ <b>' + v.name + '</b> сохранена. Кликните по карте, чтобы задать позицию.';
+});
+
+document.getElementById('ptNew').addEventListener('click', function () {
+    currentPoint = null;
+    document.getElementById('ptCat').value = 'place';
+    document.getElementById('ptName').value = '';
+    document.getElementById('ptEnglish').value = '';
+    document.getElementById('ptSynonym').value = '';
+    document.getElementById('ptDesc').value = '';
+    document.getElementById('ptUrl').value = '';
+    document.getElementById('ptLoyal').value = '';
+    document.getElementById('ptNonmap').checked = false;
+    document.getElementById('coords').textContent = 'ещё не заданы';
+    document.getElementById('preview').style.display = 'none';
+    pointSel.value = '';
+    document.getElementById('status').textContent = 'Новая метка. Заполните свойства и кликните по карте.';
+});
+
+document.getElementById('ptDelete').addEventListener('click', function () {
+    var f = currentPoint ? findPoint(currentPoint) : null;
+    if (!f) { alert('Сначала выберите метку.'); return; }
+    if (!confirm('Удалить метку «' + f.properties.name + '»?')) return;
+    currentConfig.points.features = currentConfig.points.features.filter(function (x) { return x !== f; });
+    currentPoint = null;
+    rebuildPointSel();
+    document.getElementById('coords').textContent = '—';
+    document.getElementById('preview').style.display = 'none';
+    document.getElementById('status').textContent = 'Метка удалена.';
+    showPoints();
+});
+
+pointSel.addEventListener('change', function () {
+    var f = findPoint(pointSel.value);
+    if (f) loadPointForm(f);
+});
+
+// ---------- полигоны ----------
+var regionSel = document.getElementById('regionSel');
+
+var vertMarkers = L.layerGroup().addTo(map);
+var currentVerts = [];
+var currentPoly = null;
+var regionsTemp = {};
+
+function rebuildRegionSel() {
+    regionSel.innerHTML = '';
+    var all = currentConfig.regions.features;
+    if (!all.length) {
+        var o0 = document.createElement('option');
+        o0.value = '';
+        o0.textContent = '— нет регионов —';
+        regionSel.appendChild(o0);
+        return;
+    }
+    all.forEach(function (f) {
+        var o = document.createElement('option');
+        o.value = f.properties.name;
+        o.textContent = f.properties.name;
+        regionSel.appendChild(o);
+    });
+    regionsTemp = {};
+    all.forEach(function (f) { regionsTemp[f.properties.name] = []; });
+}
+
+function redrawVerts() {
+    vertMarkers.clearLayers();
+    if (currentPoly) { map.removeLayer(currentPoly); currentPoly = null; }
+    var name = regionSel.value, pts = regionsTemp[name] || [];
+    currentVerts = pts.map(function (p) { return pxToLatLng(p[0], p[1]); });
+    currentVerts.forEach(function (ll, i) {
+        L.circleMarker(ll, { radius: 5, color: '#f7d51e', fillColor: '#f7d51e', fillOpacity: 1, className: 'vert-marker' })
+            .addTo(vertMarkers)
+            .bindTooltip('#' + (i + 1) + ' [' + pts[i].join(',') + ']');
+    });
+    if (currentVerts.length >= 2) {
+        currentPoly = L.polyline(currentVerts, { color: '#f7d51e', weight: 2, opacity: 0.9 }).addTo(map);
+    }
+    document.getElementById('regionStatus').textContent =
+        'Вершин: ' + pts.length + '. Клики добавляют вершины.';
+}
+
+// ---------- клик ----------
+map.on('click', function (e) {
+    var mode = document.getElementById('mode').value;
+    var p = latLngToPx(e.latlng);
+    if (mode === 'point') {
+        var name = currentPoint || pointSel.value;
+        var f = findPoint(name);
+        if (f) {
+            f.geometry.coordinates = p;
+            currentPoint = name;
+            document.getElementById('coords').textContent = '[' + p.join(', ') + ']';
+            document.getElementById('status').innerHTML = '✓ <b>' + name + '</b> — позиция задана.';
+            showPoints();
+        } else {
+            document.getElementById('status').textContent =
+                'Сначала создайте метку (кнопка «Новая»).';
+        }
+    } else {
+        var rn = regionSel.value;
+        regionsTemp[rn].push(p);
+        redrawVerts();
+    }
+});
+
+regionSel.addEventListener('change', redrawVerts);
+document.getElementById('clearPolygon').addEventListener('click', function () {
+    var rn = regionSel.value;
+    regionsTemp[rn] = [];
+    redrawVerts();
+});
+document.getElementById('closePolygon').addEventListener('click', function () {
+    var rn = regionSel.value;
+    if (regionsTemp[rn].length < 3) { alert('Нужно минимум 3 вершины.'); return; }
+    document.getElementById('regionStatus').textContent =
+        'Полигон «' + rn + '» готов (' + regionsTemp[rn].length + ' вершин).';
+});
+
+document.getElementById('mode').addEventListener('change', function () {
+    var m = this.value;
+    document.getElementById('pointMode').style.display = m === 'point' ? '' : 'none';
+    document.getElementById('regionMode').style.display = m === 'region' ? '' : 'none';
+});
+
+// ---------- экспорт ----------
+function buildMainJS() {
+    var cfg = currentConfig;
+    var lines = [];
+    lines.push('// Точки карты «' + cfg.title + '». Координаты: пиксельные [x, y] (maxZoom=' + MAXZOOM + ').');
+    lines.push('var ' + cfg.pointsVar + ' = {');
+    lines.push('  "type": "FeatureCollection",');
+    lines.push('  "features": [');
+    cfg.points.features.forEach(function (f, i) {
+        var pr = f.properties, last = i === cfg.points.features.length - 1;
+        var props = '    {\n' +
+            '      "type": "Feature",\n' +
+            '      "properties": {\n' +
+            '        "cat": ' + JSON.stringify(pr.cat) + ',\n' +
+            '        "name": ' + JSON.stringify(pr.name) + ',\n' +
+            '        "english": ' + JSON.stringify(pr.english || '') + ',\n' +
+            '        "synonym": ' + JSON.stringify(pr.synonym || '') + ',\n' +
+            '        "description": ' + JSON.stringify(pr.description || '') + ',\n' +
+            '        "url": ' + JSON.stringify(pr.url || '') + ',\n' +
+            '        "loyal": ' + JSON.stringify(pr.loyal || '') + ',\n' +
+            '        "nonmap": ' + (pr.nonmap ? 'true' : 'false') + '\n' +
+            '      },\n' +
+            '      "geometry": { "type": "Point", "coordinates": ' + JSON.stringify(f.geometry.coordinates) + ' }\n' +
+            '    }' + (last ? '' : ',');
+        lines.push(props);
+    });
+    lines.push('  ]\n};');
+    return lines.join('\n');
+}
+
+function buildBoundsJS() {
+    var cfg = currentConfig;
+    var lines = [];
+    lines.push('// Границы регионов «' + cfg.title + '». Координаты: пиксельные [x, y] (maxZoom=' + MAXZOOM + ').');
+    lines.push('var ' + cfg.regionsVar + ' = {');
+    lines.push('  "type": "FeatureCollection",');
+    lines.push('  "features": [');
+    cfg.regions.features.forEach(function (f, i) {
+        var pr = f.properties, last = i === cfg.regions.features.length - 1;
+        var name = pr.name, ring = regionsTemp[name] || [];
+        var ringJson = '[' + ring.map(function (p) { return '[' + p.join(',') + ']'; }).join(',') + ']';
+        var props = '    {\n' +
+            '      "type": "Feature",\n' +
+            '      "properties": {\n' +
+            '        "name": ' + JSON.stringify(name) + ',\n' +
+            '        "bg": ' + JSON.stringify(pr.bg) + ',\n' +
+            '        "page": ' + JSON.stringify(pr.page || '') + '\n' +
+            '      },\n' +
+            '      "geometry": {\n' +
+            '        "type": "Polygon",\n' +
+            '        "coordinates": [' + ringJson + ']\n' +
+            '      }\n' +
+            '    }' + (last ? '' : ',');
+        lines.push(props);
+    });
+    lines.push('  ]\n};');
+    return lines.join('\n');
+}
+
+document.getElementById('exportBtn').addEventListener('click', function () {
+    document.getElementById('exportBox').style.display = '';
+    var cfg = currentConfig;
+    document.getElementById('out').value = '// ' + cfg.pointsFile + ' → скопируйте\n\n' + buildMainJS() + '\n\n\n// ' + cfg.regionsFile + '\n\n' + buildBoundsJS();
+});
+
+document.getElementById('copyBtn').addEventListener('click', function () {
+    copyText(buildMainJS());
+});
+document.getElementById('copyBoundsBtn').addEventListener('click', function () {
+    copyText(buildBoundsJS());
+});
+
+function copyText(txt) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () { alert('Скопировано!'); });
+    } else {
+        var ta = document.getElementById('out');
+        ta.value = txt;
+        ta.select();
+        document.execCommand('copy');
+        alert('Скопировано!');
+    }
+}
+
+// ---------- загрузка из файла ----------
+var loadFileInput = document.getElementById('loadFile');
+var loadStatus = document.getElementById('loadStatus');
+
+function parseDataText(text) {
+    var s = text.trim();
+    var start = s.indexOf('{');
+    var end = s.lastIndexOf('}');
+    if (start === -1 || end === -1 || end < start) throw new Error('Объект JSON не найден.');
+    return JSON.parse(s.substring(start, end + 1));
+}
+
+function mergeLoaded(data) {
+    if (!data || data.type !== 'FeatureCollection' || !Array.isArray(data.features)) {
+        throw new Error('Нет FeatureCollection.');
+    }
+    var addedPoints = 0, updatedPoints = 0, addedRegions = 0;
+    var cfg = currentConfig;
+
+    data.features.forEach(function (f) {
+        var geom = f.geometry || {};
+        if (geom.type === 'Point') {
+            var existing = cfg.points.features.find(function (x) {
+                return x.geometry.type === 'Point' && x.properties.name === f.properties.name;
+            });
+            if (existing) {
+                existing.properties = f.properties;
+                existing.geometry.coordinates = geom.coordinates;
+                updatedPoints++;
+            } else {
+                cfg.points.features.push(f);
+                addedPoints++;
+            }
+        } else if (geom.type === 'Polygon') {
+            var name = f.properties.name;
+            if (!regionsTemp[name]) regionsTemp[name] = [];
+            var ring = (geom.coordinates && geom.coordinates[0]) || [];
+            regionsTemp[name] = ring.map(function (p) { return [p[0], p[1]]; });
+            var existing = cfg.regions.features.find(function (x) { return x.properties.name === name; });
+            if (existing) {
+                existing.properties = f.properties;
+                existing.geometry.coordinates = geom.coordinates;
+            } else {
+                cfg.regions.features.push(f);
+            }
+            addedRegions++;
+        }
+    });
+
+    return { addedPoints: addedPoints, updatedPoints: updatedPoints, addedRegions: addedRegions, regionRings: regionsTemp };
+}
+
+loadFileInput.addEventListener('change', function () {
+    var file = loadFileInput.files && loadFileInput.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        try {
+            var data = parseDataText(e.target.result);
+            var st = mergeLoaded(data);
+            rebuildPointSel();
+            rebuildRegionSel();
+            Object.keys(st.regionRings).forEach(function (k) {
+                regionsTemp[k] = st.regionRings[k] || [];
+            });
+            var stNames = Object.keys(st.regionRings);
+            if (stNames.length) {
+                regionSel.value = stNames[0];
+                if (!regionSel.value) regionSel.selectedIndex = 0;
+            }
+            showPoints();
+            redrawVerts();
+            loadStatus.innerHTML = '✓ Загружено: +' + st.addedPoints + ' новых, обновлено ' +
+                st.updatedPoints + ' точек, регионов: ' + st.addedRegions + '.';
+        } catch (err) {
+            loadStatus.innerHTML = '✗ Ошибка: ' + err.message;
+        }
+    };
+    reader.onerror = function () {
+        loadStatus.innerHTML = '✗ Не удалось прочитать файл.';
+    };
+    reader.readAsText(file);
+});
+
+// ---------- сохранение на карту ----------
+var saveToMapBtn = document.getElementById('saveToMapBtn');
+var saveStatus = document.getElementById('saveStatus');
+
+function draftKey(mapId, kind) { return 'coordhelper_draft_' + mapId + '_' + kind; }
+
+function saveToMap() {
+    var cfg = currentConfig;
+    var regions = JSON.parse(JSON.stringify(cfg.regions));
+    regions.features.forEach(function (f) {
+        var ring = regionsTemp[f.properties.name] || [];
+        if (ring.length) {
+            f.geometry.coordinates = [ring];
+        }
+    });
+    try {
+        localStorage.setItem(draftKey(currentMapId, 'points'), JSON.stringify(cfg.points));
+        localStorage.setItem(draftKey(currentMapId, 'regions'), JSON.stringify(regions));
+        saveStatus.innerHTML = '✓ Сохранено (' + new Date().toLocaleTimeString() + '). Откройте map.html — правки подхватятся автоматически.';
+    } catch (err) {
+        saveStatus.innerHTML = '✗ Не удалось сохранить: ' + err.message;
+    }
+}
+
+saveToMapBtn.addEventListener('click', saveToMap);
+
+// при загрузке/смене карты применяем сохранённый черновик, чтобы правки накапливались
+function applyDraftToHelper() {
+    var cfg = currentConfig;
+    var pts = null, regs = null;
+    try {
+        var rawP = localStorage.getItem(draftKey(currentMapId, 'points'));
+        var rawR = localStorage.getItem(draftKey(currentMapId, 'regions'));
+        if (rawP) { var p = JSON.parse(rawP); if (p && p.type === 'FeatureCollection') pts = p; }
+        if (rawR) { var r = JSON.parse(rawR); if (r && r.type === 'FeatureCollection') regs = r; }
+    } catch (e) {}
+    if (pts) cfg.points = pts;
+    if (regs) cfg.regions = regs;
+    if (pts || regs) {
+        regionsTemp = {};
+        cfg.regions.features.forEach(function (f) {
+            var ring = (f.geometry.coordinates && f.geometry.coordinates[0]) || [];
+            regionsTemp[f.properties.name] = ring.map(function (p) { return [p[0], p[1]]; });
+        });
+        if (saveStatus) {
+            saveStatus.innerHTML = '✓ Загружен черновик (' + new Date().toLocaleTimeString() + '). Правки продолжаются поверх него.';
+        }
+    }
+}
+
+// ---------- переключение карт ----------
+var mapSelect = document.getElementById('mapSelect');
+Object.keys(ORVEYMAPS).forEach(function (id) {
+    var o = document.createElement('option');
+    o.value = id;
+    o.textContent = ORVEYMAPS[id].title;
+    mapSelect.appendChild(o);
+});
+
+mapSelect.addEventListener('change', function () {
+    currentMapId = this.value;
+    applyMap();
+});
+
+applyMap();
+</script>
+</body>
+</html>

@@ -24,29 +24,12 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-</head>
-<body>
 
-  <header class="site-header">
-    <nav class="nav">
-      <a class="nav-logo" href="index.html">
-        <img src="img/gerb-small.jpg" alt="Герб Таверны «Карточная Буря»" width="42" height="42">
-        <span>Карточная Буря</span>
-      </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav-links" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="index.html#about">О нас</a></li>
-        <li><a href="games.html">Коллекция</a></li>
-        <li><a href="index.html#events">Сходки</a></li>
-        <li><a href="otgoloski.html">Отголоски Бури</a></li><li><a href="wiki/wiki.html">Орвей</a></li>
-        
-        <li><a href="index.html#team">Администрация</a></li>
-        <li><a href="index.html#contacts">Где нас найти</a></li>
-      </ul>
-    </nav>
-  </header>
+<script defer src="js/layout.js"></script>
+</head>
+<body data-layout="tavern" data-root="">
+
+  
 
   <main id="top">
     <section class="booking section">
@@ -121,19 +104,11 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <img class="footer-emblem" src="img/gerb-small.jpg" alt="Герб Таверны" width="74" height="74">
-    <p class="footer-title">Таверна «Карточная Буря»</p>
-    <p class="footer-quote">«Будь как дома, путник!»</p>
-    <p class="footer-copy">© <span class="js-year"></span> Таверна «Карточная Буря» · Двери открыты для всякого путника</p>
-    <p class="footer-copy"><a href="#top">Вернуться наверх ↑</a></p>
-  </footer>
+  
 
   <script src="js/script.js"></script>
   <script src="js/gatherings.js"></script>
   <script src="js/booking.js"></script>
-<button class="back-top" id="backTop" type="button" aria-label="Вернуться наверх" title="Наверх">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-  </button>
+
 </body>
 </html>
