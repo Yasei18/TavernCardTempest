@@ -647,6 +647,64 @@ h1, h2, h3 {
   position: relative;
   z-index: 1;
   transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  cursor: pointer;
+}
+
+.game-card.is-expanded {
+  /* высота задаётся инлайново через JS */
+}
+
+.game-desc-wrap {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+
+.game-card.is-expanded .game-desc-wrap {
+  /* высота задаётся инлайново через JS */
+}
+
+.game-desc {
+  color: var(--text-muted);
+  font-size: 19px;
+  padding-top: 10px;
+}
+
+.game-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-family: 'Forum', 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.game-toggle-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  transition: transform 0.3s ease;
+}
+
+.game-card.is-expanded .game-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.game-toggle:hover {
+  color: var(--gold-bright);
+  text-shadow: 0 0 10px rgba(212, 165, 67, 0.5);
+}
+
+.game-card.is-expanded .game-toggle {
+  color: var(--gold-bright);
 }
 
 .game-card:hover {
@@ -667,7 +725,7 @@ h1, h2, h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 12px;
+  margin-top: 14px;
 }
 
 .game-tag {
@@ -738,6 +796,35 @@ h1, h2, h3 {
 }
 
 .game-rules:hover {
+  color: var(--gold-bright);
+}
+
+.game-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.game-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Forum', 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  transition: color 0.2s;
+}
+
+.game-link svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.game-link:hover {
   color: var(--gold-bright);
 }
 
@@ -871,115 +958,6 @@ h1, h2, h3 {
   color: var(--gold);
   transform: translateY(-50%) scale(1.08);
   background: linear-gradient(160deg, var(--bg-card), var(--bg-dark));
-}
-
-/* ---------- СТРАНИЦА ИГРЫ ---------- */
-.back-link {
-  margin: 0 0 18px;
-  text-align: left;
-  font-family: 'Forum', 'Cinzel', serif;
-  font-size: 14px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.back-link a {
-  color: var(--gold);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.back-link a:hover {
-  color: var(--gold-bright);
-}
-
-.game-page {
-  display: flex;
-  gap: 40px;
-  align-items: flex-start;
-  text-align: left;
-}
-
-.game-page-art {
-  flex: 0 0 auto;
-  width: min(340px, 40%);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-}
-
-.game-page-info h1 {
-  font-size: clamp(28px, 4vw, 42px);
-  color: var(--gold-bright);
-  margin-bottom: 18px;
-}
-
-.game-page-desc {
-  color: var(--text-muted);
-  font-size: 21px;
-  line-height: 1.55;
-}
-
-.rules-block {
-  background: linear-gradient(160deg, var(--bg-card-soft), var(--bg-card));
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 26px;
-  margin-bottom: 30px;
-}
-
-.rules-title {
-  font-family: 'Forum', 'Cinzel', serif;
-  font-size: 17px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
-}
-
-.rules-pdf {
-  display: block;
-  width: 100%;
-  height: 70vh;
-  min-height: 420px;
-  border: 1px solid var(--border);
-  border-radius: calc(var(--radius) - 4px);
-  background: #2a2620;
-}
-
-.rules-link {
-  margin: 16px 0 0;
-  text-align: center;
-}
-
-/* Ссылки в карточках игр */
-.game-art-link {
-  display: block;
-}
-
-.game-card h3 a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.game-card h3 a:hover {
-  color: var(--gold-bright);
-}
-
-@media (max-width: 720px) {
-  .game-page {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .game-page-art {
-    width: min(320px, 80%);
-  }
-
-  .rules-pdf {
-    height: 60vh;
-  }
 }
 
 /* ---------- СХОДКИ ---------- */

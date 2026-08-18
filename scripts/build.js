@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /*
  * scripts/build.js
- * Генерирует HTML-страницы игр, рас и верований из данных.
+ * Генерирует HTML-страницы рас и верований из данных.
  *
  * Использование:
- *   node scripts/build.js [games|races|faiths|all]
+ *   node scripts/build.js [races|faiths|all]
  *
  * Примеры:
- *   node scripts/build.js games   — пересоздать games/*.html из GAMES[]
  *   node scripts/build.js races   — пересоздать wiki/races/*.html из RACES[]
  *   node scripts/build.js faiths  — пересоздать wiki/faiths/*.html из FAITHS[]
  *   node scripts/build.js all     — всё вместе
@@ -49,79 +48,6 @@ function extractArray(fileContent, varName) {
   // Формируем безопасный объект — оборачиваем в скобки и eval
   // (безопасно, т.к. данные рукописные и не содержат внешних вызовов)
   return (new Function('return (' + m[1] + ')'))();
-}
-
-/* ══════════════════════════════════════════════════════════════════
- *  GAME PAGES
- * ══════════════════════════════════════════════════════════════════ */
-
-function buildGames() {
-  console.log('=== Building game pages ===');
-
-  var gamesSrc = read(path.join(ROOT, 'js', 'games.js'));
-  var GAMES = extractArray(gamesSrc, 'GAMES');
-
-  var SITE = 'https://example.com/tavern';
-
-  var template =
-    '<!DOCTYPE html>\n' +
-    '<html lang="ru">\n' +
-    '<head>\n' +
-    '  <meta charset="UTF-8">\n' +
-    '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
-    '  <title>{{TITLE}} - Игры Таверны | Карточная Буря</title>\n' +
-    '  <meta name="description" content="{{DESC}}">\n' +
-    '  <meta property="og:type" content="website">\n' +
-    '  <meta property="og:site_name" content="Таверна «Карточная Буря»">\n' +
-    '  <meta property="og:locale" content="ru_RU">\n' +
-    '  <meta property="og:title" content="{{TITLE}} - Игры Таверны | Карточная Буря">\n' +
-    '  <meta property="og:description" content="{{DESC}}">\n' +
-    '  <meta property="og:url" content="{{URL}}">\n' +
-    '  <meta name="twitter:card" content="summary">\n' +
-    '  <meta name="twitter:title" content="{{TITLE}} - Игры Таверны | Карточная Буря">\n' +
-    '  <meta name="twitter:description" content="{{DESC}}">\n' +
-    '  <meta name="theme-color" content="#17100a">\n' +
-    '  <link rel="canonical" href="{{URL}}">\n' +
-    '  <link rel="apple-touch-icon" href="../img/favicon.png">\n' +
-    '  <link rel="stylesheet" href="../fonts/fonts.css">\n' +
-    '  <link rel="stylesheet" href="../css/style.css">\n' +
-    '  <link rel="icon" type="image/png" href="../img/favicon.png">\n' +
-    '  <link rel="icon" type="image/x-icon" href="../img/favicon.ico">\n' +
-    '  <script defer src="../js/layout.js"></script>\n' +
-    '</head>\n' +
-    '<body data-layout="tavern" data-root="../">\n' +
-    '\n' +
-    '  <main id="top">\n' +
-    '    <div id="gamePage"></div>\n' +
-    '  </main>\n' +
-    '\n' +
-    '  <script src="../js/games.js"></script>\n' +
-    '  <script src="../js/game-page.js"></script>\n' +
-    '  <script src="../js/script.js"></script>\n' +
-    '\n' +
-    '</body>\n' +
-    '</html>\n';
-
-  var count = 0;
-  for (var i = 0; i < GAMES.length; i++) {
-    var g = GAMES[i];
-    var slug = g.slug;
-    var title = g.title || slug;
-    var desc = g.longdesc || g.desc || '';
-    // Убираем HTML-теги из desc для meta-тегов (OG и description)
-    var metaDesc = desc.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-    var url = SITE + '/games/' + slug + '.html';
-
-    var html = template
-      .replace(/\{\{TITLE\}\}/g, esc(title))
-      .replace(/\{\{DESC\}\}/g, esc(metaDesc))
-      .replace(/\{\{URL\}\}/g, url);
-
-    write(path.join(ROOT, 'games', slug + '.html'), html);
-    count++;
-  }
-
-  console.log('  Сгенерировано ' + count + ' game-страниц в games/');
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -336,7 +262,6 @@ function buildFaiths() {
 var target = (process.argv[2] || 'all').toLowerCase();
 
 try {
-  if (target === 'games' || target === 'all') buildGames();
   if (target === 'races' || target === 'all') buildRaces();
   if (target === 'faiths' || target === 'all') buildFaiths();
   console.log('\n✓ Готово!');

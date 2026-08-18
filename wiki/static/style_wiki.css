@@ -91,7 +91,8 @@ img {
 }
 
 .create-line-header {
-	width: 1200px;
+	width: 100%;
+	max-width: 1200px;
 	border-top: 1px solid #ffffff;
 	display: block;
 	margin-left: auto;
@@ -100,9 +101,10 @@ img {
 
 .nav {
 	display: flex;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	align-items: center;
 	justify-content: center;
+	gap: 48px;
 	font-size: clamp(19px, 1.8vw, 26px);
 	text-align: center;
 }
@@ -111,7 +113,7 @@ img {
 	display: inline-block;
 	vertical-align: middle;
 	font-weight: 400;
-	margin: 15px 18px 10px;
+	padding: 15px 0 10px;
 	color: #fff;
 	text-decoration: none;
 	transition: color .1s linear;
@@ -126,8 +128,7 @@ img {
 	display: inline-block;
 	vertical-align: middle;
 	font-weight: 400;
-	margin: 15px 18px 10px;
-	padding: 8px 22px;
+	padding: 15px 0 10px;
 	color: #fff;
 	text-decoration: none;
 	transition: color .15s;
@@ -138,11 +139,12 @@ img {
 }
 
 .dropdown {
-	overflow: hidden;
+	overflow: visible;
 	display: inline-block;
 	vertical-align: middle;
 	font-weight: 400;
-	margin: 15px 18px 10px;
+	padding: 15px 0 10px;
+	position: relative;
 	transition: color .1s linear;
 }
 
@@ -151,12 +153,13 @@ img {
 	border: none;
 	outline: none;
 	color: white;
-	padding: 14px 16px;
+	padding: 0;
 	background-color: inherit;
 	font-family: 'Prata', serif;
 	font-weight: 400;
 	font-style: normal;
 	margin: 0;
+	cursor: pointer;
 }
 
 .dropdown:hover {
@@ -289,6 +292,7 @@ img {
 
 	.nav .dropdown {
 		margin: 0;
+		padding: 0;
 	}
 
 	.nav .dropdown .dropbtn {
@@ -383,12 +387,6 @@ img {
 	margin-bottom: 8px;
 }
 
-.wiki-title__en {
-	font-size: 18px;
-	color: #72777d;
-	margin-bottom: 8px;
-}
-
 .wiki-lead {
 	font-size: 19px;
 	line-height: 1.7;
@@ -407,61 +405,6 @@ img {
 	margin: 40px 0 14px;
 	padding-bottom: 6px;
 	border-bottom: 1px solid #c8ccd1;
-}
-
-.wiki h2 {
-	font-size: 28px;
-	color: #0c0c0c;
-	margin: 40px 0 14px;
-	padding-bottom: 6px;
-	border-bottom: 1px solid #c8ccd1;
-}
-
-.wiki h3 {
-	font-size: 21px;
-	color: #222;
-	margin: 28px 0 10px;
-}
-
-.wiki h4 {
-	font-size: 17px;
-	color: #333;
-	margin: 20px 0 8px;
-}
-
-.wiki p {
-	font-size: 16.5px;
-	line-height: 1.75;
-	margin: 0 0 14px;
-	color: #2a2a2a;
-}
-
-.wiki ul,
-.wiki ol {
-	margin: 0 0 14px;
-	padding-left: 26px;
-}
-
-.wiki li {
-	font-size: 16px;
-	line-height: 1.7;
-	margin-bottom: 6px;
-	color: #2a2a2a;
-}
-
-.wiki blockquote {
-	margin: 18px 0;
-	padding: 12px 20px;
-	background: #f4f6fa;
-	border-left: 4px solid #1c2c7c;
-	font-style: italic;
-	color: #444;
-}
-
-.wiki hr {
-	border: 0;
-	border-top: 1px solid #e5e5e5;
-	margin: 30px 0;
 }
 
 /* Сворачиваемые вкладки (разделы-вкладки из гугл-документов) */
@@ -591,41 +534,6 @@ img {
 	cursor: default;
 }
 
-/* Содержание (TOC) */
-.toc {
-	background: #f8f9fa;
-	border: 1px solid #c8ccd1;
-	padding: 16px 22px;
-	margin: 20px 0 30px;
-	display: inline-block;
-	font-size: 15px;
-}
-
-.toc-title {
-	font-weight: 400;
-	text-align: center;
-	margin-bottom: 8px;
-	color: #333;
-	font-size: 16px;
-}
-
-.toc ol {
-	margin: 0;
-	padding-left: 22px;
-}
-
-.toc li {
-	margin-bottom: 4px;
-}
-
-.toc a {
-	text-decoration: none;
-}
-
-.toc a:hover {
-	text-decoration: underline;
-}
-
 /* ============================================================
    ИНФОБОКС (врезка «Краткие сведения», стиль Википедии)
    ============================================================ */
@@ -723,10 +631,6 @@ img {
 
 .tag:hover {
 	filter: brightness(1.12);
-}
-
-.tag-region {
-	background: #5a6478;
 }
 
 .tag-region--alvaera {
@@ -935,16 +839,6 @@ img {
 .feature-table td:first-child {
 	color: #1c2c7c;
 	font-weight: 400;
-}
-
-.feature-group {
-	margin: 26px 0 8px;
-}
-
-.feature-group h3 {
-	font-size: 20px;
-	color: #1c2c7c;
-	margin-bottom: 6px;
 }
 
 /* ============================================================

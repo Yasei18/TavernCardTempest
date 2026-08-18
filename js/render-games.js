@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var playIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.14v13.72L19 12z"/></svg>';
 
-  var bySlug = {};
-  GAMES.forEach(function (g) { bySlug[g.slug] = g; });
+  var byId = {};
+  GAMES.forEach(function (g) { byId[g.id] = g; });
 
   var activeTags = [];
 
@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function () {
   // находил и дополнения к военным играм.
   function effectiveTags(game) {
     var tags = gameTags(game).slice();
-    if (game.base && bySlug[game.base]) {
-      gameTags(bySlug[game.base]).forEach(function (t) {
+    if (game.base && byId[game.base]) {
+      gameTags(byId[game.base]).forEach(function (t) {
         if (tags.indexOf(t) === -1) tags.push(t);
       });
     }
@@ -80,24 +80,31 @@ document.addEventListener('DOMContentLoaded', function () {
     if (expsLabel) expsLabel.textContent = plural(exps, 'дополнение', 'дополнения', 'дополнений');
   }
 
+  var pdfIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h6v7h6v9H6zm2 0h2v-2H8v2zm0-4h6v-2H8v2zm0-4h4V10H8v2z"/></svg>';
+  var toggleIcon = '<svg class="game-toggle-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>';
+
   function cardHtml(game) {
     var cls = game.featured ? 'game-card game-featured' : 'game-card';
-    var page = game.slug ? 'games/' + game.slug + '.html' : '';
-    var rules = game.rules
-      ? '<a class="game-rules" href="' + game.rules + '" target="_blank" rel="noopener">' + playIcon + 'Правила</a>'
+    var pdfLink = game.pdf
+      ? '<a class="game-link" href="' + game.pdf + '" target="_blank" rel="noopener">' + pdfIcon + 'Скачать PDF правила</a>'
+      : '';
+    var videoLink = game.rules
+      ? '<a class="game-link" href="' + game.rules + '" target="_blank" rel="noopener">' + playIcon + 'Видео правила</a>'
       : '';
     var img = game.img
-      ? '<a class="game-art-link" href="' + page + '"><img class="game-art" src="img/games/' + game.img + '" alt="' + game.title + '" loading="lazy"></a>'
+      ? '<img class="game-art" src="img/games/' + game.img + '" alt="' + game.title + '" loading="lazy">'
       : '';
     var pills = gameTags(game).map(function (t) {
       return '<span class="game-tag">' + t + '</span>';
     }).join('');
-    return '<div class="' + cls + '">' +
+    return '<div class="' + cls + '" id="game-' + game.id + '">' +
       img +
+      '<h3>' + game.title + '</h3>' +
+      (pdfLink || videoLink ? '<div class="game-links">' + pdfLink + videoLink + '</div>' : '') +
+      '<button type="button" class="game-toggle">' + toggleIcon + 'Описание</button>' +
+      '<div class="game-desc-wrap"><p class="game-desc">' + game.desc + '</p>' +
       (pills ? '<div class="game-tags">' + pills + '</div>' : '') +
-      '<h3><a href="' + page + '">' + game.title + '</a></h3>' +
-      '<p>' + game.desc + '</p>' +
-      rules +
+      '</div>' +
       '</div>';
   }
 
@@ -118,14 +125,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var html = '';
     Object.keys(groups).forEach(function (key) {
-      var base = bySlug[key];
+      var base = byId[key];
       if (!base) return;
       var items = groups[key].map(function (exp) {
-        var page = exp.slug ? 'games/' + exp.slug + '.html' : '';
-        return '<li class="games-exp-item"><a href="' + page + '">' + expShortTitle(exp) + '</a></li>';
+        return '<li class="games-exp-item">' + expShortTitle(exp) + '</li>';
       }).join('');
       html += '<div class="games-exp-group">' +
-        '<h4 class="games-exp-base"><a href="games/' + base.slug + '.html">' + base.title + '</a></h4>' +
+        '<h4 class="games-exp-base"><a href="#game-' + base.id + '">' + base.title + '</a></h4>' +
         '<ul class="games-exp-list">' + items + '</ul>' +
         '</div>';
     });
@@ -262,4 +268,41 @@ document.addEventListener('DOMContentLoaded', function () {
 
   bindTilt(grid);
   bindTilt(expGrid);
+
+  function bindToggle(container) {
+    if (!container) return;
+    container.addEventListener('click', function (e) {
+      var card = e.target.closest ? e.target.closest('.game-card') : null;
+      if (!card) return;
+
+      if (e.target.closest ? e.target.closest('.game-links') : null) return;
+
+      var wrap = card.querySelector('.game-desc-wrap');
+      var btn = card.querySelector('.game-toggle');
+      if (!wrap || !btn) return;
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (card.classList.contains('is-expanded')) {
+        wrap.style.height = wrap.scrollHeight + 'px';
+        wrap.offsetHeight;
+        wrap.style.height = '0px';
+        card.classList.remove('is-expanded');
+        btn.textContent = 'Описание';
+      } else {
+        wrap.style.height = wrap.scrollHeight + 'px';
+        card.classList.add('is-expanded');
+        btn.textContent = 'Свернуть';
+        var onEnd = function () {
+          wrap.style.height = 'auto';
+          wrap.removeEventListener('transitionend', onEnd);
+        };
+        wrap.addEventListener('transitionend', onEnd);
+      }
+    });
+  }
+
+  bindToggle(grid);
+  bindToggle(expGrid);
 });
