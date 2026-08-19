@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style_wiki.css">
+    <script defer src="../../js/layout.js"></script>
+    <script defer src="../js/main.js"></script>
+    <meta name="description" content="Доспехи и щиты Мира Орвей: таблицы лёгких, средних и тяжёлых доспехов.">
+    <title>Доспехи — Книга игрока</title>
+    <style>
+        .pb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 1.2rem 0;
+            border: 2px solid #222;
+        }
+        .pb-table th {
+            background: #1c2c7c;
+            color: #fff;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+            border-bottom: 2px solid #222;
+        }
+        .pb-table td {
+            padding: 0.55rem 0.8rem;
+            border: 1px solid #222;
+            vertical-align: top;
+        }
+        .pb-table tr:nth-child(even) td { background: #f4f6fb; }
+        .pb-table tr:hover td { background: #eef1f8; }
+    </style>
+</head>
+<body data-layout="wiki" data-root="../">
+    <div class="wiki-page">
+        <div class="wiki-container">
+            <nav class="crumbs">
+                <a href="../../index.html">Главная</a> / <a href="../player-book.html">Книга игрока</a> / <span>Доспехи</span>
+            </nav>
+            <h1 class="wiki-title">Доспехи</h1>
+            <p class="wiki-lead">Лёгкие, средние и тяжёлые доспехи, а также щиты Мира Орвей.</p>
+
+            <h2>Лёгкие доспехи</h2>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Доспех</th><th>Цена</th><th>КД</th><th>Скрытность</th><th>Вес</th><th>Особенность</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Лёгкая шкура</strong></td><td>2 зм</td><td>10</td><td>—</td><td>4</td><td>+1 к Скрытности в темноте</td></tr>
+                    <tr><td><strong>Ткань с кожаными вставками</strong></td><td>3 зм</td><td>11</td><td>—</td><td>5</td><td>—</td></tr>
+                    <tr><td><strong>Стёганный</strong></td><td>8 зм</td><td>11</td><td>Помеха</td><td>8</td><td>Надевается под тяжёлый доспех: +1 к КД, −5 фт. передвижения. Требует на 1 ед. СИЛ больше</td></tr>
+                    <tr><td><strong>Кожаный</strong></td><td>10 зм</td><td>11</td><td>—</td><td>10</td><td>—</td></tr>
+                    <tr><td><strong>Древесный</strong></td><td>15 зм</td><td>12</td><td>Помеха</td><td>14</td><td>—</td></tr>
+                    <tr><td><strong>Проклёпанная кожа</strong></td><td>30 зм</td><td>12</td><td>—</td><td>14</td><td>—</td></tr>
+                    <tr><td><strong>Многослойный стёганный</strong></td><td>40 зм</td><td>13</td><td>Помеха</td><td>12</td><td>—</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Средние доспехи</h2>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Доспех</th><th>Цена</th><th>КД</th><th>Скрытность</th><th>Вес</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Выделанная шкура</strong></td><td>10 зм</td><td>12 + Лов (макс. 2)</td><td>—</td><td>12</td></tr>
+                    <tr><td><strong>Тегиляй</strong></td><td>30 зм</td><td>11 + Лов (макс. 3)</td><td>—</td><td>14</td></tr>
+                    <tr><td><strong>Кольчужная рубаха</strong></td><td>50 зм</td><td>13 + Лов (макс. 2)</td><td>—</td><td>20</td></tr>
+                    <tr><td><strong>Ламеллярный</strong></td><td>60 зм</td><td>14 + Лов (макс. 1)</td><td>Помеха</td><td>40</td></tr>
+                    <tr><td><strong>Чешуйчатый</strong></td><td>70 зм</td><td>14 + Лов (макс. 2)</td><td>Помеха</td><td>45</td></tr>
+                    <tr><td><strong>Кираса</strong></td><td>350 зм</td><td>14 + Лов (макс. 2)</td><td>—</td><td>20</td></tr>
+                    <tr><td><strong>Полулаты</strong></td><td>750 зм</td><td>15 + Лов (макс. 2)</td><td>Помеха</td><td>40</td></tr>
+                </tbody>
+            </table>
+            <p><em>Полулаты требуют Силу 11.</em></p>
+
+            <h2>Тяжёлые доспехи</h2>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Доспех</th><th>Цена</th><th>КД</th><th>Сила</th><th>Скрытность</th><th>Вес</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Лорика</strong></td><td>30 зм</td><td>14</td><td>12</td><td>Помеха</td><td>40</td></tr>
+                    <tr><td><strong>Наборный</strong></td><td>600 зм</td><td>17</td><td>15</td><td>Помеха</td><td>100</td></tr>
+                    <tr><td><strong>Латы</strong></td><td>1 500 зм</td><td>18</td><td>17</td><td>Помеха</td><td>110</td></tr>
+                    <tr><td><strong>Рыцарский набор</strong></td><td>2 000 зм</td><td>19</td><td>18</td><td>Помеха</td><td>130</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Щиты</h2>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Щит</th><th>Цена</th><th>КД</th><th>Сила</th><th>Скрытность</th><th>Вес</th><th>Особенность</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Малый деревянный</strong></td><td>1 зм</td><td>+1</td><td>—</td><td>—</td><td>4</td><td>—</td></tr>
+                    <tr><td><strong>Баклер</strong></td><td>3 зм</td><td>+1</td><td>—</td><td>—</td><td>3</td><td>Можно использовать с двуручным оружием</td></tr>
+                    <tr><td><strong>Деревянный щит</strong></td><td>10 зм</td><td>+2</td><td>—</td><td>—</td><td>6</td><td>—</td></tr>
+                    <tr><td><strong>Металлический щит</strong></td><td>25 зм</td><td>+2</td><td>13</td><td>Помеха</td><td>10</td><td>—</td></tr>
+                    <tr><td><strong>Полуторный щит</strong></td><td>40 зм</td><td>+3</td><td>14</td><td>Помеха</td><td>15</td><td>Помеха на атаки не древковым/длиннодосягаемостным оружием при Силе &lt; 16</td></tr>
+                    <tr><td><strong>Башенный щит</strong></td><td>80 зм</td><td>+4</td><td>16</td><td>Помеха</td><td>30</td><td>Двуручный. Действием — укрытие 3/4</td></tr>
+                </tbody>
+            </table>
+
+            <nav class="wiki-nav-more">
+                <a href="../player-book.html">Книга игрока</a>
+                <a href="items-weapons.html">Оружие</a>
+                <a href="combat-schools.html">Боевые школы</a>
+            </nav>
+        </div>
+    </div>
+</body>
+</html>

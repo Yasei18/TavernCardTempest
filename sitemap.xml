@@ -201,6 +201,11 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>https://example.com/tavern/wiki/regions.html</loc>
+    <lastmod>2026-08-19</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>https://example.com/tavern/wiki/snezhnaya-pustosh.html</loc>
     <lastmod>2026-08-15</lastmod>
     <priority>0.5</priority>

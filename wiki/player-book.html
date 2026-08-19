@@ -11,7 +11,7 @@
     <script defer src="./js/main.js"></script>
 
     <meta name="description" content="Книга игрока D&D 5e: классы, расы, черты, предыстории, заклинания, снаряжение, магические предметы, бестиарий и калькулятор характеристик.">
-    <title>Книга Игрока — Мир Орвей</title>
+    <title>Книга игрока — Мир Орвей</title>
     <style>
         .pb-grid {
             display: grid;
@@ -204,18 +204,21 @@
         <div class="wiki-container">
 
             <nav class="crumbs">
-                <a href="../index.html">Главная</a> / <span>Книга Игрока</span>
+                <a href="../index.html">Главная</a> / <span>Книга игрока</span>
             </nav>
 
             <div class="races-catalog__header">
-                <h1>Книга Игрока</h1>
+                <h1>Книга игрока</h1>
                 <p>Справочные материалы для игры в D&D 5e. Классы, расы, черты, заклинания и всё остальное, что нужно знать игроку.</p>
             </div>
 
             <div class="pb-grid">
                 <a class="pb-card" href="./races.html"><span>Виды</span></a>
+                <a class="pb-card" href="./regions.html"><span>Регионы</span></a>
+                <a class="pb-card" href="./faiths.html"><span>Верования</span></a>
                 <a class="pb-card" href="./player-book/combat-schools.html"><span>Боевые школы</span></a>
-                <a class="pb-card" href="./player-book/items.html"><span>Снаряжение</span></a>
+                <a class="pb-card" href="./player-book/items-armor.html"><span>Доспехи</span></a>
+                <a class="pb-card" href="./player-book/items-weapons.html"><span>Оружие</span></a>
             </div>
 
             <div class="calc-section" id="calculator">
@@ -287,40 +290,43 @@
                 </div>
 
                 <div id="calc-pointbuy" style="display:none;">
-                    <div class="calc-roll-info">27 очков. Стоимость: 8=0, 9=1, 10=2, 11=3, 12=4, 13=5, 14=7, 15=9.</div>
+                    <div class="calc-roll-info">27 очков. Стоимость: 3=−5, 4=−4, 5=−3, 6=−2, 7=−1, 8=0, 9=1, 10=2, 11=3, 12=4, 13=5, 14=7, 15=9.</div>
                     <div class="calc-abilities" id="pb-abilities">
                         <div class="calc-ability">
                             <div class="calc-ability__label">Сила</div>
-                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="0">
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="0">
                             <div class="calc-ability__value" id="pb-val-0">8</div>
                         </div>
                         <div class="calc-ability">
                             <div class="calc-ability__label">Ловкость</div>
-                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="1">
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="1">
                             <div class="calc-ability__value" id="pb-val-1">8</div>
                         </div>
                         <div class="calc-ability">
                             <div class="calc-ability__label">Телосложение</div>
-                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="2">
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="2">
                             <div class="calc-ability__value" id="pb-val-2">8</div>
                         </div>
                         <div class="calc-ability">
                             <div class="calc-ability__label">Интеллект</div>
-                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="3">
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="3">
                             <div class="calc-ability__value" id="pb-val-3">8</div>
                         </div>
                         <div class="calc-ability">
                             <div class="calc-ability__label">Мудрость</div>
-                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="4">
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="4">
                             <div class="calc-ability__value" id="pb-val-4">8</div>
                         </div>
                         <div class="calc-ability">
                             <div class="calc-ability__label">Харизма</div>
-                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="5">
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="5">
                             <div class="calc-ability__value" id="pb-val-5">8</div>
                         </div>
                     </div>
                     <div style="margin-top:1rem;font-weight:600;color:#1c2c7c;">Осталось очков: <span id="pb-remaining">27</span></div>
+                    <div class="calc-btns">
+                        <button class="calc-btn calc-btn--secondary" id="pb-reset">Сбросить</button>
+                    </div>
                 </div>
             </div>
 
@@ -336,7 +342,7 @@
     <script>
     (function() {
         var ABILITIES = ['str','dex','con','int','wis','cha'];
-        var COSTS = [0,1,2,3,4,5,7,9];
+        var COSTS = [-5,-4,-3,-2,-1,0,1,2,3,4,5,7,9];
         var currentMethod = '4d6drop';
 
         function roll4d6drop() {
@@ -391,7 +397,7 @@
             sliders.forEach(function(s, i) {
                 var val = parseInt(s.value);
                 document.getElementById('pb-val-' + i).textContent = val;
-                total += COSTS[val - 8];
+                total += COSTS[val - 3];
             });
             var remaining = 27 - total;
             var el = document.getElementById('pb-remaining');
@@ -401,6 +407,13 @@
 
         document.querySelectorAll('.pb-slider').forEach(function(s) {
             s.addEventListener('input', updatePointBuy);
+        });
+
+        document.getElementById('pb-reset').addEventListener('click', function() {
+            document.querySelectorAll('.pb-slider').forEach(function(s) {
+                s.value = 8;
+            });
+            updatePointBuy();
         });
     })();
     </script>
