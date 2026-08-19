@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./static/style_wiki.css">
+
+    <script defer src="../js/layout.js"></script>
+    <script defer src="./js/main.js"></script>
+
+    <meta name="description" content="Книга игрока D&D 5e: классы, расы, черты, предыстории, заклинания, снаряжение, магические предметы, бестиарий и калькулятор характеристик.">
+    <title>Книга Игрока — Мир Орвей</title>
+    <style>
+        .pb-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        @media (min-width: 640px) { .pb-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 900px) { .pb-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .pb-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            padding: 0 1rem;
+            border: 1px solid #d5dae6;
+            border-radius: 10px;
+            background: #f4f6fb;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .pb-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1c2c7c 0%, #3a5098 100%);
+            z-index: 0;
+            transition: opacity 0.2s;
+        }
+        .pb-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(28, 44, 124, 0.25);
+        }
+        .pb-card:hover::before {
+            opacity: 0.85;
+        }
+        .pb-card span {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .pb-card--disabled {
+            opacity: 0.45;
+            pointer-events: none;
+        }
+        .pb-card--disabled::before {
+            background: linear-gradient(135deg, #555 0%, #777 100%);
+        }
+
+        .calc-section {
+            background: #fff;
+            border: 1px solid #d5dae6;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .calc-section h2 {
+            margin-top: 0;
+            color: #1c2c7c;
+        }
+        .calc-abilities {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 500px) { .calc-abilities { grid-template-columns: repeat(2, 1fr); } }
+        .calc-ability {
+            text-align: center;
+        }
+        .calc-ability__label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #1c2c7c;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+        .calc-ability__value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1c2c7c;
+            line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+        .calc-ability__mod {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .calc-ability__dice {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 0.2rem;
+            min-height: 1.2em;
+        }
+        .calc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            background: #1c2c7c;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .calc-btn:hover { background: #2a3d8c; }
+        .calc-btn--secondary {
+            background: #f4f6fb;
+            color: #1c2c7c;
+            border: 1px solid #d5dae6;
+        }
+        .calc-btn--secondary:hover { background: #e2e6f0; }
+        .calc-btns {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .calc-method {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .calc-method__btn {
+            padding: 0.4rem 0.9rem;
+            border: 1px solid #d5dae6;
+            border-radius: 6px;
+            background: #fff;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .calc-method__btn:hover { border-color: #1c2c7c; color: #1c2c7c; }
+        .calc-method__btn.active {
+            background: #1c2c7c;
+            color: #fff;
+            border-color: #1c2c7c;
+        }
+        .calc-roll-info {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+        .pb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+        .pb-table th {
+            background: #1c2c7c;
+            color: #fff;
+            padding: 0.5rem 0.6rem;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .pb-table td {
+            padding: 0.45rem 0.6rem;
+            border-bottom: 1px solid #d5dae6;
+            vertical-align: top;
+        }
+        .pb-table tr:nth-child(even) td { background: #f4f6fb; }
+        .pb-table tr:hover td { background: #eef1f8; }
+
+        .pb-slider {
+            width: 100%;
+            margin: 0.4rem 0;
+            accent-color: #1c2c7c;
+        }
+    </style>
+</head>
+<body data-layout="wiki" data-root="">
+
+    
+
+    <div class="wiki-page">
+        <div class="wiki-container">
+
+            <nav class="crumbs">
+                <a href="../index.html">Главная</a> / <span>Книга Игрока</span>
+            </nav>
+
+            <div class="races-catalog__header">
+                <h1>Книга Игрока</h1>
+                <p>Справочные материалы для игры в D&D 5e. Классы, расы, черты, заклинания и всё остальное, что нужно знать игроку.</p>
+            </div>
+
+            <div class="pb-grid">
+                <a class="pb-card" href="./races.html"><span>Виды</span></a>
+                <a class="pb-card" href="./player-book/combat-schools.html"><span>Боевые школы</span></a>
+                <a class="pb-card" href="./player-book/items.html"><span>Снаряжение</span></a>
+            </div>
+
+            <div class="calc-section" id="calculator">
+                <h2>Калькулятор характеристик</h2>
+                <p>Брось 4d6 и отбрось наименьший результат для каждого из шести характеристик персонажа.</p>
+
+                <div class="calc-method">
+                    <button class="calc-method__btn active" data-method="4d6drop">4d6 отброс наим.</button>
+                    <button class="calc-method__btn" data-method="standard">Стандартный набор</button>
+                    <button class="calc-method__btn" data-method="pointbuy">Покупка очков</button>
+                </div>
+
+                <div id="calc-4d6drop">
+                    <div class="calc-roll-info">Нажмите «Бросить», чтобы сгенерировать характеристики методом 4d6 с отбрасыванием наименьшего кубика.</div>
+                    <div class="calc-abilities" id="calc-abilities">
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Сила</div>
+                            <div class="calc-ability__value" id="str-val">—</div>
+                            <div class="calc-ability__mod" id="str-mod"></div>
+                            <div class="calc-ability__dice" id="str-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Ловкость</div>
+                            <div class="calc-ability__value" id="dex-val">—</div>
+                            <div class="calc-ability__mod" id="dex-mod"></div>
+                            <div class="calc-ability__dice" id="dex-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Телосложение</div>
+                            <div class="calc-ability__value" id="con-val">—</div>
+                            <div class="calc-ability__mod" id="con-mod"></div>
+                            <div class="calc-ability__dice" id="con-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Интеллект</div>
+                            <div class="calc-ability__value" id="int-val">—</div>
+                            <div class="calc-ability__mod" id="int-mod"></div>
+                            <div class="calc-ability__dice" id="int-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Мудрость</div>
+                            <div class="calc-ability__value" id="wis-val">—</div>
+                            <div class="calc-ability__mod" id="wis-mod"></div>
+                            <div class="calc-ability__dice" id="wis-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Харизма</div>
+                            <div class="calc-ability__value" id="cha-val">—</div>
+                            <div class="calc-ability__mod" id="cha-mod"></div>
+                            <div class="calc-ability__dice" id="cha-dice"></div>
+                        </div>
+                    </div>
+                    <div class="calc-btns">
+                        <button class="calc-btn" id="calc-roll">Бросить</button>
+                        <button class="calc-btn calc-btn--secondary" id="calc-reset">Сбросить</button>
+                    </div>
+                </div>
+
+                <div id="calc-standard" style="display:none;">
+                    <div class="calc-roll-info">Стандартный набор значений: <strong>15, 14, 13, 12, 10, 8</strong>. Распределите их по характеристикам по своему усмотрению.</div>
+                    <div class="calc-abilities">
+                        <div class="calc-ability"><div class="calc-ability__label">Сила</div><div class="calc-ability__value">15</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Ловкость</div><div class="calc-ability__value">14</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Телосложение</div><div class="calc-ability__value">13</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Интеллект</div><div class="calc-ability__value">12</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Мудрость</div><div class="calc-ability__value">10</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Харизма</div><div class="calc-ability__value">8</div></div>
+                    </div>
+                </div>
+
+                <div id="calc-pointbuy" style="display:none;">
+                    <div class="calc-roll-info">27 очков. Стоимость: 8=0, 9=1, 10=2, 11=3, 12=4, 13=5, 14=7, 15=9.</div>
+                    <div class="calc-abilities" id="pb-abilities">
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Сила</div>
+                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="0">
+                            <div class="calc-ability__value" id="pb-val-0">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Ловкость</div>
+                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="1">
+                            <div class="calc-ability__value" id="pb-val-1">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Телосложение</div>
+                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="2">
+                            <div class="calc-ability__value" id="pb-val-2">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Интеллект</div>
+                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="3">
+                            <div class="calc-ability__value" id="pb-val-3">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Мудрость</div>
+                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="4">
+                            <div class="calc-ability__value" id="pb-val-4">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Харизма</div>
+                            <input type="range" min="8" max="15" value="8" class="pb-slider" data-idx="5">
+                            <div class="calc-ability__value" id="pb-val-5">8</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:1rem;font-weight:600;color:#1c2c7c;">Осталось очков: <span id="pb-remaining">27</span></div>
+                </div>
+            </div>
+
+            <nav class="wiki-nav-more">
+                <a href="./wiki.html">Главная</a>
+                <a href="./races.html">Каталог рас</a>
+                <a href="./campaigns.html">Кампании</a>
+            </nav>
+
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var ABILITIES = ['str','dex','con','int','wis','cha'];
+        var COSTS = [0,1,2,3,4,5,7,9];
+        var currentMethod = '4d6drop';
+
+        function roll4d6drop() {
+            var rolls = [];
+            for (var i = 0; i < 4; i++) rolls.push(Math.floor(Math.random() * 6) + 1);
+            var sorted = rolls.slice().sort(function(a,b){ return a - b; });
+            var dropped = sorted.shift();
+            var sum = sorted.reduce(function(a,b){ return a + b; }, 0);
+            return { total: sum, kept: sorted, dropped: dropped };
+        }
+
+        function abilityMod(val) {
+            var mod = Math.floor((val - 10) / 2);
+            return mod >= 0 ? '+' + mod : '' + mod;
+        }
+
+        function rollAll4d6() {
+            ABILITIES.forEach(function(ab) {
+                var result = roll4d6drop();
+                document.getElementById(ab + '-val').textContent = result.total;
+                document.getElementById(ab + '-mod').textContent = abilityMod(result.total);
+                document.getElementById(ab + '-dice').textContent =
+                    '[' + result.kept.join(', ') + '] (отброшено: ' + result.dropped + ')';
+            });
+        }
+
+        function resetAll() {
+            ABILITIES.forEach(function(ab) {
+                document.getElementById(ab + '-val').textContent = '—';
+                document.getElementById(ab + '-mod').textContent = '';
+                document.getElementById(ab + '-dice').textContent = '';
+            });
+        }
+
+        document.getElementById('calc-roll').addEventListener('click', rollAll4d6);
+        document.getElementById('calc-reset').addEventListener('click', resetAll);
+
+        document.querySelectorAll('.calc-method__btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.calc-method__btn').forEach(function(b){ b.classList.remove('active'); });
+                btn.classList.add('active');
+                currentMethod = btn.getAttribute('data-method');
+                document.getElementById('calc-4d6drop').style.display = currentMethod === '4d6drop' ? '' : 'none';
+                document.getElementById('calc-standard').style.display = currentMethod === 'standard' ? '' : 'none';
+                document.getElementById('calc-pointbuy').style.display = currentMethod === 'pointbuy' ? '' : 'none';
+            });
+        });
+
+        function updatePointBuy() {
+            var total = 0;
+            var sliders = document.querySelectorAll('.pb-slider');
+            sliders.forEach(function(s, i) {
+                var val = parseInt(s.value);
+                document.getElementById('pb-val-' + i).textContent = val;
+                total += COSTS[val - 8];
+            });
+            var remaining = 27 - total;
+            var el = document.getElementById('pb-remaining');
+            el.textContent = remaining;
+            el.style.color = remaining < 0 ? '#c0392b' : remaining === 0 ? '#27ae60' : '#1c2c7c';
+        }
+
+        document.querySelectorAll('.pb-slider').forEach(function(s) {
+            s.addEventListener('input', updatePointBuy);
+        });
+    })();
+    </script>
+
+</body>
+</html>

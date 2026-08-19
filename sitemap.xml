@@ -6,9 +6,19 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://example.com/tavern/games.html</loc>
-    <lastmod>2026-08-11</lastmod>
-    <priority>0.8</priority>
+    <loc>https://example.com/tavern/wiki/campaigns.html</loc>
+    <lastmod>2026-08-19</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/oneshots.html</loc>
+    <lastmod>2026-08-19</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://example.com/tavern/wiki/player-book.html</loc>
+    <lastmod>2026-08-19</lastmod>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://example.com/tavern/wiki/wiki.html</loc>
@@ -36,7 +46,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://example.com/tavern/wiki/kaladan.html</loc>
+    <loc>https://example.com/tavern/wiki/kelarim.html</loc>
     <lastmod>2026-08-11</lastmod>
     <priority>0.5</priority>
   </url>

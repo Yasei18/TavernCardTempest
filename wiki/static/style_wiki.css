@@ -637,7 +637,7 @@ img {
 	background: #b8792a;
 }
 
-.tag-region--kaladan {
+.tag-region--kelarim {
 	background: #1c2c7c;
 }
 
@@ -1168,3 +1168,82 @@ img {
 	background: rgba(3, 9, 41, 0.95);
 	transform: translateY(-50%) scale(1.08);
 }
+
+/* ============================================================
+   ОРУЖИЕ И БОЕВЫЕ СТИЛИ (weapons-kelarim)
+   ============================================================ */
+details > summary {
+	cursor: pointer;
+	font-weight: 700;
+	font-size: 1.75rem;
+	padding: 0.6rem 0;
+	color: #1c2c7c;
+	list-style: none;
+	user-select: none;
+	border-bottom: 1px solid #d5dae6;
+}
+details > summary::-webkit-details-marker { display: none; }
+details > summary::before {
+	content: '▸ ';
+	display: inline-block;
+	transition: transform 0.2s;
+	font-size: 0.85em;
+}
+details[open] > summary::before { transform: rotate(90deg); }
+details > summary:hover { color: #3a5098; }
+details > .details-body {
+	padding: 1rem 0;
+}
+.school-lore {
+	font-style: italic;
+	color: #555;
+	border-left: 3px solid #a6cbe6;
+	padding: 0.6rem 1rem;
+	margin: 1rem 0;
+	background: #f0f2f7;
+}
+.school-deviz {
+	font-weight: 700;
+	color: #1c2c7c;
+	margin: 0.5rem 0 1rem;
+}
+.weapon-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9rem;
+	margin: 1rem 0;
+}
+.weapon-table th {
+	background: #1c2c7c;
+	color: #fff;
+	padding: 0.5rem 0.6rem;
+	text-align: left;
+	font-weight: 600;
+	white-space: nowrap;
+}
+.weapon-table td {
+	padding: 0.45rem 0.6rem;
+	border-bottom: 1px solid #d5dae6;
+	vertical-align: top;
+}
+.weapon-table tr:nth-child(even) td { background: #f4f6fb; }
+.weapon-table tr:hover td { background: #eef1f8; }
+.weapon-table .weapon-name { font-weight: 700; white-space: nowrap; }
+.weapon-table .weapon-prop { font-size: 0.85rem; color: #555; }
+.weapon-table .weapon-skill { font-size: 0.8rem; color: #3c4a8c; font-style: italic; }
+.tag-req {
+	display: inline-block;
+	font-size: 0.75rem;
+	padding: 0.15rem 0.45rem;
+	border-radius: 3px;
+	background: #e2e6f0;
+	color: #555;
+	margin-right: 0.3rem;
+}
+.section-sep {
+	border: none;
+	border-top: 2px solid #d5dae6;
+	margin: 2rem 0;
+}
+.wiki-page h2 { margin-top: 2rem; }
+.wiki-page h3 { margin-top: 1.5rem; color: #1c2c7c; }

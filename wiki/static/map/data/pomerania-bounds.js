@@ -8,7 +8,7 @@ var pomeraniaregions = {
       "properties": {
         "name": "Померания",
         "bg": "#1c2c7c",
-        "page": "kaladan.html"
+        "page": "kelarim.html"
       },
       "geometry": {
         "type": "Polygon",

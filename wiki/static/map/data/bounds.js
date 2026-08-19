@@ -18,9 +18,9 @@ var orveyregions = {
     {
       "type": "Feature",
       "properties": {
-        "name": "Каладан",
+        "name": "Келарим",
         "bg": "#1c2c7c",
-        "page": "kaladan.html"
+        "page": "kelarim.html"
       },
       "geometry": {
         "type": "Polygon",

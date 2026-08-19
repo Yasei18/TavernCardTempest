@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style_wiki.css">
+    <script defer src="../../js/layout.js"></script>
+    <script defer src="../js/main.js"></script>
+    <meta name="description" content="Оружие и доспехи Мира Орвей: хоумбрю таблицы снаряжения.">
+    <title>Снаряжение — Книга Игрока</title>
+    <style>
+        .pb-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            margin: 1.2rem 0;
+            border: 2px solid #222;
+        }
+        .pb-table th {
+            background: #1c2c7c;
+            color: #fff;
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+            border-bottom: 2px solid #222;
+        }
+        .pb-table td {
+            padding: 0.55rem 0.8rem;
+            border: 1px solid #222;
+            vertical-align: top;
+        }
+        .pb-table tr:nth-child(even) td { background: #f4f6fb; }
+        .pb-table tr:hover td { background: #eef1f8; }
+
+        .mastery-link {
+            color: #1c2c7c;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            cursor: pointer;
+        }
+        .mastery-link:hover {
+            text-decoration-style: solid;
+        }
+        .mastery-popover {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            background: #fff;
+            border: 1px solid #c8d3f5;
+            border-radius: 8px;
+            padding: 12px 16px;
+            max-width: 320px;
+            box-shadow: 0 4px 16px rgba(0,0,0,.15);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #333;
+        }
+        .mastery-popover__title {
+            font-weight: 700;
+            color: #1c2c7c;
+            margin: 0 0 6px;
+            font-size: 0.95rem;
+        }
+        .mastery-popover::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-left: 1px solid #c8d3f5;
+            border-top: 1px solid #c8d3f5;
+            transform: rotate(45deg);
+        }
+        .mastery-popover--bottom::before {
+            top: auto;
+            bottom: -6px;
+            border-left: none;
+            border-top: none;
+            border-right: 1px solid #c8d3f5;
+            border-bottom: 1px solid #c8d3f5;
+        }
+    </style>
+</head>
+<body data-layout="wiki" data-root="../">
+    <div class="wiki-page">
+        <div class="wiki-container">
+            <nav class="crumbs">
+                <a href="../../index.html">Главная</a> / <a href="../player-book.html">Книга Игрока</a> / <span>Снаряжение</span>
+            </nav>
+            <h1 class="wiki-title">Снаряжение</h1>
+            <p class="wiki-lead">Оружие, доспехи и оружейное мастерство Мира Орвей.</p>
+
+            <!-- ==================== ДОСПЕХИ ==================== -->
+            <h2>Доспехи</h2>
+
+            <h3>Лёгкие доспехи</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Доспех</th><th>Цена</th><th>КД</th><th>Скрытность</th><th>Вес</th><th>Особенность</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Лёгкая шкура</strong></td><td>2 зм</td><td>10</td><td>—</td><td>4</td><td>+1 к Скрытности в темноте</td></tr>
+                    <tr><td><strong>Ткань с кожаными вставками</strong></td><td>3 зм</td><td>11</td><td>—</td><td>5</td><td>—</td></tr>
+                    <tr><td><strong>Стёганный</strong></td><td>8 зм</td><td>11</td><td>Помеха</td><td>8</td><td>Надевается под тяжёлый доспех: +1 к КД, −5 фт. передвижения. Требует на 1 ед. СИЛ больше</td></tr>
+                    <tr><td><strong>Кожаный</strong></td><td>10 зм</td><td>11</td><td>—</td><td>10</td><td>—</td></tr>
+                    <tr><td><strong>Древесный</strong></td><td>15 зм</td><td>12</td><td>Помеха</td><td>14</td><td>—</td></tr>
+                    <tr><td><strong>Проклёпанная кожа</strong></td><td>30 зм</td><td>12</td><td>—</td><td>14</td><td>—</td></tr>
+                    <tr><td><strong>Многослойный стёганный</strong></td><td>40 зм</td><td>13</td><td>Помеха</td><td>12</td><td>—</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Средние доспехи</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Доспех</th><th>Цена</th><th>КД</th><th>Скрытность</th><th>Вес</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Выделанная шкура</strong></td><td>10 зм</td><td>12 + Лов (макс. 2)</td><td>—</td><td>12</td></tr>
+                    <tr><td><strong>Тегиляй</strong></td><td>30 зм</td><td>11 + Лов (макс. 3)</td><td>—</td><td>14</td></tr>
+                    <tr><td><strong>Кольчужная рубаха</strong></td><td>50 зм</td><td>13 + Лов (макс. 2)</td><td>—</td><td>20</td></tr>
+                    <tr><td><strong>Ламеллярный</strong></td><td>60 зм</td><td>14 + Лов (макс. 1)</td><td>Помеха</td><td>40</td></tr>
+                    <tr><td><strong>Чешуйчатый</strong></td><td>70 зм</td><td>14 + Лов (макс. 2)</td><td>Помеха</td><td>45</td></tr>
+                    <tr><td><strong>Кираса</strong></td><td>350 зм</td><td>14 + Лов (макс. 2)</td><td>—</td><td>20</td></tr>
+                    <tr><td><strong>Полулаты</strong></td><td>750 зм</td><td>15 + Лов (макс. 2)</td><td>Помеха</td><td>40</td></tr>
+                </tbody>
+            </table>
+            <p><em>Полулаты требуют Силу 11.</em></p>
+
+            <h3>Тяжёлые доспехи</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Доспех</th><th>Цена</th><th>КД</th><th>Сила</th><th>Скрытность</th><th>Вес</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Лорика</strong></td><td>30 зм</td><td>14</td><td>12</td><td>Помеха</td><td>40</td></tr>
+                    <tr><td><strong>Наборный</strong></td><td>600 зм</td><td>17</td><td>15</td><td>Помеха</td><td>100</td></tr>
+                    <tr><td><strong>Латы</strong></td><td>1 500 зм</td><td>18</td><td>17</td><td>Помеха</td><td>110</td></tr>
+                    <tr><td><strong>Рыцарский набор</strong></td><td>2 000 зм</td><td>19</td><td>18</td><td>Помеха</td><td>130</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Щиты</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Щит</th><th>Цена</th><th>КД</th><th>Сила</th><th>Скрытность</th><th>Вес</th><th>Особенность</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Малый деревянный</strong></td><td>1 зм</td><td>+1</td><td>—</td><td>—</td><td>4</td><td>—</td></tr>
+                    <tr><td><strong>Баклер</strong></td><td>3 зм</td><td>+1</td><td>—</td><td>—</td><td>3</td><td>Можно использовать с двуручным оружием</td></tr>
+                    <tr><td><strong>Деревянный щит</strong></td><td>10 зм</td><td>+2</td><td>—</td><td>—</td><td>6</td><td>—</td></tr>
+                    <tr><td><strong>Металлический щит</strong></td><td>25 зм</td><td>+2</td><td>13</td><td>Помеха</td><td>10</td><td>—</td></tr>
+                    <tr><td><strong>Полуторный щит</strong></td><td>40 зм</td><td>+3</td><td>14</td><td>Помеха</td><td>15</td><td>Помеха на атаки не древковым/длиннодосягаемостным оружием при Силе &lt; 16</td></tr>
+                    <tr><td><strong>Башенный щит</strong></td><td>80 зм</td><td>+4</td><td>16</td><td>Помеха</td><td>30</td><td>Двуручный. Действием — укрытие 3/4</td></tr>
+                </tbody>
+            </table>
+
+            <!-- ==================== ОРУЖИЕ ==================== -->
+            <h2>Оружие</h2>
+
+            <h3>Простое рукопашное оружие</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Оружие</th><th>Цена</th><th>Урон</th><th>Крит</th><th>Тип</th><th>Вес</th><th>Свойства</th><th>Мастерство</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Боевой посох</strong></td><td>2 см</td><td>1к6/1к8</td><td>20</td><td>Дробящий</td><td>4</td><td>Универсальное</td><td><span class="mastery-link" data-mastery="opprokidyvayushchee">Опрокидывающее</span></td></tr>
+                    <tr><td><strong>Булава</strong></td><td>5 зм</td><td>1к6</td><td>19</td><td>Дробящий</td><td>4</td><td>—</td><td><span class="mastery-link" data-mastery="oslablyayushchee">Ослабляющее</span></td></tr>
+                    <tr><td><strong>Дубинка</strong></td><td>1 см</td><td>1к4</td><td>20</td><td>Дробящий</td><td>2</td><td>Лёгкое</td><td><span class="mastery-link" data-mastery="zamedlyayushchee">Замедляющее</span></td></tr>
+                    <tr><td><strong>Кинжал</strong></td><td>2 зм</td><td>1к4</td><td>17</td><td>Колющий</td><td>1</td><td>Лёгкое, Фехтовальное, Метательное (20/60)</td><td><span class="mastery-link" data-mastery="bystroe">Быстрое</span></td></tr>
+                    <tr><td><strong>Копьё</strong></td><td>1 зм</td><td>1к6/1к8</td><td>19/20</td><td>Колющий</td><td>4</td><td>Метательное (20/60), Универсальное</td><td><span class="mastery-link" data-mastery="oslablyayushchee">Ослабляющее</span></td></tr>
+                    <tr><td><strong>Лёгкий молот</strong></td><td>2 зм</td><td>1к4</td><td>20</td><td>Дробящий</td><td>2</td><td>Лёгкое, Метательное (20/60)</td><td><span class="mastery-link" data-mastery="bystroe">Быстрое</span></td></tr>
+                    <tr><td><strong>Метательное копьё</strong></td><td>5 зм</td><td>1к6</td><td>19</td><td>Колющий</td><td>3</td><td>Метательное (30/120)</td><td><span class="mastery-link" data-mastery="zamedlyayushchee">Замедляющее</span></td></tr>
+                    <tr><td><strong>Ручной топор</strong></td><td>5 зм</td><td>1к6</td><td>19</td><td>Рубящий</td><td>2</td><td>Лёгкое, Метательное (20/60)</td><td><span class="mastery-link" data-mastery="otvlekayushchee">Отвлекающее</span></td></tr>
+                    <tr><td><strong>Серп</strong></td><td>1 зм</td><td>1к4</td><td>18</td><td>Рубящий</td><td>2</td><td>Лёгкое, Изогнутое</td><td>—</td></tr>
+                    <tr><td><strong>Томагавк</strong></td><td>2 зм</td><td>1к4</td><td>19</td><td>Рубящий</td><td>1</td><td>Лёгкое, Метательное (20/60), Фехтовальное</td><td>—</td></tr>
+                    <tr><td><strong>Тонфа</strong></td><td>7 зм</td><td>1к4</td><td>20</td><td>Дробящий</td><td>2</td><td>Лёгкое, Фехтовальное</td><td>—</td></tr>
+                    <tr><td><strong>Цестус</strong></td><td>1 зм</td><td>1к4</td><td>20</td><td>Дробящий</td><td>1</td><td>Лёгкое, Фехтовальное, Скрытое</td><td>—</td></tr>
+                    <tr><td><strong>Лёгкая кирка</strong></td><td>3 зм</td><td>1к4</td><td>20</td><td>Колющий</td><td>5</td><td>Лёгкое, Метательное (10/30), Ударное, Осадное</td><td>—</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Воинское рукопашное оружие</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Оружие</th><th>Цена</th><th>Урон</th><th>Крит</th><th>Тип</th><th>Вес</th><th>Свойства</th><th>Мастерство</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Алебарда</strong></td><td>20 зм</td><td>1к10</td><td>19</td><td>Рубящий</td><td>10</td><td>Двуручное, Досягаемость, Тяжёлое, Двойное (1к4 колющего)</td><td><span class="mastery-link" data-mastery="prorubayushchee">Прорубающее</span></td></tr>
+                    <tr><td><strong>Бердыш</strong></td><td>20 зм</td><td>1к12</td><td>20</td><td>Рубящий</td><td>10</td><td>Двуручное, Досягаемость, Тяжёлое</td><td><span class="mastery-link" data-mastery="ottalkivayushchee">Отталкивающее</span></td></tr>
+                    <tr><td><strong>Боевой молот</strong></td><td>15 зм</td><td>1к8/1к10</td><td>19</td><td>Дробящий</td><td>4</td><td>Универсальное</td><td><span class="mastery-link" data-mastery="ottalkivayushchee">Отталкивающее</span></td></tr>
+                    <tr><td><strong>Боевой топор</strong></td><td>10 зм</td><td>1к8/1к10</td><td>19/18</td><td>Рубящий</td><td>4</td><td>Универсальное</td><td><span class="mastery-link" data-mastery="opprokidyvayushchee">Опрокидывающее</span></td></tr>
+                    <tr><td><strong>Двуручный меч</strong></td><td>50 зм</td><td>2к6</td><td>19</td><td>Рубящий</td><td>4</td><td>Двуручное, Тяжёлое</td><td><span class="mastery-link" data-mastery="sekushchee">Секущее</span>, <span class="mastery-link" data-mastery="udar-efesom">Удар эфесом</span></td></tr>
+                    <tr><td><strong>Длинное копьё</strong></td><td>10 зм</td><td>1к12</td><td>20</td><td>Колющий</td><td>6</td><td>Досягаемость, Тяжёлое</td><td><span class="mastery-link" data-mastery="opprokidyvayushchee">Опрокидывающее</span></td></tr>
+                    <tr><td><strong>Длинный меч</strong></td><td>15 зм</td><td>1к8/1к10</td><td>20</td><td>Рубящий</td><td>4</td><td>Универсальное</td><td><span class="mastery-link" data-mastery="oslablyayushchee">Ослабляющее</span>, <span class="mastery-link" data-mastery="udar-efesom">Удар эфесом</span></td></tr>
+                    <tr><td><strong>Короткий меч</strong></td><td>15 зм</td><td>1к6</td><td>19</td><td>Рубящий</td><td>2</td><td>Лёгкое, Фехтовальное</td><td><span class="mastery-link" data-mastery="otvlekayushchee">Отвлекающее</span></td></tr>
+                    <tr><td><strong>Ножны от меча</strong></td><td>3 зм</td><td>1к4</td><td>20</td><td>Дробящий</td><td>1</td><td>Лёгкое, Фехтовальное</td><td><span class="mastery-link" data-mastery="parirovanie">Парирование</span></td></tr>
+                    <tr><td><strong>Пика</strong></td><td>8 зм</td><td>1к10</td><td>19</td><td>Колющий</td><td>6</td><td>Тяжёлое, Двуручное, Досягаемость</td><td><span class="mastery-link" data-mastery="ottalkivayushchee">Отталкивающее</span></td></tr>
+                    <tr><td><strong>Полуторный меч</strong></td><td>20 зм</td><td>2к4/3к4</td><td>20</td><td>Рубящий</td><td>5</td><td>Универсальное</td><td><span class="mastery-link" data-mastery="udar-efesom">Удар эфесом</span>, <span class="mastery-link" data-mastery="tolchok-plechom">Толчок плечом</span></td></tr>
+                    <tr><td><strong>Рапира</strong></td><td>25 зм</td><td>1к8</td><td>18</td><td>Колющий</td><td>2</td><td>Фехтовальное</td><td><span class="mastery-link" data-mastery="otvlekayushchee">Отвлекающее</span></td></tr>
+                    <tr><td><strong>Скимитар</strong></td><td>25 зм</td><td>1к6</td><td>19</td><td>Рубящий</td><td>3</td><td>Лёгкое, Фехтовальное</td><td><span class="mastery-link" data-mastery="bystroe">Быстрое</span></td></tr>
+                    <tr><td><strong>Эльфийская глефа</strong></td><td>200 зм</td><td>2к6</td><td>19</td><td>Рубящий</td><td>6</td><td>Двуручное, Досягаемость, Тяжёлое</td><td><span class="mastery-link" data-mastery="vrashchenie">Вращение</span></td></tr>
+                    <tr><td><strong>Двойной скимитар</strong></td><td>25 зм</td><td>2к4</td><td>19</td><td>Рубящий</td><td>6</td><td>Двуручное, Двойное (1к4), Фехтовальное</td><td>—</td></tr>
+                    <tr><td><strong>Двойной топор</strong></td><td>50 зм</td><td>1к8</td><td>19</td><td>Рубящий</td><td>6</td><td>Двуручное, Двойное (1к4), Тяжёлое</td><td>—</td></tr>
+                    <tr><td><strong>Боевая коса</strong></td><td>25 зм</td><td>3к4</td><td>18</td><td>Рубящий</td><td>8</td><td>Тяжёлое, Двуручное, Досягаемость, Изогнутое</td><td>—</td></tr>
+                    <tr><td><strong>Боевая кирка</strong></td><td>5 зм</td><td>1к8</td><td>20</td><td>Колющий</td><td>8</td><td>Ударное, Осадное, Изогнутое</td><td>—</td></tr>
+                    <tr><td><strong>Волчий нож</strong></td><td>6 зм</td><td>2к4</td><td>18</td><td>Колющий</td><td>1</td><td>Лёгкое, Фехтовальное, Жестокое</td><td>—</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Простое дальнобойное оружие</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Оружие</th><th>Цена</th><th>Урон</th><th>Крит</th><th>Тип</th><th>Вес</th><th>Свойства</th><th>Мастерство</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Короткий лук</strong></td><td>20 зм</td><td>1к6</td><td>19</td><td>Колющий</td><td>1</td><td>Двуручное, Боеприпас (80/320)</td><td><span class="mastery-link" data-mastery="otvlekayushchee">Отвлекающее</span></td></tr>
+                    <tr><td><strong>Праща</strong></td><td>1 см</td><td>1к4</td><td>19</td><td>Дробящий</td><td>1</td><td>Боеприпас (30/120)</td><td><span class="mastery-link" data-mastery="zamedlyayushchee">Замедляющее</span></td></tr>
+                </tbody>
+            </table>
+
+            <h3>Воинское дальнобойное оружие</h3>
+            <table class="pb-table">
+                <thead>
+                    <tr><th>Оружие</th><th>Цена</th><th>Урон</th><th>Крит</th><th>Тип</th><th>Вес</th><th>Свойства</th><th>Мастерство</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><strong>Длинный лук</strong></td><td>50 зм</td><td>1к8</td><td>19</td><td>Колющий</td><td>2</td><td>Боеприпас (150/600), Двуручное, Тяжёлое</td><td><span class="mastery-link" data-mastery="zamedlyayushchee">Замедляющее</span></td></tr>
+                    <tr><td><strong>Сеть</strong></td><td>1 зм</td><td>—</td><td>—</td><td>—</td><td>3</td><td>Метательное (5/15)</td><td>—</td></tr>
+                </tbody>
+            </table>
+
+            <!-- ==================== ОРУЖЕЙНОЕ МАСТЕРСТВО ==================== -->
+            <h2>Оружейное мастерство</h2>
+            <p>При попадании атакой оружием вы можете применить одно из следующих свойств мастерства. Каждое оружие обладает только одним свойством мастерства.</p>
+
+            <details id="opprokidyvayushchee">
+                <summary>Опрокидывающее</summary>
+                <p>Если вы попадаете по существу этим оружием, можете заставить его совершить спасбросок Телосложения (Сл 8 + ваши Бонус владения и модификатор характеристики, используемой для броска атаки). При провале существо получает состояние Опрокинутый.</p>
+            </details>
+
+            <details id="oslablyayushchee">
+                <summary>Ослабляющее</summary>
+                <p>Если вы попадаете по существу этим оружием, оно будет совершать с Помехой следующий бросок атаки до начала вашего следующего хода.</p>
+            </details>
+
+            <details id="otvlekayushchee">
+                <summary>Отвлекающее</summary>
+                <p>Если вы попадаете по существу этим оружием и наносите урон, вы будете совершать с Преимуществом следующий бросок атаки по этому существу до конца вашего следующего хода.</p>
+            </details>
+
+            <details id="zamedlyayushchee">
+                <summary>Замедляющее</summary>
+                <p>Если вы попадаете по существу этим оружием и наносите урон, можете уменьшить его Скорость на 10 футов до начала вашего следующего хода. Если по существу попадают из оружия с таким свойством несколько раз, снижение Скорости от этого свойства не превышает 10 футов.</p>
+            </details>
+
+            <details id="bystroe">
+                <summary>Быстрое</summary>
+                <p>Когда вы совершаете дополнительную атаку от свойства Лёгкое, можете совершить её не Бонусным действием, а частью действия Атака. Вы можете совершить эту дополнительную атаку только один раз за ход.</p>
+            </details>
+
+            <details id="prorubayushchee">
+                <summary>Прорубающее</summary>
+                <p>Когда вы попадаете по существу броском рукопашной атаки с этим оружием, можете совершить бросок рукопашной атаки с этим оружием по второму существу в пределах 5 футов от первого и в пределах вашей досягаемости. При попадании второе существо получает урон от оружия, но не добавляйте к этому урону модификатор используемой характеристики, если этот модификатор не отрицательный. Вы можете совершить эту дополнительную атаку только один раз за ход.</p>
+            </details>
+
+            <details id="ottalkivayushchee">
+                <summary>Отталкивающее</summary>
+                <p>Когда вы попадаете по существу этим оружием, можете оттолкнуть его от себя на расстояние до 10 футов, если оно Большого размера или меньше.</p>
+            </details>
+
+            <details id="sekushchee">
+                <summary>Секущее</summary>
+                <p>Если вы не попадаете по существу броском атаки с этим оружием, можете нанести этому существу урон, равный модификатору использованной для броска атаки характеристики. Этот урон того же типа, что и наносимый оружием, и этот урон может быть увеличен только с ростом модификатора характеристики.</p>
+            </details>
+
+            <details id="udar-efesom">
+                <summary>Удар эфесом</summary>
+                <p>После того как вы попали любой атакой этим оружием, можете бонусным действием совершить частью той же атаки удар его нижней частью. Совершите атаку с преимуществом. При успехе атака наносит 1к4 + Сила дробящего урона. Атака обязательно должна быть совершена по цели одной из ваших атак.</p>
+            </details>
+
+            <details id="parirovanie">
+                <summary>Парирование</summary>
+                <p>Если вас атакуют пока вы держите это оружие, вы можете реакцией совершить бросок атаки. Если ваш результат атаки выше броска атаки противника, то он должен совершить проверку Силы Сл 14, при успехе нанося вам половину своего обычного урона, а в случае провала промахиваясь.</p>
+            </details>
+
+            <details id="tolchok-plechom">
+                <summary>Толчок плечом</summary>
+                <p>Перед атакой проверку Атлетики против Телосложения противника. При успехе вы отталкиваете врага на 5 фт. от себя, после чего продолжаете совершать атаку как обычно.</p>
+            </details>
+
+            <details id="vrashchenie">
+                <summary>Вращение</summary>
+                <p>Совершите один бросок атаки с помехой и сравните ваше итоговое значение атаки с КД всех существ вокруг вас. Бросьте один раз урон вашего оружия, разделив поровну этот урон для каждого существа, по которому вы попали этой атакой (урон не может быть меньше 1 для каждого существа).</p>
+            </details>
+
+            <nav class="wiki-nav-more">
+                <a href="../player-book.html">Книга Игрока</a>
+                <a href="../wiki.html">Главная</a>
+                <a href="combat-schools.html">Боевые школы</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="mastery-popover" id="masteryPopover">
+        <div class="mastery-popover__title" id="masteryPopoverTitle"></div>
+        <div class="mastery-popover__text" id="masteryPopoverText"></div>
+    </div>
+
+    <script>
+    (function() {
+        const descriptions = {
+            'opprokidyvayushchee': 'Если вы попадаете по существу этим оружием, можете заставить его совершить спасбросок Телосложения (Сл 8 + ваши Бонус владения и модификатор характеристики, используемой для броска атаки). При провале существо получает состояние Опрокинутый.',
+            'oslablyayushchee': 'Если вы попадаете по существу этим оружием, оно будет совершать с Помехой следующий бросок атаки до начала вашего следующего хода.',
+            'otvlekayushchee': 'Если вы попадаете по существу этим оружием и наносите урон, вы будете совершать с Преимуществом следующий бросок атаки по этому существу до конца вашего следующего хода.',
+            'zamedlyayushchee': 'Если вы попадаете по существу этим оружием и наносите урон, можете уменьшить его Скорость на 10 футов до начала вашего следующего хода. Если по существу попадают из оружия с таким свойством несколько раз, снижение Скорости от этого свойства не превышает 10 футов.',
+            'bystroe': 'Когда вы совершаете дополнительную атаку от свойства Лёгкое, можете совершить её не Бонусным действием, а частью действия Атака. Вы можете совершить эту дополнительную атаку только один раз за ход.',
+            'prorubayushchee': 'Когда вы попадаете по существу броском рукопашной атаки с этим оружием, можете совершить бросок рукопашной атаки с этим оружием по второму существу в пределах 5 футов от первого и в пределах вашей досягаемости. При попадании второе существо получает урон от оружия, но не добавляйте к этому урону модификатор используемой характеристики, если этот модификатор не отрицательный. Вы можете совершить эту дополнительную атаку только один раз за ход.',
+            'ottalkivayushchee': 'Когда вы попадаете по существу этим оружием, можете оттолкнуть его от себя на расстояние до 10 футов, если оно Большого размера или меньше.',
+            'sekushchee': 'Если вы не попадаете по существу броском атаки с этим оружием, можете нанести этому существу урон, равный модификатору использованной для броска атаки характеристики. Этот урон того же типа, что и наносимый оружием, и этот урон может быть увеличен только с ростом модификатора характеристики.',
+            'udar-efesom': 'После того как вы попали любой атакой этим оружием, можете бонусным действием совершить частью той же атаки удар его нижней частью. Совершите атаку с преимуществом. При успехе атака наносит 1к4 + Сила дробящего урона. Атака обязательно должна быть совершена по цели одной из ваших атак.',
+            'parirovanie': 'Если вас атакуют пока вы держите это оружие, вы можете реакцией совершить бросок атаки. Если ваш результат атаки выше броска атаки противника, то он должен совершить проверку Силы Сл 14, при успехе нанося вам половину своего обычного урона, а в случае провала промахиваясь.',
+            'tolchok-plechom': 'Перед атакой проверку Атлетики против Телосложения противника. При успехе вы отталкиваете врага на 5 фт. от себя, после чего продолжаете совершать атаку как обычно.',
+            'vrashchenie': 'Совершите один бросок атаки с помехой и сравните ваше итоговое значение атаки с КД всех существ вокруг вас. Бросьте один раз урон вашего оружия, разделив поровну этот урон для каждого существа, по которому вы попали этой атакой (урон не может быть меньше 1 для каждого существа).'
+        };
+
+        const names = {
+            'opprokidyvayushchee': 'Опрокидывающее',
+            'oslablyayushchee': 'Ослабляющее',
+            'otvlekayushchee': 'Отвлекающее',
+            'zamedlyayushchee': 'Замедляющее',
+            'bystroe': 'Быстрое',
+            'prorubayushchee': 'Прорубающее',
+            'ottalkivayushchee': 'Отталкивающее',
+            'sekushchee': 'Секущее',
+            'udar-efesom': 'Удар эфесом',
+            'parirovanie': 'Парирование',
+            'tolchok-plechom': 'Толчок плечом',
+            'vrashchenie': 'Вращение'
+        };
+
+        const popover = document.getElementById('masteryPopover');
+        const popoverTitle = document.getElementById('masteryPopoverTitle');
+        const popoverText = document.getElementById('masteryPopoverText');
+
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('.mastery-link');
+            if (!link) {
+                popover.style.display = 'none';
+                return;
+            }
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            const key = link.dataset.mastery;
+            popoverTitle.textContent = names[key];
+            popoverText.textContent = descriptions[key];
+
+            const rect = link.getBoundingClientRect();
+            popover.style.display = 'block';
+            popover.classList.remove('mastery-popover--bottom');
+
+            let top = rect.bottom + 8;
+            let left = rect.left;
+
+            if (top + popover.offsetHeight > window.innerHeight) {
+                top = rect.top - popover.offsetHeight - 8;
+                popover.classList.add('mastery-popover--bottom');
+            }
+            if (left + popover.offsetWidth > window.innerWidth) {
+                left = window.innerWidth - popover.offsetWidth - 16;
+            }
+
+            popover.style.top = top + 'px';
+            popover.style.left = left + 'px';
+        });
+    })();
+    </script>
+</body>
+</html>

@@ -248,8 +248,8 @@ var orveymap = {
         "name": "Ледяное море",
         "english": "Icy Sea",
         "synonym": "",
-        "description": "Холодное море на севере Каладана, чьи воды не прогреваются даже летом. Отделяет Снежную Пустошь от остального мира.",
-        "url": "kaladan.html#lyedyanoe-more",
+        "description": "Холодное море на севере Келарима, чьи воды не прогреваются даже летом. Отделяет Снежную Пустошь от остального мира.",
+        "url": "kelarim.html#lyedyanoe-more",
         "loyal": "",
         "nonmap": true
       },
@@ -263,7 +263,7 @@ var orveymap = {
         "english": "Pomerania",
         "synonym": "",
         "description": "Небольшой клочок суши на южном побережье Ледяного моря между холодными водами и густыми лесами. Умеренный климат.",
-        "url": "kaladan.html#pomeraniya",
+        "url": "kelarim.html#pomeraniya",
         "loyal": "",
         "nonmap": true
       },
@@ -273,11 +273,11 @@ var orveymap = {
       "type": "Feature",
       "properties": {
         "cat": "region",
-        "name": "Центральный Каладан",
+        "name": "Центральный Келарим",
         "english": "Central Kaladan",
         "synonym": "",
         "description": "Край бурных рек, колосящихся полей и плодородных равнин — наследие великой Империи.",
-        "url": "kaladan.html#centralnyy-kaladan",
+        "url": "kelarim.html#centralnyy-kelarim",
         "loyal": "",
         "nonmap": true
       },
@@ -291,7 +291,7 @@ var orveymap = {
         "english": "Benevento",
         "synonym": "",
         "description": "Полуостров вентов с тёплым климатом, продолжительным сухим летом и вечнозелёной растительностью.",
-        "url": "kaladan.html#benevvento",
+        "url": "kelarim.html#benevvento",
         "loyal": "",
         "nonmap": true
       },
@@ -305,7 +305,7 @@ var orveymap = {
         "english": "Tarrakonika",
         "synonym": "",
         "description": "Засушливая и жаркая южная земля — родина воинственных тарраконцев.",
-        "url": "kaladan.html#tarrakonika",
+        "url": "kelarim.html#tarrakonika",
         "loyal": "",
         "nonmap": true
       },

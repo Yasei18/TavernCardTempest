@@ -11,8 +11,8 @@ var pomeraniamap = {
         "name": "Ледяное море",
         "english": "Icy Sea",
         "synonym": "",
-        "description": "Холодное море на севере Каладана, чьи воды не прогреваются даже летом. Отделяет Снежную Пустошь от остального мира.",
-        "url": "kaladan.html#lyedyanoe-more",
+        "description": "Холодное море на севере Келарима, чьи воды не прогреваются даже летом. Отделяет Снежную Пустошь от остального мира.",
+        "url": "kelarim.html#lyedyanoe-more",
         "loyal": "",
         "nonmap": true
       },
@@ -26,7 +26,7 @@ var pomeraniamap = {
         "english": "Pomerania",
         "synonym": "",
         "description": "Небольшой клочок суши на южном побережье Ледяного моря между холодными водами и густыми лесами. Умеренный климат.",
-        "url": "kaladan.html#pomeraniya",
+        "url": "kelarim.html#pomeraniya",
         "loyal": "",
         "nonmap": true
       },
