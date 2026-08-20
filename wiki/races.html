@@ -52,16 +52,70 @@
                     <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="elfy">Эльфы</button>
                     <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="demony">Демоны</button>
                     <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="zverolyudi">Зверолюди</button>
+                    <button type="button" class="tag tag-type filter-tag" data-group="type" data-filter="lyudi">Люди</button>
                 </div>
                 <button type="button" class="race-filters__clear" id="raceClear">Очистить фильтры</button>
             </div>
 
             <div class="races-list">
 
-                <a class="race-card" href="./races/race-lyudi.html">
-                    <div class="race-card__title">Люди<span class="race-card__en">Humans</span></div>
-                    <div class="race-tags"><span class="tag tag-type">Люди</span></div>
-                    <div class="race-card__desc">Самый многочисленный вид Орвея: махребы, померанцы, северяне, имперцы, венты, тарраконцы и дубравцы.</div>
+                <a class="race-card race-card--art" href="./races/race-mahreby.html" data-region="alvaera" data-type="lyudi">
+                    <div class="race-card__body">
+                        <div class="race-card__title">Махребы<span class="race-card__en">Mahreby</span></div>
+                        <div class="race-tags"><span class="tag tag-region--alvaera">Аль'Ваэра</span><span class="tag tag-type">Люди</span></div>
+                        <div class="race-card__desc">Дети солнца и песка, сердце и кровь Аль'Махребии. Торговцы, воины и правители пустынных городов.</div>
+                    </div>
+                </a>
+
+                <a class="race-card race-card--art" href="./races/race-pomerancy.html" data-region="kelarim" data-type="lyudi">
+                    <img class="race-card__img" src="./static/images/pomerancy.jpg" alt="Померанец">
+                    <div class="race-card__body">
+                        <div class="race-card__title">Померанцы<span class="race-card__en">Pomeranci</span></div>
+                        <div class="race-tags"><span class="tag tag-region--kelarim">Келарим</span><span class="tag tag-type">Люди</span></div>
+                        <div class="race-card__desc">Жители южного побережья Ледяного моря. Охотники и рыбаки, живущие в ладу с лесом.</div>
+                    </div>
+                </a>
+
+                <a class="race-card race-card--art" href="./races/race-severyane.html" data-region="kelarim" data-type="lyudi">
+                    <img class="race-card__img" src="./static/images/severyane.jpg" alt="Северянин">
+                    <div class="race-card__body">
+                        <div class="race-card__title">Северяне<span class="race-card__en">Severyane</span></div>
+                        <div class="race-tags"><span class="tag tag-region--kelarim">Келарим</span><span class="tag tag-type">Люди</span></div>
+                        <div class="race-card__desc">Суровый народ берегов Ледяного моря, привыкший к невзгодам и тяжёлому климату.</div>
+                    </div>
+                </a>
+
+                <a class="race-card race-card--art" href="./races/race-impercy.html" data-region="kelarim" data-type="lyudi">
+                    <img class="race-card__img" src="./static/images/impercy.jpg" alt="Имперец">
+                    <div class="race-card__body">
+                        <div class="race-card__title">Имперцы<span class="race-card__en">Impercy</span></div>
+                        <div class="race-tags"><span class="tag tag-region--kelarim">Келарим</span><span class="tag tag-type">Люди</span></div>
+                        <div class="race-card__desc">Потомки великой Империи центрального Келарима. Ремесленники и земледельцы богатейших земель.</div>
+                    </div>
+                </a>
+
+                <a class="race-card race-card--art" href="./races/race-venty.html" data-region="kelarim" data-type="lyudi">
+                    <img class="race-card__img" src="./static/images/venty.jpg" alt="Вент">
+                    <div class="race-card__body">
+                        <div class="race-card__title">Венты<span class="race-card__en">Venty</span></div>
+                        <div class="race-tags"><span class="tag tag-region--kelarim">Келарим</span><span class="tag tag-type">Люди</span></div>
+                        <div class="race-card__desc">Жители полуострова Беневенто, ценители искусства и виноделия.</div>
+                    </div>
+                </a>
+
+                <a class="race-card race-card--art" href="./races/race-tarrakoncy.html" data-region="kelarim" data-type="lyudi">
+                    <img class="race-card__img" src="./static/images/tarrakoncy.jpg" alt="Тарраконец">
+                    <div class="race-card__body">
+                        <div class="race-card__title">Тарраконцы<span class="race-card__en">Tarraconcy</span></div>
+                        <div class="race-tags"><span class="tag tag-region--kelarim">Келарим</span><span class="tag tag-type">Люди</span></div>
+                        <div class="race-card__desc">Гордые воины засушливого полуострова Тарраконика. Мастера войны и ковки оружия.</div>
+                    </div>
+                </a>
+
+                <a class="race-card" href="./races/race-dubravcy.html" data-region="zadubravye" data-type="lyudi">
+                    <div class="race-card__title">Дубравцы<span class="race-card__en">Dubravcy</span></div>
+                    <div class="race-tags"><span class="tag tag-region--zadubravye">Задубравье</span><span class="tag tag-type">Люди</span></div>
+                    <div class="race-card__desc">Коренной народ Задубравья, дети леса. Живут в согласии с духами чащоб и рек.</div>
                 </a>
 
                 <a class="race-card race-card--art" href="./races/race-dzhenazi.html" data-region="alvaera" data-type="stihiynye">
@@ -155,7 +209,7 @@
                 </a>
 
                 <a class="race-card race-card--art" href="./races/race-albany.html" data-region="kelarim" data-type="stihiynye">
-                    <img class="race-card__img" src="./static/images/albany.jpg" alt="Альбани">
+                    <img class="race-card__img" src="./static/images/shug-albany.jpg" alt="Альбани">
                     <div class="race-card__body">
                         <div class="race-card__title">Альбани<span class="race-card__en">Albani</span></div>
                         <div class="race-tags"><span class="tag tag-region--kelarim">Келарим</span><span class="tag tag-type">Стихийные</span></div>
