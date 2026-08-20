@@ -76,7 +76,17 @@ img {
 	transition: box-shadow .3s;
 	backdrop-filter: blur(8px);
 	-webkit-backdrop-filter: blur(8px);
-	background: rgb(3, 9, 41, 88%);
+	background: rgba(3, 9, 41, 0.88);
+}
+
+.header_mini {
+	background-color: rgba(3, 9, 41, 0.82);
+	box-shadow: 0px 0px 30px -11px rgba(0, 0, 0, 0.8);
+}
+
+.header_mini .header__container {
+	padding-top: 0px;
+	padding-bottom: 0px;
 }
 
 .header__container {
@@ -343,7 +353,8 @@ img {
 	border-radius: 8px;
 	box-shadow: 0 12px 40px rgba(3, 9, 41, 0.15);
 	padding: 48px 56px;
-	overflow: hidden;
+	overflow-x: auto;
+	overflow-y: visible;
 }
 
 /* Хлебные крошки */
@@ -839,6 +850,27 @@ img {
 	font-weight: 400;
 }
 
+.wiki-container table:not(.feature-table):not(.weapon-table) {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 12px 0;
+	font-size: 15px;
+}
+
+.wiki-container table:not(.feature-table):not(.weapon-table) th {
+	background: #1c2c7c;
+	color: #fff;
+	text-align: left;
+	padding: 8px 12px;
+	font-weight: 400;
+}
+
+.wiki-container table:not(.feature-table):not(.weapon-table) td {
+	padding: 8px 12px;
+	border-bottom: 1px solid #e5e5e5;
+	vertical-align: top;
+}
+
 /* ============================================================
    КАТАЛОГ РАС (страница «Виды»)
    ============================================================ */
@@ -1149,6 +1181,25 @@ img {
 		border-radius: 4px;
 	}
 
+	.feature-table {
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		font-size: 14px;
+	}
+
+	.feature-table th,
+	.feature-table td {
+		padding: 8px 10px;
+		white-space: nowrap;
+	}
+
+	.feature-table th:first-child {
+		width: auto;
+		min-width: 120px;
+		white-space: normal;
+	}
+
 	.wiki-title {
 		font-size: 28px;
 	}
@@ -1161,6 +1212,19 @@ img {
 		float: none;
 		width: 100%;
 	}
+
+	.weapon-table {
+		display: block;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		font-size: 13px;
+	}
+
+	.weapon-table th,
+	.weapon-table td {
+		padding: 6px 8px;
+		white-space: nowrap;
+	}
 }
 
 @media (max-width: 575px) {
@@ -1172,8 +1236,18 @@ img {
 		font-size: 17px;
 	}
 
+	.feature-table {
+		font-size: 13px;
+	}
+
+	.feature-table th,
+	.feature-table td {
+		padding: 6px 8px;
+	}
+
 	.feature-table th:first-child {
-		width: 42%;
+		width: auto;
+		min-width: 100px;
 	}
 
 	.wiki h2 {
