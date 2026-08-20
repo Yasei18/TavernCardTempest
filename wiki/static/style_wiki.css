@@ -394,9 +394,7 @@ img {
 	margin-bottom: 26px;
 }
 
-.wiki-lead:first-letter {
-	color: #1c2c7c;
-}
+
 
 .wiki-container > h2,
 .wiki-content > h2 {
@@ -1019,6 +1017,61 @@ img {
 }
 
 /* ============================================================
+   СОЦИАЛЬНЫЕ ССЫЛКИ (Telegram, YouTube, Boosty)
+   Fixed-сайдбар, всегда виден при прокрутке
+   ============================================================ */
+
+.wiki-page {
+	display: flex;
+	align-items: flex-start;
+	gap: 32px;
+	max-width: 1402px;
+	margin: 0 auto;
+}
+
+.wiki-page > .wiki-container {
+	flex: 1;
+	min-width: 0;
+}
+
+.wiki-socials {
+	position: fixed;
+	left: 20px;
+	bottom: 30px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	z-index: 9000;
+}
+
+.wiki-socials a {
+	width: 36px;
+	height: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #c8d3f5;
+	border-radius: 50%;
+	color: #1c2c7c;
+	background: #f4f6fb;
+	text-decoration: none;
+	transition: all 0.25s;
+	box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.wiki-socials a:hover {
+	background: #1c2c7c;
+	border-color: #1c2c7c;
+	color: #fff;
+}
+
+.wiki-socials svg {
+	width: 18px;
+	height: 18px;
+	fill: currentColor;
+}
+
+/* ============================================================
    АДАПТИВ
    ============================================================ */
 
@@ -1058,6 +1111,20 @@ img {
 		width: 100%;
 		max-width: 1060px;
 		margin: 0 auto;
+	}
+
+	.wiki-page {
+		flex-direction: column;
+		gap: 0;
+	}
+
+	.wiki-socials {
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 16px;
+		flex-direction: row;
+		gap: 14px;
 	}
 
 	.race-art {

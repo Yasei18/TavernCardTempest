@@ -2219,3 +2219,67 @@ h1, h2, h3 {
     padding: 18px 20px 22px;
   }
 }
+
+/* ============================================================
+   СОЦИАЛЬНЫЕ ССЫЛКИ (фиксированный сайдбар)
+   ============================================================ */
+
+.wiki-socials {
+  position: fixed;
+  left: 20px;
+  bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9000;
+}
+
+.wiki-socials a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c8d3f5;
+  border-radius: 50%;
+  color: #1c2c7c;
+  background: #f4f6fb;
+  text-decoration: none;
+  transition: all 0.25s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.wiki-socials a:hover {
+  background: #1c2c7c;
+  border-color: #1c2c7c;
+  color: #fff;
+}
+
+.wiki-socials svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+@media (max-width: 990px) {
+  .wiki-socials {
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 16px;
+    flex-direction: row;
+    gap: 14px;
+  }
+}
+
+body[data-layout="tavern"] .wiki-socials a {
+  border-color: #4d3a27;
+  color: #d4a543;
+  background: #17100a;
+  box-shadow: 0 2px 8px rgba(0,0,0,.3);
+}
+
+body[data-layout="tavern"] .wiki-socials a:hover {
+  background: #d4a543;
+  border-color: #d4a543;
+  color: #17100a;
+}
