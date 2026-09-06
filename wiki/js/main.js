@@ -129,6 +129,7 @@ document.querySelectorAll('a[href^="#"]:not([href="#header"])').forEach(function
     if (details && !details.open) {
       details.open = true
     }
+    if (!headerEl) return
     e.preventDefault()
     const offset = headerEl.offsetHeight + 16
     const top = target.getBoundingClientRect().top + window.scrollY - offset
