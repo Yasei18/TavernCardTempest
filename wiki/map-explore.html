@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Иммерсивная интерактивная карта мира Орвей. Исследуйте Келарим, Аль'Ваэру и Задубравье.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Карта мира Орвей — Исследование</title>
+
+    <link rel="stylesheet" href="./static/map-explore/css/explore.css">
+
+    <style>
+        /* Loading background — тёмный фон с лёгким градиентом */
+        #loading {
+            background: radial-gradient(ellipse at center, #12141a 0%, #0a0a0a 70%);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== LOADING ========== -->
+    <div id="loading">
+        <div id="loading-logo">Мир Орвей</div>
+        <div id="loading-bar-outer">
+            <div id="loading-bar"></div>
+        </div>
+        <div id="loading-text">Загрузка…</div>
+    </div>
+
+    <!-- ========== TOP BAR ========== -->
+    <div id="topbar">
+        <div class="topbar-title">Орвей</div>
+        <nav class="topbar-nav">
+            <button class="topbar-btn topbar-btn-home" id="btn-home" title="Вернуться на карту мира">Карта мира</button>
+            <button class="topbar-btn" id="btn-bounds" title="Режим правки границ регионов">✎ Границы</button>
+            <a class="topbar-btn" href="./wiki.html">Вики</a>
+            <a class="topbar-btn active" href="./map-explore.html">Карта</a>
+            <a class="topbar-btn" href="./map.html">Подробная</a>
+        </nav>
+    </div>
+
+    <!-- ========== MAP ========== -->
+    <div id="map-viewport">
+        <div id="map-world">
+            <img id="map-img" alt="Карта мира Орвей" draggable="false">
+            <div id="svg-overlay"></div>
+        </div>
+    </div>
+
+    <!-- ========== DRILL DOWN ========== -->
+    <button id="btn-back" style="display:none" title="Вернуться к карте мира">← Мир Орвей</button>
+
+    <!-- ========== ZOOM CONTROLS ========== -->
+    <div id="zoom-controls">
+        <button class="zoom-btn" id="zoom-in" title="Приблизить (+)">+</button>
+        <button class="zoom-btn" id="zoom-out" title="Отдалить (−)">−</button>
+        <button class="zoom-btn" id="zoom-reset" title="Сбросить вид (0)">⌂</button>
+    </div>
+
+    <!-- ========== MINIMAP ========== -->
+    <div id="minimap">
+        <img id="minimap-img" alt="" draggable="false">
+        <div id="minimap-viewport"></div>
+    </div>
+
+    <!-- ========== REGION PANEL ========== -->
+    <div id="region-panel">
+        <div class="panel-header" style="border-top: 3px solid var(--gold);">
+            <button class="panel-close" title="Закрыть (Esc)">✕</button>
+            <div class="panel-region-name">Регион</div>
+            <div class="panel-region-subtitle"></div>
+        </div>
+        <div class="panel-body"></div>
+    </div>
+
+    <!-- ========== BOUNDS EDITOR ========== -->
+    <div id="bounds-editor">
+        <div class="be-header">
+            <span>Редактор границ</span>
+            <span class="be-btn-group">
+                <button class="be-hide" id="be-hide" title="Скрыть панель, не выходя из режима">▁</button>
+                <button class="be-close" id="be-close" title="Закрыть (E)">✕</button>
+            </span>
+        </div>
+        <div class="be-body">
+            <div class="be-mode">
+                <button class="be-mode-btn active" id="be-mode-bounds">Границы</button>
+                <button class="be-mode-btn" id="be-mode-markers">Города</button>
+            </div>
+            <label class="be-label" id="be-region-label">Регион</label>
+            <select id="be-region"></select>
+            <p class="be-map" id="be-map-label"></p>
+            <label class="be-label" id="be-city-label" style="display:none">Город</label>
+            <select id="be-city" style="display:none"></select>
+            <p class="be-hint" id="be-hint">Кликайте по карте, чтобы добавить вершину границы. <b>Drag</b> — панорама.</p>
+            <div class="be-actions">
+                <button class="be-btn" id="be-undo" title="Убрать последнюю точку">↩</button>
+                <button class="be-btn" id="be-clear" title="Очистить все точки">Очистить</button>
+                <button class="be-btn be-btn-primary" id="be-done" title="Показать координаты">Завершить</button>
+            </div>
+            <textarea id="be-output" readonly rows="3" placeholder="Координаты появятся здесь после «Завершить»"></textarea>
+            <button class="be-btn be-btn-copy" id="be-copy" title="Скопировать координаты">Копировать</button>
+        </div>
+    </div>
+
+    <!-- ========== ATTRIBUTION ========== -->
+    <div id="attribution">
+        мир © Таверна «Карточная Буря» · D&amp;D 5e
+    </div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <script src="./static/map-explore/data/regions.js"></script>
+    <script src="./static/map-explore/js/explore.js"></script>
+
+</body>
+</html>

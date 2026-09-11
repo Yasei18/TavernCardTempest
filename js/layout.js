@@ -52,6 +52,7 @@
       '    <nav class="nav" id="nav">',
       '      ' + link('wiki.html', 'Главная', 'nav__btn'),
       '      ' + link('player-book.html', 'Книга игрока', 'nav__btn') + '',
+      '      ' + link('map-explore.html', 'Атлас', 'nav__link') + '',
       '      ' + link('map.html', 'Карта', 'nav__link') + '',
       '      <div class="dropdown">',
       '        <div class="box-wrap">',
