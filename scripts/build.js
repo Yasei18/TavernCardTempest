@@ -76,7 +76,7 @@ function buildRaces() {
   var dataSrc = read(path.join(ROOT, 'wiki', 'js', 'data.js'));
   var RACES = extractArray(dataSrc, 'RACES');
 
-  var SITE = 'https://example.com/tavern';
+  var SITE = 'https://yasei18.github.io/TavernCardTempest';
 
   // Сначала извлекаем body-content из существующих HTML-файлов
   // и добавляем в данные (если ещё нет)
@@ -175,7 +175,7 @@ function buildFaiths() {
   }
   var FAITHS = (new Function('return (' + faithsMatch[1] + ')'))();
 
-  var SITE = 'https://example.com/tavern';
+  var SITE = 'https://yasei18.github.io/TavernCardTempest';
 
   // Извлекаем body из существующих HTML-файлов
   var faithsDir = path.join(ROOT, 'wiki', 'faiths');

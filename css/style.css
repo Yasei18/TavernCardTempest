@@ -2206,6 +2206,32 @@ h1, h2, h3 {
   color: var(--gold-bright);
 }
 
+.recap-index {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 38px;
+}
+
+.recap-index-link {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px dashed var(--gold-dim);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-family: 'Forum', 'Cinzel', Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.recap-index-link:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold);
+  background: rgba(212, 165, 67, 0.08);
+}
+
 /* ---------- СВЕТОВОЕ ОКНО (ЛАЙТБОКС) ---------- */
 .lightbox {
   position: fixed;
@@ -2287,12 +2313,32 @@ h1, h2, h3 {
 
 .lightbox-count {
   position: absolute;
-  bottom: 22px;
+  bottom: 46px;
   left: 50%;
   transform: translateX(-50%);
   font-family: 'Forum', 'Cinzel', serif;
   letter-spacing: 2px;
   color: var(--gold);
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 80%;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .lightbox-caption {
+    white-space: normal;
+  }
 }
 
 /* ---------- АДАПТИВ ---------- */
