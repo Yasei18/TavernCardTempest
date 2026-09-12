@@ -143,7 +143,9 @@
           banner.className = 'newcomer-banner';
           banner.setAttribute('role', 'complementary');
           banner.innerHTML =
-            '<a class="newcomer-banner-link" href="' + root + 'index.html#newcomers">Впервые у нас?</a>' +
+            '<a class="newcomer-banner-link" href="' + root + 'index.html#newcomers">Впервые у нас?' +
+            '<span class="newcomer-banner-hint">нажми на меня</span>' +
+            '</a>' +
             '<button type="button" class="newcomer-banner-close" aria-label="Скрыть подсказку">×</button>';
           banner.addEventListener('click', function (e) {
             if (e.target && e.target.classList.contains('newcomer-banner-close')) {

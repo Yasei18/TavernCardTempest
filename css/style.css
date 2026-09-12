@@ -2598,6 +2598,10 @@ body[data-layout="tavern"] .wiki-socials a:hover {
 }
 
 .newcomer-banner-link {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 10px;
   font-family: 'Forum', 'Cinzel', Georgia, serif;
   font-size: 17px;
   font-weight: 700;
@@ -2605,8 +2609,18 @@ body[data-layout="tavern"] .wiki-socials a:hover {
   white-space: nowrap;
 }
 
+.newcomer-banner-hint {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 .newcomer-banner-close {
   flex: none;
+  margin-left: auto;
   width: 28px;
   height: 28px;
   display: flex;
