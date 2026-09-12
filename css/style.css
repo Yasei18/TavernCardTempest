@@ -2522,3 +2522,192 @@ body[data-layout="tavern"] .wiki-socials a:hover {
   border-color: #d4a543;
   color: #17100a;
 }
+
+/* ============================================================
+   UX ДЛЯ НОВИЧКОВ
+   ============================================================ */
+
+/* Баннер «Впервые у нас?» — плашка под шапкой для первого визита */
+.newcomer-banner {
+  position: fixed;
+  top: 78px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: calc(100% - 32px);
+  padding: 10px 12px 10px 18px;
+  background: linear-gradient(180deg, var(--bg-card-soft), var(--bg-card));
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  animation: bannerIn 0.35s ease-out;
+}
+
+@keyframes bannerIn {
+  from { opacity: 0; transform: translate(-50%, -8px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.newcomer-banner-link {
+  font-family: 'Forum', 'Cinzel', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--gold-bright);
+  white-space: nowrap;
+}
+
+.newcomer-banner-close {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.newcomer-banner-close:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold-dim);
+}
+
+/* Плавающая кнопка записи на сходку (мобильные) */
+.cta-sticky {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .cta-sticky {
+    display: flex;
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    z-index: 95;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 18px;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    border: 1px solid var(--gold);
+    border-radius: var(--radius);
+    color: #17100a;
+    font-family: 'Forum', 'Cinzel', Georgia, serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow);
+  }
+
+  .cta-sticky:hover {
+    background: linear-gradient(180deg, #f2d58a, var(--gold-bright));
+  }
+
+  .newcomer-banner {
+    max-width: none;
+    left: 14px;
+    right: 14px;
+    transform: none;
+  }
+
+  @keyframes bannerIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Маршрут новичка (3 шага) на главной */
+.newcomer-route {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin-top: 34px;
+}
+
+.newcomer-route-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 22px 12px 12px;
+  background: linear-gradient(180deg, var(--bg-card-soft), var(--bg-card));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-main);
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.newcomer-route-step:hover {
+  border-color: var(--gold-dim);
+  transform: translateY(-2px);
+}
+
+.newcomer-route-num {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #17100a;
+  font-family: 'Forum', 'Cinzel', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.newcomer-route-text {
+  font-family: 'Forum', 'Cinzel', Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Мини-FAQ на странице бронирования */
+.booking-faq {
+  max-width: 640px;
+  margin: 0 auto 40px;
+  border: 1px dashed var(--gold-dim);
+  border-radius: var(--radius);
+  background: rgba(212, 165, 67, 0.05);
+}
+
+.booking-faq summary {
+  cursor: pointer;
+  padding: 14px 20px;
+  color: var(--gold-bright);
+  font-family: 'Forum', 'Cinzel', Georgia, serif;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  list-style: none;
+}
+
+.booking-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.booking-faq summary::before {
+  content: '✦ ';
+  color: var(--gold-dim);
+}
+
+.booking-faq[open] summary {
+  border-bottom: 1px dashed var(--gold-dim);
+}
+
+.booking-faq p {
+  margin: 0;
+  padding: 14px 20px 18px;
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.65;
+}

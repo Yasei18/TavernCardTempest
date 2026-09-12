@@ -125,6 +125,43 @@
     body.insertAdjacentHTML('beforeend', footerHtml);
   }
 
+  /* UX для новичков (только макет «таверна»):
+     — закреплённая снизу кнопка «Записаться на сходку» на мобильных;
+     — баннер «Впервые у нас?» с подсказкой для первого визита (показывается один раз). */
+  if (layout === 'tavern') {
+    var page = location.pathname.split('/').pop() || 'index.html';
+    if (page !== 'booking.html') {
+      var sticky = document.createElement('a');
+      sticky.className = 'cta-sticky';
+      sticky.href = root + 'booking.html';
+      sticky.textContent = 'Записаться на сходку';
+      body.appendChild(sticky);
+
+      try {
+        if (!localStorage.getItem('tct_banner_newcomer')) {
+          var banner = document.createElement('aside');
+          banner.className = 'newcomer-banner';
+          banner.setAttribute('role', 'complementary');
+          banner.innerHTML =
+            '<a class="newcomer-banner-link" href="' + root + 'index.html#newcomers">Впервые у нас?</a>' +
+            '<button type="button" class="newcomer-banner-close" aria-label="Скрыть подсказку">×</button>';
+          banner.addEventListener('click', function (e) {
+            if (e.target && e.target.classList.contains('newcomer-banner-close')) {
+              try { localStorage.setItem('tct_banner_newcomer', '1'); } catch (err) { /* пусто */ }
+              banner.remove();
+            }
+            if (e.target && e.target.classList.contains('newcomer-banner-link')) {
+              try { localStorage.setItem('tct_banner_newcomer', '1'); } catch (err) { /* пусто */ }
+            }
+          });
+          body.insertBefore(banner, body.firstChild);
+        }
+      } catch (e) {
+        /* localStorage недоступен — просто не показываем баннер */
+      }
+    }
+  }
+
   // Подсветка активного пункта меню по текущей странице.
   // Ссылки с якорем (#) не считаем активными — они ведут на разделы одной страницы.
   var currentFile = location.pathname.split('/').pop();
