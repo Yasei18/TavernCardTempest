@@ -1158,6 +1158,13 @@ img {
 		gap: 0;
 	}
 
+	.wiki-page > .wiki-container {
+		width: 100%;
+		flex: 0 0 auto;
+		max-width: 1060px;
+		margin: 0 auto;
+	}
+
 	.wiki-socials {
 		position: fixed;
 		left: 50%;
