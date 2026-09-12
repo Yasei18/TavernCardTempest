@@ -83,6 +83,9 @@
             border-right: 1px solid #c8d3f5;
             border-bottom: 1px solid #c8d3f5;
         }
+        @media (max-width: 575px) {
+            .mastery-popover { max-width: calc(100vw - 24px); }
+        }
     </style>
 </head>
 <body data-layout="wiki" data-root="../">
@@ -325,15 +328,15 @@
             popover.style.display = 'block';
             popover.classList.remove('mastery-popover--bottom');
 
-            let top = rect.bottom + 8;
-            let left = rect.left;
+            let top = Math.max(16, rect.bottom + 8);
+            let left = Math.max(16, rect.left);
 
-            if (top + popover.offsetHeight > window.innerHeight) {
-                top = rect.top - popover.offsetHeight - 8;
+            if (top + popover.offsetHeight > window.innerHeight - 16) {
+                top = Math.max(16, rect.top - popover.offsetHeight - 8);
                 popover.classList.add('mastery-popover--bottom');
             }
-            if (left + popover.offsetWidth > window.innerWidth) {
-                left = window.innerWidth - popover.offsetWidth - 16;
+            if (left + popover.offsetWidth > window.innerWidth - 16) {
+                left = Math.max(16, window.innerWidth - popover.offsetWidth - 16);
             }
 
             popover.style.top = top + 'px';

@@ -34,6 +34,7 @@ body {
   line-height: 1.55;
   -webkit-text-stroke: 0.5px;
   color: var(--text-main);
+  overflow-wrap: break-word;
   background:
     radial-gradient(ellipse at 50% 0%, rgba(212, 165, 67, 0.08), transparent 60%),
     radial-gradient(ellipse at 50% 100%, rgba(156, 47, 58, 0.06), transparent 55%),
@@ -1265,7 +1266,8 @@ h1, h2, h3 {
 .hint-pop {
   position: absolute;
   bottom: 150%;
-  right: 0;
+  left: 0;
+  right: auto;
   width: 280px;
   max-width: 60vw;
   background: var(--bg-darker);
@@ -1473,6 +1475,13 @@ h1, h2, h3 {
 @media (max-width: 560px) {
   .booking-card {
     padding: 30px 22px;
+  }
+
+  .hint-pop {
+    width: min(280px, calc(100vw - 44px));
+    max-width: calc(100vw - 44px);
+    font-size: 14px;
+    padding: 9px 11px;
   }
 }
 

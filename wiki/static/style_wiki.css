@@ -355,6 +355,7 @@ img {
 	padding: 48px 56px;
 	overflow-x: auto;
 	overflow-y: visible;
+	overflow-wrap: break-word;
 }
 
 /* Хлебные крошки */
@@ -1224,6 +1225,18 @@ img {
 	.weapon-table td {
 		padding: 6px 8px;
 		white-space: nowrap;
+	}
+
+	.pb-table {
+		display: block;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.pb-table th,
+	.pb-table td {
+		padding: 0.5rem 0.6rem;
 	}
 }
 
