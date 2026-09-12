@@ -2650,22 +2650,32 @@ body[data-layout="tavern"] .wiki-socials a:hover {
   .cta-sticky {
     display: flex;
     position: fixed;
-    left: 14px;
-    right: 14px;
-    bottom: 14px;
+    left: 50%;
+    bottom: 64px;
     z-index: 95;
+    transform: translateX(-50%);
     align-items: center;
     justify-content: center;
-    padding: 14px 18px;
+    max-width: calc(100% - 28px);
+    padding: 10px 22px;
     background: linear-gradient(180deg, var(--gold-bright), var(--gold));
     border: 1px solid var(--gold);
-    border-radius: var(--radius);
+    border-radius: 999px;
     color: #17100a;
     font-family: 'Forum', 'Cinzel', Georgia, serif;
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.5px;
+    white-space: nowrap;
     box-shadow: var(--shadow);
+    opacity: 1;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+
+  .cta-sticky.cta-sticky-hidden {
+    opacity: 0;
+    transform: translateX(-50%) translateY(150%);
+    pointer-events: none;
   }
 
   .cta-sticky:hover {
@@ -2684,6 +2694,9 @@ body[data-layout="tavern"] .wiki-socials a:hover {
     to   { opacity: 1; transform: translateY(0); }
   }
 }
+
+/* На мобильных соц-кнопки (из вики-макета) закреплены снизу по центру,
+   а плавающая кнопка записи всплывает над ними (bottom: 64px) — они не мешают друг другу. */
 
 /* Маршрут новичка (3 шага) на главной */
 .newcomer-route {

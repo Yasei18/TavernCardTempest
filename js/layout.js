@@ -137,6 +137,20 @@
       sticky.textContent = 'Записаться на сходку';
       body.appendChild(sticky);
 
+      /* На мобильных не показываем кнопку, пока на экране есть hero с соц-ссылками
+         (чтобы не перекрывать их), и показываем при прокрутке вниз. */
+      var heroEl = document.querySelector('.hero');
+      if (heroEl && 'IntersectionObserver' in window) {
+        var ctaObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            sticky.classList.toggle('cta-sticky-hidden', entry.isIntersecting && entry.intersectionRatio > 0.1);
+          });
+        }, { threshold: 0.1 });
+        ctaObserver.observe(heroEl);
+      } else if (!heroEl || !('IntersectionObserver' in window)) {
+        sticky.classList.remove('cta-sticky-hidden');
+      }
+
       try {
         if (!localStorage.getItem('tct_banner_newcomer')) {
           var banner = document.createElement('aside');
