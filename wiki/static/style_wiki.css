@@ -1401,3 +1401,336 @@ details > .details-body {
 }
 .wiki-page h2 { margin-top: 2rem; }
 .wiki-page h3 { margin-top: 1.5rem; color: #1c2c7c; }
+
+/* ============================================================
+   ПОИСК ПО ВИКИ
+   ============================================================ */
+.wiki-search {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 8px 0 20px;
+	padding: 0;
+	border-radius: 8px;
+	border: 1px solid #c8ccd1;
+	background: #fff;
+	transition: border-color .15s, box-shadow .15s;
+}
+
+.wiki-search:focus-within {
+	border-color: #1c2c7c;
+	box-shadow: 0 0 0 3px rgba(28, 44, 124, 0.12);
+}
+
+.wiki-search__label {
+	display: flex;
+	align-items: center;
+	flex: 1 1 auto;
+	gap: 4px;
+	min-width: 0;
+	padding: 0;
+}
+
+.wiki-search__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-left: 14px;
+	flex: 0 0 auto;
+}
+
+.wiki-search__icon svg {
+	width: 22px;
+	height: 22px;
+	fill: #72777d;
+}
+
+.wiki-search__input {
+	flex: 1 1 auto;
+	min-width: 0;
+	border: none;
+	outline: none;
+	background: transparent;
+	padding: 14px 12px 14px 2px;
+	font-family: 'Segoe UI', Tahoma, sans-serif;
+	font-size: 18px;
+	color: #0c0c0c;
+	box-shadow: none;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+.wiki-search__input::placeholder {
+	color: #a2a9b1;
+}
+
+.wiki-search__input::-webkit-search-cancel-button {
+	display: none;
+}
+
+.wiki-search__clear {
+	flex: 0 0 auto;
+	margin-right: 10px;
+	width: 34px;
+	height: 34px;
+	border: none;
+	border-radius: 50%;
+	background: #eef1f8;
+	color: #555;
+	font-size: 20px;
+	line-height: 1;
+	cursor: pointer;
+	transition: background .15s, color .15s;
+}
+
+.wiki-search__clear:hover {
+	background: #1c2c7c;
+	color: #fff;
+}
+
+.wiki-search__meta {
+	min-height: 22px;
+	margin: 0 0 14px;
+	font-size: 15px;
+	color: #555;
+}
+
+.wiki-search-quick {
+	margin-top: 6px;
+}
+
+.wiki-search-quick__label {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 15px;
+	color: #72777d;
+}
+
+.wiki-search-quick__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.wiki-search-quick__links a {
+	display: inline-block;
+	padding: 8px 14px;
+	border: 1px solid #d5dae6;
+	border-radius: 20px;
+	background: #f4f6fb;
+	color: #1c2c7c;
+	font-size: 15px;
+	text-decoration: none;
+	transition: background .15s, border-color .15s, color .15s;
+}
+
+.wiki-search-quick__links a:hover {
+	background: #1c2c7c;
+	border-color: #1c2c7c;
+	color: #fff;
+}
+
+.wiki-search-results {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-top: 4px;
+}
+
+.wiki-search-item {
+	display: block;
+	padding: 16px 18px;
+	border: 1px solid #d5dae6;
+	border-left: 4px solid #d5dae6;
+	border-radius: 8px;
+	background: #fbfcfe;
+	text-decoration: none;
+	transition: box-shadow .15s, border-color .15s, transform .1s;
+}
+
+.wiki-search-item:hover {
+	border-left-color: #1c2c7c;
+	box-shadow: 0 4px 14px rgba(3, 9, 41, 0.1);
+	transform: translateY(-1px);
+}
+
+.wiki-search-item__section {
+	display: block;
+	margin-bottom: 6px;
+	font-size: 13px;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: #72777d;
+}
+
+.wiki-search-item__title {
+	display: block;
+	font-family: 'Prata', serif;
+	font-size: 20px;
+	line-height: 1.35;
+	color: #1c2c7c;
+	margin-bottom: 6px;
+}
+
+.wiki-search-item__lead {
+	display: block;
+	font-size: 15px;
+	line-height: 1.55;
+	color: #3c4043;
+}
+
+.wiki-search-item mark {
+	background: #ffe58a;
+	color: #111;
+	padding: 0 2px;
+	border-radius: 2px;
+}
+
+.wiki-search-empty {
+	padding: 22px;
+	border: 1px dashed #d5dae6;
+	border-radius: 8px;
+	background: #fbfcfe;
+	color: #555;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+.wiki-search-empty p {
+	margin: 0 0 8px;
+}
+
+.wiki-search-empty p:last-child {
+	margin-bottom: 0;
+}
+
+.wiki-search-more {
+	margin: 4px 0 0;
+	font-size: 14px;
+	color: #72777d;
+}
+
+/* ============================================================
+   ФИШКИ ВИКИ: похожие статьи и печать
+   ============================================================ */
+
+.wiki-related {
+	margin-top: 34px;
+	padding-top: 20px;
+	border-top: 1px solid #d5dae6;
+}
+
+.wiki-related h2 {
+	font-family: 'Prata', serif;
+	font-size: 22px;
+	line-height: 1.4;
+	color: #202122;
+	margin: 0 0 12px;
+}
+
+.wiki-related__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.wiki-related__item {
+	margin: 0;
+}
+
+.wiki-related__item a {
+	display: inline-block;
+	padding: 8px 14px;
+	border: 1px solid #d5dae6;
+	border-radius: 20px;
+	background: #f4f6fb;
+	color: #1c2c7c;
+	font-size: 15px;
+	text-decoration: none;
+	transition: background .15s, border-color .15s, color .15s;
+}
+
+.wiki-related__item a:hover {
+	background: #1c2c7c;
+	border-color: #1c2c7c;
+	color: #fff;
+}
+
+@media print {
+	.header,
+	.create-line-header,
+	.wiki-sidebar,
+	.back-top,
+	.wiki-footer,
+	.wiki-socials,
+	.wiki-search,
+	.wiki-related {
+		display: none !important;
+	}
+
+	body {
+		background: #fff;
+		color: #000;
+		font-size: 12pt;
+	}
+
+	.wiki-page,
+	.wiki-container {
+		margin: 0;
+		padding: 0;
+		max-width: 100%;
+	}
+
+	.wiki-container a {
+		color: #000;
+		text-decoration: underline;
+	}
+
+	.wiki-container h1,
+	.wiki-container h2,
+	.wiki-container h3 {
+		page-break-after: avoid;
+	}
+
+	.wiki-container table,
+	.wiki-container img,
+	.race-card {
+		page-break-inside: avoid;
+	}
+}
+
+.wiki-search-noscript {
+	margin-top: 24px;
+	padding: 18px;
+	border: 1px solid #d5dae6;
+	border-radius: 8px;
+	background: #fbfcfe;
+	font-size: 16px;
+	line-height: 1.6;
+}
+
+.wiki-search-noscript ul {
+	margin: 10px 0 0;
+	padding-left: 22px;
+}
+
+.wiki-search-noscript li {
+	margin: 4px 0;
+}
+
+.wiki-search-noscript a {
+	color: #1c2c7c;
+}
+
+@media (max-width: 770px) {
+	.wiki-search__input {
+		font-size: 16px;
+	}
+
+	.wiki-search-item__title {
+		font-size: 18px;
+	}
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./static/style_wiki.css">
+
+    <script defer src="../js/layout.js"></script>
+    <script defer src="./js/main.js"></script>
+    <script defer src="./js/search-data.js"></script>
+    <script defer src="./js/search.js"></script>
+
+    <meta name="description" content="Поиск по вики мира Орвей: регионы, расы, верования, правила и материалы для домашней игры по D&D 5e от Таверны «Карточная Буря».">
+    <title>Поиск — Мир Орвей</title>
+</head>
+<body data-layout="wiki" data-root="">
+
+    <div class="wiki-page">
+        <div class="wiki-container">
+
+            <nav class="crumbs">
+                <a href="./wiki.html">Мир Орвей</a> / <span>Поиск</span>
+            </nav>
+
+            <h1 class="wiki-title">Поиск</h1>
+            <p class="wiki-lead">Найди регион, расу, бога или правило в вики мира Орвей. Можно искать по-русски или по-английски.</p>
+
+            <form class="wiki-search" id="searchForm" role="search">
+                <label class="wiki-search__label" for="searchInput">
+                    <span class="wiki-search__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" focusable="false"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+                    </span>
+                    <input class="wiki-search__input" type="search" id="searchInput"
+                           placeholder="Например: дварфы, Пятеро, кродирование, Albany…"
+                           autocomplete="off" spellcheck="false" autofocus>
+                </label>
+                <button class="wiki-search__clear" type="button" id="searchClear" aria-label="Очистить запрос" title="Очистить" hidden>×</button>
+            </form>
+
+            <p class="wiki-search__meta" id="searchMeta" role="status"></p>
+
+            <div class="wiki-search-quick" id="searchQuick">
+                <span class="wiki-search-quick__label">Начать можно отсюда:</span>
+                <div class="wiki-search-quick__links">
+                    <a href="./kelarim.html">Келарим</a>
+                    <a href="./alvaera.html">Аль&rsquo;Ваэра</a>
+                    <a href="./zadubravye.html">Задубравье</a>
+                    <a href="./races.html">Расы</a>
+                    <a href="./faiths.html">Верования</a>
+                    <a href="./player-book.html">Книга игрока</a>
+                    <a href="./weapons-kelarim.html">Оружие Келарима</a>
+                    <a href="./campaigns.html">Кампании</a>
+                    <a href="./oneshots.html">Ваншоты</a>
+                    <a href="./map.html">Карта</a>
+                </div>
+            </div>
+
+            <div class="wiki-search-results" id="searchResults" aria-live="polite"></div>
+
+            <noscript>
+                <div class="wiki-search-noscript">
+                    <p>Поиск требует включённого JavaScript. Вы можете перейти к основным разделам вики:</p>
+                    <ul>
+                        <li><a href="./races.html">Расы</a></li>
+                        <li><a href="./faiths.html">Верования</a></li>
+                        <li><a href="./player-book.html">Книга игрока</a></li>
+                        <li><a href="./regions.html">Регионы</a></li>
+                        <li><a href="./map.html">Карта мира</a></li>
+                    </ul>
+                </div>
+            </noscript>
+
+        </div>
+    </div>
+
+</body>
+</html>

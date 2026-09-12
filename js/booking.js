@@ -56,54 +56,66 @@ document.addEventListener('DOMContentLoaded', function () {
     gatheringSelect.selectedIndex = index >= 0 ? index : 0;
   }
 
-  /* Кеш последнего полученного списка: рендерим его сразу, без ожидания сети. */
-  var CACHE_KEY = 'tct_gatherings';
-  var CACHE_TTL_MS = 60 * 60 * 1000;
-
-  function loadCachedGatherings() {
-    try {
-      var raw = localStorage.getItem(CACHE_KEY);
-      if (!raw) return null;
-      var parsed = JSON.parse(raw);
-      if (!parsed || !parsed.ts || !Array.isArray(parsed.gatherings) || !parsed.gatherings.length) return null;
-      if (Date.now() - parsed.ts > CACHE_TTL_MS) return null;
-      return parsed.gatherings;
-    } catch (e) {
-      return null;
-    }
+  /* Разбор даты из строки: DD.MM.YYYY или YYYY-MM-DD. */
+  function parseGatheringDate(str) {
+    if (!str) return null;
+    var m = String(str).match(/(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+    if (m) return new Date(+m[3], +m[2] - 1, +m[1]);
+    m = String(str).match(/(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (m) return new Date(+m[1], +m[2] - 1, +m[3]);
+    return null;
   }
 
-  function saveGatheringsCache(list) {
-    try {
-      localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), gatherings: list }));
-    } catch (e) {}
+  /* Отсекаем прошедшие и тестовые сходки из таблицы, сортируем от ближайшей.
+     «Пока не определился» всегда добавляем последней строкой. */
+  var TEST_GATHERING_RE = /(тест|test|пробн|пример|demo|уч[её]бн)/i;
+
+  function sanitizeGatherings(list) {
+    if (!list) return [];
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    var seen = {};
+    var out = [];
+    (Array.isArray(list) ? list : []).forEach(function (item) {
+      var label = item && item.label ? String(item.label).trim() : '';
+      if (!label) return;
+      if (label === 'Пока не определился') return;
+      if (TEST_GATHERING_RE.test(label)) return;
+      var date = item && item.date ? String(item.date).trim() : '';
+      var d = parseGatheringDate(date || label);
+      if (d && d.getTime() < today.getTime()) return;
+      if (seen[label]) return;
+      seen[label] = true;
+      out.push({ label: label, date: date });
+    });
+    out.sort(function (a, b) {
+      var da = parseGatheringDate(a.date || a.label);
+      var db = parseGatheringDate(b.date || b.label);
+      if (da && db) return da.getTime() - db.getTime();
+      if (da) return -1;
+      if (db) return 1;
+      return a.label.localeCompare(b.label, 'ru');
+    });
+    out.push({ label: 'Пока не определился', date: '' });
+    return out;
   }
 
-  /* Список сходок приходит из Google-таблицы (вкладки «Сходка …»).
-     Сразу показываем резервный список из js/gatherings.js (поле не пустует),
-     затем — последний известный из кеша, а в фоне обновляем из таблицы.
+  /* Список сходок берём только из Google-таблицы (вкладки «Сходка …»):
+     ни резервного списка, ни кеша — в таблице всегда актуальные даты.
      Кеш-бастер в URL и cache: 'no-store' обходят агрессивное кеширование
      мобильных браузеров, из-за которого список мог не обновляться. */
   if (gatheringSelect) {
-    if (typeof GATHERINGS !== 'undefined' && GATHERINGS.length) {
-      buildGatheringList(GATHERINGS);
-    }
-
-    var cached = loadCachedGatherings();
-    if (cached) buildGatheringList(cached);
-
     fetch(WEB_APP_URL + '?action=sheets&_=' + Date.now(), { cache: 'no-store' })
       .then(function (res) {
         return res.json();
       })
       .then(function (data) {
         if (data && data.result === 'ok' && data.gatherings && data.gatherings.length) {
-          buildGatheringList(data.gatherings);
-          saveGatheringsCache(data.gatherings);
+          buildGatheringList(sanitizeGatherings(data.gatherings));
         }
       })
       .catch(function () {
-        /* остаёмся на резервном или кешированном списке */
+        /* пока не получена таблица — в списке остаётся только плейсхолдер */
       });
   }
 

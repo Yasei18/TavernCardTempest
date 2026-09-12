@@ -70,7 +70,7 @@ h1, h2, h3 {
 }
 
 .nav {
-  max-width: 1200px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 16px 26px;
   display: flex;
@@ -83,12 +83,17 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: 0 0 auto;
   color: var(--text-main);
   font-family: 'Forum', 'Cinzel', serif;
   font-weight: 700;
   font-size: 27px;
   letter-spacing: 1px;
   word-spacing: -2px;
+}
+
+.nav-logo span {
+  white-space: nowrap;
 }
 
 .nav-logo img {
@@ -103,6 +108,13 @@ h1, h2, h3 {
   list-style: none;
   display: flex;
   gap: 22px;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-links a {
@@ -458,6 +470,133 @@ h1, h2, h3 {
   padding: 10px 20px;
   font-size: 15px;
   text-align: center;
+}
+
+/* ---------- ПУТНИКАМ ВПЕРВЫЕ ---------- */
+#newcomers .about-card {
+  padding: 34px 30px;
+}
+
+.steps-list {
+  list-style: none;
+  counter-reset: step;
+  flex: 1;
+}
+
+.steps-list li {
+  counter-increment: step;
+  position: relative;
+  padding: 10px 0 10px 46px;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.steps-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid var(--gold-dim);
+  border-radius: 50%;
+  color: var(--gold);
+  font-family: 'Forum', 'Cinzel', serif;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-list li + li {
+  border-top: 1px dashed var(--border);
+}
+
+.steps-list a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-decoration-color: var(--gold-dim);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.steps-list a:hover {
+  color: var(--gold-bright);
+  text-decoration-color: currentColor;
+}
+
+.rules-list {
+  list-style: none;
+  flex: 1;
+}
+
+.rules-list li {
+  position: relative;
+  padding: 8px 0 8px 30px;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.rules-list li + li {
+  border-top: 1px dashed var(--border);
+}
+
+.rules-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 2px;
+  top: 9px;
+  color: var(--gold);
+  font-size: 14px;
+}
+
+.faq-item {
+  margin: 10px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  cursor: pointer;
+  font-family: 'Forum', 'Cinzel', serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  color: var(--gold);
+  user-select: none;
+}
+
+.faq-item summary::after {
+  content: '+';
+  flex: 0 0 auto;
+  color: var(--gold-dim);
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.15s;
+}
+
+.faq-item[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item[open] summary::after {
+  content: '−';
+}
+
+.faq-item p {
+  padding: 12px 16px 14px;
+  color: var(--text-muted);
+  font-size: 18px;
+  line-height: 1.55;
 }
 
 /* ---------- ИГРЫ ---------- */
@@ -1022,6 +1161,85 @@ h1, h2, h3 {
   font-style: italic;
   max-width: 560px;
   margin: 0 auto 28px;
+}
+
+/* ---------- ВИДЖЕТ «БЛИЖАЙШАЯ БУРЯ» ---------- */
+.next-gathering {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  padding: 26px 24px;
+  max-width: 680px;
+  background: linear-gradient(160deg, rgba(212, 165, 67, 0.1), rgba(23, 16, 10, 0.45));
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius);
+  text-align: left;
+}
+
+.next-gathering-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  color: var(--gold);
+}
+
+.next-gathering-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+.next-gathering-info {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.next-gathering-kicker {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.next-gathering-date {
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.next-gathering-in {
+  margin: 0 0 4px;
+  font-size: 17px;
+  color: var(--gold-bright);
+}
+
+.next-gathering-place {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+@media (max-width: 560px) {
+  .next-gathering {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .next-gathering .btn {
+    width: 100%;
+  }
 }
 
 /* ---------- АДМИНИСТРАЦИЯ ---------- */
@@ -2078,9 +2296,9 @@ h1, h2, h3 {
 }
 
 /* ---------- АДАПТИВ ---------- */
-/* Шапка: до 1200px полноценное меню не помещается — включаем компактную
-   шапку с бургером (планшеты и телефоны). */
-@media (max-width: 1200px) {
+/* Шапка: пока не хватает места для полного меню (логотип + 8 пунктов),
+   включаем компактную шапку с бургером (планшеты и телефоны). */
+@media (max-width: 1280px) {
   .nav {
     padding: 12px 18px;
     gap: 12px;

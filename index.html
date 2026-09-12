@@ -20,7 +20,7 @@
   <meta name="theme-color" content="#17100a">
   <link rel="canonical" href="https://example.com/tavern/index.html">
   <link rel="apple-touch-icon" href="img/favicon.png">
-  <!-- Обновите startDate/endDate под ближайшую сходку перед публикацией. -->
+  <!-- Обновите даты здесь и в js/upcoming-gathering.js под ближайшую сходку перед публикацией. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -29,8 +29,8 @@
     "description": "Настольные сходки Таверны «Карточная Буря»: игры, ведущие, чай и печенье. Первый визит — скидка 50%.",
     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
-    "startDate": "2026-08-15T19:00:00+03:00",
-    "endDate": "2026-08-15T23:00:00+03:00",
+    "startDate": "2026-10-04T12:00:00+03:00",
+    "endDate": "2026-10-04T23:00:00+03:00",
     "location": {
       "@type": "Place",
       "name": "Москва, Тишинская площадь, 1с1",
@@ -119,7 +119,7 @@
     <section id="about" class="section">
       <div class="container">
         <div class="section-head">
-          <span class="ornament">❧</span>
+          <span class="ornament">✧</span>
           <h2>Чем мы занимаемся</h2>
           <p class="section-note">Таверна — это сообщество, нацеленное на развлекательное времяпрепровождение в кругу любителей настольных ролевых игр.</p>
         </div>
@@ -167,11 +167,89 @@
       </div>
     </section>
 
+    <!-- ПУТНИКАМ ВПЕРВЫЕ -->
+    <section id="newcomers" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="ornament">✧</span>
+          <h2>Путникам впервые</h2>
+          <p class="section-note">Бояться нечего: заходи, знакомься и садись за стол — буревестники из числа наших помогут во всём разобраться.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1a2 2 0 0 0 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3a1 1 0 0 0-1-1H8v-2h2a1 1 0 0 0 1-1V7h2a2 2 0 0 0 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></span>
+            <h3>Как проходит первая сходка</h3>
+            <ol class="steps-list">
+              <li>Запишись на Бурю — на странице <a href="booking.html">бронирования</a> выбери дату и оставь весть.</li>
+              <li>Приходи к 12:00 или позже, как удобно — Буря длится до самого вечера.</li>
+              <li>Тебя встретят, познакомят с другими путниками и подсадят за стол по интересам.</li>
+              <li>Ведущие объясняют правила прямо за столом — опыт не нужен.</li>
+              <li>Чай и печенье уже ждут. Любимую игру тоже можно принести!</li>
+            </ol>
+            <div class="about-links">
+              <a class="btn btn-gold" href="booking.html">Записаться</a>
+            </div>
+          </article>
+
+          <article class="about-card">
+            <span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg></span>
+            <h3>Правила и этикет</h3>
+            <ul class="rules-list">
+              <li>Новички — все свои: не бойся задавать вопросы, тебе всегда подскажут.</li>
+              <li>Уважаем чужие партии и компоненты: берём игры и фигурки только с разрешения.</li>
+              <li>Победители не злорадствуют, а проигравшие не унывают — мы собираемся ради вечера.</li>
+              <li>Скидку «первый визит» обязательно назови Хозяину, чтобы он отметил тебя в летописи.</li>
+              <li>Оставляй стол и игры такими же опрятными, какими их нашёл.</li>
+            </ul>
+          </article>
+
+          <article class="about-card">
+            <span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg></span>
+            <h3>Частые вопросы</h3>
+            <details class="faq-item">
+              <summary>Нужен ли опыт в настолках и D&amp;D?</summary>
+              <p>Нет. Ведущие объясняют правила прямо за столом, а в первую игру можно просто слушать и втягиваться.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Сколько это стоит?</summary>
+              <p>300 ₽ — игры, ведущие, чай и печенье включены. Для первого визита скидка 50%: всего 150 ₽.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Можно ли прийти одному?</summary>
+              <p>Конечно! Многие приходят в одиночку — с тобой познакомятся и подсадят к подходящему столу.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Во сколько приходить?</summary>
+              <p>Буря длится с 12:00 и до самого вечера. Можно заглянуть и позже — просто отметься в записи или напиши в Шумный Зал.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Что взять с собой?</summary>
+              <p>Только желание играть и хорошее настроение. Любимую игру можешь принести и познакомить с ней остальных.</p>
+            </details>
+          </article>
+
+          <article class="about-card">
+            <span class="about-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg></span>
+            <h3>История и атмосфера</h3>
+            <p>Всё началось с дружеских вечеров за настолками. Теперь Таверна — это сходки, видео и авторский фэнтези мир. Загляни в «Отголоски Бури», чтобы услышать истории с прошедших встреч, — и приходи составлять новые.</p>
+            <div class="about-links">
+              <a class="btn btn-ghost" href="otgoloski.html">Отголоски Бури</a>
+              <a class="btn btn-ghost" href="wiki/wiki.html">Фэнтези<br>мир</a>
+            </div>
+            <div class="about-links">
+              <a class="btn btn-ghost" href="https://t.me/TavernCardTempest_Chat" target="_blank" rel="noopener">Шумный Зал</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- В КАКИЕ ИГРЫ ИГРАЕМ -->
     <section id="games" class="section section-dark">
       <div class="container">
         <div class="section-head">
-          <span class="ornament">❦</span>
+          <span class="ornament">✦</span>
           <h2>В какие игры мы играем</h2>
           <p class="section-note">От эпичных ролевых саг до душевных партий в кругу друзей — список постоянно растёт.</p>
         </div>
@@ -195,6 +273,16 @@
         </div>
 
         <div class="events-card">
+          <div class="next-gathering">
+            <span class="next-gathering-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 8.997c0 5.25 7 13 7 13s7-7.75 7-13C19 5.13 15.87 2 12 2zm0 9.75A2.75 2.75 0 1 1 12 6a2.75 2.75 0 0 1 0 5.75z"/></svg></span>
+            <div class="next-gathering-info">
+              <p class="next-gathering-kicker">Ближайшая Буря</p>
+              <p class="next-gathering-date" id="nextGatheringDate">—</p>
+              <p class="next-gathering-in" id="nextGatheringIn"></p>
+              <p class="next-gathering-place" id="nextGatheringPlace"></p>
+            </div>
+            <a class="btn btn-gold" href="booking.html">Забронировать место</a>
+          </div>
           <ul class="events-list">
             <li>
               <span class="event-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 8.997c0 5.25 7 13 7 13s7-7.75 7-13C19 5.13 15.87 2 12 2zm0 9.75A2.75 2.75 0 1 1 12 6a2.75 2.75 0 0 1 0 5.75z"/></svg></span>
@@ -282,7 +370,7 @@
     <section id="contacts" class="section">
       <div class="container">
         <div class="section-head">
-          <span class="ornament">❧</span>
+          <span class="ornament">✧</span>
           <h2>Где нас найти</h2>
           <p class="section-note">Все тропы ведут в «Шумный Зал». Выбирай любую дорогу — будем рады видеть тебя!</p>
         </div>
@@ -344,6 +432,8 @@
 
   <script src="js/games.js"></script>
   <script src="js/render-games.js"></script>
+  <script src="js/upcoming-gathering.js"></script>
+  <script src="js/upcoming.js"></script>
   <script src="js/script.js"></script>
 
 </body>

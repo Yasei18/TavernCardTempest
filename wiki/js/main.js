@@ -181,3 +181,88 @@ function highlightTarget(target) {
   window.addEventListener("resize", positionSocials)
 })()
 
+/* ── Фишки вики: «Случайная статья» и «Похожие статьи» ──
+   Данные подгружаем динамически из js/browse-data.js (генерируется build.js),
+   чтобы не править скрипты на каждой странице вики. */
+;(function () {
+  var body = document.body
+  if (!body) return
+
+  var root = body.getAttribute("data-root") || ""
+  var depth = (root.match(/\.\.\//g) || []).length
+  var file = location.pathname.split("/").pop()
+
+  // Вики-относительный адрес текущей страницы: 'races/race-albany.html' и т.п.
+  function currentRelUrl() {
+    var dirs = location.pathname.split("/")
+    dirs.pop()
+    return dirs.slice(Math.max(0, dirs.length - depth)).concat(file).join("/")
+  }
+
+  // Относительный путь от страницы from к to (обе — вики-относительные).
+  function relPath(from, to) {
+    var fDir = from.split("/").slice(0, -1)
+    var t = to.split("/")
+    var tFile = t.pop()
+    var tDir = t
+    while (fDir.length && tDir.length && fDir[0] === tDir[0]) {
+      fDir.shift()
+      tDir.shift()
+    }
+    var prefix = []
+    for (var i = 0; i < fDir.length; i++) prefix.push("..")
+    return prefix.concat(tDir, tFile).join("/")
+  }
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+  }
+
+  var script = document.createElement("script")
+  script.src = root + "js/browse-data.js"
+  script.onload = initBrowse
+  script.onerror = function () {}
+  document.head.appendChild(script)
+
+  function initBrowse() {
+    if (!window.WIKI_BROWSE_INDEX || !WIKI_BROWSE_INDEX.urls) return
+    var index = WIKI_BROWSE_INDEX
+    var cur = currentRelUrl()
+    var slug = file.replace(/\.html$/, "")
+
+    // «Случайная» в шапке вики: выбираем страницу, не совпадающую с текущей.
+    var randomLink = document.getElementById("wikiRandomLink")
+    if (randomLink) {
+      var pool = index.urls.filter(function (u) { return u !== cur })
+      if (pool.length) {
+        randomLink.setAttribute("href", relPath(cur, pool[Math.floor(Math.random() * pool.length)]))
+      }
+    }
+
+    if (file === "search.html") return
+
+    // «Похожие статьи» в конец контента.
+    var related = index.related[slug]
+    if (!related || !related.length) return
+
+    var container = document.querySelector(".wiki-container")
+    if (!container) return
+
+    var items = ""
+    related.forEach(function (r) {
+      items += '<li class="wiki-related__item"><a href="' + relPath(cur, r.url) + '">' + esc(r.title) + "</a></li>"
+    })
+
+    var block = document.createElement("section")
+    block.className = "wiki-related"
+    block.innerHTML =
+      "<h2>Похожие статьи</h2>" +
+      '<ul class="wiki-related__list">' + items + "</ul>"
+    container.appendChild(block)
+  }
+})()
+
