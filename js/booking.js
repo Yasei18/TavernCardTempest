@@ -29,39 +29,96 @@ document.addEventListener('DOMContentLoaded', function () {
     gatheringSelect.appendChild(opt);
   }
 
-  function renderGatherings(list) {
+  /* Пересобирает список сходок, сохраняя текущий выбор пользователя.
+     «Пока не определился» не дублируется, даже если пришёл из таблицы. */
+  function buildGatheringList(list) {
+    var current = gatheringSelect.value;
+    gatheringSelect.innerHTML = '';
+
+    var placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = 'Выбери Бурю…';
+    gatheringSelect.appendChild(placeholder);
+
+    var hasUndecided = false;
     for (var i = 0; i < list.length; i++) {
-      addGatheringOption(list[i].label, list[i].date || '');
+      var label = list[i] && list[i].label ? list[i].label : '';
+      if (!label) continue;
+      if (label === 'Пока не определился') hasUndecided = true;
+      addGatheringOption(label, (list[i] && list[i].date) || '');
     }
-    addGatheringOption('Пока не определился', '');
+    if (!hasUndecided) addGatheringOption('Пока не определился', '');
+
+    var index = -1;
+    for (var j = 0; j < gatheringSelect.options.length; j++) {
+      if (gatheringSelect.options[j].value === current) { index = j; break; }
+    }
+    gatheringSelect.selectedIndex = index >= 0 ? index : 0;
   }
 
-  function renderFallbackGatherings() {
-    if (typeof GATHERINGS !== 'undefined' && GATHERINGS.length) {
-      renderGatherings(GATHERINGS);
-    } else {
-      addGatheringOption('Пока не определился', '');
+  /* Кеш последнего полученного списка: рендерим его сразу, без ожидания сети. */
+  var CACHE_KEY = 'tct_gatherings';
+  var CACHE_TTL_MS = 60 * 60 * 1000;
+
+  function loadCachedGatherings() {
+    try {
+      var raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      var parsed = JSON.parse(raw);
+      if (!parsed || !parsed.ts || !Array.isArray(parsed.gatherings) || !parsed.gatherings.length) return null;
+      if (Date.now() - parsed.ts > CACHE_TTL_MS) return null;
+      return parsed.gatherings;
+    } catch (e) {
+      return null;
     }
+  }
+
+  function saveGatheringsCache(list) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), gatherings: list }));
+    } catch (e) {}
   }
 
   /* Список сходок приходит из Google-таблицы (вкладки «Сходка …»).
-     Если таблица не ответила — используем резервный список из js/gatherings.js. */
+     Сразу показываем резервный список из js/gatherings.js (поле не пустует),
+     затем — последний известный из кеша, а в фоне обновляем из таблицы.
+     Кеш-бастер в URL и cache: 'no-store' обходят агрессивное кеширование
+     мобильных браузеров, из-за которого список мог не обновляться. */
   if (gatheringSelect) {
-    fetch(WEB_APP_URL + '?action=sheets')
+    if (typeof GATHERINGS !== 'undefined' && GATHERINGS.length) {
+      buildGatheringList(GATHERINGS);
+    }
+
+    var cached = loadCachedGatherings();
+    if (cached) buildGatheringList(cached);
+
+    fetch(WEB_APP_URL + '?action=sheets&_=' + Date.now(), { cache: 'no-store' })
       .then(function (res) {
         return res.json();
       })
       .then(function (data) {
         if (data && data.result === 'ok' && data.gatherings && data.gatherings.length) {
-          renderGatherings(data.gatherings);
-        } else {
-          renderFallbackGatherings();
+          buildGatheringList(data.gatherings);
+          saveGatheringsCache(data.gatherings);
         }
       })
       .catch(function () {
-        renderFallbackGatherings();
+        /* остаёмся на резервном или кешированном списке */
       });
   }
+
+  /* «@» сам подставляется на бэкенде — в форме не заставляем и не позволяем
+     вводить его, иначе никнейм дублируется (@@никнейм). */
+  function stripAt(input) {
+    if (!input) return;
+    input.addEventListener('input', function () {
+      if (input.value.charAt(0) === '@') {
+        input.value = input.value.replace(/^@+/, '');
+      }
+    });
+  }
+  stripAt(document.getElementById('telegram'));
+  stripAt(document.getElementById('inviterTelegram'));
 
   firstTime.addEventListener('change', function () {
     inviterFields.classList.toggle('hidden', !firstTime.checked);
@@ -103,12 +160,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var payload = {
       name: form.name.value.trim(),
-      telegram: form.telegram.value.trim(),
+      telegram: form.telegram.value.trim().replace(/^@+/, ''),
       gathering: gatheringSelect ? gatheringSelect.value : '',
       gatheringDate: chosenDate,
       firstTime: firstTime.checked,
       inviterName: inviterFields.classList.contains('hidden') ? '' : form.inviterName.value.trim(),
-      inviterTelegram: inviterFields.classList.contains('hidden') ? '' : form.inviterTelegram.value.trim(),
+      inviterTelegram: inviterFields.classList.contains('hidden') ? '' : form.inviterTelegram.value.trim().replace(/^@+/, ''),
       gameWish: form.gameWish.value.trim(),
       website: form.website.value.trim(),
       secret: SITE_SECRET
