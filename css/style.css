@@ -2517,6 +2517,13 @@ h1, h2, h3 {
   flex-direction: column;
   gap: 10px;
   z-index: 9000;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.wiki-socials.wiki-socials-hidden {
+  opacity: 0;
+  transform: translateY(150%);
+  pointer-events: none;
 }
 
 .wiki-socials a {
@@ -2553,6 +2560,10 @@ h1, h2, h3 {
     bottom: 16px;
     flex-direction: row;
     gap: 14px;
+  }
+
+  .wiki-socials.wiki-socials-hidden {
+    transform: translate(-50%, 150%);
   }
 }
 

@@ -166,6 +166,11 @@ function highlightTarget(target) {
   document.body.appendChild(socials)
 
   function positionSocials() {
+    var isMobile = window.innerWidth <= 990
+    if (isMobile) {
+      socials.style.left = ""
+      return
+    }
     if (layout === "wiki") {
       var wikiPage = document.querySelector(".wiki-page")
       var container = wikiPage ? wikiPage.querySelector(".wiki-container") : null
@@ -179,6 +184,16 @@ function highlightTarget(target) {
   }
   positionSocials()
   window.addEventListener("resize", positionSocials)
+
+  /* При долистывании до конца страницы прячем закреплённые соц-ссылки,
+     чтобы они не перекрывали подвал. */
+  function updateSocialsOnScroll() {
+    var nearEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120
+    socials.classList.toggle("wiki-socials-hidden", nearEnd)
+  }
+  updateSocialsOnScroll()
+  window.addEventListener("scroll", updateSocialsOnScroll, { passive: true })
+  window.addEventListener("resize", updateSocialsOnScroll)
 })()
 
 /* ── Фишки вики: «Случайная статья» и «Похожие статьи» ──
@@ -234,18 +249,7 @@ function highlightTarget(target) {
     var cur = currentRelUrl()
     var slug = file.replace(/\.html$/, "")
 
-    // «Случайная» в шапке вики: выбираем страницу, не совпадающую с текущей.
-    var randomLink = document.getElementById("wikiRandomLink")
-    if (randomLink) {
-      var pool = index.urls.filter(function (u) { return u !== cur })
-      if (pool.length) {
-        randomLink.setAttribute("href", relPath(cur, pool[Math.floor(Math.random() * pool.length)]))
-      }
-    }
-
-    if (file === "search.html") return
-
-    // «Похожие статьи» в конец контента.
+// «Похожие статьи» в конец контента.
     var related = index.related[slug]
     if (!related || !related.length) return
 

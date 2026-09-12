@@ -55,7 +55,6 @@
       '      ' + link('player-book.html', 'Книга игрока', 'nav__btn') + '',
       '      ' + link('map.html', 'Карта', 'nav__link') + '',
       '      ' + link('search.html', 'Поиск', 'nav__link') + '',
-      '      <a class="nav__link" id="wikiRandomLink" href="#">Случайная</a>',
       '      <div class="dropdown">',
       '        <div class="box-wrap">',
       '          <button class="dropbtn" type="button">Игры</button>',
@@ -150,6 +149,15 @@
       } else if (!heroEl || !('IntersectionObserver' in window)) {
         sticky.classList.remove('cta-sticky-hidden');
       }
+
+      /* В самом низу страницы также прячем кнопку, чтобы не перекрывала подвал. */
+      var updateStickyOnScroll = function () {
+        var nearEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120;
+        sticky.classList.toggle('cta-sticky-hidden', nearEnd);
+      };
+      updateStickyOnScroll();
+      window.addEventListener('scroll', updateStickyOnScroll, { passive: true });
+      window.addEventListener('resize', updateStickyOnScroll);
 
       try {
         if (!localStorage.getItem('tct_banner_newcomer')) {
