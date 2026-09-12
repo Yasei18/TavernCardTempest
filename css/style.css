@@ -1443,6 +1443,18 @@ h1, h2, h3 {
   font-style: italic;
 }
 
+.bot-copy {
+  margin-top: 8px;
+}
+
+.bot-name {
+  color: var(--gold-bright);
+  font-style: normal;
+  font-weight: 600;
+  user-select: all;
+  -webkit-user-select: all;
+}
+
 .form-status {
   margin-top: 16px;
   text-align: center;
