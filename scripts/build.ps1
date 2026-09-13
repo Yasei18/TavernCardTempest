@@ -250,6 +250,9 @@ function Build-WikiPages($items, $dir, $suffix, $titleField) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>' + (XmlEscape $title) + '</title>
     <meta name="description" content="' + (XmlEscape $meta) + '">
+    <link rel="apple-touch-icon" href="../../img/favicon.png">
+    <link rel="icon" type="image/png" href="../../img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
     <link rel="stylesheet" href="../static/style_wiki.css">
     <script defer src="../../js/layout.js"></script>
     <script defer src="../js/main.js"></script>
