@@ -157,7 +157,7 @@ function applyMap() {
     currentConfig = cfg;
 
     if (currentTileLayer) { map.removeLayer(currentTileLayer); }
-    var tileUrl = '../maps/tiles/' + (cfg.tilesRoot ? cfg.tilesRoot + '/' : '') + '{z}/{x}/{y}.png';
+    var tileUrl = '../maps/tiles/' + (cfg.tilesRoot ? cfg.tilesRoot + '/' : '') + '{z}/{x}/{y}.webp';
     currentTileLayer = L.tileLayer(tileUrl, {
         tileSize: 512, noWrap: true
     }).addTo(map);
