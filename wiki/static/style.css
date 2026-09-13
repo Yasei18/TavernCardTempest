@@ -1084,3 +1084,410 @@ hr {
   }
 
 }
+
+/* ============================================================
+   ГЛАВНАЯ ВИКИ: поиск, разделы, случайная страница, карта-превью
+   ============================================================ */
+
+/* --- Поиск на главной --- */
+
+.home-search {
+  max-width: 760px;
+  margin: 0 auto 30px;
+}
+
+.home-search .wiki-search {
+  margin: 0 0 12px;
+}
+
+.wiki-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 20px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid #c8ccd1;
+  background: #fff;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+.wiki-search:focus-within {
+  border-color: #1c2c7c;
+  box-shadow: 0 0 0 3px rgba(28, 44, 124, 0.12);
+}
+
+.wiki-search__label {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  gap: 4px;
+  min-width: 0;
+  padding: 0;
+}
+
+.wiki-search__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 14px;
+  flex: 0 0 auto;
+}
+
+.wiki-search__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: #72777d;
+}
+
+.wiki-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 14px 12px 14px 2px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 18px;
+  color: #0c0c0c;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.wiki-search__input::placeholder {
+  color: #a2a9b1;
+}
+
+.wiki-search__input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.wiki-search__clear {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #eef1f8;
+  color: #555;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+}
+
+.wiki-search__clear:hover {
+  background: #1c2c7c;
+  color: #fff;
+}
+
+.wiki-search__meta {
+  min-height: 22px;
+  margin: 4px 0 14px;
+  font-size: 15px;
+  color: #555;
+}
+
+.wiki-search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.wiki-search-item {
+  display: block;
+  padding: 16px 18px;
+  border: 1px solid #d5dae6;
+  border-left: 4px solid #d5dae6;
+  border-radius: 8px;
+  background: #fbfcfe;
+  text-decoration: none;
+  transition: box-shadow .15s, border-color .15s, transform .1s;
+}
+
+.wiki-search-item:hover {
+  border-left-color: #1c2c7c;
+  box-shadow: 0 4px 14px rgba(3, 9, 41, 0.1);
+  transform: translateY(-1px);
+}
+
+.wiki-search-item__section {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #72777d;
+}
+
+.wiki-search-item__title {
+  display: block;
+  font-family: 'Prata', serif;
+  font-size: 20px;
+  line-height: 1.35;
+  color: #1c2c7c;
+  margin-bottom: 6px;
+}
+
+.wiki-search-item__lead {
+  display: block;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #3c4043;
+}
+
+.wiki-search-item mark {
+  background: #ffe58a;
+  color: #111;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.wiki-search-empty {
+  padding: 22px;
+  border: 1px dashed #d5dae6;
+  border-radius: 8px;
+  background: #fbfcfe;
+  color: #555;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.wiki-search-empty p {
+  margin: 0 0 8px;
+}
+
+.wiki-search-empty p:last-child {
+  margin-bottom: 0;
+}
+
+.wiki-search-more {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #72777d;
+}
+
+.wiki-search-noscript {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid #d5dae6;
+  border-radius: 8px;
+  background: #fbfcfe;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.wiki-search-noscript ul {
+  margin: 10px 0 0;
+  padding-left: 22px;
+}
+
+.wiki-search-noscript li {
+  margin: 4px 0;
+}
+
+.wiki-search-noscript a {
+  color: #1c2c7c;
+}
+
+.home-search__tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  min-height: 22px;
+}
+
+.home-search__hint {
+  font-size: 15px;
+  color: #72777d;
+}
+
+.home-search__random {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 14px;
+  letter-spacing: .02em;
+  padding: 8px 14px;
+  border: 1px solid #d5dae6;
+  border-radius: 20px;
+  background: #f4f6fb;
+  color: #1c2c7c;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.home-search__random:hover {
+  background: #1c2c7c;
+  border-color: #1c2c7c;
+  color: #fff;
+}
+
+/* --- Разделы (порталы) --- */
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 70px auto 0;
+  max-width: 1100px;
+  text-align: left;
+}
+
+.portal-grid__item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 20px 18px;
+  border: 1px solid #d5d5d5;
+  border-left: 4px solid #d5dae6;
+  border-radius: 8px;
+  background: #fbfcfe;
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow .15s, border-color .15s, transform .1s;
+}
+
+.portal-grid__item:hover {
+  border-left-color: #1c2c7c;
+  box-shadow: 0 8px 22px rgba(3, 9, 41, 0.12);
+  transform: translateY(-3px);
+}
+
+.portal-grid__cat {
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #72777d;
+}
+
+.portal-grid__name {
+  font-family: 'Prata', serif;
+  font-size: 24px;
+  color: #1c2c7c;
+}
+
+.portal-grid__more {
+  align-self: flex-start;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #555;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  margin-top: 4px;
+  transition: border-color .15s, color .15s;
+}
+
+.portal-grid__item:hover .portal-grid__more {
+  border-bottom-color: #1c2c7c;
+  color: #1c2c7c;
+}
+
+/* --- Карта-превью --- */
+
+.home-map {
+  margin: 40px auto 10px;
+  max-width: 920px;
+  padding: 10px;
+  background: #f8f9fa;
+  border: 1px solid #c8ccd1;
+  text-align: center;
+}
+
+.home-map__canvas {
+  height: 460px;
+  border: 1px solid #d5dae6;
+  background: #eef1f5 url("maps/orvey-map-preview.webp") center / cover no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-map__canvas .leaflet-container {
+  background: transparent;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.home-map__caption {
+  font-size: 14px;
+  color: #72777d;
+  margin-top: 10px;
+}
+
+.home-map__open {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 18px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 15px;
+  letter-spacing: .02em;
+  border: 1px solid #1c2c7c;
+  border-radius: 4px;
+  background: #1c2c7c;
+  color: #fff;
+  text-decoration: none;
+  transition: background .15s, border-color .15s, color .15s;
+}
+
+.home-map__open:hover {
+  background: #0c1855;
+  border-color: #0c1855;
+}
+
+#homeMap .leaflet-popup-content {
+  margin: 12px 14px;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  line-height: 1.5;
+  text-align: left;
+}
+
+#homeMap .home-map__popup-title {
+  font-family: 'Prata', serif;
+  font-size: 19px;
+  color: #0c1855;
+  margin-bottom: 2px;
+}
+
+#homeMap .home-map__popup-sub {
+  font-size: 13px;
+  color: #72777d;
+  margin-bottom: 6px;
+}
+
+#homeMap .home-map__popup-desc {
+  font-size: 14px;
+  color: #3c4043;
+}
+
+#homeMap .home-map__popup-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #1c2c7c;
+}
+
+/* --- адаптив главной --- */
+
+@media (max-width: 990px) {
+  .portal-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 575px) {
+  .portal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home-map__canvas {
+    height: 320px;
+  }
+
+  .home-search__tools {
+    justify-content: center;
+    text-align: center;
+  }
+}
