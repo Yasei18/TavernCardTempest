@@ -64,9 +64,8 @@ h1, h2, h3 {
   left: 0;
   right: 0;
   z-index: 100;
-  background: linear-gradient(180deg, rgba(18, 11, 6, 0.95), rgba(18, 11, 6, 0.8));
+  background: linear-gradient(180deg, rgba(18, 11, 6, 0.97), rgba(18, 11, 6, 0.94));
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(6px);
 }
 
 .nav {
@@ -319,6 +318,8 @@ h1, h2, h3 {
 /* ---------- СЕКЦИИ ---------- */
 .section {
   padding: 90px 24px;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
 }
 
 .section-dark {
@@ -891,7 +892,6 @@ h1, h2, h3 {
   margin: 0 0 16px;
   background: var(--bg-card);
   cursor: zoom-in;
-  will-change: transform;
   transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease, border-color 0.5s ease;
 }
 
@@ -899,6 +899,7 @@ h1, h2, h3 {
    и показывается целиком, без обрезки */
 .game-art-zoomed {
   object-fit: contain;
+  will-change: transform;
   transform: perspective(700px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) scale(1.55);
   border-color: var(--gold-dim);
   box-shadow: 0 30px 50px rgba(0, 0, 0, 0.55);

@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ? '<a class="game-link" href="' + game.rules + '" target="_blank" rel="noopener">' + playIcon + 'Видео правила</a>'
       : '';
     var img = game.img
-      ? '<img class="game-art" src="img/games/' + game.img + '" alt="' + game.title + '" loading="lazy">'
+      ? '<img class="game-art" src="img/games/' + game.img + '" alt="' + game.title + '" loading="lazy" decoding="async">'
       : '';
     var pills = gameTags(game).map(function (t) {
       return '<span class="game-tag">' + t + '</span>';
@@ -244,26 +244,57 @@ document.addEventListener('DOMContentLoaded', function () {
   apply();
 
   // 3D-наклон карточек: картинка следует за курсором.
+  // rAF-батчинг + кэш rect: без вызова getBoundingClientRect() на каждый mousemove,
+  // который при наведении на сетку вызывает принудительную раскладку и просадку FPS при скролле.
   function bindTilt(container) {
     if (!container) return;
+    var finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var activeEl = null;
+    var rect = null;
+    var raf = 0;
+
+    function applyTilt() {
+      raf = 0;
+      if (!activeEl || !rect) return;
+      var px = (rect.px - rect.left) / rect.width;
+      var py = (rect.py - rect.top) / rect.height;
+      activeEl.style.setProperty('--rx', ((py - 0.5) * 18).toFixed(2) + 'deg');
+      activeEl.style.setProperty('--ry', ((0.5 - px) * 18).toFixed(2) + 'deg');
+    }
+
+    function schedule(e) {
+      if (!activeEl) return;
+      rect.px = e.clientX;
+      rect.py = e.clientY;
+      if (!raf) raf = requestAnimationFrame(applyTilt);
+    }
+
     container.addEventListener('mouseover', function (e) {
       var el = e.target;
-      if (el && el.classList && el.classList.contains('game-art')) el.classList.add('game-art-zoomed');
+      if (!el || !el.classList || !el.classList.contains('game-art')) return;
+      activeEl = el;
+      rect = el.getBoundingClientRect();
+      rect.px = rect.left + rect.width / 2;
+      rect.py = rect.top + rect.height / 2;
+      el.classList.add('game-art-zoomed');
     });
     container.addEventListener('mouseout', function (e) {
       var el = e.target;
-      if (el && el.classList && el.classList.contains('game-art')) el.classList.remove('game-art-zoomed');
-    });
-    container.addEventListener('mousemove', function (e) {
-      var el = e.target;
-      if (el && el.classList && el.classList.contains('game-art')) {
-        var r = el.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;
-        var py = (e.clientY - r.top) / r.height;
-        el.style.setProperty('--rx', ((py - 0.5) * 18).toFixed(2) + 'deg');
-        el.style.setProperty('--ry', ((0.5 - px) * 18).toFixed(2) + 'deg');
+      if (!el || !el.classList || !el.classList.contains('game-art')) return;
+      el.classList.remove('game-art-zoomed');
+      if (activeEl === el) {
+        activeEl = null;
+        rect = null;
       }
     });
+    if (finePointer && !reducedMotion) {
+      container.addEventListener('mousemove', schedule);
+      window.addEventListener('resize', function () {
+        if (activeEl) rect = activeEl.getBoundingClientRect();
+      });
+    }
   }
 
   bindTilt(grid);
