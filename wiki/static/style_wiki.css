@@ -670,6 +670,9 @@ img {
 .tag-type {
 	background: #7a7a7a;
 }
+.tag-status--done {
+	background: #7a2e3c;
+}
 
 .filter-tag {
 	cursor: pointer;
@@ -1295,6 +1298,298 @@ img {
 		height: auto;
 		max-height: 340px;
 	}
+}
+
+/* ============================================================
+   СТАТБЛОКИ ПЕРСОНАЖЕЙ (usta-te)
+   ============================================================ */
+
+.char-stats {
+	margin: 0 0 22px;
+	background: #fff;
+	border: 1px solid #c8ccd1;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.char-stats__head {
+	background: #1c2c7c;
+	color: #fff;
+	padding: 10px 18px;
+	font-size: 17px;
+	letter-spacing: 0.03em;
+}
+
+.char-stats__info {
+	padding: 4px 0;
+	font-size: 14px;
+	line-height: 1.5;
+}
+
+.char-stats__row {
+	display: flex;
+	justify-content: space-between;
+	gap: 14px;
+	padding: 6px 18px;
+	border-bottom: 1px solid #ececec;
+}
+
+.char-stats__row:last-child {
+	border-bottom: none;
+}
+
+.char-stats__key {
+	color: #555;
+	flex: 0 0 auto;
+}
+
+.char-stats__val {
+	text-align: right;
+	flex: 1 1 auto;
+}
+
+.char-stats__abilities {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	border-top: 1px solid #c8ccd1;
+}
+
+.char-stats__ability {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2px;
+	padding: 10px 4px 12px;
+	border-right: 1px solid #ececec;
+	text-align: center;
+}
+
+.char-stats__ability:last-child {
+	border-right: none;
+}
+
+.char-stats__label {
+	font-size: 11px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: #72777d;
+}
+
+.char-stats__score {
+	font-size: 20px;
+	line-height: 1.2;
+	color: #0c0c0c;
+}
+
+.char-stats__mod {
+	font-size: 13px;
+	color: #1c2c7c;
+}
+
+.char-abilities strong,
+.char-features strong {
+	color: #1c2c7c;
+}
+
+/* Лист персонажа: медиа-ряд сверху (арт + статблок), текст и способности ниже */
+.char-sheet {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 28px;
+	margin: 0 0 4px;
+}
+
+.char-sheet > .race-art {
+	float: none;
+	flex: 0 0 320px;
+	width: 320px;
+	margin: 0;
+}
+
+.char-sheet__info {
+	flex: 1 1 0;
+	min-width: 280px;
+	max-width: 560px;
+}
+
+.char-sheet__info .char-stats {
+	width: 100%;
+	margin: 0 0 16px;
+}
+
+.char-sheet__info > p {
+	margin: 0;
+}
+
+.char-features {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.char-features li {
+	position: relative;
+	padding: 7px 0 7px 20px;
+	border-bottom: 1px solid #e8ebf2;
+	line-height: 1.6;
+}
+
+.char-features li:last-child {
+	border-bottom: none;
+}
+
+.char-features li::before {
+	content: "";
+	position: absolute;
+	left: 4px;
+	top: 14px;
+	width: 6px;
+	height: 6px;
+	background: #1c2c7c;
+	border-radius: 50%;
+}
+
+.char-abilities > .char-features {
+	padding: 16px 18px 18px;
+	font-size: 14px;
+}
+
+/* Гадальные карты (Нахра) */
+.char-cards,
+.char-abilities,
+.char-item {
+	background: #fff;
+	border: 1px solid #c8ccd1;
+	border-radius: 8px;
+	overflow: hidden;
+	margin: 18px 0 22px;
+}
+
+.char-cards > summary,
+.char-abilities > summary,
+.char-item > summary {
+	background: #1c2c7c;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0.03em;
+	padding: 12px 18px;
+	border-bottom: none;
+	list-style: none;
+	cursor: pointer;
+	user-select: none;
+}
+
+.char-cards > summary::-webkit-details-marker,
+.char-abilities > summary::-webkit-details-marker,
+.char-item > summary::-webkit-details-marker { display: none; }
+
+.char-cards > summary::before,
+.char-abilities > summary::before,
+.char-item > summary::before { content: none; }
+
+.char-cards[open] > summary,
+.char-abilities[open] > summary,
+.char-item[open] > summary { border-bottom: 1px solid #d5dae6; }
+
+.char-cards > summary::after,
+.char-abilities > summary::after,
+.char-item > summary::after {
+	content: "\25BE";
+	float: right;
+	margin-left: 12px;
+	transition: transform 0.2s;
+}
+
+.char-cards[open] > summary::after,
+.char-abilities[open] > summary::after,
+.char-item[open] > summary::after {
+	transform: rotate(180deg);
+}
+
+.char-cards__body {
+	padding: 16px 18px 18px;
+}
+
+.char-cards__note {
+	font-style: italic;
+	color: #555;
+	margin: 0 0 14px;
+	font-size: 14px;
+}
+
+.char-cards__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 12px;
+}
+
+.char-card {
+	background: #f4f6fa;
+	border: 1px solid #e2e6f0;
+	border-radius: 6px;
+	padding: 12px 14px;
+	font-size: 13px;
+	line-height: 1.55;
+}
+
+.char-card__name {
+	font-size: 15px;
+	font-weight: 700;
+	color: #1c2c7c;
+	margin-bottom: 6px;
+}
+
+.char-card__label {
+	display: block;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: #72777d;
+	margin-bottom: 2px;
+}
+
+.char-card__meaning {
+	color: #1c2c7c;
+	font-weight: 600;
+	margin-bottom: 8px;
+}
+
+.char-card__text {
+	color: #444;
+}
+
+.char-card__text + .char-card__text {
+	margin-top: 8px;
+}
+
+@media (max-width: 800px) {
+	.char-sheet {
+		flex-direction: column;
+	}
+
+	.char-sheet > .race-art {
+		flex: 0 0 auto;
+		width: 100%;
+		max-width: 320px;
+	}
+}
+
+@media (max-width: 575px) {
+	.char-stats__abilities {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.char-stats__ability:nth-child(3n) {
+		border-right: none;
+	}
+}
+
+/* Погасить глобальный маркер details для сворачиваемых вкладок */
+.wiki-tab > summary::before {
+	content: none;
 }
 
 /* ============================================================

@@ -64,6 +64,8 @@ var WIKI_BROWSE_INDEX =
         "regions.html",
         "snezhnaya-pustosh.html",
         "player-book/speed-burst.html",
+        "tools.html",
+        "usta-te.html",
         "weapons-kelarim.html",
         "wiki.html",
         "zadubravye.html"
@@ -89,18 +91,22 @@ var WIKI_BROWSE_INDEX =
                 "title": "Верования"
             },
             {
-                "url": "faiths/faith-duhi-predkov.html",
-                "title": "Духи предков"
+                "url": "alvaera.html",
+                "title": "Аль'Ваэра"
             },
             {
-                "url": "faiths/faith-pyatero.html",
-                "title": "Пятеро"
+                "url": "faiths/faith-dzhailam.html",
+                "title": "Джа'Илам"
             }
         ],
         "combat-schools": [
             {
                 "url": "weapons-kelarim.html",
                 "title": "Оружие и боевые стили Келарима"
+            },
+            {
+                "url": "usta-te.html",
+                "title": "Ушта-те"
             },
             {
                 "url": "races/race-yargany.html",
@@ -917,10 +923,42 @@ var WIKI_BROWSE_INDEX =
                 "title": "Травмы 3.0"
             }
         ],
+        "tools": [
+            {
+                "url": "alvaera.html",
+                "title": "Аль'Ваэра"
+            },
+            {
+                "url": "campaigns.html",
+                "title": "Кампании"
+            },
+            {
+                "url": "faiths.html",
+                "title": "Верования"
+            }
+        ],
+        "usta-te": [
+            {
+                "url": "weapons-kelarim.html",
+                "title": "Оружие и боевые стили Келарима"
+            },
+            {
+                "url": "alvaera.html",
+                "title": "Аль'Ваэра"
+            },
+            {
+                "url": "player-book/combat-schools.html",
+                "title": "Боевые школы Келарима"
+            }
+        ],
         "weapons-kelarim": [
             {
                 "url": "player-book/combat-schools.html",
                 "title": "Боевые школы Келарима"
+            },
+            {
+                "url": "usta-te.html",
+                "title": "Ушта-те"
             },
             {
                 "url": "races/race-yargany.html",

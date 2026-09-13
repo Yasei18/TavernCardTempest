@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./static/style_wiki.css">
+
+    <script defer src="../js/layout.js"></script>
+    <script defer src="./js/main.js"></script>
+
+    <meta name="description" content="Инструменты D&D 5e: калькулятор характеристик, бросок кубиков и проверка к20 + модификатор.">
+    <title>Инструменты — Мир Орвей</title>
+    <style>
+        .calc-section {
+            background: #fff;
+            border: 1px solid #d5dae6;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .calc-section h2 {
+            margin-top: 0;
+            color: #1c2c7c;
+        }
+        .calc-abilities {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        @media (max-width: 500px) { .calc-abilities { grid-template-columns: repeat(2, 1fr); } }
+        .calc-ability {
+            text-align: center;
+        }
+        .calc-ability__label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #1c2c7c;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.3rem;
+        }
+        .calc-ability__value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #1c2c7c;
+            line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+        .calc-ability__mod {
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .calc-ability__dice {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 0.2rem;
+            min-height: 1.2em;
+        }
+        .calc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            background: #1c2c7c;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .calc-btn:hover { background: #2a3d8c; }
+        .calc-btn--secondary {
+            background: #f4f6fb;
+            color: #1c2c7c;
+            border: 1px solid #d5dae6;
+        }
+        .calc-btn--secondary:hover { background: #e2e6f0; }
+        .calc-btns {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .calc-method {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .calc-method__btn {
+            padding: 0.4rem 0.9rem;
+            border: 1px solid #d5dae6;
+            border-radius: 6px;
+            background: #fff;
+            color: #555;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .calc-method__btn:hover { border-color: #1c2c7c; color: #1c2c7c; }
+        .calc-method__btn.active {
+            background: #1c2c7c;
+            color: #fff;
+            border-color: #1c2c7c;
+        }
+        .calc-roll-info {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1rem;
+        }
+        .pb-slider {
+            width: 100%;
+            margin: 0.4rem 0;
+            accent-color: #1c2c7c;
+        }
+        .dice-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        .dice-btn {
+            min-width: 64px;
+            padding: 0.6rem 0.9rem;
+            border: 1px solid #d5dae6;
+            border-radius: 6px;
+            background: #fff;
+            color: #1c2c7c;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .dice-btn:hover { border-color: #1c2c7c; background: #eef1f8; }
+        .dice-btn:focus-visible { outline: 2px solid #1c2c7c; outline-offset: 2px; }
+        .dice-result {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #1c2c7c;
+            margin: 0.6rem 0;
+        }
+        .dice-hist {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            min-height: 1.3em;
+        }
+        .dice-divider {
+            border: none;
+            border-top: 1px solid #d5dae6;
+            margin: 1.5rem 0;
+        }
+        .dice-check {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin: 0.5rem 0 0.25rem;
+        }
+        .dice-check input {
+            width: 96px;
+            padding: 0.5rem;
+            border: 1px solid #d5dae6;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+        .dice-check__res {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1c2c7c;
+        }
+    </style>
+
+<link rel="apple-touch-icon" href="../img/favicon.png">
+<link rel="icon" type="image/png" href="../img/favicon.png">
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico">
+</head>
+<body data-layout="wiki" data-root="">
+
+    
+
+    <div class="wiki-page">
+        <div class="wiki-container">
+
+            <nav class="crumbs">
+                <a href="../index.html">Главная</a> / <a href="./player-book.html">Книга игрока</a> / <span>Инструменты</span>
+            </nav>
+
+            <div class="races-catalog__header">
+                <h1>Инструменты</h1>
+                <p>Калькулятор характеристик, кубики и проверки — всё в одном месте, без дайс-ботов и настоящих костей.</p>
+            </div>
+
+            <div class="calc-section" id="calculator">
+                <h2>Калькулятор характеристик</h2>
+                <p>Брось 4d6 и отбрось наименьший результат для каждого из шести характеристик персонажа.</p>
+
+                <div class="calc-method">
+                    <button class="calc-method__btn active" data-method="4d6drop">4d6 отброс наим.</button>
+                    <button class="calc-method__btn" data-method="standard">Стандартный набор</button>
+                    <button class="calc-method__btn" data-method="pointbuy">Покупка очков</button>
+                </div>
+
+                <div id="calc-4d6drop">
+                    <div class="calc-roll-info">Нажмите «Бросить», чтобы сгенерировать характеристики методом 4d6 с отбрасыванием наименьшего кубика.</div>
+                    <div class="calc-abilities" id="calc-abilities">
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Сила</div>
+                            <div class="calc-ability__value" id="str-val">—</div>
+                            <div class="calc-ability__mod" id="str-mod"></div>
+                            <div class="calc-ability__dice" id="str-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Ловкость</div>
+                            <div class="calc-ability__value" id="dex-val">—</div>
+                            <div class="calc-ability__mod" id="dex-mod"></div>
+                            <div class="calc-ability__dice" id="dex-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Телосложение</div>
+                            <div class="calc-ability__value" id="con-val">—</div>
+                            <div class="calc-ability__mod" id="con-mod"></div>
+                            <div class="calc-ability__dice" id="con-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Интеллект</div>
+                            <div class="calc-ability__value" id="int-val">—</div>
+                            <div class="calc-ability__mod" id="int-mod"></div>
+                            <div class="calc-ability__dice" id="int-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Мудрость</div>
+                            <div class="calc-ability__value" id="wis-val">—</div>
+                            <div class="calc-ability__mod" id="wis-mod"></div>
+                            <div class="calc-ability__dice" id="wis-dice"></div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Харизма</div>
+                            <div class="calc-ability__value" id="cha-val">—</div>
+                            <div class="calc-ability__mod" id="cha-mod"></div>
+                            <div class="calc-ability__dice" id="cha-dice"></div>
+                        </div>
+                    </div>
+                    <div class="calc-btns">
+                        <button class="calc-btn" id="calc-roll">Бросить</button>
+                        <button class="calc-btn calc-btn--secondary" id="calc-reset">Сбросить</button>
+                    </div>
+                </div>
+
+                <div id="calc-standard" style="display:none;">
+                    <div class="calc-roll-info">Стандартный набор значений: <strong>15, 14, 13, 12, 10, 8</strong>. Распределите их по характеристикам по своему усмотрению.</div>
+                    <div class="calc-abilities">
+                        <div class="calc-ability"><div class="calc-ability__label">Сила</div><div class="calc-ability__value">15</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Ловкость</div><div class="calc-ability__value">14</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Телосложение</div><div class="calc-ability__value">13</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Интеллект</div><div class="calc-ability__value">12</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Мудрость</div><div class="calc-ability__value">10</div></div>
+                        <div class="calc-ability"><div class="calc-ability__label">Харизма</div><div class="calc-ability__value">8</div></div>
+                    </div>
+                </div>
+
+                <div id="calc-pointbuy" style="display:none;">
+                    <div class="calc-roll-info">27 очков. Стоимость: 3=−5, 4=−4, 5=−3, 6=−2, 7=−1, 8=0, 9=1, 10=2, 11=3, 12=4, 13=5, 14=7, 15=9.</div>
+                    <div class="calc-abilities" id="pb-abilities">
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Сила</div>
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="0">
+                            <div class="calc-ability__value" id="pb-val-0">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Ловкость</div>
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="1">
+                            <div class="calc-ability__value" id="pb-val-1">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Телосложение</div>
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="2">
+                            <div class="calc-ability__value" id="pb-val-2">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Интеллект</div>
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="3">
+                            <div class="calc-ability__value" id="pb-val-3">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Мудрость</div>
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="4">
+                            <div class="calc-ability__value" id="pb-val-4">8</div>
+                        </div>
+                        <div class="calc-ability">
+                            <div class="calc-ability__label">Харизма</div>
+                            <input type="range" min="3" max="15" value="8" class="pb-slider" data-idx="5">
+                            <div class="calc-ability__value" id="pb-val-5">8</div>
+                        </div>
+                    </div>
+                    <div style="margin-top:1rem;font-weight:600;color:#1c2c7c;">Осталось очков: <span id="pb-remaining">27</span></div>
+                    <div class="calc-btns">
+                        <button class="calc-btn calc-btn--secondary" id="pb-reset">Сбросить</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calc-section" id="dice">
+                <h2>Кости</h2>
+                <p>Не нужны ни дайс-боты, ни настоящие кости: брось кубик прямо здесь.</p>
+                <div class="dice-btns" id="diceButtons">
+                    <button type="button" class="dice-btn" data-faces="4">к4</button>
+                    <button type="button" class="dice-btn" data-faces="6">к6</button>
+                    <button type="button" class="dice-btn" data-faces="8">к8</button>
+                    <button type="button" class="dice-btn" data-faces="10">к10</button>
+                    <button type="button" class="dice-btn" data-faces="12">к12</button>
+                    <button type="button" class="dice-btn" data-faces="20">к20</button>
+                    <button type="button" class="dice-btn" data-faces="100">к100</button>
+                </div>
+                <div class="dice-result" id="diceResult">Нажми на кость</div>
+                <div class="dice-hist" id="diceHistory"></div>
+                <button type="button" class="calc-btn calc-btn--secondary" id="diceReset">Очистить</button>
+                <hr class="dice-divider">
+                <h3>Проверка характеристики</h3>
+                <p>Бросай к20 и добавляй модификатор.</p>
+                <div class="dice-check">
+                    <label for="d20Mod">Модификатор:</label>
+                    <input type="number" id="d20Mod" value="0" min="-20" max="20">
+                    <button type="button" class="calc-btn" id="d20Roll">Бросить</button>
+                    <span class="dice-check__res" id="d20Result"></span>
+                </div>
+            </div>
+
+            <nav class="wiki-nav-more">
+                <a href="./wiki.html">Главная</a>
+                <a href="./player-book.html">Книга игрока</a>
+                <a href="./races.html">Каталог рас</a>
+            </nav>
+
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        var ABILITIES = ['str','dex','con','int','wis','cha'];
+        var COSTS = [-5,-4,-3,-2,-1,0,1,2,3,4,5,7,9];
+        var currentMethod = '4d6drop';
+
+        function roll4d6drop() {
+            var rolls = [];
+            for (var i = 0; i < 4; i++) rolls.push(Math.floor(Math.random() * 6) + 1);
+            var sorted = rolls.slice().sort(function(a,b){ return a - b; });
+            var dropped = sorted.shift();
+            var sum = sorted.reduce(function(a,b){ return a + b; }, 0);
+            return { total: sum, kept: sorted, dropped: dropped };
+        }
+
+        function abilityMod(val) {
+            var mod = Math.floor((val - 10) / 2);
+            return mod >= 0 ? '+' + mod : '' + mod;
+        }
+
+        function rollAll4d6() {
+            ABILITIES.forEach(function(ab) {
+                var result = roll4d6drop();
+                document.getElementById(ab + '-val').textContent = result.total;
+                document.getElementById(ab + '-mod').textContent = abilityMod(result.total);
+                document.getElementById(ab + '-dice').textContent =
+                    '[' + result.kept.join(', ') + '] (отброшено: ' + result.dropped + ')';
+            });
+        }
+
+        function resetAll() {
+            ABILITIES.forEach(function(ab) {
+                document.getElementById(ab + '-val').textContent = '—';
+                document.getElementById(ab + '-mod').textContent = '';
+                document.getElementById(ab + '-dice').textContent = '';
+            });
+        }
+
+        document.getElementById('calc-roll').addEventListener('click', rollAll4d6);
+        document.getElementById('calc-reset').addEventListener('click', resetAll);
+
+        document.querySelectorAll('.calc-method__btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.calc-method__btn').forEach(function(b){ b.classList.remove('active'); });
+                btn.classList.add('active');
+                currentMethod = btn.getAttribute('data-method');
+                document.getElementById('calc-4d6drop').style.display = currentMethod === '4d6drop' ? '' : 'none';
+                document.getElementById('calc-standard').style.display = currentMethod === 'standard' ? '' : 'none';
+                document.getElementById('calc-pointbuy').style.display = currentMethod === 'pointbuy' ? '' : 'none';
+            });
+        });
+
+        function updatePointBuy() {
+            var total = 0;
+            var sliders = document.querySelectorAll('.pb-slider');
+            sliders.forEach(function(s, i) {
+                var val = parseInt(s.value);
+                document.getElementById('pb-val-' + i).textContent = val;
+                total += COSTS[val - 3];
+            });
+            var remaining = 27 - total;
+            var el = document.getElementById('pb-remaining');
+            el.textContent = remaining;
+            el.style.color = remaining < 0 ? '#c0392b' : remaining === 0 ? '#27ae60' : '#1c2c7c';
+        }
+
+        document.querySelectorAll('.pb-slider').forEach(function(s) {
+            s.addEventListener('input', updatePointBuy);
+        });
+
+        document.getElementById('pb-reset').addEventListener('click', function() {
+            document.querySelectorAll('.pb-slider').forEach(function(s) {
+                s.value = 8;
+            });
+            updatePointBuy();
+        });
+    })();
+
+    (function () {
+        var resultEl = document.getElementById('diceResult');
+        var histEl = document.getElementById('diceHistory');
+        var history = [];
+
+        document.querySelectorAll('#diceButtons .dice-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var faces = parseInt(btn.getAttribute('data-faces'), 10);
+                var value = 1 + Math.floor(Math.random() * faces);
+                var label = btn.textContent.trim();
+                resultEl.textContent = label + ' → ' + value;
+                history.unshift(label + ' → ' + value);
+                if (history.length > 12) history.pop();
+                histEl.textContent = history.join(' · ');
+            });
+        });
+
+        document.getElementById('diceReset').addEventListener('click', function () {
+            history = [];
+            histEl.textContent = '';
+            resultEl.textContent = 'Нажми на кость';
+        });
+
+        document.getElementById('d20Roll').addEventListener('click', function () {
+            var mod = parseInt(document.getElementById('d20Mod').value, 10) || 0;
+            var die = 1 + Math.floor(Math.random() * 20);
+            var total = die + mod;
+            var modText = mod >= 0 ? '+ ' + mod : '− ' + Math.abs(mod);
+            document.getElementById('d20Result').textContent =
+                'к20 → ' + die + ' (' + modText + ') = ' + total;
+        });
+    })();
+    </script>
+
+</body>
+</html>
