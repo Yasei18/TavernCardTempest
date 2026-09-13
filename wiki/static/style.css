@@ -695,13 +695,13 @@ hr {
 }
 
 .region-nav__item--kelarim {
-  background-image: url("images/region-kelarim.jpg");
+  background-image: url("images/region-kelarim.webp");
 }
 .region-nav__item--alvaera {
-  background-image: url("images/region-alvaera.jpg");
+  background-image: url("images/region-alvaera.webp");
 }
 .region-nav__item--zadubravye {
-  background-image: url("images/region-zadubravye.jpg");
+  background-image: url("images/region-zadubravye.webp");
 }
 
 .region-nav__name {
@@ -803,7 +803,7 @@ hr {
 
 /* Footer */
 .footer {
-  background: url("images/footer.jpg") center no-repeat;
+  background: url("images/footer.webp") center no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
 }

@@ -24,7 +24,7 @@
       '<header class="site-header">',
       '  <nav class="nav">',
       '    <a class="nav-logo" href="' + root + 'index.html">',
-      '      <img src="' + root + 'img/gerb-small.jpg" alt="Герб Таверны «Карточная Буря»" width="42" height="42">',
+      '      <img src="' + root + 'img/gerb-small.webp" alt="Герб Таверны «Карточная Буря»" width="42" height="42">',
       '      <span>Карточная Буря</span>',
       '    </a>',
       '    <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-controls="nav-links" aria-expanded="false">',
@@ -77,7 +77,7 @@
   var FOOTERS = {
     tavern: [
       '<footer class="site-footer">',
-      '  <img class="footer-emblem" src="' + root + 'img/gerb-small.jpg" alt="Герб Таверны" width="74" height="74">',
+      '  <img class="footer-emblem" src="' + root + 'img/gerb-small.webp" alt="Герб Таверны" width="74" height="74">',
       '  <p class="footer-title">Таверна «Карточная Буря»</p>',
       '  <p class="footer-quote">«Будь как дома, путник!»</p>',
       '  <p class="footer-copy">© <span class="js-year"></span> Таверна «Карточная Буря» · Двери открыты для всякого путника</p>',
