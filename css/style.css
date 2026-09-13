@@ -1953,7 +1953,7 @@ h1, h2, h3 {
 .wiki-hero {
   background:
     radial-gradient(ellipse at 50% 0%, rgba(23, 16, 10, 0.45), rgba(23, 16, 10, 0.9)),
-    url("../img/worlds/intro-mobile.jpg") center 20% / cover no-repeat,
+    url("../img/worlds/intro-mobile.webp") center 20% / cover no-repeat,
     radial-gradient(ellipse at 50% 0%, rgba(212, 165, 67, 0.1), transparent 60%);
 }
 
@@ -2040,7 +2040,7 @@ h1, h2, h3 {
 .section--races {
   background:
     radial-gradient(ellipse at 50% 0%, rgba(23, 16, 10, 0.8), rgba(23, 16, 10, 0.93)),
-    url("../img/worlds/races-bg.jpg") center 40% / cover no-repeat;
+    url("../img/worlds/races-bg.webp") center 40% / cover no-repeat;
 }
 
 /* ---------- ВИКИ: КАМПАНИИ ---------- */

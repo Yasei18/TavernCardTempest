@@ -49,7 +49,7 @@ img {
   min-height: 700px;
   position: relative;
 
-  background: url("../img/worlds/intro-mobile.jpg") center no-repeat;
+  background: url("../img/worlds/intro-mobile.webp") center no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
 }
@@ -700,7 +700,7 @@ img {
 
 /* Footer */
 .footer {
-  background: url("../img/worlds/footer-bg.jpg") center no-repeat;
+  background: url("../img/worlds/footer-bg.webp") center no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
 }

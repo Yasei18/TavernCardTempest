@@ -75,7 +75,7 @@ hr {
   min-height: 820px;
   position: relative;;
 
-  background: url("../../img/worlds/intro-mobile.jpg") center no-repeat;
+  background: url("../../img/worlds/intro-mobile.webp") center no-repeat;
   -webkit-background-size: cover;
   background-size: cover;
 }
