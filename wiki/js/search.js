@@ -163,10 +163,22 @@
     }
 
     if (!results.length) {
+      var chips = [
+        { text: 'Дварфы', href: './races/races-dvarfy.html' },
+        { text: 'Альбани', href: './races/race-albany.html' },
+        { text: 'Джа&#39;Илам', href: './faiths/faith-dzhailam.html' },
+        { text: 'Черты', href: './player-book/feats.html' },
+        { text: 'Кампания «Ушта-те»', href: './usta-te.html' },
+        { text: 'Карта мира', href: './map.html' }
+      ];
+      var chipsHtml = chips
+        .map(function (c) { return '<a href="' + c.href + '">' + c.text + '</a>'; })
+        .join('');
       resultsEl.innerHTML =
         '<div class="wiki-search-empty">' +
           '<p>По запросу «' + esc(query) + '» ничего не нашлось.</p>' +
-          '<p>Попробуй другое слово: например, <em>дварфы</em>, <em>Кехабат</em> или <em>черты</em>.</p>' +
+          '<p>Попробуй другое слово или загляни в популярные статьи:</p>' +
+          '<div class="wiki-search-empty__chips">' + chipsHtml + '</div>' +
         '</div>';
       return;
     }
@@ -236,9 +248,11 @@
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === '/' && document.activeElement !== input && !/^(input|textarea)$/i.test(document.activeElement.tagName)) {
+    var quickKey = e.key === '/' || e.code === 'Slash' || e.keyCode === 191;
+    if (quickKey && document.activeElement !== input && !/^(input|textarea)$/i.test(document.activeElement.tagName)) {
       e.preventDefault();
       input.focus();
+      input.select();
     }
   });
 

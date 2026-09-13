@@ -4,19 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./static/style.css">
-    <link rel="stylesheet" href="./static/map/distr/leaflet.css">
+    <link rel="preload" as="image" href="../img/worlds/intro-mobile.webp">
 
     <script defer src="../js/layout.js"></script>
 <script defer src="./js/main.js"></script>
 <script defer src="./js/search-data.js"></script>
 <script defer src="./js/search.js"></script>
-<script defer src="./static/map/distr/leaflet.js"></script>
-<script defer src="./static/map/data/main.js"></script>
-<script defer src="./static/map/data/bounds.js"></script>
 <script defer src="./js/home.js"></script>
 
         <meta name="description" content="Орвей — неофициальный сеттинг для пятой редакции D&D: континенты Аль Ваэра и Келарим, расы, карты и легенды от Таверны «Карточная Буря».">
-    <title>Орвей — мир для D&D 5e | Таверна «Карточная Буря»</title>
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Мир Орвей">
+    <meta property="og:locale" content="ru_RU">
+    <meta property="og:title" content="Орвей — мир для D&D | Таверна «Карточная Буря»">
+    <meta property="og:description" content="Неофициальный сеттинг для D&D: Аль'Ваэра, Келарим и Задубравье. Расы, регионы, верования, карта мира, книга игрока и кампании.">
+    <meta property="og:url" content="https://yasei18.github.io/TavernCardTempest/wiki/wiki.html">
+    <meta property="og:image" content="https://yasei18.github.io/TavernCardTempest/img/worlds/intro-mobile.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Орвей — мир для D&D | Таверна «Карточная Буря»">
+    <meta name="twitter:description" content="Неофициальный сеттинг для D&D: Аль'Ваэра, Келарим и Задубравье. Расы, регионы, верования, карта мира.">
+    <meta name="twitter:image" content="https://yasei18.github.io/TavernCardTempest/img/worlds/intro-mobile.webp">
+    <title>Орвей — мир для D&D | Таверна «Карточная Буря»</title>
+    <link rel="canonical" href="https://yasei18.github.io/TavernCardTempest/wiki/wiki.html">
 
 <link rel="apple-touch-icon" href="../img/favicon.png">
 <link rel="icon" type="image/png" href="../img/favicon.png">
@@ -30,13 +39,11 @@
         <div class="intro__container">
             <h2 class="intro__subtitle">Мир</h2>
             <h1 class="intro__title">ОРВЕЙ</h1>
-        </div>
-    </div><!-- /.intro -->
 
-    <section class="section" id="search">
-        <div class="container">
+            <p class="intro-search__tagline">Авторский фэнтези-мир Таверны «Карточная Буря»</p>
+            <p class="intro-search__stats" id="wikiStats"></p>
 
-            <div class="home-search">
+            <div class="intro-search">
                 <form class="wiki-search" id="searchForm" role="search">
                     <label class="wiki-search__label" for="searchInput">
                         <span class="wiki-search__icon" aria-hidden="true">
@@ -49,161 +56,162 @@
                     <button class="wiki-search__clear" type="button" id="searchClear" aria-label="Очистить запрос" title="Очистить" hidden>×</button>
                 </form>
 
-                <div class="home-search__tools">
-                    <span class="home-search__hint">Ищи по названиям, именам, местам и правилам.</span>
-                    <button type="button" class="home-search__random" id="randomPage">Случайная страница</button>
-                </div>
-
-                <p class="wiki-search__meta" id="searchMeta" role="status"></p>
-
-                <div class="wiki-search-results" id="searchResults" aria-live="polite"></div>
-
-                <noscript>
-                    <div class="wiki-search-noscript">
-                        <p>Поиск требует включённого JavaScript. Вы можете перейти к основным разделам вики:</p>
-                        <ul>
-                            <li><a href="./races.html">Расы</a></li>
-                            <li><a href="./faiths.html">Верования</a></li>
-                            <li><a href="./regions.html">Регионы</a></li>
-                            <li><a href="./player-book.html">Книга игрока</a></li>
-                            <li><a href="./map.html">Карта мира</a></li>
-                        </ul>
+                <div class="intro-search__panel">
+                    <div class="home-search__tools">
+                        <span class="home-search__hint">Ищи по названиям, именам, местам и правилам.</span>
+                        <button type="button" class="home-search__random" id="randomPage">Случайная страница</button>
                     </div>
-                </noscript>
+
+                    <div class="home-search__keys">
+                        <button type="button" class="kbd kbd--action" id="quickSearchKey" title="Клавиша «/» — быстрый поиск" aria-label="Быстрый поиск: клавиша «/»">/</button> быстрый поиск
+                        <span class="kbd">Enter</span> первый результат
+                    </div>
+
+                    <p class="wiki-search__meta" id="searchMeta" role="status"></p>
+
+                    <div class="wiki-search-results" id="searchResults" aria-live="polite"></div>
+
+                    <noscript>
+                        <div class="wiki-search-noscript">
+                            <p>Поиск требует включённого JavaScript. Вы можете перейти к основным разделам вики:</p>
+                            <ul>
+                                <li><a href="./races.html">Расы</a></li>
+                                <li><a href="./faiths.html">Верования</a></li>
+                                <li><a href="./regions.html">Регионы</a></li>
+                                <li><a href="./player-book.html">Книга игрока</a></li>
+                                <li><a href="./map.html">Карта мира</a></li>
+                            </ul>
+                        </div>
+                    </noscript>
+                </div>
             </div>
 
+        </div>
+    </div><!-- /.intro -->
+
+    <section class="section" id="start">
+        <div class="container">
+
+            <div class="section__header">
+                <h3 class="section__subtitle">С ЧЕГО НАЧАТЬ</h3>
+                <div class="create-line-section"></div>
+
+                <div class="start-path">
+                    <a class="start-path__step" href="./player-book.html">
+                        <span class="start-path__num">1</span>
+                        <span class="start-path__body">
+                            <span class="start-path__name">Книга игрока</span>
+                            <span class="start-path__desc">Правила, классы, черты и домашние механики мира.</span>
+                        </span>
+                    </a>
+                    <a class="start-path__step" href="./races.html">
+                        <span class="start-path__num">2</span>
+                        <span class="start-path__body">
+                            <span class="start-path__name">Выбери расу</span>
+                            <span class="start-path__desc">Народы Орвея — от альбани и шуалов до полуночников.</span>
+                        </span>
+                    </a>
+                    <a class="start-path__step" href="./map.html">
+                        <span class="start-path__num">3</span>
+                        <span class="start-path__body">
+                            <span class="start-path__name">Найди свой путь</span>
+                            <span class="start-path__desc">Интерактивная карта регионов и городов мира.</span>
+                        </span>
+                    </a>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <section class="section" id="about">
-        <div class="container">
-      
-          <div class="section__header">
-            <h3 class="section__subtitle">ОПИСАНИЕ</h3>
-            <div class="create-line-section"></div>
-            <div class="section__text">
-              <p>Здесь начинается ваше увлекательное путешествие
-                по неофициальному сеттингу для пятой редакции
-              легендарной настольной ролевой игры 
-              Dungeons & Dragons. Этот уникальный мир был создан 
-              талантливыми энтузиастами из Таверны "Карточная Буря".
-            </div>
-
-          <a href="../index.html#team" class="button ribbon-outset border">создатели</a>
-
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="worlds">
-        <div class="container">
-      
-          <div class="section__header">
-            <h3 class="section__subtitle">ИССЛЕДУЙ</h3>
-            <div class="create-line-section"></div>
-            
-
-            <div class="region-nav">
-              <a class="region-nav__item region-nav__item--kelarim" href="./kelarim.html">
-                <span class="region-nav__name">Келарим</span>
-                <span class="region-nav__desc">Крупный регион, где разворачивается большая часть событий сеттинга.</span>
-                <span class="region-nav__more">Исследовать →</span>
-              </a>
-              <a class="region-nav__item region-nav__item--alvaera" href="./alvaera.html">
-                <span class="region-nav__name">Аль'Ваэра</span>
-                <span class="region-nav__desc">Пустынный мир дюн, миража и древних племён.</span>
-                <span class="region-nav__more">Исследовать →</span>
-              </a>
-              <a class="region-nav__item region-nav__item--zadubravye" href="./zadubravye.html">
-                <span class="region-nav__name">Задубравье</span>
-                <span class="region-nav__desc">Край лесов, рек и нечисти.</span>
-                <span class="region-nav__more">Исследовать →</span>
-              </a>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="sections">
+    <section class="section" id="worlds">
         <div class="container">
 
-          <div class="section__header">
-            <h3 class="section__subtitle">РАЗДЕЛЫ</h3>
-            <div class="create-line-section"></div>
+            <div class="section__header">
+                <h3 class="section__subtitle">ИССЛЕДУЙ</h3>
+                <div class="create-line-section"></div>
 
-            <div class="portal-grid">
-              <a class="portal-grid__item" href="./races.html">
-                <span class="portal-grid__cat">Народы</span>
-                <span class="portal-grid__name">Расы</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
-              <a class="portal-grid__item" href="./faiths.html">
-                <span class="portal-grid__cat">Боги и культы</span>
-                <span class="portal-grid__name">Верования</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
-              <a class="portal-grid__item" href="./regions.html">
-                <span class="portal-grid__cat">География</span>
-                <span class="portal-grid__name">Регионы</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
-              <a class="portal-grid__item" href="./player-book.html">
-                <span class="portal-grid__cat">Для игры</span>
-                <span class="portal-grid__name">Книга игрока</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
-              <a class="portal-grid__item" href="./campaigns.html">
-                <span class="portal-grid__cat">Истории игр</span>
-                <span class="portal-grid__name">Кампании</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
-              <a class="portal-grid__item" href="./oneshots.html">
-                <span class="portal-grid__cat">Короткие игры</span>
-                <span class="portal-grid__name">Ваншоты</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
-              <a class="portal-grid__item" href="./tools.html">
-                <span class="portal-grid__cat">Помощь мастеру</span>
-                <span class="portal-grid__name">Инструменты</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
-              <a class="portal-grid__item" href="./map.html">
-                <span class="portal-grid__cat">Интерактивная</span>
-                <span class="portal-grid__name">Карта мира</span>
-                <span class="portal-grid__more">Открыть →</span>
-              </a>
+                <div class="region-nav">
+                    <a class="region-nav__item region-nav__item--kelarim" href="./kelarim.html">
+                        <span class="region-nav__name">Келарим</span>
+                        <span class="region-nav__desc">Крупный регион, где разворачивается большая часть событий сеттинга.</span>
+                    </a>
+                    <a class="region-nav__item region-nav__item--alvaera" href="./alvaera.html">
+                        <span class="region-nav__name">Аль'Ваэра</span>
+                        <span class="region-nav__desc">Пустынный мир дюн, миража и древних племён.</span>
+                    </a>
+                    <a class="region-nav__item region-nav__item--zadubravye" href="./zadubravye.html">
+                        <span class="region-nav__name">Задубравье</span>
+                        <span class="region-nav__desc">Край лесов, рек и нечисти.</span>
+                    </a>
+                </div>
+
+                <div class="portal-grid">
+                    <a class="portal-grid__item" href="./races.html">
+                        <span class="portal-grid__cat">Народы</span>
+                        <span class="portal-grid__name">Расы</span>
+                    </a>
+                    <a class="portal-grid__item" href="./faiths.html">
+                        <span class="portal-grid__cat">Боги и культы</span>
+                        <span class="portal-grid__name">Верования</span>
+                    </a>
+                    <a class="portal-grid__item" href="./regions.html">
+                        <span class="portal-grid__cat">География</span>
+                        <span class="portal-grid__name">Регионы</span>
+                    </a>
+                    <a class="portal-grid__item" href="./player-book.html">
+                        <span class="portal-grid__cat">Для игры</span>
+                        <span class="portal-grid__name">Книга игрока</span>
+                    </a>
+                    <a class="portal-grid__item" href="./campaigns.html">
+                        <span class="portal-grid__cat">Истории игр</span>
+                        <span class="portal-grid__name">Кампании</span>
+                    </a>
+                    <a class="portal-grid__item" href="./oneshots.html">
+                        <span class="portal-grid__cat">Короткие игры</span>
+                        <span class="portal-grid__name">Ваншоты</span>
+                    </a>
+                    <a class="portal-grid__item" href="./tools.html">
+                        <span class="portal-grid__cat">Помощь мастеру</span>
+                        <span class="portal-grid__name">Инструменты</span>
+                    </a>
+                    <a class="portal-grid__item" href="./map.html">
+                        <span class="portal-grid__cat">Интерактивная</span>
+                        <span class="portal-grid__name">Карта мира</span>
+                    </a>
+                </div>
+
             </div>
-
-          </div>
         </div>
-      </section>
+    </section>
 
-      <section class="section" id="map">
+    <section class="section" id="facts">
         <div class="container">
-          <div class="section__header">
-            <h3 class="section__subtitle">КАРТА</h3>
-            <div class="create-line-section"></div>
 
-            <div class="home-map">
-              <div class="home-map__canvas" id="homeMap"></div>
-              <noscript>
-                <figure class="wiki-map">
-                  <a href="./static/maps/orvey-map.webp">
-                    <img src="./static/maps/orvey-map-preview.webp" alt="Карта мира Орвей">
-                  </a>
-                  <figcaption>Мир Орвей.</figcaption>
-                </figure>
-              </noscript>
-              <p class="home-map__caption">Веди карту мышкой и кликай по меткам, чтобы узнать о местах мира.</p>
-              <a class="home-map__open" href="./map.html">Открыть полную карту →</a>
+            <div class="section__header">
+                <h3 class="section__subtitle">ЗНАЕТЕ ЛИ ВЫ?</h3>
+                <div class="create-line-section"></div>
+
+                <div class="wiki-facts">
+                    <div class="wiki-fact">
+                        <p class="wiki-fact__text"><strong>«Ушта-те»</strong> — приветствие в Аль'Ваэре, означающее «Да обретёшь ты счастье». А вслед уходящему путнику кочевники желают: <em>«Риях-те»</em> — «Попутного ветра».</p>
+                        <a class="wiki-fact__more" href="./alvaera.html">Языки пустыни →</a>
+                    </div>
+                    <div class="wiki-fact">
+                        <p class="wiki-fact__text">У <strong>альбани</strong> нет богов — только духи предков. Погибших они не хоронят, а «кродируют»: сжигают на костре-кроде, ритуальной лодке, выпуская душу из заточения тела.</p>
+                        <a class="wiki-fact__more" href="./races/race-albany.html">Читать об альбани →</a>
+                    </div>
+                    <div class="wiki-fact">
+                        <p class="wiki-fact__text"><strong>Полуночники</strong> — полуживые дети упырей и человеческих матерей. Бледные, со слегка заострёнными клыками и глазами, мерцающими в темноте, они живут до 500 лет.</p>
+                        <a class="wiki-fact__more" href="./races/race-polunoshniki.html">Читать о полуночниках →</a>
+                    </div>
+                </div>
+
             </div>
-
-          </div>
         </div>
-      </section>
+    </section>
 
-      <!--Footer-->
+    <!--Footer-->
 
 </body>
 </html>

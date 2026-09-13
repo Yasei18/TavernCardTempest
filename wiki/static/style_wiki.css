@@ -148,6 +148,16 @@ img {
 	color: #a6cbe6;
 }
 
+.nav__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.nav__icon svg {
+	display: block;
+}
+
 .dropdown {
 	overflow: visible;
 	display: inline-block;
@@ -1050,6 +1060,43 @@ img {
 
 .wiki-footer .copyright a {
 	color: #1c2c7c;
+}
+
+.wiki-footer .footer-socials {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-bottom: 16px;
+	font-family: 'Prata', serif;
+	font-size: 13px;
+	color: #999;
+}
+
+.wiki-footer .footer-socials a {
+	color: #1c2c7c;
+	letter-spacing: .02em;
+	text-decoration: none;
+}
+
+.wiki-footer .footer-socials a:hover {
+	color: #0c1855;
+	text-decoration: underline;
+}
+
+.wiki-footer .footer-social-sep {
+	margin: 0 12px;
+	color: #b7bdd3;
+}
+
+@media (max-width: 575px) {
+	.wiki-footer .footer-socials {
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+	.wiki-footer .footer-social-sep {
+		display: none;
+	}
 }
 
 /* ============================================================

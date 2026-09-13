@@ -4,6 +4,22 @@
 (function () {
   'use strict';
 
+  /* ---------- Счётчик страниц вики ---------- */
+  var statsEl = document.getElementById('wikiStats');
+  if (statsEl && typeof WIKI_SEARCH_INDEX !== 'undefined' && WIKI_SEARCH_INDEX.length) {
+    statsEl.textContent = WIKI_SEARCH_INDEX.length + ' страниц вики';
+  }
+
+  /* ---------- Кнопка «/» в подсказке фокусирует строку поиска ---------- */
+  var quickKeyBtn = document.getElementById('quickSearchKey');
+  var heroSearchInput = document.getElementById('searchInput');
+  if (quickKeyBtn && heroSearchInput) {
+    quickKeyBtn.addEventListener('click', function () {
+      heroSearchInput.focus();
+      heroSearchInput.select();
+    });
+  }
+
   /* ---------- Случайная страница ---------- */
   var randomBtn = document.getElementById('randomPage');
   if (randomBtn) {
