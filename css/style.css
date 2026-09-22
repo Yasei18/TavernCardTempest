@@ -1243,6 +1243,240 @@ h1, h2, h3 {
   }
 }
 
+/* ---------- РАСПИСАНИЕ СОБЫТИЙ ---------- */
+.schedule-list {
+  position: relative;
+  display: grid;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 880px;
+}
+
+.schedule-item {
+  position: relative;
+  display: flex;
+  gap: 26px;
+  align-items: stretch;
+  text-decoration: none;
+  color: inherit;
+}
+
+.schedule-item::before {
+  content: "";
+  position: absolute;
+  left: 163px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--gold-dim), transparent 85%);
+  opacity: 0.55;
+}
+
+.schedule-item:last-child::before {
+  display: none;
+}
+
+.schedule-dot {
+  position: absolute;
+  left: 163px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-dark);
+  box-shadow: 0 0 0 2px rgba(212, 165, 67, 0.4);
+  z-index: 1;
+}
+
+.schedule-date {
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6px 0 0;
+}
+
+.schedule-day {
+  font-family: 'Forum', 'Cinzel', serif;
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--gold-bright);
+}
+
+.schedule-month {
+  margin-top: 4px;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.schedule-weekday {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.schedule-time {
+  margin-top: 8px;
+  font-size: 14px;
+  font-style: italic;
+  color: var(--gold);
+}
+
+.schedule-card {
+  flex: 1 1 auto;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  min-width: 0;
+  padding: 20px 24px;
+  background: linear-gradient(160deg, var(--bg-card-soft), var(--bg-card));
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: var(--radius);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.schedule-item:hover .schedule-card,
+.schedule-item:focus-visible .schedule-card {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--gold);
+}
+
+.schedule-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+}
+
+.schedule-item--gathering .schedule-icon { color: var(--gold); }
+.schedule-item--youtube .schedule-icon { color: #f2543d; }
+.schedule-item--twitch .schedule-icon { color: #a474ff; }
+.schedule-item--boosty .schedule-icon { color: #dd8a2a; }
+.schedule-item--_default .schedule-icon { color: var(--gold); }
+
+.schedule-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: currentColor;
+}
+
+.schedule-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.schedule-kicker {
+  margin: 0 0 3px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.schedule-title {
+  margin: 0 0 3px;
+  font-size: 23px;
+  line-height: 1.25;
+  color: var(--text-main);
+}
+
+.schedule-desc {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.schedule-in {
+  flex: 0 0 auto;
+  margin: 0;
+  font-size: 15px;
+  font-style: italic;
+  white-space: nowrap;
+  color: var(--gold-bright);
+}
+
+.schedule-empty {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.schedule-empty a {
+  color: var(--gold-bright);
+}
+
+.schedule-item.is-next .schedule-card {
+  border-left-color: var(--gold-bright);
+  box-shadow: 0 0 0 1px rgba(212, 165, 67, 0.22), var(--shadow);
+}
+
+.schedule-item.is-next .schedule-dot {
+  background: var(--gold-bright);
+  box-shadow: 0 0 0 4px rgba(212, 165, 67, 0.28);
+}
+
+@media (max-width: 700px) {
+  .schedule-item {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .schedule-item::before,
+  .schedule-dot {
+    display: none;
+  }
+
+  .schedule-date {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+    justify-content: flex-start;
+    padding: 4px 6px 0;
+  }
+
+  .schedule-day {
+    font-size: 30px;
+  }
+
+  .schedule-month {
+    margin-top: 0;
+    font-size: 14px;
+  }
+
+  .schedule-time {
+    margin-top: 0;
+  }
+
+  .schedule-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .schedule-in {
+    white-space: normal;
+  }
+}
+
 /* ---------- АДМИНИСТРАЦИЯ ---------- */
 .team-grid {
   display: grid;

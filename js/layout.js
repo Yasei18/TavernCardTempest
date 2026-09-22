@@ -47,6 +47,7 @@
       '      <li>' + link('index.html#about', 'О нас') + '</li>',
       '      <li>' + link('games.html', 'Коллекция') + '</li>',
       '      <li>' + link('index.html#events', 'Сходки') + '</li>',
+      '      <li>' + link('index.html#schedule', 'Расписание') + '</li>',
       '      <li>' + link('index.html#newcomers', 'Новичкам') + '</li>',
 '      <li>' + link('otgoloski.html', 'Отголоски Бури') + '</li>',
     '      <li>' + link('wiki/wiki.html', 'Орвей') + '</li>',
