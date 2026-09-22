@@ -30,16 +30,21 @@
     var today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    var upcoming = [];
+    var dated = [];
+    var undated = [];
     events.forEach(function (e) {
       var d = parseDate(e.date);
-      if (!d) return;
-      if (d.getTime() < today.getTime()) return;
-      upcoming.push({ e: e, d: d });
+      if (!d) {
+        /* Без даты — анонс «скоро»: всегда в конце расписания. */
+        undated.push({ e: e, d: null });
+      } else if (d.getTime() >= today.getTime()) {
+        dated.push({ e: e, d: d });
+      }
     });
-    upcoming.sort(function (a, b) {
+    dated.sort(function (a, b) {
       return a.d.getTime() - b.d.getTime();
     });
+    var upcoming = dated.concat(undated);
 
     if (!upcoming.length) {
       listEl.innerHTML = '';
@@ -49,7 +54,8 @@
 
     var html = '';
     for (var i = 0; i < Math.min(upcoming.length, SCHEDULE_MAX); i++) {
-      html += itemHtml(upcoming[i], i === 0);
+      /* «Ближайшее» подсвечиваем только у ближайшей датированной сходки. */
+      html += itemHtml(upcoming[i], i === 0 && dated.length > 0);
     }
     listEl.innerHTML = html;
     if (emptyEl) emptyEl.hidden = true;
@@ -60,9 +66,20 @@
     var d = entry.d;
     var type = LABELS[e.type] ? e.type : '_default';
 
-    var day = d.getDate();
-    var month = d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' }).replace(/^\d+\s*/, '');
-    var weekday = capitalize(d.toLocaleDateString('ru-RU', { weekday: 'long' }));
+    var day, month, weekday, inText;
+    var hasDate = !!d;
+    if (hasDate) {
+      day = d.getDate();
+      month = d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' }).replace(/^\d+\s*/, '');
+      weekday = capitalize(d.toLocaleDateString('ru-RU', { weekday: 'long' }));
+      inText = daysText(d);
+    } else {
+      /* Без даты — вместо числа в «календаре» звезда и пометка «скоро». */
+      day = '✦';
+      month = 'скоро';
+      weekday = '';
+      inText = 'Дата уточняется';
+    }
 
     var kicker = (isNext ? 'Ближайшее · ' : '') + LABELS[type];
     if (e.time) kicker += ' · ' + e.time;
@@ -74,7 +91,7 @@
       '<div class="schedule-date">' +
         '<span class="schedule-day">' + day + '</span>' +
         '<span class="schedule-month">' + month + '</span>' +
-        '<span class="schedule-weekday">' + weekday + '</span>' +
+        (weekday ? '<span class="schedule-weekday">' + weekday + '</span>' : '') +
         (e.time ? '<span class="schedule-time">' + escapeHtml(e.time) + '</span>' : '') +
       '</div>' +
       '<div class="schedule-card">' +
@@ -84,7 +101,7 @@
           '<h3 class="schedule-title">' + escapeHtml(e.title) + '</h3>' +
           (e.desc ? '<p class="schedule-desc">' + escapeHtml(e.desc) + '</p>' : '') +
         '</div>' +
-        '<p class="schedule-in">' + daysText(d) + '</p>' +
+        '<p class="schedule-in">' + inText + '</p>' +
       '</div>';
 
     return e.url
