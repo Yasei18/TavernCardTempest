@@ -20,6 +20,8 @@
     _default: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V8h14v11zM7 10h5v5H7v-5z"/></svg>'
   };
 
+  var ICON_CLOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm.5-13h-1.5v6l5.2 3.1.8-1.3-4.5-2.7z"/></svg>';
+
   document.addEventListener('DOMContentLoaded', function () {
     var listEl = document.getElementById('scheduleList');
     var emptyEl = document.getElementById('scheduleEmpty');
@@ -66,19 +68,24 @@
     var d = entry.d;
     var type = LABELS[e.type] ? e.type : '_default';
 
-    var day, month, weekday, inText;
+    var day, month, weekday, inText, inMod, inIcon;
     var hasDate = !!d;
     if (hasDate) {
       day = d.getDate();
       month = d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' }).replace(/^\d+\s*/, '');
       weekday = capitalize(d.toLocaleDateString('ru-RU', { weekday: 'long' }));
-      inText = daysText(d);
+      var counter = daysText(d);
+      inText = counter.text;
+      inMod = counter.mod;
+      inIcon = ICON_CLOCK;
     } else {
       /* Без даты — вместо числа в «календаре» звезда и пометка «скоро». */
       day = '✦';
       month = 'скоро';
       weekday = '';
       inText = 'Дата уточняется';
+      inMod = 'is-tbd';
+      inIcon = '';
     }
 
     var kicker = (isNext ? 'Ближайшее · ' : '') + LABELS[type];
@@ -87,7 +94,6 @@
     var cls = 'schedule-item schedule-item--' + type + (isNext ? ' is-next' : '');
 
     var inner =
-      '<span class="schedule-dot" aria-hidden="true"></span>' +
       '<div class="schedule-date">' +
         '<span class="schedule-day">' + day + '</span>' +
         '<span class="schedule-month">' + month + '</span>' +
@@ -101,7 +107,7 @@
           '<h3 class="schedule-title">' + escapeHtml(e.title) + '</h3>' +
           (e.desc ? '<p class="schedule-desc">' + escapeHtml(e.desc) + '</p>' : '') +
         '</div>' +
-        '<p class="schedule-in">' + inText + '</p>' +
+        '<p class="schedule-in ' + inMod + '">' + inIcon + '<span>' + escapeHtml(inText) + '</span></p>' +
       '</div>';
 
     return e.url
@@ -121,9 +127,12 @@
     var today = new Date();
     today.setHours(0, 0, 0, 0);
     var diff = Math.round((start - today) / 86400000);
-    if (diff <= 0) return 'Сегодня';
-    if (diff === 1) return 'Завтра';
-    return 'Через ' + diff + ' ' + plural(diff, 'день', 'дня', 'дней');
+    if (diff <= 0) return { text: 'Сегодня', mod: 'is-now' };
+    if (diff === 1) return { text: 'Завтра', mod: 'is-now' };
+    return {
+      text: 'Через ' + diff + ' ' + plural(diff, 'день', 'дня', 'дней'),
+      mod: diff <= 7 ? 'is-soon' : 'is-later'
+    };
   }
 
   function capitalize(s) {

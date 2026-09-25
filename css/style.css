@@ -1261,35 +1261,6 @@ h1, h2, h3 {
   color: inherit;
 }
 
-.schedule-item::before {
-  content: "";
-  position: absolute;
-  left: 163px;
-  top: 12px;
-  bottom: 12px;
-  width: 2px;
-  background: linear-gradient(180deg, var(--gold-dim), transparent 85%);
-  opacity: 0.55;
-}
-
-.schedule-item:last-child::before {
-  display: none;
-}
-
-.schedule-dot {
-  position: absolute;
-  left: 163px;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: var(--gold);
-  border: 2px solid var(--bg-dark);
-  box-shadow: 0 0 0 2px rgba(212, 165, 67, 0.4);
-  z-index: 1;
-}
-
 .schedule-date {
   flex: 0 0 150px;
   display: flex;
@@ -1412,10 +1383,45 @@ h1, h2, h3 {
 
 .schedule-in {
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   margin: 0;
-  font-size: 15px;
+  padding: 5px 12px;
+  border: 1px solid var(--gold-dim);
+  border-radius: 999px;
+  background: rgba(212, 165, 67, 0.08);
+  font-size: 14px;
   font-style: italic;
   color: var(--gold-bright);
+  white-space: nowrap;
+}
+
+.schedule-in svg {
+  flex: 0 0 auto;
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+}
+
+.schedule-in.is-soon {
+  border-color: var(--gold);
+  background: rgba(212, 165, 67, 0.18);
+}
+
+.schedule-in.is-now {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  color: #17100a;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.schedule-in.is-tbd {
+  border-style: dashed;
+  border-color: var(--border);
+  background: transparent;
+  color: var(--text-muted);
 }
 
 .schedule-empty {
@@ -1435,20 +1441,10 @@ h1, h2, h3 {
   box-shadow: 0 0 0 1px rgba(212, 165, 67, 0.22), var(--shadow);
 }
 
-.schedule-item.is-next .schedule-dot {
-  background: var(--gold-bright);
-  box-shadow: 0 0 0 4px rgba(212, 165, 67, 0.28);
-}
-
 @media (max-width: 700px) {
   .schedule-item {
     flex-direction: column;
     gap: 10px;
-  }
-
-  .schedule-item::before,
-  .schedule-dot {
-    display: none;
   }
 
   .schedule-date {
