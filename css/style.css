@@ -1344,7 +1344,14 @@ h1, h2, h3 {
   transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
 }
 
-.schedule-item:hover .schedule-card,
+@media (hover: hover) {
+  .schedule-item:hover .schedule-card {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: var(--gold);
+  }
+}
+
 .schedule-item:focus-visible .schedule-card {
   transform: translateY(-3px);
   box-shadow: var(--shadow);
@@ -1445,9 +1452,12 @@ h1, h2, h3 {
   }
 
   .schedule-date {
+    flex: 0 0 auto;
+    width: 100%;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: baseline;
-    gap: 12px;
+    gap: 4px 12px;
     justify-content: flex-start;
     padding: 4px 6px 0;
   }
@@ -1461,6 +1471,10 @@ h1, h2, h3 {
     font-size: 14px;
   }
 
+  .schedule-weekday {
+    margin-top: 0;
+  }
+
   .schedule-time {
     margin-top: 0;
   }
@@ -1468,7 +1482,22 @@ h1, h2, h3 {
   .schedule-card {
     flex-direction: column;
     align-items: flex-start;
-    gap: 14px;
+    gap: 12px;
+    padding: 16px 18px;
+  }
+
+  .schedule-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .schedule-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .schedule-main {
+    align-self: stretch;
   }
 }
 
