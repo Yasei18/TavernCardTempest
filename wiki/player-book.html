@@ -10,7 +10,7 @@
     <script defer src="../js/layout.js"></script>
     <script defer src="./js/main.js"></script>
 
-    <meta name="description" content="Книга игрока D&D 5e: классы, расы, черты, предыстории, заклинания, снаряжение, магические предметы, бестиарий и инструменты.">
+    <meta name="description" content="Книга игрока D&D 5e: создание персонажа (расы, черты, доспехи, оружие), домашние правила Мира Орвей и раздел с его лором — регионы, верования и карта.">
     <title>Книга игрока — Мир Орвей</title>
     <style>
         .pb-grid {
@@ -21,6 +21,27 @@
         }
         @media (min-width: 640px) { .pb-grid { grid-template-columns: repeat(3, 1fr); } }
         @media (min-width: 900px) { .pb-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        /* Разделы книги: «Создание персонажа», «Мир Орвей», «Домашние правила», «Для мастера». */
+        .pb-section {
+            margin-top: 2.75rem;
+            scroll-margin-top: 90px;
+        }
+        .pb-section .pb-section__title {
+            font-size: 24px;
+            color: #0c0c0c;
+            border-bottom: 2px solid #1c2c7c;
+            padding-bottom: 6px;
+            margin: 0 0 6px;
+        }
+        .pb-section .pb-section__lead {
+            color: #666;
+            font-size: 16px;
+            margin: 0;
+        }
+        .pb-section .pb-grid {
+            margin: 1.25rem 0 0;
+        }
 
         .pb-card {
             position: relative;
@@ -79,20 +100,48 @@
 
             <div class="races-catalog__header">
                 <h1>Книга игрока</h1>
-                <p>Справочные материалы для игры в D&D 5e. Классы, расы, черты, заклинания и всё остальное, что нужно знать игроку.</p>
+                <p>Справочные материалы для игры в D&amp;D 5e: как собрать персонажа, какие здесь действуют правила и как устроен мир.</p>
             </div>
 
-            <div class="pb-grid">
-                <a class="pb-card" href="./tools.html"><span>Инструменты</span></a>
-                <a class="pb-card" href="./races.html"><span>Виды</span></a>
-                <a class="pb-card" href="./regions.html"><span>Регионы</span></a>
-                <a class="pb-card" href="./faiths.html"><span>Верования</span></a>
-                <a class="pb-card" href="./player-book/house-rules.html"><span>Домашние правила</span></a>
-                <a class="pb-card" href="./player-book/combat-schools.html"><span>Боевые школы</span></a>
-                <a class="pb-card" href="./player-book/items-armor.html"><span>Доспехи</span></a>
-                <a class="pb-card" href="./player-book/items-weapons.html"><span>Оружие</span></a>
-                <a class="pb-card" href="./player-book/feats.html"><span>Черты</span></a>
-            </div>
+            <section class="pb-section" id="sozdanie">
+                <h2 class="pb-section__title">Создание персонажа</h2>
+                <p class="pb-section__lead">Расы, черты и снаряжение — всё, с чего начинается герой.</p>
+                <div class="pb-grid">
+                    <a class="pb-card" href="./races.html"><span>Виды</span></a>
+                    <a class="pb-card" href="./player-book/feats.html"><span>Черты</span></a>
+                    <a class="pb-card" href="./player-book/items-armor.html"><span>Доспехи</span></a>
+                    <a class="pb-card" href="./player-book/items-weapons.html"><span>Оружие</span></a>
+                </div>
+            </section>
+
+            <section class="pb-section" id="lor">
+                <h2 class="pb-section__title">Мир Орвей</h2>
+                <p class="pb-section__lead">География, народы, верования и боевые традиции мира, в котором проходят наши игры.</p>
+                <div class="pb-grid">
+                    <a class="pb-card" href="./regions.html"><span>Регионы</span></a>
+                    <a class="pb-card" href="./faiths.html"><span>Верования</span></a>
+                    <a class="pb-card" href="./player-book/combat-schools.html"><span>Боевые школы</span></a>
+                    <a class="pb-card" href="./weapons-kelarim.html"><span>Оружие Келарима</span></a>
+                    <a class="pb-card" href="./map.html"><span>Карта мира</span></a>
+                </div>
+            </section>
+
+            <section class="pb-section" id="pravila">
+                <h2 class="pb-section__title">Домашние правила</h2>
+                <p class="pb-section__lead">Нестандартные механики Орвея — то, чем книга игрока отличается от базовых правил 5e.</p>
+                <div class="pb-grid">
+                    <a class="pb-card" href="./player-book/injuries.html"><span>Ранения</span></a>
+                    <a class="pb-card" href="./player-book/speed-burst.html"><span>Скоростной рывок</span></a>
+                </div>
+            </section>
+
+            <section class="pb-section" id="master">
+                <h2 class="pb-section__title">Для мастера</h2>
+                <p class="pb-section__lead">Справочники и приёмы для ведения игры.</p>
+                <div class="pb-grid">
+                    <a class="pb-card" href="./tools.html"><span>Инструменты</span></a>
+                </div>
+            </section>
 
             <nav class="wiki-nav-more">
                 <a href="./wiki.html">Главная</a>

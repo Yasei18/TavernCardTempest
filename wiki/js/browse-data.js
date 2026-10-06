@@ -359,16 +359,12 @@ var WIKI_BROWSE_INDEX =
         ],
         "player-book": [
             {
-                "url": "alvaera.html",
-                "title": "Аль'Ваэра"
+                "url": "wiki.html",
+                "title": "ОРВЕЙ"
             },
             {
-                "url": "campaigns.html",
-                "title": "Кампании"
-            },
-            {
-                "url": "faiths.html",
-                "title": "Верования"
+                "url": "player-book/speed-burst.html",
+                "title": "Скоростной импульс"
             }
         ],
         "race-akrabimy": [
@@ -921,6 +917,10 @@ var WIKI_BROWSE_INDEX =
             {
                 "url": "player-book/injuries.html",
                 "title": "Травмы 3.0"
+            },
+            {
+                "url": "player-book.html",
+                "title": "Книга игрока"
             }
         ],
         "tools": [
@@ -967,16 +967,16 @@ var WIKI_BROWSE_INDEX =
         ],
         "wiki": [
             {
-                "url": "alvaera.html",
-                "title": "Аль'Ваэра"
+                "url": "player-book.html",
+                "title": "Книга игрока"
             },
             {
-                "url": "campaigns.html",
-                "title": "Кампании"
+                "url": "faiths/faith-staraya-vera-zadubravye.html",
+                "title": "Пантеон Задубравья"
             },
             {
-                "url": "faiths.html",
-                "title": "Верования"
+                "url": "races/race-faskiry.html",
+                "title": "Фаскиры"
             }
         ],
         "zadubravye": [
