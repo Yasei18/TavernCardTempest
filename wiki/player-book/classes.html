@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/style_wiki.css">
+
+    <script defer src="../../js/layout.js"></script>
+    <script defer src="../js/main.js"></script>
+
+    <meta name="description" content="Классы персонажей D&D 5e для создания персонажа в мире Орвей: паладин и другие классы Книги игрока.">
+    <title>Классы — Книга игрока</title>
+    <style>
+        .pb-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        @media (min-width: 640px) { .pb-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 900px) { .pb-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .pb-section {
+            margin-top: 2.75rem;
+            scroll-margin-top: 90px;
+        }
+        .pb-section .pb-section__title {
+            font-size: 24px;
+            color: #0c0c0c;
+            border-bottom: 2px solid #1c2c7c;
+            padding-bottom: 6px;
+            margin: 0 0 6px;
+        }
+        .pb-section .pb-section__lead {
+            color: #666;
+            font-size: 16px;
+            margin: 0;
+        }
+        .pb-section .pb-grid {
+            margin: 1.25rem 0 0;
+        }
+
+        .pb-card {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+            padding: 0 1rem;
+            border: 1px solid #d5dae6;
+            border-radius: 10px;
+            background: #f4f6fb;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .pb-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #1c2c7c 0%, #3a5098 100%);
+            z-index: 0;
+            transition: opacity 0.2s;
+        }
+        .pb-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(28, 44, 124, 0.25);
+        }
+        .pb-card:hover::before {
+            opacity: 0.85;
+        }
+        .pb-card span {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
+
+<link rel="apple-touch-icon" href="../../img/favicon.png">
+<link rel="icon" type="image/png" href="../../img/favicon.png">
+<link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+</head>
+<body data-layout="wiki" data-root="../">
+
+    <div class="wiki-page">
+        <div class="wiki-container">
+
+            <nav class="crumbs">
+                <a href="../../index.html">Главная</a> / <a href="../player-book.html">Книга игрока</a> / <span>Классы</span>
+            </nav>
+
+            <div class="races-catalog__header">
+                <h1>Классы</h1>
+                <p>Классы персонажей D&amp;D 5e — выбор, который определяет роль героя в отряде. Нажмите на класс, чтобы перейти к его описанию.</p>
+            </div>
+
+            <section class="pb-section" id="classes">
+                <h2 class="pb-section__title">Все классы</h2>
+                <p class="pb-section__lead">Страницы классов с характеристиками, умениями и рекомендациями по созданию персонажа.</p>
+                <div class="pb-grid">
+                    <a class="pb-card" href="./class-paladin.html"><span>Паладин</span></a>
+                </div>
+            </section>
+
+            <nav class="wiki-nav-more">
+                <a href="../player-book.html">Книга игрока</a>
+                <a href="./feats.html">Черты</a>
+                <a href="./combat-schools.html">Боевые школы</a>
+            </nav>
+
+        </div>
+    </div>
+
+</body>
+</html>

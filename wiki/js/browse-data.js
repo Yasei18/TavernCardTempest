@@ -4,6 +4,8 @@ var WIKI_BROWSE_INDEX =
     "urls": [
         "alvaera.html",
         "campaigns.html",
+        "player-book/class-paladin.html",
+        "player-book/classes.html",
         "player-book/combat-schools.html",
         "faiths/faith-draconiy-bog.html",
         "faiths/faith-duhi-predkov.html",
@@ -99,18 +101,46 @@ var WIKI_BROWSE_INDEX =
                 "title": "Джа'Илам"
             }
         ],
+        "class-paladin": [
+            {
+                "url": "player-book/combat-schools.html",
+                "title": "Боевые школы Келарима"
+            },
+            {
+                "url": "faiths/faith-pyatero.html",
+                "title": "Пятеро"
+            },
+            {
+                "url": "faiths/faith-staraya-vera-alvaera.html",
+                "title": "Пантеон Аль'Ваэры"
+            }
+        ],
+        "classes": [
+            {
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
+            },
+            {
+                "url": "player-book/combat-schools.html",
+                "title": "Боевые школы Келарима"
+            },
+            {
+                "url": "player-book/feats.html",
+                "title": "Черты"
+            }
+        ],
         "combat-schools": [
             {
                 "url": "weapons-kelarim.html",
                 "title": "Оружие и боевые стили Келарима"
             },
             {
-                "url": "usta-te.html",
-                "title": "Ушта-те"
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
             },
             {
-                "url": "races/race-yargany.html",
-                "title": "Ярганы"
+                "url": "usta-te.html",
+                "title": "Ушта-те"
             }
         ],
         "faith-draconiy-bog": [
@@ -255,30 +285,30 @@ var WIKI_BROWSE_INDEX =
         ],
         "feats": [
             {
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
+            },
+            {
+                "url": "player-book/classes.html",
+                "title": "Классы"
+            },
+            {
                 "url": "player-book/combat-schools.html",
                 "title": "Боевые школы Келарима"
-            },
-            {
-                "url": "player-book/house-rules.html",
-                "title": "Домашние правила"
-            },
-            {
-                "url": "player-book/injuries.html",
-                "title": "Травмы 3.0"
             }
         ],
         "house-rules": [
             {
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
+            },
+            {
+                "url": "player-book/classes.html",
+                "title": "Классы"
+            },
+            {
                 "url": "player-book/combat-schools.html",
                 "title": "Боевые школы Келарима"
-            },
-            {
-                "url": "player-book/feats.html",
-                "title": "Черты"
-            },
-            {
-                "url": "player-book/injuries.html",
-                "title": "Травмы 3.0"
             }
         ],
         "injuries": [
@@ -289,30 +319,30 @@ var WIKI_BROWSE_INDEX =
         ],
         "items-armor": [
             {
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
+            },
+            {
+                "url": "player-book/classes.html",
+                "title": "Классы"
+            },
+            {
                 "url": "player-book/combat-schools.html",
                 "title": "Боевые школы Келарима"
-            },
-            {
-                "url": "player-book/feats.html",
-                "title": "Черты"
-            },
-            {
-                "url": "player-book/house-rules.html",
-                "title": "Домашние правила"
             }
         ],
         "items-weapons": [
             {
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
+            },
+            {
+                "url": "player-book/classes.html",
+                "title": "Классы"
+            },
+            {
                 "url": "player-book/combat-schools.html",
                 "title": "Боевые школы Келарима"
-            },
-            {
-                "url": "player-book/feats.html",
-                "title": "Черты"
-            },
-            {
-                "url": "player-book/house-rules.html",
-                "title": "Домашние правила"
             }
         ],
         "kelarim": [
@@ -961,8 +991,8 @@ var WIKI_BROWSE_INDEX =
                 "title": "Ушта-те"
             },
             {
-                "url": "races/race-yargany.html",
-                "title": "Ярганы"
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
             }
         ],
         "wiki": [
