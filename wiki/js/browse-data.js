@@ -5,6 +5,7 @@ var WIKI_BROWSE_INDEX =
         "alvaera.html",
         "campaigns.html",
         "player-book/class-paladin.html",
+        "player-book/class-warlord.html",
         "player-book/classes.html",
         "player-book/combat-schools.html",
         "faiths/faith-draconiy-bog.html",
@@ -115,10 +116,28 @@ var WIKI_BROWSE_INDEX =
                 "title": "Пантеон Аль'Ваэры"
             }
         ],
+        "class-warlord": [
+            {
+                "url": "player-book/combat-schools.html",
+                "title": "Боевые школы Келарима"
+            },
+            {
+                "url": "player-book/classes.html",
+                "title": "Классы"
+            },
+            {
+                "url": "weapons-kelarim.html",
+                "title": "Оружие и боевые стили Келарима"
+            }
+        ],
         "classes": [
             {
                 "url": "player-book/class-paladin.html",
                 "title": "Паладин"
+            },
+            {
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             },
             {
                 "url": "player-book/combat-schools.html",
