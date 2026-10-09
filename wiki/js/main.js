@@ -125,7 +125,7 @@ document.querySelectorAll('a[href^="#"]:not([href="#header"])').forEach(function
     if (!hash || hash.length < 2) return
     const target = document.getElementById(hash.slice(1))
     if (!target) return
-    const details = target.closest("details.wiki-tab")
+    const details = target.closest("details")
     if (details && !details.open) {
       details.open = true
     }
@@ -137,6 +137,18 @@ document.querySelectorAll('a[href^="#"]:not([href="#header"])').forEach(function
     highlightTarget(target)
   })
 })
+
+/* Открываем свёрнутый подкласс (details), если на него ведёт якорь при загрузке. */
+function openAncestorDetails() {
+  const hash = location.hash
+  if (!hash || hash.length < 2) return
+  const target = document.getElementById(hash.slice(1))
+  if (!target) return
+  const details = target.closest("details")
+  if (details && !details.open) details.open = true
+}
+openAncestorDetails()
+window.addEventListener("hashchange", openAncestorDetails)
 
 function highlightTarget(target) {
   target.classList.remove("wiki-tab-highlight")

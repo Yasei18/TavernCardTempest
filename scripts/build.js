@@ -4,13 +4,14 @@
  * Генерирует HTML-страницы рас и верований из данных.
  *
  * Использование:
- *   node scripts/build.js [races|faiths|search|all]
+ *   node scripts/build.js [races|faiths|search|character|all]
  *
  * Примеры:
- *   node scripts/build.js races   — пересоздать wiki/races/*.html из RACES[]
- *   node scripts/build.js faiths  — пересоздать wiki/faiths/*.html из FAITHS[]
- *   node scripts/build.js search  — пересоздать wiki/js/search-data.js и browse-data.js
- *   node scripts/build.js all     — всё вместе
+ *   node scripts/build.js races    — пересоздать wiki/races/*.html из RACES[]
+ *   node scripts/build.js faiths   — пересоздать wiki/faiths/*.html из FAITHS[]
+ *   node scripts/build.js search   — пересоздать wiki/js/search-data.js и browse-data.js
+ *   node scripts/build.js character — пересоздать wiki/js/character-data.js (конструктор персонажа)
+ *   node scripts/build.js all      — всё вместе
  */
 'use strict';
 
@@ -498,6 +499,78 @@ function buildWikiData() {
 }
 
 /* ══════════════════════════════════════════════════════════════════
+ *  CHARACTER BUILDER DATA
+ *  Собирает данные для конструктора персонажа из существующих страниц
+ *  правил, чтобы страница не зависела от fetch() (в т.ч. при открытии
+ *  по file://). Источник правды — сами страницы.
+ * ══════════════════════════════════════════════════════════════════ */
+
+// Раздел классовых умений (#umeniya) вместе с подклассами (#podklass)
+// до нижней навигации — ровно то, что разбирает конструктор.
+function extractClassFragment(raw) {
+  // Начинаем с таблицы уровней (#urovni): из неё конструктор узнаёт, на каких
+  // уровнях даётся черта и сколько известно приёмов; если её нет — с умений.
+  var m = raw.match(/<h2 id="urovni"[\s\S]*?(?=<nav class="wiki-nav-more">)/) ||
+          raw.match(/<h2 id="umeniya"[\s\S]*?(?=<nav class="wiki-nav-more">)/);
+  if (m) return m[0];
+  // Запасной вариант — вся страница без <style>/<script>.
+  return raw
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '');
+}
+
+function extractFeatFragment(raw) {
+  var articles = raw.match(/<article class="race-card feat-card"[\s\S]*?<\/article>/g) || [];
+  var buttons = raw.match(/<button[^>]*filter-tag[^>]*>[\s\S]*?<\/button>/g) || [];
+  return '<div>' + buttons.join('') + articles.join('') + '</div>';
+}
+
+function buildCharacterData() {
+  console.log('\n=== Building character builder data ===');
+
+  var dir = path.join(ROOT, 'wiki', 'player-book');
+  var hub = read(path.join(dir, 'classes.html'));
+
+  // Порядок классов — как в хабе classes.html, затем любые найденные файлы.
+  var order = [];
+  var re = /href="[^"]*?(class-[a-z0-9-]+\.html)"/gi;
+  var m;
+  while ((m = re.exec(hub)) !== null) {
+    if (order.indexOf(m[1]) === -1) order.push(m[1]);
+  }
+  fs.readdirSync(dir).forEach(function (name) {
+    if (/^class-[a-z0-9-]+\.html$/i.test(name) && order.indexOf(name) === -1) {
+      order.push(name);
+    }
+  });
+
+  var docs = {};
+  var index = [];
+  order.forEach(function (file) {
+    var p = path.join(dir, file);
+    if (!fs.existsSync(p)) return;
+    var raw = read(p);
+    var slug = file.replace(/^class-/, '').replace(/\.html$/i, '');
+    docs[slug] = extractClassFragment(raw);
+    var tm = raw.match(/<h1 class="wiki-title"[^>]*>([\s\S]*?)<\/h1>/);
+    index.push({ slug: slug, file: file, title: tm ? stripHtml(tm[1]) : slug });
+  });
+
+  var featsFragment = extractFeatFragment(read(path.join(dir, 'feats.html')));
+  var featCount = (featsFragment.match(/feat-card/g) || []).length;
+
+  var content =
+    '/* Данные конструктора персонажа. Сгенерировано автоматически из страниц правил.\n' +
+    '   Не редактируйте вручную — запустите `node scripts/build.js character`. */\n' +
+    'var CT_CLASS_DOCS = ' + JSON.stringify(docs) + ';\n' +
+    'var CT_CLASS_INDEX = ' + JSON.stringify(index) + ';\n' +
+    'var CT_FEATS_HTML = ' + JSON.stringify(featsFragment) + ';\n';
+  write(path.join(ROOT, 'wiki', 'js', 'character-data.js'), content);
+
+  console.log('  character-data.js: ' + index.length + ' классов, ' + featCount + ' черт');
+}
+
+/* ══════════════════════════════════════════════════════════════════
  *  MAIN
  * ══════════════════════════════════════════════════════════════════ */
 
@@ -507,6 +580,7 @@ try {
   if (target === 'races' || target === 'all') buildRaces();
   if (target === 'faiths' || target === 'all') buildFaiths();
   if (target === 'search' || target === 'browse' || target === 'all') buildWikiData();
+  if (target === 'character' || target === 'all') buildCharacterData();
   console.log('\n✓ Готово!');
 } catch (err) {
   console.error('ОШИБКА:', err.message);

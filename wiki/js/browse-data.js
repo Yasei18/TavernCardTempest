@@ -4,6 +4,7 @@ var WIKI_BROWSE_INDEX =
     "urls": [
         "alvaera.html",
         "campaigns.html",
+        "player-book/character-builder.html",
         "player-book/class-paladin.html",
         "player-book/class-warlord.html",
         "player-book/classes.html",
@@ -19,7 +20,6 @@ var WIKI_BROWSE_INDEX =
         "faiths/faith-tengrianstvo.html",
         "faiths.html",
         "player-book/feats.html",
-        "player-book/house-rules.html",
         "player-book/injuries.html",
         "player-book/items-armor.html",
         "player-book/items-weapons.html",
@@ -102,35 +102,7 @@ var WIKI_BROWSE_INDEX =
                 "title": "Джа'Илам"
             }
         ],
-        "class-paladin": [
-            {
-                "url": "player-book/combat-schools.html",
-                "title": "Боевые школы Келарима"
-            },
-            {
-                "url": "faiths/faith-pyatero.html",
-                "title": "Пятеро"
-            },
-            {
-                "url": "faiths/faith-staraya-vera-alvaera.html",
-                "title": "Пантеон Аль'Ваэры"
-            }
-        ],
-        "class-warlord": [
-            {
-                "url": "player-book/combat-schools.html",
-                "title": "Боевые школы Келарима"
-            },
-            {
-                "url": "player-book/classes.html",
-                "title": "Классы"
-            },
-            {
-                "url": "weapons-kelarim.html",
-                "title": "Оружие и боевые стили Келарима"
-            }
-        ],
-        "classes": [
+        "character-builder": [
             {
                 "url": "player-book/class-paladin.html",
                 "title": "Паладин"
@@ -140,12 +112,50 @@ var WIKI_BROWSE_INDEX =
                 "title": "Воевода"
             },
             {
+                "url": "player-book/classes.html",
+                "title": "Классы"
+            }
+        ],
+        "class-paladin": [
+            {
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
+            },
+            {
                 "url": "player-book/combat-schools.html",
                 "title": "Боевые школы Келарима"
             },
             {
-                "url": "player-book/feats.html",
-                "title": "Черты"
+                "url": "races/race-yargany.html",
+                "title": "Ярганы"
+            }
+        ],
+        "class-warlord": [
+            {
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
+            },
+            {
+                "url": "player-book/combat-schools.html",
+                "title": "Боевые школы Келарима"
+            },
+            {
+                "url": "player-book/speed-burst.html",
+                "title": "Скоростной импульс"
+            }
+        ],
+        "classes": [
+            {
+                "url": "player-book/character-builder.html",
+                "title": "Конструктор персонажа"
+            },
+            {
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
+            },
+            {
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             }
         ],
         "combat-schools": [
@@ -154,12 +164,12 @@ var WIKI_BROWSE_INDEX =
                 "title": "Оружие и боевые стили Келарима"
             },
             {
-                "url": "player-book/class-paladin.html",
-                "title": "Паладин"
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             },
             {
-                "url": "usta-te.html",
-                "title": "Ушта-те"
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
             }
         ],
         "faith-draconiy-bog": [
@@ -304,30 +314,16 @@ var WIKI_BROWSE_INDEX =
         ],
         "feats": [
             {
-                "url": "player-book/class-paladin.html",
-                "title": "Паладин"
+                "url": "player-book/character-builder.html",
+                "title": "Конструктор персонажа"
             },
-            {
-                "url": "player-book/classes.html",
-                "title": "Классы"
-            },
-            {
-                "url": "player-book/combat-schools.html",
-                "title": "Боевые школы Келарима"
-            }
-        ],
-        "house-rules": [
             {
                 "url": "player-book/class-paladin.html",
                 "title": "Паладин"
             },
             {
-                "url": "player-book/classes.html",
-                "title": "Классы"
-            },
-            {
-                "url": "player-book/combat-schools.html",
-                "title": "Боевые школы Келарима"
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             }
         ],
         "injuries": [
@@ -338,30 +334,30 @@ var WIKI_BROWSE_INDEX =
         ],
         "items-armor": [
             {
+                "url": "player-book/character-builder.html",
+                "title": "Конструктор персонажа"
+            },
+            {
                 "url": "player-book/class-paladin.html",
                 "title": "Паладин"
             },
             {
-                "url": "player-book/classes.html",
-                "title": "Классы"
-            },
-            {
-                "url": "player-book/combat-schools.html",
-                "title": "Боевые школы Келарима"
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             }
         ],
         "items-weapons": [
             {
+                "url": "player-book/character-builder.html",
+                "title": "Конструктор персонажа"
+            },
+            {
                 "url": "player-book/class-paladin.html",
                 "title": "Паладин"
             },
             {
-                "url": "player-book/classes.html",
-                "title": "Классы"
-            },
-            {
-                "url": "player-book/combat-schools.html",
-                "title": "Боевые школы Келарима"
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             }
         ],
         "kelarim": [
@@ -410,6 +406,10 @@ var WIKI_BROWSE_INDEX =
             {
                 "url": "wiki.html",
                 "title": "ОРВЕЙ"
+            },
+            {
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             },
             {
                 "url": "player-book/speed-burst.html",
@@ -964,6 +964,10 @@ var WIKI_BROWSE_INDEX =
         ],
         "speed-burst": [
             {
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
+            },
+            {
                 "url": "player-book/injuries.html",
                 "title": "Травмы 3.0"
             },
@@ -996,8 +1000,8 @@ var WIKI_BROWSE_INDEX =
                 "title": "Аль'Ваэра"
             },
             {
-                "url": "player-book/combat-schools.html",
-                "title": "Боевые школы Келарима"
+                "url": "player-book/class-paladin.html",
+                "title": "Паладин"
             }
         ],
         "weapons-kelarim": [
@@ -1010,8 +1014,8 @@ var WIKI_BROWSE_INDEX =
                 "title": "Ушта-те"
             },
             {
-                "url": "player-book/class-paladin.html",
-                "title": "Паладин"
+                "url": "player-book/class-warlord.html",
+                "title": "Воевода"
             }
         ],
         "wiki": [

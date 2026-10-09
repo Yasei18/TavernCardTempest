@@ -9,48 +9,25 @@
     <script defer src="../js/main.js"></script>
     <meta name="description" content="Домашнее правило Травмы 3.0 — долговременные эффекты от ранений в Мире Орвей.">
     <title>Травмы — Домашние правила</title>
-    <style>
-        .pb-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            margin: 1.2rem 0;
-            border: 2px solid #222;
-        }
-        .pb-table th {
-            background: #1c2c7c;
-            color: #fff;
-            padding: 0.6rem 0.8rem;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
-            border-bottom: 2px solid #222;
-        }
-        .pb-table td {
-            padding: 0.55rem 0.8rem;
-            border: 1px solid #222;
-            vertical-align: top;
-        }
-        .pb-table tr:nth-child(even) td { background: #f4f6fb; }
-        .pb-table tr:hover td { background: #eef1f8; }
-    </style>
 
-<link rel="apple-touch-icon" href="../../img/favicon.png">
+<link rel="apple-touch-icon" href="../../img/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="../../img/favicon.png">
 <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+<link rel="manifest" href="../../manifest.webmanifest">
+<script defer src="../../js/analytics.js"></script>
 </head>
 <body data-layout="wiki" data-root="../">
     <div class="wiki-page">
         <div class="wiki-container">
             <nav class="crumbs">
-                <a href="../../index.html">Главная</a> / <a href="../player-book.html">Книга игрока</a> / <a href="house-rules.html">Домашние правила</a> / <span>Травмы</span>
+                <a href="../../index.html">Главная</a> / <a href="../player-book.html">Книга игрока</a> / <span>Травмы</span>
             </nav>
             <h1 class="wiki-title">Травмы 3.0</h1>
             <p class="wiki-lead">Домашнее правило &bull; D&amp;D 5e &bull; Долговременные эффекты от ранений</p>
 
             <p>Обычно урон не оставляет долговременных эффектов, но это правило вводит в игру травмы. После почти смертельного сражения команда не может просто отлежаться вечером у костра и утром отправиться в погоню за королём-личом — травмы заставляют игроков задумываться над своими действиями и ощущать последствия тяжёлых столкновений.</p>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Условия травмы</summary>
                 <p>Мастер подземелий сам решает, когда совершать проверку на травму. Триггером травмы может быть только:</p>
                 <ul>
@@ -60,7 +37,7 @@
                 </ul>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Определение характера травмы</summary>
                 <p>Когда выполнены условия для травмы, бросьте к20 и обратитесь к таблице:</p>
                 <table class="pb-table">
@@ -78,7 +55,7 @@
                 <p>В каждом разделе есть хотя бы два варианта. Какую именно назначить — выбирает ведущий.</p>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Определение тяжести травмы</summary>
                 <p>Правило предполагает наличие <strong>4+1 степеней</strong> травм:</p>
                 <ul>
@@ -90,12 +67,12 @@
                 <p>Переход к более тяжёлым происходит методом простого сложения, если вновь травмирована та же часть тела. Если часть тела уже травмирована Критически, дополнительное травмирование приводит к <strong>Трагической утрате</strong> этой части.</p>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Быстрый вариант (без доспехов)</summary>
                 <p>Если выполнено условие травмы, Мастер определяет характер и назначает <strong>2 степени</strong> серьёзности автоматически.</p>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Быстрый вариант (с учётом доспехов)</summary>
                 <p>Мастер определяет характер травмы и назначает степени в зависимости от защиты:</p>
                 <table class="pb-table">
@@ -113,7 +90,7 @@
 
             <h2>Эффекты травм по зонам</h2>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Кровотечение</summary>
                 <ul>
                     <li><strong>Лёгкое</strong> — царапина или ссадина.</li>
@@ -124,7 +101,7 @@
                 </ul>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Травмы рук</summary>
                 <ul>
                     <li><strong>Лёгкая</strong> — вывихи, ушибы, крупные синяки.</li>
@@ -135,7 +112,7 @@
                 </ul>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Травмы ног</summary>
                 <p>Персонаж с двумя травмированными ногами не может совершать «Рывок».</p>
                 <ul>
@@ -147,7 +124,7 @@
                 </ul>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Травмы корпуса</summary>
                 <ul>
                     <li><strong>Лёгкая</strong> — ушибы, крупные синяки.</li>
@@ -158,7 +135,7 @@
                 </ul>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Травмы головы</summary>
                 <ul>
                     <li><strong>Лёгкая</strong> — ушибы, крупные синяки. Можно назначить ошеломление на 1 раунд.</li>
@@ -169,7 +146,7 @@
                 </ul>
             </details>
 
-            <details>
+            <details class="pb-accordion">
                 <summary>Исцеление травм</summary>
                 <p>Исцелить одну ступень травмы можно по итогу продолжительного отдыха, если травма успешно перевязана (проверка <strong>Медицины (Мудрость) КС 15</strong>).</p>
                 <p>Опционально: сразу после боя можно исцелить одну ступень, если перевязка была сделана вовремя — это мотивирует игроков заботиться о раненых, а не преследовать врагов.</p>
@@ -178,7 +155,6 @@
 
             <nav class="wiki-nav-more">
                 <a href="../player-book.html">Книга игрока</a>
-                <a href="house-rules.html">Домашние правила</a>
                 <a href="speed-burst.html">Скоростной импульс</a>
                 <a href="feats.html">Черты</a>
                 <a href="items-weapons.html">Оружие</a>

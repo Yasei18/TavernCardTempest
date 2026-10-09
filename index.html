@@ -19,47 +19,42 @@
   <meta name="twitter:image" content="https://yasei18.github.io/TavernCardTempest/img/gerb.webp">
   <meta name="theme-color" content="#17100a">
   <link rel="canonical" href="https://yasei18.github.io/TavernCardTempest/index.html">
-  <link rel="apple-touch-icon" href="img/favicon.png">
-  <!-- Обновите даты здесь и в js/upcoming-gathering.js под ближайшую сходку перед публикацией. -->
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <!-- Организация и место сходок. Когда объявите конкретную дату — добавьте сюда
+       отдельный блок Event (@type Event) с startDate/endDate и синхронизируйте
+       js/upcoming-gathering.js. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Event",
-    "name": "Сходка «Карточная Буря»",
-    "description": "Настольные сходки Таверны «Карточная Буря»: игры, ведущие, чай и печенье. Первый визит — скидка 50%.",
-    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-    "eventStatus": "https://schema.org/EventScheduled",
-    "startDate": "2026-10-04T12:00:00+03:00",
-    "endDate": "2026-10-04T23:00:00+03:00",
+    "@type": "Organization",
+    "@id": "https://yasei18.github.io/TavernCardTempest/#organization",
+    "name": "Таверна «Карточная Буря»",
+    "url": "https://yasei18.github.io/TavernCardTempest/",
+    "logo": "https://yasei18.github.io/TavernCardTempest/img/gerb.webp",
+    "description": "Сообщество любителей настольных и ролевых игр: сходки в Москве, D&D, стримы и авторский мир Орвей.",
+    "sameAs": [
+      "https://t.me/tavern_card_tempest",
+      "https://vk.com/taverncardtempest",
+      "https://www.youtube.com/@CardTempestTavern",
+      "https://www.twitch.tv/tavern_card_tempest",
+      "https://discord.gg/AAMw8UJCj5",
+      "https://boosty.to/taverncardtempest"
+    ],
     "location": {
       "@type": "Place",
-      "name": "Москва, Тишинская площадь, 1с1",
+      "name": "Место сходок Таверны «Карточная Буря»",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Москва",
         "streetAddress": "Тишинская площадь, 1с1",
         "addressCountry": "RU"
       }
-    },
-    "organizer": {
-      "@type": "Organization",
-      "name": "Таверна «Карточная Буря»",
-      "url": "https://yasei18.github.io/TavernCardTempest/",
-      "sameAs": [
-        "https://t.me/tavern_card_tempest",
-        "https://vk.com/taverncardtempest",
-        "https://www.youtube.com/@CardTempestTavern"
-      ]
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "300",
-      "priceCurrency": "RUB",
-      "description": "300 ₽ — игры, ведущие, чай и печенье включены. Первый визит — 50% (150 ₽)."
     }
   }
   </script>
   <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="preload" href="fonts/cormorant-cyr.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/forum-cyr.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
   <link rel="icon" type="image/x-icon" href="img/favicon.ico">
@@ -67,6 +62,7 @@
 <script defer src="js/layout.js"></script>
 <script defer src="js/analytics.js"></script>
 <script defer src="wiki/js/main.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body data-layout="tavern" data-root="">
 

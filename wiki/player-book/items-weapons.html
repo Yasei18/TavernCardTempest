@@ -10,30 +10,6 @@
     <meta name="description" content="Оружие и оружейное мастерство Мира Орвей: таблицы рукопашного и дальнобойного оружия.">
     <title>Оружие — Книга игрока</title>
     <style>
-        .pb-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            margin: 1.2rem 0;
-            border: 2px solid #222;
-        }
-        .pb-table th {
-            background: #1c2c7c;
-            color: #fff;
-            padding: 0.6rem 0.8rem;
-            text-align: left;
-            font-weight: 600;
-            white-space: nowrap;
-            border-bottom: 2px solid #222;
-        }
-        .pb-table td {
-            padding: 0.55rem 0.8rem;
-            border: 1px solid #222;
-            vertical-align: top;
-        }
-        .pb-table tr:nth-child(even) td { background: #f4f6fb; }
-        .pb-table tr:hover td { background: #eef1f8; }
-
         .mastery-link {
             color: #1c2c7c;
             text-decoration: underline;
@@ -88,9 +64,11 @@
         }
     </style>
 
-<link rel="apple-touch-icon" href="../../img/favicon.png">
+<link rel="apple-touch-icon" href="../../img/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="../../img/favicon.png">
 <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+<link rel="manifest" href="../../manifest.webmanifest">
+<script defer src="../../js/analytics.js"></script>
 </head>
 <body data-layout="wiki" data-root="../">
     <div class="wiki-page">
@@ -173,13 +151,13 @@
                 </tbody>
             </table>
 
-            <details>
+            <details class="pb-accordion" id="vladenie-oruzhiem">
                 <summary>Владение оружием</summary>
                 <p>Ваша раса, класс и черты дают владение конкретными видами и целыми категориями оружия. Категорий две: простое оружие и воинское оружие. Простым оружием могут пользоваться многие. В это оружие входят дубинки, булавы и прочее оружие, доступное обывателям. Воинское оружие включает мечи, топоры и древковое оружие, требующее для эффективного использования особых тренировок.</p>
                 <p>Владение оружием позволяет вам добавлять бонус мастерства к броскам атаки всех атак, совершённых этим оружием. Если вы совершаете бросок атаки, используя оружие, которым не владеете, вы не добавляете к броску атаки бонус мастерства.</p>
             </details>
 
-            <details>
+            <details class="pb-accordion" id="svojstva-oruzhiya">
                 <summary>Свойства оружия</summary>
                 <dl>
                     <dt><strong>Боеприпас.</strong></dt>
@@ -211,7 +189,7 @@
                 </dl>
             </details>
 
-            <details>
+            <details class="pb-accordion" id="oruzhejnoe-masterstvo">
                 <summary>Оружейное мастерство</summary>
                 <p>Ваше обучение обращению с оружием позволяет вам использовать свойства мастерства трёх видов Простого или Воинского оружия на ваш выбор. Каждый раз, когда вы завершаете Долгий отдых, вы можете поупражняться с оружием и заменить одно из выбранных оружий.</p>
                 <p>Когда вы достигаете определённых уровней Воина, вы получаете возможность использовать свойства мастерства большего количества видов оружия, как показано в столбце «Оружейное мастерство» таблице класса.</p>
@@ -243,7 +221,6 @@
                 <a href="items-armor.html">Доспехи</a>
                 <a href="combat-schools.html">Боевые школы</a>
                 <a href="feats.html">Черты</a>
-                <a href="house-rules.html">Домашние правила</a>
             </nav>
         </div>
     </div>

@@ -9,33 +9,12 @@
     <script defer src="../js/main.js"></script>
     <meta name="description" content="Боевые школы и стили фехтования Келарима: Таргус, Ветер, Имперская.">
     <title>Боевые школы — Книга игрока</title>
-    <style>
-        .school-lore {
-            font-style: italic;
-            color: #555;
-            border-left: 3px solid #a6cbe6;
-            padding: 0.6rem 1rem;
-            margin: 1rem 0;
-            background: #f0f2f7;
-        }
-        .school-deviz {
-            font-weight: 700;
-            color: #1c2c7c;
-            margin: 0.5rem 0 1rem;
-        }
-        .feat-name { font-weight: 700; white-space: nowrap; }
-        .feat-req { font-size: 0.85rem; color: #3c4a8c; font-style: italic; }
-        .section-sep { border: none; border-top: 2px solid #d5dae6; margin: 2rem 0; }
-        .pb-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 1.2rem 0; border: 2px solid #222; }
-        .pb-table th { background: #1c2c7c; color: #fff; padding: 0.6rem 0.8rem; text-align: left; font-weight: 600; white-space: nowrap; border-bottom: 2px solid #222; }
-        .pb-table td { padding: 0.55rem 0.8rem; border: 1px solid #222; vertical-align: top; }
-        .pb-table tr:nth-child(even) td { background: #f4f6fb; }
-        .pb-table tr:hover td { background: #eef1f8; }
-    </style>
 
-<link rel="apple-touch-icon" href="../../img/favicon.png">
+<link rel="apple-touch-icon" href="../../img/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="../../img/favicon.png">
 <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+<link rel="manifest" href="../../manifest.webmanifest">
+<script defer src="../../js/analytics.js"></script>
 </head>
 <body data-layout="wiki" data-root="../">
     <div class="wiki-page">
@@ -88,7 +67,15 @@
 
             <hr class="section-sep">
 
-            <details>
+            <nav class="pb-subclass-nav" aria-label="Боевые школы">
+                <span class="pb-subclass-nav__label">Школы</span>
+                <a href="#shkola-targusa">Таргуса</a>
+                <a href="#shkola-vetra">Ветра</a>
+                <a href="#imperskaya-shkola">Имперская</a>
+                <a href="#elfiyskaya-shkola">Эльфийская</a>
+            </nav>
+
+            <details class="pb-accordion" id="shkola-targusa">
                 <summary>Школа Таргуса</summary>
                     <div class="school-lore">
                         Таргус Зенон «Железный кулак» или «Громящий кулак» — герой времён старых и забытых королевств. Он родился в те времена, когда нынешние монументальные горы были ещё холмами, а бескрайние океаны были озёрами. Было у Таргуса лишь одна страсть — бой. Всю свою долгую жизнь он посвятил сражению, ни страшился ни монстров, ни драконов, бросая вызов каждому, кто казался бы ему сильным. Годы тренировок и странствий сделали из Таргуса воина, не знающего поражения, и был он настолько силён, что ударом своим рушил горы. Свои знания Таргус передал своим ученикам, а они своим. Так со временем и зародилась школа Таргуса.
@@ -138,7 +125,7 @@
                     </table>
             </details>
 
-            <details>
+            <details class="pb-accordion" id="shkola-vetra">
                 <summary>Школа Ветра</summary>
                     <div class="school-lore">
                         Неизвестно, когда и как зародилась Боевая школа Ветра, однако несомненно, что она стала ответом учению последователей Таргуса. Адепты данной школы концентрируются на познании боя в его многообразии. Их цель — выжить в бою, и ради этой цели они готовы мириться с эффективностью.
@@ -183,7 +170,7 @@
                     </table>
             </details>
 
-            <details>
+            <details class="pb-accordion" id="imperskaya-shkola">
                 <summary>Имперская боевая школа</summary>
                     <div class="school-lore">
                         Империя — это не просто сверхгосударство, контролировавшее на пике своего величия практически весь цивилизованный Келарим, но и невероятно мощный двигатель прогресса, науки и культуры. Реформы Оттона I «Великого» принесли масштабные изменения в принципы ведения войны и формирования армий. Его легионы своим маршем прошли от дварфийских гор до эльфийского леса и принесли жителям Империи множество славных побед. Имперская боевая школа построена на чёткости и машинности. Заучивание конкретных стоек и позиций, доведение до автоматизма базовых движений отличаю её от других подходов ведения боя.
@@ -225,7 +212,7 @@
                     </table>
             </details>
 
-            <details>
+            <details class="pb-accordion" id="elfiyskaya-shkola">
                 <summary>Эльфийская школа</summary>
                     <p class="school-deviz">Философия: мастерство дальнего боя и универсальность. Эльфы сочетают в себе меткость стрелков и фехтовальную грацию, используя как лук, так и клинок.</p>
 
@@ -251,7 +238,6 @@
                 <a href="items-armor.html">Доспехи</a>
                 <a href="items-weapons.html">Оружие</a>
                 <a href="feats.html">Черты</a>
-                <a href="house-rules.html">Домашние правила</a>
             </nav>
         </div>
     </div>

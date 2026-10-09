@@ -1,22 +1,29 @@
 /* Виджет «Ближайшая Буря» на главной: дата и счётчик дней до сходки.
-   Данные берёт из UPCOMING_GATHERING (js/upcoming-gathering.js). */
+   Данные берёт из UPCOMING_GATHERING (js/upcoming-gathering.js).
+   Если дата не задана — показывает «дата уточняется». */
 document.addEventListener('DOMContentLoaded', function () {
   var elDate = document.getElementById('nextGatheringDate');
   var elIn = document.getElementById('nextGatheringIn');
-  if (!elDate && !elIn) return;
-  if (!window.UPCOMING_GATHERING || !UPCOMING_GATHERING.date) return;
+  var elPlace = document.getElementById('nextGatheringPlace');
+  if (!elDate && !elIn && !elPlace) return;
 
-  var g = UPCOMING_GATHERING;
+  var g = window.UPCOMING_GATHERING || {};
+
+  if (elPlace && g.place) elPlace.textContent = g.place;
+
+  /* Дата ещё не объявлена — не показываем протухшую дату. */
+  if (!g.date) {
+    if (elDate) elDate.textContent = 'Дата уточняется';
+    if (elIn) elIn.textContent = 'Следи за анонсами в Шумном Зале';
+    return;
+  }
+
   var target = new Date(g.date + 'T' + (g.time || '12:00') + ':00');
   if (isNaN(target.getTime())) return;
 
   var weekday = target.toLocaleDateString('ru-RU', { weekday: 'long' });
   var dayMonth = target.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
-  elDate.textContent = capitalize(weekday) + ', ' + dayMonth;
-
-  var elPlace = document.getElementById('nextGatheringPlace');
-  if (elPlace && g.place) elPlace.textContent = g.place;
-
+  if (elDate) elDate.textContent = capitalize(weekday) + ', ' + dayMonth;
   if (!elIn) return;
 
   var today = new Date();

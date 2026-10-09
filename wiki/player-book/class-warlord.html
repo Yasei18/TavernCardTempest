@@ -243,9 +243,11 @@
         }
     </style>
 
-<link rel="apple-touch-icon" href="../../img/favicon.png">
+<link rel="apple-touch-icon" href="../../img/apple-touch-icon.png">
 <link rel="icon" type="image/png" href="../../img/favicon.png">
 <link rel="icon" type="image/x-icon" href="../../img/favicon.ico">
+<link rel="manifest" href="../../manifest.webmanifest">
+<script defer src="../../js/analytics.js"></script>
 </head>
 <body data-layout="wiki" data-root="../">
 
@@ -670,8 +672,13 @@
             <h2 id="podklass">Академии войны</h2>
             <p>На 3-м уровне Воевода выбирает Академию войны — специализацию, которая определяет его тактику. Умения Академии вы получаете на 3, 6, 14 и 18 уровнях.</p>
 
-            <details>
-                <summary>Академия интриг</summary>
+            <details class="pb-subclass" id="akademiya-intrig">
+                <summary>
+                    <span class="pb-subclass__name">Академия интриг</span>
+                    <span class="pb-subclass__tag">Хитрость, обман и грязные приёмы</span>
+                    <span class="pb-subclass__chev" aria-hidden="true"></span>
+                </summary>
+                <div class="pb-subclass__body">
 
                 <p class="school-lore">Воеводы Академии интриг обеспечат свою победу любой ценой. Их не заботит то, как именно достигать своих целей: они жульничают, обманывают и жертвуют всем необходимым для успеха. У таких Воевод всегда есть план отступления, если всё пойдёт не так.</p>
 
@@ -709,6 +716,7 @@
                 <p>Вы не можете сделать это снова, пока не закончите Короткий или Долгий отдых.</p>
 
                 <p class="pb-note"><strong>Приключенцы-интриганы.</strong> Играя за персонажа с сомнительной моралью и мотивациями, помните, что D&amp;D — командная игра, в которой ожидается сотрудничество. Мастера интриг используют любые доступные им преимущества, включая способности своих союзников. Убедитесь, что вы включаете других игроков в любые планы, которые может иметь ваш Воевода-интриган: Воевода — ничто без союзников, которыми можно командовать!</p>
+                </div>
             </details>
 
             <nav class="wiki-nav-more">

@@ -864,14 +864,14 @@ img {
 	font-weight: 400;
 }
 
-.wiki-container table:not(.feature-table):not(.weapon-table) {
+.wiki-container table:not(.feature-table):not(.weapon-table):not(.pb-table) {
 	width: 100%;
 	border-collapse: collapse;
 	margin: 12px 0;
 	font-size: 15px;
 }
 
-.wiki-container table:not(.feature-table):not(.weapon-table) th {
+.wiki-container table:not(.feature-table):not(.weapon-table):not(.pb-table) th {
 	background: #1c2c7c;
 	color: #fff;
 	text-align: left;
@@ -879,11 +879,43 @@ img {
 	font-weight: 400;
 }
 
-.wiki-container table:not(.feature-table):not(.weapon-table) td {
+.wiki-container table:not(.feature-table):not(.weapon-table):not(.pb-table) td {
 	padding: 8px 12px;
 	border-bottom: 1px solid #e5e5e5;
 	vertical-align: top;
 }
+
+/* ============================================================
+   ТАБЛИЦЫ КНИГИ ИГРОКА (.pb-table)
+   ============================================================ */
+.wiki-container .pb-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 12px 0;
+	font-size: 15px;
+}
+
+.wiki-container .pb-table th {
+	background: #1c2c7c;
+	color: #fff;
+	text-align: left;
+	padding: 8px 12px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.wiki-container .pb-table td {
+	padding: 8px 12px;
+	border-bottom: 1px solid #d5dae6;
+	vertical-align: top;
+}
+
+.wiki-container .pb-table tr:nth-child(even) td { background: #f4f6fb; }
+.wiki-container .pb-table tr:hover td { background: #eef1f8; }
+
+/* Вспомогательные подписи в таблицах Книги игрока */
+.feat-name { font-weight: 700; white-space: nowrap; }
+.feat-req { font-size: 0.85rem; color: #3c4a8c; font-style: italic; }
 
 /* ============================================================
    КАТАЛОГ РАС (страница «Виды»)
@@ -1761,6 +1793,141 @@ details > .details-body {
 }
 .wiki-page h2 { margin-top: 2rem; }
 .wiki-page h3 { margin-top: 1.5rem; color: #1c2c7c; }
+
+/* ============================================================
+   КЛАССЫ: ВЫБОР ПОДКЛАССА (клятвы паладина, академии воеводы)
+   ============================================================ */
+.pb-subclass-nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin: 0 0 18px;
+}
+.pb-subclass-nav__label {
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: #72777d;
+	margin-right: 4px;
+}
+.pb-subclass-nav a {
+	display: inline-block;
+	padding: 5px 14px;
+	border: 1px solid #d5dae6;
+	border-radius: 100px;
+	background: #f8f9fa;
+	color: #1c2c7c;
+	font-size: 14px;
+	text-decoration: none;
+	transition: background .15s, border-color .15s, color .15s;
+}
+.pb-subclass-nav a:hover {
+	background: #1c2c7c;
+	border-color: #1c2c7c;
+	color: #fff;
+}
+
+.pb-subclass,
+.pb-accordion {
+	border: 1px solid #d5dae6;
+	border-radius: 12px;
+	background: #fff;
+	margin: 0 0 16px;
+	overflow: hidden;
+	box-shadow: 0 1px 2px rgba(20, 30, 70, .05);
+}
+.pb-accordion { padding: 0 20px; }
+.pb-accordion[open] { padding-bottom: 18px; }
+
+.pb-subclass > summary,
+.pb-accordion > summary {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	padding: 14px 18px;
+	font-size: 19px;
+	font-weight: 700;
+	line-height: 1.3;
+	color: #1c2c7c;
+	background: #f4f6fb;
+	border-bottom: 1px solid transparent;
+	list-style: none;
+}
+.pb-subclass > summary::-webkit-details-marker,
+.pb-accordion > summary::-webkit-details-marker { display: none; }
+.pb-subclass > summary::before,
+.pb-accordion > summary::before { content: none; }
+.pb-subclass[open] > summary,
+.pb-accordion[open] > summary {
+	background: #eef1f8;
+	border-bottom-color: #d5dae6;
+}
+.pb-subclass > summary:hover,
+.pb-accordion > summary:hover {
+	background: #eef1f8;
+	color: #3a5098;
+}
+
+/* Общий аккордеон-карточка (разделы Книги игрока) */
+.pb-accordion > summary { margin: 0 -20px; }
+.pb-accordion > summary::after {
+	content: '';
+	flex: 0 0 auto;
+	width: 9px;
+	height: 9px;
+	margin: 0 4px 4px auto;
+	border-right: 2px solid #72777d;
+	border-bottom: 2px solid #72777d;
+	transform: rotate(45deg);
+	transition: transform .2s, margin .2s;
+}
+.pb-accordion[open] > summary::after {
+	transform: rotate(-135deg);
+	margin-bottom: -4px;
+}
+
+.pb-subclass__name { flex: 1 1 auto; }
+.pb-subclass__tag {
+	font-weight: 400;
+	font-size: 14px;
+	color: #72777d;
+	text-align: right;
+}
+.pb-subclass__chev {
+	flex: 0 0 auto;
+	width: 9px;
+	height: 9px;
+	margin: 0 4px 4px 6px;
+	border-right: 2px solid #72777d;
+	border-bottom: 2px solid #72777d;
+	transform: rotate(45deg);
+	transition: transform .2s, margin .2s;
+}
+.pb-subclass[open] > summary .pb-subclass__chev {
+	transform: rotate(-135deg);
+	margin-bottom: -4px;
+}
+.pb-subclass__body {
+	padding: 4px 20px 20px;
+}
+.pb-subclass__body > h3:first-of-type { margin-top: 14px; }
+.pb-subclass__body > .pb-note:last-child { margin-bottom: 4px; }
+.pb-subclass.wiki-tab-highlight,
+.pb-accordion.wiki-tab-highlight { border-radius: 12px; }
+
+@media (max-width: 640px) {
+	.pb-subclass > summary,
+	.pb-accordion > summary { font-size: 17px; padding: 12px 14px; }
+	.pb-accordion { padding: 0 14px; }
+	.pb-accordion > summary {
+		margin-left: -14px;
+		margin-right: -14px;
+	}
+	.pb-subclass__tag { display: none; }
+	.pb-subclass__body { padding: 4px 14px 16px; }
+}
 
 /* ============================================================
    ПОИСК ПО ВИКИ
