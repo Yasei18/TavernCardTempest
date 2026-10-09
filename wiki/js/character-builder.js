@@ -25,6 +25,39 @@
   var FEATS_FILE = 'feats.html';
   var CLASSES_HUB = 'classes.html';
 
+  var ABILITIES = [
+    { key: 'str', label: 'Сила', short: 'СИЛ' },
+    { key: 'dex', label: 'Ловкость', short: 'ЛОВ' },
+    { key: 'con', label: 'Телосложение', short: 'ТЕЛ' },
+    { key: 'int', label: 'Интеллект', short: 'ИНТ' },
+    { key: 'wis', label: 'Мудрость', short: 'МДР' },
+    { key: 'cha', label: 'Харизма', short: 'ХАР' }
+  ];
+
+  // 18 навыков и их базовые характеристики.
+  var SKILLS = [
+    { key: 'athletics', name: 'Атлетика', ab: 'str', abShort: 'СИЛ' },
+    { key: 'acrobatics', name: 'Акробатика', ab: 'dex', abShort: 'ЛОВ' },
+    { key: 'sleight', name: 'Ловкость рук', ab: 'dex', abShort: 'ЛОВ' },
+    { key: 'stealth', name: 'Скрытность', ab: 'dex', abShort: 'ЛОВ' },
+    { key: 'arcana', name: 'Магия', ab: 'int', abShort: 'ИНТ' },
+    { key: 'history', name: 'История', ab: 'int', abShort: 'ИНТ' },
+    { key: 'investigation', name: 'Расследование', ab: 'int', abShort: 'ИНТ' },
+    { key: 'nature', name: 'Природа', ab: 'int', abShort: 'ИНТ' },
+    { key: 'religion', name: 'Религия', ab: 'int', abShort: 'ИНТ' },
+    { key: 'perception', name: 'Восприятие', ab: 'wis', abShort: 'МДР' },
+    { key: 'animal', name: 'Уход за животными', ab: 'wis', abShort: 'МДР' },
+    { key: 'insight', name: 'Проницательность', ab: 'wis', abShort: 'МДР' },
+    { key: 'medicine', name: 'Медицина', ab: 'wis', abShort: 'МДР' },
+    { key: 'survival', name: 'Выживание', ab: 'wis', abShort: 'МДР' },
+    { key: 'deception', name: 'Обман', ab: 'cha', abShort: 'ХАР' },
+    { key: 'intimidation', name: 'Запугивание', ab: 'cha', abShort: 'ХАР' },
+    { key: 'performance', name: 'Выступление', ab: 'cha', abShort: 'ХАР' },
+    { key: 'persuasion', name: 'Убеждение', ab: 'cha', abShort: 'ХАР' }
+  ];
+  var SKILL_MAP = {};
+  SKILLS.forEach(function (s) { SKILL_MAP[s.key] = s; });
+
   /* ─────────────── состояние ─────────────── */
 
   var state = {
@@ -32,7 +65,11 @@
     race: '',
     classes: [{ slug: '', level: 1, subclass: '' }],
     tricks: [],   // "slug::Название приёма"
-    feats: []     // имена выбранных черт
+    feats: [],    // имена выбранных черт
+    abilities: { str: '', dex: '', con: '', int: '', wis: '', cha: '' },
+    skills: {},   // key -> 0 нет / 1 владение / 2 экспертиза
+    combat: { hp: '', hpMax: '', ac: '', speed: '', init: '', hitDice: '' },
+    bio: { background: '', alignment: '', notes: '' }
   };
 
   var data = {
@@ -80,6 +117,69 @@
     if (!levels || !levels.length) return '';
     if (levels.length === 1) return levels[0] + ' уровень';
     return levels.join(', ') + ' уровни';
+  }
+
+  /* ─────────────── характеристики и боевые показатели ─────────────── */
+
+  function numOrNull(v) {
+    if (v === '' || v == null) return null;
+    var n = parseInt(v, 10);
+    return isNaN(n) ? null : n;
+  }
+
+  function abilityMod(key) {
+    var s = numOrNull(state.abilities[key]);
+    return s == null ? null : Math.floor((s - 10) / 2);
+  }
+
+  function signed(n) {
+    return n == null ? '—' : (n >= 0 ? '+' : '') + n;
+  }
+
+  function sumLevels() {
+    var t = 0;
+    state.classes.forEach(function (c) { t += clampInt(c.level, 1, 20); });
+    return t;
+  }
+
+  function initiativeValue() {
+    var manual = numOrNull(state.combat.init);
+    if (manual != null) return manual;
+    return abilityMod('dex');
+  }
+
+  // Вариант «Кость мастерства» (DMG, стр. 263): бонус владения заменяется костью.
+  function profDie(total) {
+    var lvl = Math.max(1, Math.min(20, parseInt(total, 10) || 1));
+    if (lvl <= 4) return 'к4';
+    if (lvl <= 8) return 'к6';
+    if (lvl <= 12) return 'к8';
+    if (lvl <= 16) return 'к10';
+    return 'к12';
+  }
+
+  // Проверка навыка: модификатор характеристики + кость мастерства (двойная при экспертизе).
+  function skillTotalText(key) {
+    var sk = SKILL_MAP[key];
+    if (!sk) return '—';
+    var mod = abilityMod(sk.ab);
+    if (mod == null) return '—';
+    var lvl = state.skills[key] || 0;
+    if (!lvl) return signed(mod);
+    var dice = (lvl >= 2 ? '2' : '') + profDie(sumLevels());
+    return mod === 0 ? dice : dice + ' ' + signed(mod);
+  }
+
+  // Пассивное значение навыка (Восприятие, Проницательность, Расследование):
+  // для пассивных проверок кость мастерства учитывается по среднему — как стандартный бонус.
+  function passiveSkill(key) {
+    var sk = SKILL_MAP[key];
+    if (!sk) return null;
+    var base = abilityMod(sk.ab);
+    if (base == null) return null;
+    var lvl = state.skills[key] || 0;
+    var prof = profBonus(sumLevels());
+    return 10 + base + (lvl >= 1 ? prof : 0) + (lvl >= 2 ? prof : 0);
   }
 
   /* ─────────────── разбор страниц правил ─────────────── */
@@ -444,6 +544,77 @@
 
   /* ─────────────── отрисовка панели управления ─────────────── */
 
+  function setInput(sel, val) {
+    var el = q(sel);
+    var str = val == null ? '' : String(val);
+    if (el && el.value !== str) el.value = str;
+  }
+
+  function renderStatsInputs() {
+    ABILITIES.forEach(function (a) {
+      var inp = q('.cb-ab-input[data-key="' + a.key + '"]');
+      if (inp && inp.value !== String(state.abilities[a.key] || '')) inp.value = state.abilities[a.key] || '';
+      var mod = q('.cb-ab__mod[data-key="' + a.key + '"]');
+      if (mod) mod.textContent = signed(abilityMod(a.key));
+    });
+    setInput('#cbHp', state.combat.hp);
+    setInput('#cbHpMax', state.combat.hpMax);
+    setInput('#cbAc', state.combat.ac);
+    setInput('#cbSpeed', state.combat.speed);
+    setInput('#cbInit', state.combat.init);
+    setInput('#cbHitDice', state.combat.hitDice);
+    setInput('#cbBackground', state.bio.background);
+    setInput('#cbAlignment', state.bio.alignment);
+    setInput('#cbNotes', state.bio.notes);
+  }
+
+  function renderSkillsPicker() {
+    var box = q('#cbSkills');
+    if (!box) return;
+    var html = '';
+    SKILLS.forEach(function (s) {
+      var lvl = state.skills[s.key] || 0;
+      html += '<div class="cb-skill">'
+        + '<label class="cb-skill__main">'
+        + '<input type="checkbox" class="cb-skill-prof" data-key="' + s.key + '"' + (lvl >= 1 ? ' checked' : '') + '>'
+        + '<span class="cb-skill__name">' + esc(s.name) + '</span>'
+        + '<span class="cb-skill__ab">' + esc(s.abShort) + '</span>'
+        + '</label>'
+        + '<label class="cb-skill__exp" title="Экспертиза: ещё одна кость мастерства">'
+        + '<input type="checkbox" class="cb-skill-exp" data-key="' + s.key + '"' + (lvl >= 2 ? ' checked' : '') + (lvl >= 1 ? '' : ' disabled') + '> Э'
+        + '</label>'
+        + '<span class="cb-skill__bonus" data-bonus="' + s.key + '">—</span>'
+        + '</div>';
+    });
+    box.innerHTML = html;
+    updateSkillBonuses();
+  }
+
+  function syncSkillRow(key) {
+    var lvl = state.skills[key] || 0;
+    var prof = q('.cb-skill-prof[data-key="' + key + '"]');
+    if (prof) prof.checked = lvl >= 1;
+    var exp = q('.cb-skill-exp[data-key="' + key + '"]');
+    if (exp) exp.checked = lvl >= 2;
+  }
+
+  function updateSkillBonuses() {
+    var chosen = 0;
+    SKILLS.forEach(function (s) {
+      var lvl = state.skills[s.key] || 0;
+      if (lvl > 0) chosen++;
+      var out = q('.cb-skill__bonus[data-bonus="' + s.key + '"]');
+      if (out) {
+        out.textContent = skillTotalText(s.key);
+        out.classList.toggle('cb-skill__bonus--prof', lvl >= 1 && abilityMod(s.ab) != null);
+      }
+      var exp = q('.cb-skill-exp[data-key="' + s.key + '"]');
+      if (exp) exp.disabled = lvl < 1;
+    });
+    var cnt = q('#cbSkillCount');
+    if (cnt) cnt.textContent = chosen || '';
+  }
+
   function renderRaceSelect() {
     var sel = q('#cbRace');
     if (!sel) return;
@@ -751,6 +922,85 @@
       + (sub ? ' <span class="cb-group__sub">' + esc(sub) + '</span>' : '') + '</h3>';
   }
 
+  // Раздел «Характеристики» в листе — показываем, если игрок что-то заполнил.
+  function statsSectionHtml() {
+    var anyAbility = ABILITIES.some(function (a) { return numOrNull(state.abilities[a.key]) != null; });
+    var anyCombat = ['hp', 'hpMax', 'ac', 'speed', 'init', 'hitDice'].some(function (k) {
+      return String(state.combat[k] == null ? '' : state.combat[k]) !== '';
+    });
+    if (!anyAbility && !anyCombat) return '';
+
+    var html = '<section class="cb-group cb-stats">';
+    html += groupTitle('Характеристики', 'лист персонажа');
+
+    html += '<div class="cb-stats__grid">';
+    ABILITIES.forEach(function (a) {
+      var score = numOrNull(state.abilities[a.key]);
+      html += '<div class="cb-stat">'
+        + '<span class="cb-stat__name">' + esc(a.short) + '</span>'
+        + '<span class="cb-stat__score">' + (score == null ? '—' : score) + '</span>'
+        + '<span class="cb-stat__mod">' + signed(abilityMod(a.key)) + '</span>'
+        + '<span class="cb-stat__label">' + esc(a.label) + '</span>'
+        + '</div>';
+    });
+    html += '</div>';
+
+    var items = [];
+    var hp = String(state.combat.hp == null ? '' : state.combat.hp);
+    var hpMax = String(state.combat.hpMax == null ? '' : state.combat.hpMax);
+    if (hp !== '' || hpMax !== '') {
+      var hpText = (hp !== '' && hpMax !== '') ? (hp + ' / ' + hpMax) : (hp !== '' ? hp : hpMax);
+      items.push(['Хиты', hpText]);
+    }
+    if (String(state.combat.ac == null ? '' : state.combat.ac) !== '') items.push(['Класс доспеха', state.combat.ac]);
+    var init = initiativeValue();
+    if (init != null) items.push(['Инициатива', signed(init)]);
+    if (String(state.combat.speed == null ? '' : state.combat.speed) !== '') items.push(['Скорость', state.combat.speed]);
+    var pp = passiveSkill('perception');
+    if (pp != null) items.push(['Пассивное Восприятие', pp]);
+    var pins = passiveSkill('insight');
+    if (pins != null) items.push(['Пассивная Проницательность', pins]);
+    var pinv = passiveSkill('investigation');
+    if (pinv != null) items.push(['Пассивное Расследование', pinv]);
+    items.push(['Кость мастерства', profDie(sumLevels())]);
+    if (String(state.combat.hitDice == null ? '' : state.combat.hitDice) !== '') items.push(['Кость хитов', state.combat.hitDice]);
+
+    html += '<div class="cb-stats__combat">';
+    items.forEach(function (it) {
+      html += '<span class="cb-combat-item"><span class="cb-combat-item__k">' + esc(it[0]) + '</span> <b>' + esc(it[1]) + '</b></span>';
+    });
+    html += '</div>';
+    html += '</section>';
+    return html;
+  }
+
+  // Раздел «Навыки» в листе — все навыки с бонусом и тем, из чего он складывается.
+  function skillsSectionHtml() {
+    var anyAbility = ABILITIES.some(function (a) { return numOrNull(state.abilities[a.key]) != null; });
+    if (!anyAbility) return '';
+
+    var die = profDie(sumLevels());
+    var html = '<section class="cb-group cb-skills">' + groupTitle('Навыки', 'все навыки и что прибавляется');
+    html += '<ul class="cb-skills__list">';
+    SKILLS.forEach(function (s) {
+      var lvl = state.skills[s.key] || 0;
+      var mod = abilityMod(s.ab);
+      var parts = [s.abShort + ' ' + signed(mod)];
+      if (lvl >= 1) parts.push('владение ' + die);
+      if (lvl >= 2) parts.push('экспертиза +' + die);
+      html += '<li class="cb-skill-row' + (lvl >= 1 ? ' cb-skill-row--prof' : '') + '">'
+        + '<span class="cb-skill-row__mark" aria-hidden="true">' + (lvl >= 1 ? '●' : '○') + '</span>'
+        + '<span class="cb-skill-row__name">' + esc(s.name) + '</span>'
+        + '<span class="cb-skill-row__calc">' + esc(parts.join(' · ')) + '</span>'
+        + '<span class="cb-skill-row__bonus">' + esc(skillTotalText(s.key)) + '</span>'
+        + '</li>';
+    });
+    html += '</ul>';
+    html += '<p class="cb-skills__note">● — владение: к проверке прибавляется кость мастерства (к4…к12 по уровню). «Экспертиза» прибавляет ещё одну такую кость. ○ — без владения: только модификатор характеристики.</p>';
+    html += '</section>';
+    return html;
+  }
+
   function renderOutput() {
     var out = q('#cbOutput');
     if (!out) return;
@@ -777,12 +1027,22 @@
       + (race ? esc(race.title) : '<span class="cb-muted">вид не выбран</span>')
       + (classNames.length ? ' · ' + esc(classNames.join(' / ')) : '')
       + ' · суммарный уровень ' + effectiveTotal
-      + ' · бонус владения <strong>+' + profBonus(totalLevel) + '</strong>'
+      + ' · кость мастерства <strong>' + profDie(totalLevel) + '</strong>'
       + '</p>';
+    var bioBits = [];
+    if (state.bio.background) bioBits.push('Предыстория: ' + state.bio.background);
+    if (state.bio.alignment) bioBits.push('Мировоззрение: ' + state.bio.alignment);
+    if (bioBits.length) html += '<p class="cb-sheet__bio">' + esc(bioBits.join(' · ')) + '</p>';
     if (totalLevel > 20) {
       html += '<p class="cb-warn">Суммарный уровень больше 20 — правила мультикласса разрешают не более 20 уровней. Проверьте сами.</p>';
     }
     html += '</div>';
+
+    /* Характеристики и боевые показатели */
+    html += statsSectionHtml();
+
+    /* Навыки */
+    html += skillsSectionHtml();
 
     /* Вид */
     if (race) {
@@ -890,10 +1150,17 @@
         + featsHtml + '</section>';
     }
 
+    /* Заметки */
+    if (state.bio.notes) {
+      html += '<section class="cb-group">' + groupTitle('Описание')
+        + '<p class="cb-notes">' + esc(state.bio.notes) + '</p></section>';
+    }
+
     out.innerHTML = html;
 
     updateFeatRules();
     updateFeatCount();
+    updateSkillBonuses();
   }
 
   /* ─────────────── сохранение ─────────────── */
@@ -909,6 +1176,22 @@
     }
     state.tricks = Array.isArray(s.tricks) ? s.tricks.map(String) : [];
     state.feats = Array.isArray(s.feats) ? s.feats.map(String) : [];
+    state.skills = {};
+    if (s.skills && typeof s.skills === 'object') {
+      SKILLS.forEach(function (sk) {
+        var v = clampInt(s.skills[sk.key], 0, 2);
+        if (v) state.skills[sk.key] = v;
+      });
+    }
+    ABILITIES.forEach(function (a) {
+      state.abilities[a.key] = (s.abilities && s.abilities[a.key] != null) ? String(s.abilities[a.key]) : '';
+    });
+    Object.keys(state.combat).forEach(function (k) {
+      state.combat[k] = (s.combat && s.combat[k] != null) ? String(s.combat[k]) : '';
+    });
+    Object.keys(state.bio).forEach(function (k) {
+      state.bio[k] = (s.bio && s.bio[k] != null) ? String(s.bio[k]) : '';
+    });
   }
 
   function save() {
@@ -1010,6 +1293,52 @@
     if (nameInput) nameInput.addEventListener('input', function () {
       state.name = this.value; renderOutput(); save();
     });
+
+    var abBox = q('#cbAbilities');
+    if (abBox) abBox.addEventListener('input', function (e) {
+      var t = e.target;
+      if (!t.classList || !t.classList.contains('cb-ab-input')) return;
+      var key = t.getAttribute('data-key');
+      state.abilities[key] = t.value;
+      var mod = q('.cb-ab__mod[data-key="' + key + '"]');
+      if (mod) mod.textContent = signed(abilityMod(key));
+      renderOutput(); save();
+    });
+
+    var combatBox = q('#cbCombat');
+    if (combatBox) combatBox.addEventListener('input', function (e) {
+      var map = { cbHp: 'hp', cbHpMax: 'hpMax', cbAc: 'ac', cbSpeed: 'speed', cbInit: 'init', cbHitDice: 'hitDice' };
+      var f = map[e.target.id];
+      if (f) { state.combat[f] = e.target.value; renderOutput(); save(); }
+    });
+
+    var bioBox = q('#cbBio');
+    if (bioBox) bioBox.addEventListener('input', function (e) {
+      var map = { cbBackground: 'background', cbAlignment: 'alignment', cbNotes: 'notes' };
+      var f = map[e.target.id];
+      if (f) { state.bio[f] = e.target.value; renderOutput(); save(); }
+    });
+
+    var skillsBox = q('#cbSkills');
+    if (skillsBox) {
+      skillsBox.addEventListener('change', function (e) {
+        var t = e.target;
+        var key = t.getAttribute('data-key');
+        if (!key) return;
+        if (t.classList.contains('cb-skill-prof')) {
+          if (t.checked) state.skills[key] = Math.max(1, state.skills[key] || 0);
+          else delete state.skills[key];
+        } else if (t.classList.contains('cb-skill-exp')) {
+          state.skills[key] = t.checked ? 2 : 1;
+        } else {
+          return;
+        }
+        syncSkillRow(key);
+        updateSkillBonuses();
+        renderOutput();
+        save();
+      });
+    }
 
     var classesBox = q('#cbClasses');
     if (classesBox) {
@@ -1122,12 +1451,20 @@
     var resetBtn = q('#cbReset');
     if (resetBtn) resetBtn.addEventListener('click', function () {
       if (!window.confirm('Сбросить персонажа?')) return;
-      state = { name: '', race: '', classes: [{ slug: '', level: 1, subclass: '' }], tricks: [], feats: [] };
+      state = {
+        name: '', race: '', classes: [{ slug: '', level: 1, subclass: '' }], tricks: [], feats: [],
+        abilities: { str: '', dex: '', con: '', int: '', wis: '', cha: '' },
+        skills: {},
+        combat: { hp: '', hpMax: '', ac: '', speed: '', init: '', hitDice: '' },
+        bio: { background: '', alignment: '', notes: '' }
+      };
       data.featsSearch = '';
       data.featsCat = '';
       try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* ignore */ }
       if (nameInput) nameInput.value = '';
       if (raceSel) raceSel.value = '';
+      renderStatsInputs();
+      renderSkillsPicker();
       renderClassRows();
       renderTricksPicker();
       renderFeatsPicker();
@@ -1147,6 +1484,8 @@
     var nameInput = q('#cbName');
     if (nameInput) nameInput.value = state.name;
 
+    renderStatsInputs();
+    renderSkillsPicker();
     renderRaceSelect();
     renderClassRows();
     renderFeatsPicker();

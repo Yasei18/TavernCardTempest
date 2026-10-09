@@ -86,6 +86,89 @@
             color: #72777d;
         }
         .cb-lvl input { width: 48px; text-align: center; }
+
+        /* ─── Характеристики (ввод) ─── */
+        .cb-stats-edit { padding: 0 14px 14px; }
+        .cb-abilities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .cb-ab {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 52px 30px;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: #3b3f45;
+        }
+        .cb-ab__name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .cb-ab__mod { text-align: right; font-weight: 700; color: #1c2c7c; font-size: 13px; }
+        .cb-stats-edit input,
+        .cb-stats-edit textarea {
+            box-sizing: border-box;
+            padding: 6px 8px;
+            border: 1px solid #c8ccd1;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 13px;
+            color: #202122;
+            font-family: inherit;
+        }
+        .cb-stats-edit textarea { width: 100%; resize: vertical; }
+        .cb-ab-input { width: 100%; text-align: center; }
+        .cb-combat-edit {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .cb-mini { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: #72777d; }
+        .cb-mini input { width: 100%; min-width: 0; }
+        .cb-mini__row { display: flex; align-items: center; gap: 6px; }
+        .cb-bio { display: grid; grid-template-columns: 1fr; gap: 8px; }
+
+        /* ─── Навыки (ввод) ─── */
+        .cb-skill {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto auto;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+        .cb-skill:hover { background: #f4f6fb; }
+        .cb-skill__main {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            cursor: pointer;
+        }
+        .cb-skill__main input { flex: 0 0 auto; }
+        .cb-skill__name {
+            flex: 1 1 auto;
+            font-size: 14px;
+            color: #202122;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cb-skill__ab { flex: 0 0 auto; font-size: 11px; color: #72777d; }
+        .cb-skill__exp {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 12px;
+            color: #72777d;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .cb-skill__exp input:disabled { cursor: default; }
+        .cb-skill__bonus { text-align: right; font-weight: 700; font-size: 13px; color: #72777d; white-space: nowrap; }
+        .cb-skill__bonus--prof { color: #1c2c7c; }
+
         .cb-icon-btn {
             width: 30px; height: 30px;
             border: 1px solid #d5dae6;
@@ -220,7 +303,72 @@
         .cb-sheet__name { margin: 0 0 4px; color: #fff; font-size: 24px; }
         .cb-sheet__meta { margin: 0; font-size: 14px; color: #dbe2f5; }
         .cb-sheet__meta strong { color: #fff; }
+        .cb-sheet__bio { margin: 6px 0 0; font-size: 13px; color: #dbe2f5; }
         .cb-warn { margin: 8px 0 0; font-size: 13px; color: #ffe08a; }
+
+        .cb-stats__grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .cb-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            padding: 10px 4px;
+            border: 1px solid #d5dae6;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+        .cb-stat__name { font-size: 11px; letter-spacing: .06em; color: #72777d; }
+        .cb-stat__score { font-size: 21px; font-weight: 700; color: #202122; line-height: 1.1; }
+        .cb-stat__mod {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1c2c7c;
+            background: #e7ebf7;
+            border-radius: 100px;
+            padding: 0 8px;
+        }
+        .cb-stat__label { font-size: 10px; color: #8a8f98; text-align: center; }
+        .cb-stats__combat { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+        .cb-combat-item { font-size: 14px; color: #3b3f45; }
+        .cb-combat-item__k { color: #72777d; }
+        .cb-notes { white-space: pre-line; font-size: 15px; line-height: 1.6; color: #3b3f45; margin: 0; }
+
+        .cb-skills__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            border-top: 1px solid #e3e6ee;
+        }
+        .cb-skill-row {
+            display: grid;
+            grid-template-columns: 14px minmax(0, 1fr) auto auto;
+            align-items: baseline;
+            gap: 10px;
+            padding: 4px 2px;
+            border-bottom: 1px dotted #e3e6ee;
+            font-size: 15px;
+        }
+        .cb-skill-row__mark { font-size: 11px; color: #b8bcc4; text-align: center; }
+        .cb-skill-row--prof .cb-skill-row__mark { color: #2f6b3c; }
+        .cb-skill-row__name { color: #3b3f45; }
+        .cb-skill-row--prof .cb-skill-row__name { font-weight: 600; }
+        .cb-skill-row__calc { font-size: 12px; color: #8a8f98; white-space: nowrap; }
+        .cb-skill-row__bonus { text-align: right; font-weight: 700; color: #555; white-space: nowrap; }
+        .cb-skill-row--prof .cb-skill-row__bonus { color: #1c2c7c; }
+        .cb-skills__note { margin: 10px 0 0; font-size: 12px; color: #8a8f98; }
+
+        @media (max-width: 640px) {
+            .cb-stats__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .cb-skill-row { grid-template-columns: 14px minmax(0, 1fr) auto; }
+            .cb-skill-row__calc { display: none; }
+        }
 
         .cb-group { margin-top: 26px; }
         .cb-group__title {
@@ -272,7 +420,8 @@
                 border: 2px solid #1c2c7c;
                 padding: 12px 16px;
             }
-            .cb-sheet__name, .cb-sheet__meta, .cb-sheet__meta strong { color: #000 !important; }
+            .cb-sheet__name, .cb-sheet__meta, .cb-sheet__meta strong, .cb-sheet__bio { color: #000 !important; }
+            .cb-stat, .cb-stat__mod { border-color: #999; background: #fff; }
             .cb-ability, .pb-accordion {
                 box-shadow: none !important;
                 break-inside: avoid;
@@ -311,7 +460,8 @@
             <p class="cb-intro">
                 Выберите <strong>вид</strong>, один или несколько <strong>классов</strong> с уровнями
                 (поддерживается мультикласс), <strong>подкласс</strong> — если уровень позволяет, —
-                доступные <strong>приёмы</strong> и <strong>черты</strong>. Конструктор соберёт полные
+                доступные <strong>приёмы</strong> и <strong>черты</strong>, а при желании заполните
+                <strong>характеристики</strong> и <strong>навыки</strong>. Конструктор соберёт полные
                 описания умений вида, класса, подкласса, приёмов и черт в единый живой список,
                 который можно распечатать или сохранить в PDF.
                 <br>
@@ -342,6 +492,40 @@
                         <div id="cbClasses" class="cb-classes"></div>
                         <button type="button" id="cbAddClass" class="cb-btn cb-btn--ghost">+ Добавить класс</button>
                     </div>
+
+                    <details class="cb-picker" id="cbStatsBox" open>
+                        <summary>Характеристики и описание <span class="cb-picker__hint">необязательно</span></summary>
+                        <div class="cb-stats-edit">
+                            <div class="cb-abilities" id="cbAbilities">
+                                <label class="cb-ab"><span class="cb-ab__name">Сила</span><input type="number" class="cb-ab-input" data-key="str" min="1" max="30" placeholder="10"><span class="cb-ab__mod" data-key="str">—</span></label>
+                                <label class="cb-ab"><span class="cb-ab__name">Ловкость</span><input type="number" class="cb-ab-input" data-key="dex" min="1" max="30" placeholder="10"><span class="cb-ab__mod" data-key="dex">—</span></label>
+                                <label class="cb-ab"><span class="cb-ab__name">Телосложение</span><input type="number" class="cb-ab-input" data-key="con" min="1" max="30" placeholder="10"><span class="cb-ab__mod" data-key="con">—</span></label>
+                                <label class="cb-ab"><span class="cb-ab__name">Интеллект</span><input type="number" class="cb-ab-input" data-key="int" min="1" max="30" placeholder="10"><span class="cb-ab__mod" data-key="int">—</span></label>
+                                <label class="cb-ab"><span class="cb-ab__name">Мудрость</span><input type="number" class="cb-ab-input" data-key="wis" min="1" max="30" placeholder="10"><span class="cb-ab__mod" data-key="wis">—</span></label>
+                                <label class="cb-ab"><span class="cb-ab__name">Харизма</span><input type="number" class="cb-ab-input" data-key="cha" min="1" max="30" placeholder="10"><span class="cb-ab__mod" data-key="cha">—</span></label>
+                            </div>
+                            <div class="cb-combat-edit" id="cbCombat">
+                                <label class="cb-mini">Хиты <span class="cb-mini__row"><input type="number" id="cbHp" min="0" placeholder="тек."> / <input type="number" id="cbHpMax" min="0" placeholder="макс."></span></label>
+                                <label class="cb-mini">КД <input type="number" id="cbAc" min="0" placeholder="—"></label>
+                                <label class="cb-mini">Скорость <input type="text" id="cbSpeed" placeholder="30 фт"></label>
+                                <label class="cb-mini">Инициатива <input type="number" id="cbInit" placeholder="авто"></label>
+                                <label class="cb-mini">Кость хитов <input type="text" id="cbHitDice" placeholder="5к8"></label>
+                            </div>
+                            <div class="cb-bio" id="cbBio">
+                                <label class="cb-mini">Предыстория <input type="text" id="cbBackground" placeholder="Например, солдат"></label>
+                                <label class="cb-mini">Мировоззрение <input type="text" id="cbAlignment" placeholder="Например, нейтрально-добрый"></label>
+                                <label class="cb-mini">Заметки <textarea id="cbNotes" rows="3" placeholder="Внешность, характер, цели…"></textarea></label>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="cb-picker" id="cbSkillsBox">
+                        <summary>Навыки <span class="cb-count" id="cbSkillCount"></span> <span class="cb-picker__hint">владение и экспертиза</span></summary>
+                        <div class="cb-rules">
+                            <p class="cb-rules__note">Отметьте навыки, которыми владеет персонаж. Второй флажок «Э» — экспертиза: добавляет ещё одну кость мастерства. Проверка навыка = модификатор характеристики + кость мастерства (1к4 на 1–4 уровнях, далее к6, к8, к10, к12). Сколько навыков положено классу — сверяйтесь с описанием.</p>
+                        </div>
+                        <div class="cb-picker__scroll" id="cbSkills"></div>
+                    </details>
 
                     <div id="cbTricks"></div>
                     <div id="cbFeats"></div>
