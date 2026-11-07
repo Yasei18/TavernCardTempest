@@ -3,7 +3,7 @@
    впишите её в формате YYYY-MM-DD (пустая строка = «дата уточняется»)
    и синхронизируйте JSON-LD Event в index.html. */
 var UPCOMING_GATHERING = {
-  date: '',
+  date: '2026-11-22',
   time: '12:00',
   place: 'Москва, Тишинская площадь, 1с1'
 };

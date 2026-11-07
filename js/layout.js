@@ -91,7 +91,7 @@
     '<div class="footer-socials">',
     '  <a href="https://t.me/tavern_card_tempest" target="_blank" rel="noopener">Telegram</a><span class="footer-social-sep">·</span>',
     '  <a href="https://t.me/TavernCardTempest_Chat" target="_blank" rel="noopener">Шумный Зал</a><span class="footer-social-sep">·</span>',
-    '  <a href="https://www.youtube.com/@CardTempestTavern" target="_blank" rel="noopener">YouTube</a><span class="footer-social-sep">·</span>',
+    '  <a href="https://www.youtube.com/@ТавернаКарточнаяБуря" target="_blank" rel="noopener">YouTube</a><span class="footer-social-sep">·</span>',
     '  <a href="https://vk.com/taverncardtempest" target="_blank" rel="noopener">ВКонтакте</a><span class="footer-social-sep">·</span>',
     '  <a href="https://discord.gg/AAMw8UJCj5" target="_blank" rel="noopener">Discord</a><span class="footer-social-sep">·</span>',
     '  <a href="https://boosty.to/taverncardtempest" target="_blank" rel="noopener">Boosty</a>',

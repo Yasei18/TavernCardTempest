@@ -68,7 +68,7 @@ node scripts/build.js all       # всё вместе
 
 - Telegram — [tavern_card_tempest](https://t.me/tavern_card_tempest)
 - ВКонтакте — [taverncardtempest](https://vk.com/taverncardtempest)
-- YouTube — [@CardTempestTavern](https://www.youtube.com/@CardTempestTavern)
+- YouTube — [@ТавернаКарточнаяБуря](https://www.youtube.com/@ТавернаКарточнаяБуря)
 - Twitch — [tavern_card_tempest](https://www.twitch.tv/tavern_card_tempest)
 - Discord — [Шумный Зал](https://discord.gg/AAMw8UJCj5)
 
